@@ -17,7 +17,7 @@
 			.has-no-child-modules .module-header {
 				padding: 15px;
 				display: grid;
-				grid-template-columns: 1fr 70px;
+				grid-template-columns: 65% 35%;
 				background-color: #E6EAF0;
 				border-radius: 8px 8px 8px 8px;
 			}
@@ -58,7 +58,7 @@
 
 			.module-completion-count {
 				text-align: right;
-
+				grid-column: 2;
 				/* Small Body Text - Lato Regular 14, Tungsten */
 				font-size: 14px;
 				line-height: 20px;
@@ -69,7 +69,6 @@
 
 			.has-no-child-modules .module-completion-count {
 				float: right;
-				grid-column: 2;
 			}
 
 			.has-child-modules .module-completion-count {
@@ -207,8 +206,10 @@
 				<div slot="header" class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">
-						<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
-						<template is="dom-if" if="[[showCount]]">
+						<template is="dom-if" if="[[showDivider]]">	
+							<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
+						</template>
+						<template is="dom-if" if="[[showCount]]">					
 							<span class="countStatus">
 								[[completionCount.completed]] of [[completionCount.total]]
 							</span>
@@ -294,6 +295,11 @@
 						type: Boolean,
 						value: false,
 						computed: '_showOptional(completionCount, selectedModule)'
+					},
+					showDivider: {
+						type: Boolean,
+						value: false,
+						computed: '_showDivider(showCount, showCheckmark, showOptional)'
 					}
 				};
 			}
@@ -346,6 +352,10 @@
 					return false;
 				}
 				return this._isOptionalModule() && !this._isAccordianOpen() && !this._isAllOptionalViewed();
+			}
+
+			_showDivider(showCount, showCheckmark, showOptional) {
+				return showCount || showCheckmark || showOptional;
 			}
 
 			getSubEntities(entity) {
