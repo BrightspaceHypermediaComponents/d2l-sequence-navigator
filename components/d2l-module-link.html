@@ -146,7 +146,7 @@
 				letter-spacing: 0.2px;
 			}
 
-			.optional {
+			.optionalStatus {
 				color: var(--d2l-color-ferrite);
 				font-weight: bold;
 			}
@@ -207,7 +207,7 @@
 				<div slot="header" class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">
-						<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon">
+						<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
 						<template is="dom-if" if="[[showCount]]">
 							<span class="countStatus">
 								[[completionCount.completed]] of [[completionCount.total]]
