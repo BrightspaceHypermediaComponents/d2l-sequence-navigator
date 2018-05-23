@@ -205,13 +205,19 @@
 					<span class="module-completion-count">
 						<d2l-icon icon="d2l-tier2:divider-big"></d2l-icon>
 						<template is="dom-if" if="[[showCount]]">
-							[[completionCount.completed]] of [[completionCount.total]]
+							<span class="countStatus">
+								[[completionCount.completed]] of [[completionCount.total]]
+							</span>
 						</template>
 						<template is="dom-if" if="[[showCheckmark]]">
-							<d2l-icon class="moduleComplete" icon="d2l-tier1:check"></d2l-icon>
+							<span class="completedStatus">
+								<d2l-icon class="moduleComplete" icon="d2l-tier1:check"></d2l-icon>
+							</span>
 						</template>
 						<template is="dom-if" if="[[showOptional]]">
-							optional
+							<span class="optionalStatus">
+								optional
+							</span>
 						</template>
 					</span>
 				</div>
@@ -273,17 +279,17 @@
 					showCount: {
 						type: Boolean,
 						value: false,
-						computed: '_showCount(entity, selectedModule)'
+						computed: '_showCount(completionCount, selectedModule)'
 					},
 					showCheckmark: {
 						type: Boolean,
 						value: false,
-						computed: '_showCheckmark(entity, selectedModule)'
+						computed: '_showCheckmark(completionCount, selectedModule)'
 					},
 					showOptional: {
 						type: Boolean,
 						value: false,
-						computed: '_showOptional(entity, selectedModule)'
+						computed: '_showOptional(completionCount, selectedModule)'
 					}
 				};
 			}
@@ -311,8 +317,8 @@
 				return this.completionCount && this.completionCount.total > 0 && this.completionCount.completed > 0 && this.completionCount.completed <  this.completionCount.total;
 			}
 
-			_showCount(entity) {
-				if ( !entity ) {
+			_showCount(completionCount) {
+				if ( !completionCount ) {
 					return false;
 				}
 				return !this._isOptionalModule() && (
@@ -321,8 +327,8 @@
 				);
 			}
 
-			_showCheckmark(entity) {
-				if ( !entity ) {
+			_showCheckmark(completionCount) {
+				if ( !completionCount ) {
 					return false;
 				}
 				return !this._isAccordianOpen() && (
@@ -331,8 +337,8 @@
 				);
 			}
 
-			_showOptional(entity) {
-				if ( !entity ) {
+			_showOptional(completionCount) {
+				if ( !completionCount ) {
 					return false;
 				}
 				return this._isOptionalModule() && !this._isAccordianOpen() && !this._isAllOptionalViewed();
