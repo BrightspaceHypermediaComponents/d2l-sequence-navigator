@@ -305,7 +305,7 @@
 				};
 			}
 
-			_isAccordianOpen() {
+			_isAccordionOpen() {
 				if ( !this.shadowRoot || !this.shadowRoot.querySelector('#moduleLink') ) {
 					return false;
 				}
@@ -333,8 +333,8 @@
 					return false;
 				}
 				return !this._isOptionalModule() && (
-					this._isAccordianOpen() ||
-					( !this._isAccordianOpen() && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
+					this._isAccordionOpen() ||
+					( !this._isAccordionOpen() && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
 				);
 			}
 
@@ -342,7 +342,7 @@
 				if ( !completionCount ) {
 					return false;
 				}
-				return !this._isAccordianOpen() && (
+				return !this._isAccordionOpen() && (
 					( this._isOptionalModule() && this._isAllOptionalViewed() ) ||
 					( !this._isOptionalModule() && this._isAllRequiredViewed() )
 				);
@@ -352,7 +352,7 @@
 				if ( !completionCount ) {
 					return false;
 				}
-				return this._isOptionalModule() && !this._isAccordianOpen() && !this._isAllOptionalViewed();
+				return this._isOptionalModule() && !this._isAccordionOpen() && !this._isAllOptionalViewed();
 			}
 
 			_showDivider(showCount, showCheckmark, showOptional) {
