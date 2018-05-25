@@ -189,15 +189,6 @@
 				}
 			},
 
-			_isOptionalViewed(activity) {
-				var aboutSubEntity =  activity.getSubEntityByRel('about');
-				if( aboutSubEntity && aboutSubEntity.getSubEntityByClass('last-viewed') ) {
-					return true;
-				} else{
-					return false
-				}
-			},
-
 			_notify: function(entityId, token, result) {
 				const listenerSet = this._initContainer(this._listeners, entityId, token, new Set());
 				for (const listener of listenerSet) {
