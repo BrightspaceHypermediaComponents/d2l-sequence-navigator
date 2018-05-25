@@ -197,14 +197,16 @@
 				test('should show the word optional when the accordion is closed', function(done) {
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
-						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-						expect(optionalStatus).to.exist;
-						assert.equal(optionalStatus.innerText, 'optional');
-						done();
+						flush( function() {
+							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+							expect(optionalStatus).to.exist;
+							assert.equal(optionalStatus.innerText, 'optional');
+							done();
+						});
 					});
 				});
 
-				test('should show count for a open accordion that has one completed activity', function(done) {
+				test('should not show the count or divider icon', function(done) {
 					flush( function() {
 						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordianElement.addEventListener('click', function() {
@@ -238,7 +240,7 @@
 						});
 				});
 
-				test('should show the word optional when the accordion is closed', function(done) {
+				test('should not show the count or the divider, when the accordion is closed', function(done) {
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -247,7 +249,7 @@
 					});
 				});
 
-				test('should show count for a open accordion that has one completed activity', function(done) {
+				test('should show count for a open accordion that has no completed required activites', function(done) {
 					flush( function() {
 						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordianElement.addEventListener('click', function() {
@@ -260,7 +262,7 @@
 				});
 			});
 
-			suite('d2l-module-link for module with all unread required activies', () => {
+			suite('d2l-module-link for module with all required activies that are completed', () => {
 
 				var element;
 
@@ -278,7 +280,7 @@
 						});
 				});
 
-				test('should show the word optional when the accordion is closed', function(done) {
+				test('should show the checkmark status', function(done) {
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var completedStatus = element.shadowRoot.querySelector('.completedStatus');
@@ -287,7 +289,7 @@
 					});
 				});
 
-				test('should show count for a open accordion that has one completed activity', function(done) {
+				test('should show the count of completed activites when accordion is open', function(done) {
 					flush( function() {
 						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordianElement.addEventListener('click', function() {
