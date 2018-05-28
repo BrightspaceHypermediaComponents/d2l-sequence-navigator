@@ -175,10 +175,12 @@
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.$.trigger.click();
 						TestHelpers.forceXIfStamp(accordionElement);
-						var countStatus = element.shadowRoot.querySelector('.countStatus');
-						expect(countStatus).to.exist;
-						assert.equal(countStatus.innerText, '1 of 2');
-						done();
+						flush( function() {
+							var countStatus = element.shadowRoot.querySelector('.countStatus');
+							expect(countStatus).to.exist;
+							assert.equal(countStatus.innerText, '1 of 2');
+							done();
+						});
 					});
 				});
 			});
@@ -218,11 +220,12 @@
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
 							TestHelpers.forceXIfStamp(accordionElement);
-							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-							expect(optionalStatus).to.exist;
-							assert.equal(optionalStatus.style.display, 'none');
-							done();
-
+							flush( function() {
+								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+								expect(optionalStatus).to.exist;
+								assert.equal(optionalStatus.style.display, 'none');
+								done();
+							});
 						});
 						accordionElement.$.trigger.click();
 					});
@@ -263,9 +266,11 @@
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
 							TestHelpers.forceXIfStamp(accordionElement);
-							var countStatus = element.shadowRoot.querySelector('.countStatus');
-							expect(countStatus).to.exist;
-							done();
+							flush( function() {
+								var countStatus = element.shadowRoot.querySelector('.countStatus');
+								expect(countStatus).to.exist;
+								done();
+							});
 						});
 						accordionElement.$.trigger.click();
 					});
