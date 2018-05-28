@@ -204,8 +204,8 @@
 			</d2l-accordion-collapse>
 		</template>
 
-	<template is="dom-if" if="[[!hasChildModules]]">
-		<d2l-accordion-collapse
+		<template is="dom-if" if="[[!hasChildModules]]">
+			<d2l-accordion-collapse
 				class$="[[_getIsSelected(selectedModule)]] has-no-child-modules"
 				on-click="toggleSelected"
 				id="moduleLink"

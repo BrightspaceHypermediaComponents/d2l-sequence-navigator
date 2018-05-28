@@ -8,20 +8,16 @@
 		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 		<link rel="import" href="../d2l-sequence-navigator.html">
+		<link rel="import" href="../d2l-lesson-navigator.html">
 		<link rel="import" href="../d2l-root-sequence-navigator.html">
 		<custom-style>
 			<style is="custom-style" include="demo-pages-shared-styles"></style>
 			<style>
-				#sidebar {
+				.sidebar {
 					width: 330px;
-					height: 400px;
-					padding: 40px 30px 40px 30px;
+					height: 600px;
 					background: linear-gradient(to right, #F9FAFC, #FFFFFF);
 					box-shadow: 0px 2px 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
-				}
-				#navMenu {
-					height: 100%;
-					overflow-y: auto;
 				}
 			</style>
 		</custom-style>
@@ -32,13 +28,13 @@
 			<h3>Simple sequence-navigator</h3>
 			<demo-snippet>
 				<template>
-					<h4>Inside a sidebar</h4>
-					<div class="sidebar-container" id="sidebar">
-						<d2l-sequence-navigator id="navMenu"
-							current-activity="data/m2-activity2.json"
+					<h4>Lesson navigator in a sidebar</h4>
+					<div class="sidebar">
+						<d2l-lesson-navigator
 							href="data/lesson1.json"
 							token="foozleberries"
-						></d2l-sequence-navigator>
+							current-activity="data/m2-activity2.json"
+						></d2l-lesson-navigator>
 					</div>
 
 					<h4>Default From root</h4>
