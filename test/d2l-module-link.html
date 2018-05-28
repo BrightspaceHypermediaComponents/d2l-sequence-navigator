@@ -217,8 +217,7 @@
 				});
 
 				test('should not show the count or divider icon when the accordion is open', function(done) {
-					TestHelpers.forceXIfStamp(element);
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
 							setTimeout( function() {
@@ -231,7 +230,7 @@
 							});
 						});
 						accordionElement.$.trigger.click();
-					});
+					}, 100);
 				});
 			});
 
@@ -277,7 +276,7 @@
 							});
 						});
 						accordionElement.$.trigger.click();
-					});
+					}, 100);
 				});
 			});
 
