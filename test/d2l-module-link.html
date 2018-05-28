@@ -185,7 +185,7 @@
 				});
 			});
 
-			suite('d2l-module-link for module with all unread optional activies', () => {
+			suite('d2l-module-link for module with all unread optional activities', () => {
 
 				var element;
 
@@ -232,7 +232,7 @@
 				});
 			});
 
-			suite('d2l-module-link for module with all unread required activies', () => {
+			suite('d2l-module-link for module with all unread required activities', () => {
 
 				var element;
 
@@ -262,7 +262,7 @@
 
 				test('should show count for a open accordion that has no completed required activites', function(done) {
 					TestHelpers.forceXIfStamp(element);
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
 							setTimeout( function() {
@@ -277,7 +277,7 @@
 				});
 			});
 
-			suite('d2l-module-link for module with all required activies that are completed', () => {
+			suite('d2l-module-link for module with all required activities that are completed', () => {
 
 				var element;
 
