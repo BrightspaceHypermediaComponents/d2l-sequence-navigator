@@ -196,11 +196,13 @@
 
 				test('should show the word optional when the accordion is closed', function(done) {
 					setTimeout( function() {
-						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
-						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-						expect(optionalStatus).to.exist;
-						assert.equal(optionalStatus.innerText, 'optional');
-						done();
+						flush( function() {
+							expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
+							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+							expect(optionalStatus).to.exist;
+							assert.equal(optionalStatus.innerText, 'optional');
+							done();
+						});
 					});
 				});
 
@@ -209,10 +211,12 @@
 						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordianElement.addEventListener('click', function() {
 							setTimeout( function() {
-								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-								expect(optionalStatus).to.exist;
-								assert.equal(optionalStatus.style.display, 'none');
-								done();
+								flush( function() {
+									var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+									expect(optionalStatus).to.exist;
+									assert.equal(optionalStatus.style.display, 'none');
+									done();
+								});
 							});
 						});
 						accordianElement.$.trigger.click();
