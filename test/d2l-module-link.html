@@ -9,7 +9,10 @@
 		<script src="../../webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="../../web-component-tester/browser.js"></script>
 		<link rel="import" href="../../polymer/polymer.html">
+		<link rel="import" href="../../iron-test-helpers/iron-test-helpers.html">		
 		<link rel="import" href="../components/d2l-module-link.html">
+		<link rel="import" href="../components/d2l-module-link.html">
+		
 	</head>
 	<body>
 		<test-fixture id="ModuleWithChildrenFixture">
@@ -30,6 +33,7 @@
 			</template>
 		</test-fixture>
 		<script>
+			/*global TestHelpers */
 			suite('d2l-module-link for module with children', () => {
 
 				var element;
@@ -65,11 +69,11 @@
 
 				test('select the module by clicking on it', function(done) {
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						assert.equal(element.selectedModule, '');
-						assert.isNotTrue(accordianElement.classList.contains('selected'));
-						accordianElement.$.trigger.click();
-						assert.isTrue(accordianElement.classList.contains('selected'));
+						assert.isNotTrue(accordionElement.classList.contains('selected'));
+						accordionElement.$.trigger.click();
+						assert.isTrue(accordionElement.classList.contains('selected'));
 						assert.equal(element.selectedModule, 'data/lesson1.json');
 						done();
 					});
@@ -77,10 +81,10 @@
 
 				test('select then unselect the module by clicking on it again', function(done) {
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.$.trigger.click();
-						accordianElement.$.trigger.click();
-						assert.isNotTrue(accordianElement.classList.contains('selected'));
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.$.trigger.click();
+						accordionElement.$.trigger.click();
+						assert.isNotTrue(accordionElement.classList.contains('selected'));
 						assert.equal(element.selectedModule, '');
 						done();
 					});
@@ -88,10 +92,10 @@
 
 				test('select then unselect by setting another module as selected', function(done) {
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.$.trigger.click();
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.$.trigger.click();
 						element.selectedModule = 'someotherModule';
-						assert.isNotTrue(accordianElement.classList.contains('selected'));
+						assert.isNotTrue(accordionElement.classList.contains('selected'));
 						assert.equal(element.selectedModule, 'someotherModule');
 						done();
 					});
@@ -155,6 +159,7 @@
 				});
 
 				test('should show count for a closed accordion that has one completed activity', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -165,9 +170,11 @@
 				});
 
 				test('should show count for a open accordion that has one completed activity', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.$.trigger.click();
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.$.trigger.click();
+						TestHelpers.forceXIfStamp(accordionElement);
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
 						expect(countStatus).to.exist;
 						assert.equal(countStatus.innerText, '1 of 2');
@@ -195,31 +202,29 @@
 				});
 
 				test('should show the word optional when the accordion is closed', function(done) {
-					setTimeout( function() {
-						flush( function() {
-							expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
-							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-							expect(optionalStatus).to.exist;
-							assert.equal(optionalStatus.innerText, 'optional');
-							done();
-						});
+					TestHelpers.forceXIfStamp(element);
+					flush( function() {
+						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
+						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+						expect(optionalStatus).to.exist;
+						assert.equal(optionalStatus.innerText, 'optional');
+						done();
 					});
 				});
 
 				test('should not show the count or divider icon', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.addEventListener('click', function() {
-							setTimeout( function() {
-								flush( function() {
-									var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-									expect(optionalStatus).to.exist;
-									assert.equal(optionalStatus.style.display, 'none');
-									done();
-								});
-							});
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.addEventListener('click', function() {
+							TestHelpers.forceXIfStamp(accordionElement);
+							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+							expect(optionalStatus).to.exist;
+							assert.equal(optionalStatus.style.display, 'none');
+							done();
+
 						});
-						accordianElement.$.trigger.click();
+						accordionElement.$.trigger.click();
 					});
 				});
 			});
@@ -243,6 +248,7 @@
 				});
 
 				test('should not show the count or the divider, when the accordion is closed', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -252,14 +258,15 @@
 				});
 
 				test('should show count for a open accordion that has no completed required activites', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.addEventListener('click', function() {
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.addEventListener('click', function() {
 							var countStatus = element.shadowRoot.querySelector('.countStatus');
 							expect(countStatus).to.be.null;
 							done();
 						});
-						accordianElement.$.trigger.click();
+						accordionElement.$.trigger.click();
 					});
 				});
 			});
@@ -283,6 +290,7 @@
 				});
 
 				test('should show the checkmark status', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var completedStatus = element.shadowRoot.querySelector('.completedStatus');
@@ -292,9 +300,11 @@
 				});
 
 				test('should show the count of completed activites when accordion is open', function(done) {
+					TestHelpers.forceXIfStamp(element);
 					flush( function() {
-						var accordianElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-						accordianElement.addEventListener('click', function() {
+						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.addEventListener('click', function() {
+							TestHelpers.forceXIfStamp(accordionElement);
 							flush( function() {
 								var countStatus = element.shadowRoot.querySelector('.countStatus');
 								var completedStatus = element.shadowRoot.querySelector('.completedStatus');
@@ -303,7 +313,7 @@
 								done();
 							});
 						});
-						accordianElement.$.trigger.click();
+						accordionElement.$.trigger.click();
 					});
 				});
 			});
