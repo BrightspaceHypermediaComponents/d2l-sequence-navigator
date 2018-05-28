@@ -219,7 +219,7 @@
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							flush( function() {
+							setTimeout( function() {
 								TestHelpers.forceXIfStamp(element);
 								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 								expect(optionalStatus).to.exist;
@@ -265,7 +265,7 @@
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							flush( function() {
+							setTimeout( function() {
 								TestHelpers.forceXIfStamp(element);
 								var countStatus = element.shadowRoot.querySelector('.countStatus');
 								expect(countStatus).to.exist;
