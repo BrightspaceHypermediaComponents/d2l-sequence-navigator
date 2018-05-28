@@ -204,7 +204,8 @@
 				});
 
 				test('should show the word optional when the accordion is closed', function(done) {
-					flush( function() {
+					// flush( function() {
+					setTimeout( function() {
 						TestHelpers.flushAsynchronousOperations();
 						TestHelpers.forceXIfStamp(element);
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
@@ -212,7 +213,7 @@
 						expect(optionalStatus).to.exist;
 						assert.equal(optionalStatus.innerText, 'optional');
 						done();
-					});
+					}, 100);
 				});
 
 				test('should not show the count or divider icon when the accordion is open', function(done) {
