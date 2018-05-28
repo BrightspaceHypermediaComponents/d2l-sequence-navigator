@@ -353,13 +353,13 @@
 				}
 			}
 
-			onSidebarScroll(e) {
+			onSidebarScroll() {
 				if ( this.$.sidebarContent.scrollTop === 0 ) {
-					if( this.$.sidebarHeader.classList.contains('shadowed') ) {
+					if ( this.$.sidebarHeader.classList.contains('shadowed') ) {
 						this.$.sidebarHeader.classList.remove('shadowed');
 					}
 				} else {
-					if( !this.$.sidebarHeader.classList.contains('shadowed') ) {
+					if ( !this.$.sidebarHeader.classList.contains('shadowed') ) {
 						this.$.sidebarHeader.classList.add('shadowed');
 					}
 				}
