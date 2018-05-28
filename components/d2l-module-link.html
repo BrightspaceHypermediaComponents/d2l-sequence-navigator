@@ -18,13 +18,13 @@
 				padding: 15px;
 				display: grid;
 				grid-template-columns: 65% 35%;
-				background-color: #E6EAF0;
+				background-color: var(--d2l-color-gypsum);
 				border-radius: 8px 8px 8px 8px;
 			}
 
 			d2l-accordion-collapse[opened].has-no-child-modules .module-header {
 				border-radius: 8px 8px 0px 0px;
-				border-bottom: 1px solid #D3D9E3;
+				border-bottom: 1px solid var(--d2l-color-mica);
 			}
 
 			.module-title {
@@ -84,14 +84,13 @@
 				@include vui-typography;
 				padding: 20px 15px;
 				background-color: white;
-				border-top: 1px solid var(--d2l-color-gypsum);
 				display: block;
 				color: var(--d2l-color-ferrite);
 				@include d2l-body-small;
 			}
 
 			d2l-accordion-collapse.has-no-child-modules {
-				border: 1px solid #D3D9E3;
+				border: 1px solid var(--d2l-color-mica);
 				border-radius: 8px;
 			}
 
@@ -119,8 +118,8 @@
 			}
 
 			.has-no-child-modules .module-item:not(.current):not(:hover) {
-				border: 1px solid #D3D9E3;
-				border-bottom: 1px solid #D3D9E3;
+				border: 1px solid var(--d2l-color-mica);
+				border-bottom: 1px solid var(--d2l-color-mica);
 			}
 
 			.has-no-child-modules .module-item.current,
@@ -144,7 +143,7 @@
 
 			.has-child-modules .end-of-lesson {
 				text-align: center;
-				color: #006FBF;
+				color: var(--d2l-color-celestine);
 				padding-top: 30px;
 
 				/* Label Text - Lato Bold 14 */
@@ -164,7 +163,7 @@
 			}
 
 			.divider-icon {
-				color:#D3D9E4 !important;
+				color: var(--d2l-color-mica) !important;
 			}
 
 		</style>
