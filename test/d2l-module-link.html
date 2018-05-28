@@ -262,8 +262,9 @@
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
+							TestHelpers.forceXIfStamp(accordionElement);
 							var countStatus = element.shadowRoot.querySelector('.countStatus');
-							expect(countStatus).to.be.null;
+							expect(countStatus).to.exist;
 							done();
 						});
 						accordionElement.$.trigger.click();
