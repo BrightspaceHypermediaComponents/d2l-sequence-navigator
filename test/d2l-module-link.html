@@ -159,7 +159,6 @@
 				});
 
 				test('should show count for a closed accordion that has one completed activity', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -170,7 +169,6 @@
 				});
 
 				test('should show count for a open accordion that has one completed activity', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.$.trigger.click();
@@ -204,7 +202,6 @@
 				});
 
 				test('should show the word optional when the accordion is closed', function(done) {
-					// flush( function() {
 					setTimeout( function() {
 						TestHelpers.flushAsynchronousOperations();
 						TestHelpers.forceXIfStamp(element);
@@ -220,14 +217,12 @@
 					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							setTimeout( function() {
-								TestHelpers.flushAsynchronousOperations();
-								TestHelpers.forceXIfStamp(element);
-								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-								expect(optionalStatus).to.exist;
-								assert.equal(optionalStatus.style.display, 'none');
-								done();
-							});
+							TestHelpers.flushAsynchronousOperations();
+							TestHelpers.forceXIfStamp(element);
+							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+							expect(optionalStatus).to.exist;
+							assert.equal(optionalStatus.style.display, 'none');
+							done();
 						});
 						accordionElement.$.trigger.click();
 					}, 100);
@@ -253,7 +248,6 @@
 				});
 
 				test('should not show the count or the divider, when the accordion is closed', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -263,17 +257,14 @@
 				});
 
 				test('should show count for a open accordion that has no completed required activites', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							setTimeout( function() {
-								TestHelpers.flushAsynchronousOperations();
-								TestHelpers.forceXIfStamp(element);
-								var countStatus = element.shadowRoot.querySelector('.countStatus');
-								expect(countStatus).to.exist;
-								done();
-							});
+							TestHelpers.flushAsynchronousOperations();
+							TestHelpers.forceXIfStamp(element);
+							var countStatus = element.shadowRoot.querySelector('.countStatus');
+							expect(countStatus).to.exist;
+							done();
 						});
 						accordionElement.$.trigger.click();
 					}, 100);
@@ -299,7 +290,6 @@
 				});
 
 				test('should show the checkmark status', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var completedStatus = element.shadowRoot.querySelector('.completedStatus');
@@ -309,18 +299,15 @@
 				});
 
 				test('should show the count of completed activites when accordion is open', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.forceXIfStamp(accordionElement);
-							flush( function() {
-								var countStatus = element.shadowRoot.querySelector('.countStatus');
-								var completedStatus = element.shadowRoot.querySelector('.completedStatus');
-								assert.equal(completedStatus.style.display, 'none');
-								assert.equal(countStatus.innerText, '3 of 3');
-								done();
-							});
+							TestHelpers.forceXIfStamp(element);
+							var countStatus = element.shadowRoot.querySelector('.countStatus');
+							var completedStatus = element.shadowRoot.querySelector('.completedStatus');
+							assert.equal(completedStatus.style.display, 'none');
+							assert.equal(countStatus.innerText, '3 of 3');
+							done();
 						});
 						accordionElement.$.trigger.click();
 					});
