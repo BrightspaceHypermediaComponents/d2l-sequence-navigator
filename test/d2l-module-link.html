@@ -202,8 +202,8 @@
 				});
 
 				test('should show the word optional when the accordion is closed', function(done) {
-					TestHelpers.forceXIfStamp(element);
 					flush( function() {
+						TestHelpers.forceXIfStamp(element);
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 						expect(optionalStatus).to.exist;
@@ -212,12 +212,12 @@
 					});
 				});
 
-				test('should not show the count or divider icon', function(done) {
+				test('should not show the count or divider icon when the accordion is open', function(done) {
 					TestHelpers.forceXIfStamp(element);
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.forceXIfStamp(accordionElement);
+							TestHelpers.forceXIfStamp(element);
 							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 							expect(optionalStatus).to.exist;
 							assert.equal(optionalStatus.style.display, 'none');
@@ -262,6 +262,7 @@
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
+							TestHelpers.forceXIfStamp(element);
 							var countStatus = element.shadowRoot.querySelector('.countStatus');
 							expect(countStatus).to.be.null;
 							done();
