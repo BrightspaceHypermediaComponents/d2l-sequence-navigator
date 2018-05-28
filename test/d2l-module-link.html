@@ -219,8 +219,8 @@
 					flush( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.forceXIfStamp(accordionElement);
 							flush( function() {
+								TestHelpers.forceXIfStamp(element);
 								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 								expect(optionalStatus).to.exist;
 								assert.equal(optionalStatus.style.display, 'none');
