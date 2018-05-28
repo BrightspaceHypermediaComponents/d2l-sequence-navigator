@@ -206,6 +206,7 @@
 				test('should show the word optional when the accordion is closed', function(done) {
 					flush( function() {
 						TestHelpers.forceXIfStamp(element);
+						TestHelpers.flushAsynchronousOperations();
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 						expect(optionalStatus).to.exist;
@@ -221,6 +222,7 @@
 						accordionElement.addEventListener('click', function() {
 							setTimeout( function() {
 								TestHelpers.forceXIfStamp(element);
+								TestHelpers.flushAsynchronousOperations();
 								var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 								expect(optionalStatus).to.exist;
 								assert.equal(optionalStatus.style.display, 'none');
@@ -267,6 +269,7 @@
 						accordionElement.addEventListener('click', function() {
 							setTimeout( function() {
 								TestHelpers.forceXIfStamp(element);
+								TestHelpers.flushAsynchronousOperations();
 								var countStatus = element.shadowRoot.querySelector('.countStatus');
 								expect(countStatus).to.exist;
 								done();
