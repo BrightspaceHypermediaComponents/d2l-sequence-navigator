@@ -269,7 +269,8 @@
 					currentActivity: {
 						type: String,
 						value: '',
-						notify: true
+						notify: true,
+						observer: '_closeModule'
 					},
 					selectedModule: {
 						type: String,
@@ -325,10 +326,6 @@
 						type: String,
 						value: '',
 						computed: '_stringifyCount(completionCount.total)'
-					},
-					hasCurrent: {
-						type: Boolean,
-						value: false
 					}
 				};
 			}
@@ -473,14 +470,24 @@
 			}
 
 			_getIsCurrent(childLink, currentActivity) {
-				var accordion = this.shadowRoot.querySelector('#moduleLink');
 				if ( childLink.href === currentActivity ) {
-					this.hasCurrent = true;
-					accordion.setAttribute('opened', '');
+					this.shadowRoot.querySelector('#moduleLink').setAttribute('opened', '');
 					return 'current';
-				} else if ( !this.hasCurrent ) {
-					accordion.removeAttribute('opened', '');
 				}
+			}
+
+			_closeModule() {
+				if ( !this.entity ) {
+					return;
+				}
+				var children = this.entity.getSubEntities();
+				var i;
+				for (i = 0; i < children.length; i++) {
+					if ( children[i].href === this.currentActivity ) {
+						return;
+					}
+				}
+				this.shadowRoot.querySelector('#moduleLink').removeAttribute('opened');
 			}
 
 			_onActivityClicked(e) {
