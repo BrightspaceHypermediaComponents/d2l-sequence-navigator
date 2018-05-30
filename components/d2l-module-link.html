@@ -480,9 +480,8 @@
 				if ( !this.entity ) {
 					return;
 				}
-				var children = this.entity.getSubEntities();
-				var i;
-				for (i = 0; i < children.length; i++) {
+				const children = this.entity.getSubEntities();
+				for ( let i = 0; i < children.length; i++ ) {
 					if ( children[i].href === this.currentActivity ) {
 						return;
 					}
