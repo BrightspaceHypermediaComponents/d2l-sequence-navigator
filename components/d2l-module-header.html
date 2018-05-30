@@ -205,13 +205,6 @@
 				this.loadResources(this.resolveUrl('../locales.json'));
 			}
 
-			_isAccordionOpen() {
-				if ( !this.shadowRoot || !this.shadowRoot.querySelector('#moduleLink') ) {
-					return false;
-				}
-				return this.shadowRoot.querySelector('#moduleLink').hasAttribute('opened');
-			}
-
 			_isOptionalModule() {
 				return this.completionCount && this.completionCount.total === 0 && this.completionCount.optionalTotal > 0;
 			}
@@ -229,12 +222,13 @@
 			}
 
 			_showCount(completionCount) {
+				console.log('showCount');
 				if ( !completionCount ) {
 					return false;
 				}
 				return !this._isOptionalModule() && (
-					this._isAccordionOpen() ||
-					( !this._isAccordionOpen() && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
+					this.opened ||
+					( !this.opened && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
 				);
 			}
 
@@ -242,7 +236,7 @@
 				if ( !completionCount ) {
 					return false;
 				}
-				return !this._isAccordionOpen() && (
+				return !this.opened && (
 					( this._isOptionalModule() && this._isAllOptionalViewed() ) ||
 					( !this._isOptionalModule() && this._isAllRequiredViewed() )
 				);
@@ -252,7 +246,7 @@
 				if ( !completionCount ) {
 					return false;
 				}
-				return this._isOptionalModule() && !this._isAccordionOpen() && !this._isAllOptionalViewed();
+				return this._isOptionalModule() && !this.opened && !this._isAllOptionalViewed();
 			}
 
 			_showDivider(showCount, showCheckmark, showOptional) {
