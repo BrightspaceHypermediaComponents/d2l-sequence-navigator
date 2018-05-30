@@ -1,5 +1,6 @@
 <link rel="import" href="d2l-sequence-navigator-item.html">
 <link rel="import" href="d2l-progress-bar.html">
+<link rel="import" href="d2l-module-header.html">
 <link rel="import" href="../utility/completion-status-mixin.html">
 <link rel="import" href="../../d2l-accordion/d2l-accordion.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
@@ -12,48 +13,6 @@
 			:host {
 				display: block;
 				font-family: 'Lato', sans-serif;
-			}
-
-			.has-no-child-modules .module-header {
-				padding: 15px;
-				display: grid;
-				grid-template-columns: 65% 35%;
-				background-color: var(--d2l-color-gypsum);
-				border-radius: 8px 8px 8px 8px;
-			}
-
-			d2l-accordion-collapse[opened].has-no-child-modules .module-header {
-				border-radius: 8px 8px 0px 0px;
-				border-bottom: 1px solid var(--d2l-color-mica);
-			}
-
-			.module-title {
-				color: var(--d2l-color-ferrite);
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
-
-			.has-no-child-modules .module-title {
-				float: left;
-				grid-column: 1;
-
-				/* Body Text - Lato Regular 19 */
-				font-size: 19px;
-				line-height: 24px;
-				font-weight: 400; /* normal */
-				letter-spacing: 0.2px;
-			}
-
-			.has-child-modules .module-title {
-				margin-top: 0px;
-				margin-bottom: 0px;
-
-				/* Heading 3 - Lato Bold 20 */
-				font-size: 20px;
-				line-height: 30px;
-				font-weight: 700; /* bold */
-				letter-spacing: 0.2px;
 			}
 
 			.module-completion-count {
@@ -90,8 +49,8 @@
 			}
 
 			d2l-accordion-collapse.has-no-child-modules {
-				border: 1px solid var(--d2l-color-mica);
 				border-radius: 8px;
+				border: 1px solid var(--d2l-color-mica);
 			}
 
 			.module-item-list {
@@ -176,11 +135,13 @@
 				no-icons
 				flex
 			>
-				<div slot="header" class="module-header">
-					<div class="module-title">[[entity.properties.title]]</div>
-					<d2l-progress-bar percent-completed=[[percentCompleted]]></d2l-progress-bar>
-					<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCount.completed, 'total', completionCount.total)]]</div>
-				</div>
+			<d2l-module-header slot="header" id="moduleHeader"
+				href="[[href]]"
+				token="[[token]]"
+				current-activity="{{currentActivity}}"
+				selected-module="{{selectedModule}}"
+				opened="{{moduleOpened}}">
+			</d2l-module-header>
 
 				<ol class="module-item-list">
 					<template is="dom-repeat" items="[[subEntities]]" as="childLink">
@@ -209,29 +170,13 @@
 				no-icons
 				flex
 			>
-				<div slot="header" class="module-header">
-					<span class="module-title">[[entity.properties.title]]</span>
-					<span class="module-completion-count">
-						<template is="dom-if" if="[[showDivider]]">
-							<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
-						</template>
-						<template is="dom-if" if="[[showCount]]">
-							<span class="countStatus">
-								[[localize('countStatus', 'completed', completionCount.completed, 'total', completionCount.total)]]
-							</span>
-						</template>
-						<template is="dom-if" if="[[showCheckmark]]">
-							<span class="completedStatus">
-								<d2l-icon class="moduleComplete" icon="d2l-tier1:check"></d2l-icon>
-							</span>
-						</template>
-						<template is="dom-if" if="[[showOptional]]">
-							<span class="optionalStatus">
-								[[localize('optional')]]
-							</span>
-						</template>
-					</span>
-				</div>
+				<d2l-module-header slot="header" id="moduleHeader"
+					href="[[href]]"
+					token="[[token]]"
+					current-activity="{{currentActivity}}"
+					selected-module="{{selectedModule}}"
+					opened="{{moduleOpened}}">
+				</d2l-module-header>
 
 				<ol class="module-item-list">
 					<template is="dom-repeat" items="[[subEntities]]" as="childLink">
@@ -315,6 +260,10 @@
 						type: Boolean,
 						value: false,
 						computed: '_showDivider(showCount, showCheckmark, showOptional)'
+					},
+					moduleOpened: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
@@ -436,6 +385,11 @@
 				this.selectedModule = (this.selectedModule === '') ?
 					this._getLinkByRel(this.entity, 'self').href :
 					'';
+				this.moduleOpened = !this.moduleOpened;
+			}
+
+			_getModuleOpened(selected) {
+				return this.entity && this._getLinkByRel(this.entity, 'self').href === selectedModule;
 			}
 
 			_getIsOpened(selectedModule) {
