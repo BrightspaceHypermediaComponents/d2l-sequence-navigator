@@ -61,14 +61,14 @@
 				});
 
 				test('should create d2l-navigation-item elements for child entities', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						expect(element.shadowRoot.querySelector('.module-item-list')).to.exist;
 						done();
 					});
 				});
 
 				test('select the module by clicking on it', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						assert.equal(element.selectedModule, '');
 						assert.isNotTrue(accordionElement.classList.contains('selected'));
@@ -80,7 +80,7 @@
 				});
 
 				test('select then unselect the module by clicking on it again', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.$.trigger.click();
 						accordionElement.$.trigger.click();
@@ -91,7 +91,7 @@
 				});
 
 				test('select then unselect by setting another module as selected', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.$.trigger.click();
 						element.selectedModule = 'someotherModule';
@@ -124,14 +124,14 @@
 				});
 
 				test('should not create any child d2l-sequence-navigator-item elements', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						expect(element.shadowRoot.querySelector('d2l-sequence-navigator-item')).to.be.null;
 						done();
 					});
 				});
 
 				test('should create empty text', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var item = element.shadowRoot.querySelector('.no-topics');
 						expect(item).to.not.be.null;
 						expect(item.innerText.trim()).to.equal('This module has no topics');
@@ -144,19 +144,18 @@
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
 						expect(element.shadowRoot.querySelector('.countStatus')).to.be.null;
 						done();
-					}, 100);
+					});
 				});
 
 				test('should not show any counts when the accordion is open', function(done) {
 					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.forceXIfStamp(element);
 							expect(element.shadowRoot.querySelector('.countStatus')).to.be.null;
 							done();
 						});
 						accordionElement.$.trigger.click();
-					}, 100);
+					});
 				});
 			});
 
@@ -189,16 +188,13 @@
 				});
 
 				test('should show count for a open accordion that has one completed activity', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.$.trigger.click();
-						TestHelpers.forceXIfStamp(accordionElement);
-						flush( function() {
-							var countStatus = element.shadowRoot.querySelector('.countStatus');
-							expect(countStatus).to.exist;
-							assert.equal(countStatus.innerText, '1 of 2');
-							done();
-						});
+						var countStatus = element.shadowRoot.querySelector('.countStatus');
+						expect(countStatus).to.exist;
+						assert.equal(countStatus.innerText, '1 of 2');
+						done();
 					});
 				});
 			});
@@ -223,21 +219,18 @@
 
 				test('should show the word optional when the accordion is closed', function(done) {
 					setTimeout( function() {
-						TestHelpers.flushAsynchronousOperations();
-						TestHelpers.forceXIfStamp(element);
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 						expect(optionalStatus).to.exist;
 						assert.equal(optionalStatus.innerText, 'optional');
 						done();
-					}, 100);
+					});
 				});
 
 				test('should not show the count or divider icon when the accordion is open', function(done) {
 					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.flushAsynchronousOperations();
 							TestHelpers.forceXIfStamp(element);
 							var optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 							expect(optionalStatus).to.exist;
@@ -245,7 +238,7 @@
 							done();
 						});
 						accordionElement.$.trigger.click();
-					}, 100);
+					});
 				});
 			});
 
@@ -268,7 +261,7 @@
 				});
 
 				test('should not show the count or the divider, when the accordion is closed', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
 						var countStatus = element.shadowRoot.querySelector('.countStatus');
 						expect(countStatus).to.be.null;
@@ -280,14 +273,13 @@
 					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
-							TestHelpers.flushAsynchronousOperations();
 							TestHelpers.forceXIfStamp(element);
 							var countStatus = element.shadowRoot.querySelector('.countStatus');
 							expect(countStatus).to.exist;
 							done();
 						});
 						accordionElement.$.trigger.click();
-					}, 100);
+					});
 				});
 			});
 
@@ -310,7 +302,7 @@
 				});
 
 				test('should show the checkmark status', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						expect(element.shadowRoot.querySelector('.divider-icon')).to.exist;
 						var completedStatus = element.shadowRoot.querySelector('.completedStatus');
 						expect(completedStatus).to.exist;
@@ -319,7 +311,7 @@
 				});
 
 				test('should show the count of completed activites when accordion is open', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						var accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 						accordionElement.addEventListener('click', function() {
 							TestHelpers.forceXIfStamp(element);
