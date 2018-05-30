@@ -325,6 +325,10 @@
 						type: String,
 						value: '',
 						computed: '_stringifyCount(completionCount.total)'
+					},
+					hasCurrent: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
@@ -469,8 +473,13 @@
 			}
 
 			_getIsCurrent(childLink, currentActivity) {
+				var accordion = this.shadowRoot.querySelector('#moduleLink');
 				if ( childLink.href === currentActivity ) {
+					this.hasCurrent = true;
+					accordion.setAttribute('opened', '');
 					return 'current';
+				} else if ( !this.hasCurrent ) {
+					accordion.removeAttribute('opened', '');
 				}
 			}
 
