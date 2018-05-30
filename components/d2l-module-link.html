@@ -277,7 +277,7 @@
 					},
 					completionCount: {
 						type: Object,
-						computed: '_getStatus(completionStatus)',
+						computed: '_getStatus(completionStatus, entity)',
 						observer: '_getPercentCompleted'
 					},
 					subEntities: {
@@ -335,7 +335,10 @@
 			}
 
 			_stringifyCount(count) {
-				return count.toString();
+				if ( !count ) {
+					return '';
+				}
+				return `${count}`;
 			}
 
 			_isAccordionOpen() {
@@ -405,12 +408,15 @@
 			}
 
 			_getStatus(completionStatus) {
-				return completionStatus || {
-					completed: 0,
-					optionalViewed: 0,
-					optionalTotal: 0,
-					total: 0
-				};
+				if ( !this.entity || !completionStatus ) {
+					return {
+						completed: 0,
+						optionalViewed: 0,
+						optionalTotal: 0,
+						total: 0
+					};
+				}
+				return completionStatus;
 			}
 
 			_getPercentCompleted() {
