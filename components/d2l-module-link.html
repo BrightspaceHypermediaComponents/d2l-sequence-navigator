@@ -179,7 +179,7 @@
 				<div slot="header" class="module-header">
 					<div class="module-title">[[entity.properties.title]]</div>
 					<d2l-progress-bar percent-completed=[[percentCompleted]]></d2l-progress-bar>
-					<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCount.completed, 'total', completionCount.total)]]</div>
+					<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 				</div>
 
 				<ol class="module-item-list">
@@ -217,7 +217,7 @@
 						</template>
 						<template is="dom-if" if="[[showCount]]">
 							<span class="countStatus">
-								[[localize('countStatus', 'completed', completionCount.completed, 'total', completionCount.total)]]
+								[[localize('countStatus', 'completed', completionCompleted, 'total', completionTotal)]]
 							</span>
 						</template>
 						<template is="dom-if" if="[[showCheckmark]]">
@@ -269,7 +269,8 @@
 					currentActivity: {
 						type: String,
 						value: '',
-						notify: true
+						notify: true,
+						observer: '_closeModule'
 					},
 					selectedModule: {
 						type: String,
@@ -277,7 +278,7 @@
 					},
 					completionCount: {
 						type: Object,
-						computed: '_getStatus(completionStatus)',
+						computed: '_getStatus(completionStatus, entity)',
 						observer: '_getPercentCompleted'
 					},
 					subEntities: {
@@ -315,6 +316,16 @@
 						type: Boolean,
 						value: false,
 						computed: '_showDivider(showCount, showCheckmark, showOptional)'
+					},
+					completionCompleted: {
+						type: String,
+						value: '',
+						computed: '_stringifyCount(completionCount.completed)'
+					},
+					completionTotal: {
+						type: String,
+						value: '',
+						computed: '_stringifyCount(completionCount.total)'
 					}
 				};
 			}
@@ -322,6 +333,13 @@
 			connectedCallback() {
 				super.connectedCallback();
 				this.loadResources(this.resolveUrl('../locales.json'));
+			}
+
+			_stringifyCount(count) {
+				if ( count === undefined ||  count === null ) {
+					return '';
+				}
+				return `${count}`;
 			}
 
 			_isAccordionOpen() {
@@ -351,7 +369,8 @@
 				if ( !completionCount ) {
 					return false;
 				}
-				return !this._isOptionalModule() && (
+				return this.hasChildren &&
+					!this._isOptionalModule() && (
 					this._isAccordionOpen() ||
 					( !this._isAccordionOpen() && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
 				);
@@ -390,12 +409,15 @@
 			}
 
 			_getStatus(completionStatus) {
-				return completionStatus || {
-					completed: 0,
-					optionalViewed: 0,
-					optionalTotal: 0,
-					total: 0
-				};
+				if ( !this.entity || !completionStatus ) {
+					return {
+						completed: 0,
+						optionalViewed: 0,
+						optionalTotal: 0,
+						total: 0
+					};
+				}
+				return completionStatus;
 			}
 
 			_getPercentCompleted() {
@@ -449,8 +471,22 @@
 
 			_getIsCurrent(childLink, currentActivity) {
 				if ( childLink.href === currentActivity ) {
+					this.shadowRoot.querySelector('#moduleLink').setAttribute('opened', '');
 					return 'current';
 				}
+			}
+
+			_closeModule() {
+				if ( !this.entity ) {
+					return;
+				}
+				const children = this.entity.getSubEntities();
+				for ( let i = 0; i < children.length; i++ ) {
+					if ( children[i].href === this.currentActivity ) {
+						return;
+					}
+				}
+				this.shadowRoot.querySelector('#moduleLink').removeAttribute('opened');
 			}
 
 			_onActivityClicked(e) {
