@@ -1,0 +1,346 @@
+<link rel="import" href="d2l-sequence-navigator-item.html">
+<link rel="import" href="d2l-progress-bar.html">
+<link rel="import" href="../utility/completion-status-mixin.html">
+<link rel="import" href="../../d2l-accordion/d2l-accordion.html">
+<link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../d2l-icons/d2l-icons.html">
+<link rel="import" href="../../d2l-typography/d2l-typography.html">
+<link rel="import" href="../../d2l-localize-behavior/d2l-localize-behavior.html">
+<dom-module id="d2l-module-header">
+	<template>
+		<style>
+			:host {
+				display: block;
+				font-family: 'Lato', sans-serif;
+			}
+
+			.has-no-child-modules .module-header {
+				padding: 15px;
+				display: grid;
+				grid-template-columns: 65% 35%;
+				background-color: var(--d2l-color-gypsum);
+				border-radius: 8px 8px 8px 8px;
+			}
+
+			div.opened.has-no-child-modules .module-header {
+				border-radius: 8px 8px 0px 0px;
+				border-bottom: 1px solid var(--d2l-color-mica);
+			}
+
+			.module-title {
+				color: var(--d2l-color-ferrite);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.has-no-child-modules .module-title {
+				float: left;
+				grid-column: 1;
+
+				/* Body Text - Lato Regular 19 */
+				font-size: 19px;
+				line-height: 24px;
+				font-weight: 400; /* normal */
+				letter-spacing: 0.2px;
+			}
+
+			.has-child-modules .module-title {
+				margin-top: 0px;
+				margin-bottom: 0px;
+
+				/* Heading 3 - Lato Bold 20 */
+				font-size: 20px;
+				line-height: 30px;
+				font-weight: 700; /* bold */
+				letter-spacing: 0.2px;
+			}
+
+			.module-completion-count {
+				text-align: right;
+
+				/* Small Body Text - Lato Regular 14, Tungsten */
+				font-size: 14px;
+				line-height: 20px;
+				font-weight: 400; /* normal */
+				letter-spacing: 0.2px;
+				color: var(--d2l-color-tungsten);
+			}
+
+			.has-no-child-modules .module-completion-count {
+				float: right;
+				grid-column: 2;
+			}
+
+			.has-child-modules .module-completion-count {
+				padding-top: 10px;
+			}
+
+			.has-no-child-modules .module-completion-count d2l-icon:not(.moduleComplete) {
+				color: var(--d2l-color-tungsten);
+			}
+
+			.optionalStatus {
+				color: var(--d2l-color-ferrite);
+				font-weight: bold;
+			}
+
+			.moduleComplete {
+				color: var(--d2l-color-olivine);
+			}
+
+			.divider-icon {
+				color: var(--d2l-color-mica) !important;
+			}
+
+		</style>
+
+		<template is="dom-if" if="[[hasChildModules]]">
+			<div
+				class$="has-child-modules [[_getIsOpened(opened)]]"
+				id="moduleLink"
+			>
+				<div slot="header" class="module-header">
+					<div class="module-title">[[entity.properties.title]]</div>
+					<d2l-progress-bar percent-completed=[[percentCompleted]]></d2l-progress-bar>
+					<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCount.completed, 'total', completionCount.total)]]</div>
+				</div>
+
+			</div>
+		</template>
+
+		<template is="dom-if" if="[[!hasChildModules]]">
+			<div
+				class$="has-no-child-modules [[_getIsOpened(opened)]]"
+				id="moduleLink"
+			>
+				<div slot="header" class="module-header">
+					<span class="module-title">[[entity.properties.title]]</span>
+					<span class="module-completion-count">
+						<template is="dom-if" if="[[showDivider]]">
+							<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
+						</template>
+						<template is="dom-if" if="[[showCount]]">
+							<span class="countStatus">
+								[[localize('countStatus', 'completed', completionCount.completed, 'total', completionCount.total)]]
+							</span>
+						</template>
+						<template is="dom-if" if="[[showCheckmark]]">
+							<span class="completedStatus">
+								<d2l-icon class="moduleComplete" icon="d2l-tier1:check"></d2l-icon>
+							</span>
+						</template>
+						<template is="dom-if" if="[[showOptional]]">
+							<span class="optionalStatus">
+								[[localize('optional')]]
+							</span>
+						</template>
+					</span>
+				</div>
+			</div>
+		</template>
+
+	</template>
+	<script>
+		/*
+		@memberOf window.D2L.Polymer.Mixins;
+		@mixes D2L.Polymer.Mixins.CompletionStatusMixin
+		*/
+		class D2LModuleHeader extends Polymer.mixinBehaviors(D2L.PolymerBehaviors.LocalizeBehavior, D2L.Polymer.Mixins.CompletionStatusMixin(Polymer.Element)) {
+			static get is() {
+				return 'd2l-module-header';
+			}
+			static get properties() {
+				return {
+					currentActivity: {
+						type: String,
+						value: '',
+						notify: true
+					},
+					selectedModule: {
+						type: String,
+						value: ''
+					},
+					completionCount: {
+						type: Object,
+						computed: '_getStatus(completionStatus)',
+						observer: '_getPercentCompleted'
+					},
+					subEntities: {
+						type: Array,
+						computed: 'getSubEntities(entity)'
+					},
+					hasChildModules: {
+						type: Boolean,
+						value: false,
+						computed: '_containsChildModules(entity)'
+					},
+					hasChildren: {
+						type: Boolean,
+						computed: '_hasChildren(entity)'
+					},
+					percentCompleted: {
+						type: Number
+					},
+					showCount: {
+						type: Boolean,
+						value: false,
+						computed: '_showCount(completionCount, selectedModule)'
+					},
+					showCheckmark: {
+						type: Boolean,
+						value: false,
+						computed: '_showCheckmark(completionCount, selectedModule)'
+					},
+					showOptional: {
+						type: Boolean,
+						value: false,
+						computed: '_showOptional(completionCount, selectedModule)'
+					},
+					showDivider: {
+						type: Boolean,
+						value: false,
+						computed: '_showDivider(showCount, showCheckmark, showOptional)'
+					},
+					opened: {
+						type: Boolean,
+						value: false
+					}
+				};
+			}
+
+			connectedCallback() {
+				super.connectedCallback();
+				this.loadResources(this.resolveUrl('../locales.json'));
+			}
+
+			_isAccordionOpen() {
+				if ( !this.shadowRoot || !this.shadowRoot.querySelector('#moduleLink') ) {
+					return false;
+				}
+				return this.shadowRoot.querySelector('#moduleLink').hasAttribute('opened');
+			}
+
+			_isOptionalModule() {
+				return this.completionCount && this.completionCount.total === 0 && this.completionCount.optionalTotal > 0;
+			}
+
+			_isAllOptionalViewed() {
+				return this.completionCount && this.completionCount.optionalTotal > 0 && this.completionCount.optionalTotal === this.completionCount.optionalViewed;
+			}
+
+			_isAllRequiredViewed() {
+				return this.completionCount && this.completionCount.total > 0 && this.completionCount.total === this.completionCount.completed;
+			}
+
+			_isRequiredSomeComplete() {
+				return this.completionCount && this.completionCount.total > 0 && this.completionCount.completed > 0 && this.completionCount.completed <  this.completionCount.total;
+			}
+
+			_showCount(completionCount) {
+				if ( !completionCount ) {
+					return false;
+				}
+				return !this._isOptionalModule() && (
+					this._isAccordionOpen() ||
+					( !this._isAccordionOpen() && !this._isAllRequiredViewed() && this._isRequiredSomeComplete() )
+				);
+			}
+
+			_showCheckmark(completionCount) {
+				if ( !completionCount ) {
+					return false;
+				}
+				return !this._isAccordionOpen() && (
+					( this._isOptionalModule() && this._isAllOptionalViewed() ) ||
+					( !this._isOptionalModule() && this._isAllRequiredViewed() )
+				);
+			}
+
+			_showOptional(completionCount) {
+				if ( !completionCount ) {
+					return false;
+				}
+				return this._isOptionalModule() && !this._isAccordionOpen() && !this._isAllOptionalViewed();
+			}
+
+			_showDivider(showCount, showCheckmark, showOptional) {
+				return showCount || showCheckmark || showOptional;
+			}
+
+			getSubEntities(entity) {
+				return entity.getSubEntities()
+					.filter( subEntity =>
+						(subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href )
+					.map(this._getHref);
+			}
+
+			_getHref(entity) {
+				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
+			}
+
+			_getStatus(completionStatus) {
+				return completionStatus || {
+					completed: 0,
+					optionalViewed: 0,
+					optionalTotal: 0,
+					total: 0
+				};
+			}
+
+			_getPercentCompleted() {
+				if (!this.completionCount || this.completionCount.total === 0) return 0;
+				this.percentCompleted = 100 * this.completionCount.completed / this.completionCount.total;
+			}
+
+			_containsChildModules(entity) {
+				var children = entity.getSubEntities();
+				var i;
+				for (i = 0; i < children.length; i++) {
+					if (this.isModule(children[i])) {
+						return true;
+					}
+				}
+				return false;
+			}
+			_hasChildren(entity) {
+				return entity.getSubEntities().length !== 0;
+			}
+
+			isActivity(childEntity) {
+				return childEntity.class[0] === 'sequenced-activity' && Object.keys(childEntity.properties).length > 0;
+			}
+
+			isModule(childEntity) {
+				return childEntity.class[1] === 'sequence-description';
+			}
+
+			isComplete(activity) {
+				return activity
+					.getSubEntityByRel('about')
+					.getSubEntityByClass('completion')
+					.hasClass('completed');
+			}
+
+			_getIsCurrent(childLink, currentActivity) {
+				if ( childLink.href === currentActivity ) {
+					return 'current';
+				}
+			}
+
+			_onActivityClicked(e) {
+				var newActivityLink = e.model.__data.childLink.href;
+				if ( this.currentActivity !== newActivityLink ) {
+					this.currentActivity = newActivityLink;
+				}
+			}
+
+			_getIsOpened(opened) {
+				if(this.opened) return 'opened';
+				else return '';
+			}
+		}
+		customElements.define(D2LModuleHeader.is, D2LModuleHeader);
+
+	</script>
+</dom-module>
