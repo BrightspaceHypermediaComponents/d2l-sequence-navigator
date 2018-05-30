@@ -1,4 +1,3 @@
-<link rel="import" href="d2l-sequence-navigator-item.html">
 <link rel="import" href="d2l-progress-bar.html">
 <link rel="import" href="../utility/completion-status-mixin.html">
 <link rel="import" href="../../d2l-accordion/d2l-accordion.html">
@@ -22,7 +21,7 @@
 				border-radius: 8px 8px 8px 8px;
 			}
 
-			div.opened.has-no-child-modules .module-header {
+			.opened.has-no-child-modules .module-header {
 				border-radius: 8px 8px 0px 0px;
 				border-bottom: 1px solid var(--d2l-color-mica);
 			}
@@ -166,18 +165,10 @@
 						computed: '_getStatus(completionStatus)',
 						observer: '_getPercentCompleted'
 					},
-					subEntities: {
-						type: Array,
-						computed: 'getSubEntities(entity)'
-					},
 					hasChildModules: {
 						type: Boolean,
 						value: false,
 						computed: '_containsChildModules(entity)'
-					},
-					hasChildren: {
-						type: Boolean,
-						computed: '_hasChildren(entity)'
 					},
 					percentCompleted: {
 						type: Number
@@ -268,17 +259,6 @@
 				return showCount || showCheckmark || showOptional;
 			}
 
-			getSubEntities(entity) {
-				return entity.getSubEntities()
-					.filter( subEntity =>
-						(subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href )
-					.map(this._getHref);
-			}
-
-			_getHref(entity) {
-				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
-			}
-
 			_getStatus(completionStatus) {
 				return completionStatus || {
 					completed: 0,
@@ -303,41 +283,13 @@
 				}
 				return false;
 			}
-			_hasChildren(entity) {
-				return entity.getSubEntities().length !== 0;
-			}
-
-			isActivity(childEntity) {
-				return childEntity.class[0] === 'sequenced-activity' && Object.keys(childEntity.properties).length > 0;
-			}
 
 			isModule(childEntity) {
 				return childEntity.class[1] === 'sequence-description';
 			}
 
-			isComplete(activity) {
-				return activity
-					.getSubEntityByRel('about')
-					.getSubEntityByClass('completion')
-					.hasClass('completed');
-			}
-
-			_getIsCurrent(childLink, currentActivity) {
-				if ( childLink.href === currentActivity ) {
-					return 'current';
-				}
-			}
-
-			_onActivityClicked(e) {
-				var newActivityLink = e.model.__data.childLink.href;
-				if ( this.currentActivity !== newActivityLink ) {
-					this.currentActivity = newActivityLink;
-				}
-			}
-
 			_getIsOpened(opened) {
-				if(this.opened) return 'opened';
-				else return '';
+				return this.opened ? 'opened' : '';
 			}
 		}
 		customElements.define(D2LModuleHeader.is, D2LModuleHeader);
