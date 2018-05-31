@@ -42,10 +42,10 @@
 				});
 
 				test('creates d2l-sequence-navigator-item child', function(done) {
-					flush( function() {
+					setTimeout( function() {
 						expect( element.shadowRoot.querySelector('d2l-sequence-navigator-item') ).to.exist;
 						done();
-					});
+					}, 100);
 				});
 			});
 		</script>
