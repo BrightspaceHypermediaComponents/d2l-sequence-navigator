@@ -4,6 +4,7 @@
 <link rel="import" href="../d2l-accordion/d2l-accordion.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-typography/d2l-typography.html">
+<link rel="import" href="./siren-entity.html">
 <!--
 'd2l-sequence-navigator'
 
@@ -66,7 +67,7 @@
 			padding-bottom: 40px;
 		}
 		</style>
-
+    <d2l-siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></d2l-siren-entity>
 		<d2l-lesson-header class="module-header" id="sidebarHeader"
 			href=[[rootHref]]
 			token=[[token]]
@@ -91,7 +92,6 @@
 			<div class="end-of-lesson">END OF LESSON</div>
 
 		</d2l-accordion>
-
 	</template>
 	<script>
 		/*
@@ -113,19 +113,35 @@
 						type: String,
 						value: ''
 					},
-					rootHref: {
+					_rootHref: {
 						type: String,
-						computed: '_fetchRootLink(entity)'
+						computed: '_getDirectParentHref(_moduleEntity)'
 					},
 					subEntities: {
 						type: Array,
 						computed: 'getSubEntities(entity)'
+          }
+					_moduleEntity: {
+						type: Object
+					},
+					_moduleHref: {
+						type: String,
+						computed: '_getModuleHref(entity)'
 					}
 				};
 			}
 
-			_fetchRootLink(entity) {
-				return this._getLinkByRel( entity, 'self' ).href;
+			_getModuleHref(entity) {
+				if (entity && this._hasClass( entity, 'sequence-description') ) {
+					var selfLink = this._getLinkByRel( entity, 'self' );
+					return selfLink && selfLink.href || '';
+				}
+				return entity && this._hasClass(entity, 'sequenced-activity') && this._getDirectParentHref( entity ) || '';
+			}
+
+			_getDirectParentHref(entity) {
+				const upLink = this._getLinkByRel( entity, 'up' );
+				return upLink && upLink.href || '';
 			}
 
 			getSubEntities(entity) {
