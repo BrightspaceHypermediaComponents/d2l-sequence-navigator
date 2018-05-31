@@ -55,7 +55,8 @@
 						var stub = sinon.stub();
 						var entityFake = {
 							class: ['', 'sequence-description'],
-							getLinkByRel: stub.returns({href: moduleUrl})
+							getLinkByRel: stub.returns({href: moduleUrl}),
+							hasClass: () => true
 						};
 
 						expect( element._getModuleHref(entityFake)).to.equal( moduleUrl );
@@ -69,7 +70,8 @@
 						var stub = sinon.stub();
 						var entityFake = {
 							class: ['', 'sequenced-activity'],
-							getLinkByRel: stub.returns({href: activityUrl})
+							getLinkByRel: stub.returns({href: activityUrl}),
+							hasClass: (input) => input === 'sequenced-activity'
 						};
 						expect( element._getModuleHref(entityFake)).to.equal( activityUrl );
 						sinon.assert.calledOnce(stub);

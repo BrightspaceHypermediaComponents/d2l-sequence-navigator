@@ -57,7 +57,7 @@
 					},
 					_rootHref: {
 						type: String,
-						computed: '_getLessonHref(_moduleEntity)'
+						computed: '_getDirectParentHref(_moduleEntity)'
 					},
 					isLesson: {
 						type: Boolean,
@@ -74,16 +74,15 @@
 			}
 
 			_getModuleHref(entity) {
-				if (entity && entity.class[1] === 'sequence-description') {
+				if (entity && this._hasClass( entity, 'sequence-description') ) {
 					var selfLink = this._getLinkByRel( entity, 'self' );
 					return selfLink && selfLink.href || '';
 				}
-				const upLink = this._getLinkByRel( entity, 'up' );
-				return upLink && upLink.href || '';
+				return entity && this._hasClass(entity, 'sequenced-activity') && this._getDirectParentHref( entity ) || '';
 			}
 
-			_getLessonHref(moduleEntity) {
-				const upLink = this._getLinkByRel( moduleEntity, 'up' );
+			_getDirectParentHref(entity) {
+				const upLink = this._getLinkByRel( entity, 'up' );
 				return upLink && upLink.href || '';
 			}
 		}
