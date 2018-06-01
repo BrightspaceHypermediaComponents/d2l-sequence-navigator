@@ -33,46 +33,48 @@
 							token="foozleberries"
 						></d2l-sequence-navigator>
 					</div>
-
-<!--
+				</template>
+			</demo-snippet>
+			<demo-snippet>
+				<template>
 					<h4>Default From root</h4>
-					<d2l-sequence-navigator
+					<d2l-lesson-header
 						href="data/lesson1.json"
 						token="foozleberries"
+						entity
 					>
-					</d2l-sequence-navigator>
+					</d2l-lesson-header>
 				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Module</h4>
-					<d2l-sequence-navigator
-						href="data/l1-module2.json"
-						token="foozleberries"
-					>
-					</d2l-sequence-navigator>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Activity</h4>
-					<d2l-sequence-navigator
-						href="data/activity1.json"
-						token="foozleberries"
-					>
-					</d2l-sequence-navigator>
-				</template>
-			</demo-snippet>
+
+				</demo-snippet>
+				<demo-snippet>
+					<template>
+						<h4>Module</h4>
+						<d2l-module-link
+							href="data/l1-module2.json"
+							token="foozleberries"
+						>
+						</d2l-module-link>
+					</template>
+				</demo-snippet>
+				<demo-snippet>
+					<template>
+						<h4>Activity</h4>
+						<d2l-activity-link
+							href="data/activity1.json"
+							token="foozleberries"
+						>
+						</d2l-activity-link>
+					</template>
+				</demo-snippet>
 			<demo-snippet>
 				<template>
 					<h4>Empty Module</h4>
-					<d2l-sequence-navigator
+					<d2l-module-link
 						href="data/empty-module.json"
 						token="emptytoken"
 					>
-					</d2l-sequence-navigator>
-				-->
-
+				</d2l-module-link>
 				</template>
 			</demo-snippet>
 			<demo-snippet>
