@@ -5,6 +5,7 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-typography/d2l-typography.html">
 <link rel="import" href="./siren-entity.html">
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
 <!--
 'd2l-sequence-navigator'
 
@@ -90,7 +91,7 @@
 				</template>
 			</ol>
 
-			<div class="end-of-lesson">END OF LESSON</div>
+			<div class="end-of-lesson">[[localize('endOfLesson')]]</div>
 
 		</d2l-accordion>
 	</template>
@@ -99,7 +100,7 @@
 		@memberOf D2L.Polymer.Mixins;
 		@mixes SirenEntityMixin
 		*/
-		class D2LSequenceNavigator extends D2L.Polymer.Mixins.SirenEntityMixin( Polymer.Element ) {
+		class D2LSequenceNavigator extends Polymer.mixinBehaviors(D2L.PolymerBehaviors.LocalizeBehavior, D2L.Polymer.Mixins.SirenEntityMixin( Polymer.Element )) {
 			static get is() {
 				return 'd2l-sequence-navigator';
 			}
@@ -133,6 +134,11 @@
 						type: Object
 					}
 				};
+			}
+
+			connectedCallback() {
+				super.connectedCallback();
+				this.loadResources(this.resolveUrl('./locales.json'));
 			}
 
 			_getModuleHref(entity) {
