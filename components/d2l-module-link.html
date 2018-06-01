@@ -179,7 +179,7 @@
 				<div slot="header" class="module-header">
 					<div class="module-title">[[entity.properties.title]]</div>
 					<d2l-progress-bar percent-completed=[[percentCompleted]]></d2l-progress-bar>
-					<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+
 				</div>
 
 				<ol class="module-item-list">
@@ -316,16 +316,6 @@
 						type: Boolean,
 						value: false,
 						computed: '_showDivider(showCount, showCheckmark, showOptional)'
-					},
-					completionCompleted: {
-						type: String,
-						value: '',
-						computed: '_stringifyCount(completionCount.completed)'
-					},
-					completionTotal: {
-						type: String,
-						value: '',
-						computed: '_stringifyCount(completionCount.total)'
 					}
 				};
 			}
@@ -333,13 +323,6 @@
 			connectedCallback() {
 				super.connectedCallback();
 				this.loadResources(this.resolveUrl('../locales.json'));
-			}
-
-			_stringifyCount(count) {
-				if ( count === undefined ||  count === null ) {
-					return '';
-				}
-				return `${count}`;
 			}
 
 			_isAccordionOpen() {

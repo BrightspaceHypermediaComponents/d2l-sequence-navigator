@@ -2,6 +2,7 @@
 <link rel="import" href="../utility/completion-status-mixin.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../d2l-typography/d2l-typography.html">
+<link rel="import" href="../../d2l-localize-behavior/d2l-localize-behavior.html">
 <!--
 'd2l-lesson-header'
 
@@ -51,7 +52,7 @@
 		<div>
 			<div class="module-title">[[entity.properties.title]]</div>
 			<d2l-progress-bar percent-completed=[[percentCompleted]]></d2l-progress-bar>
-			<div class="module-completion-count">Done [[completionCount.completed]]/[[completionCount.total]]</div>
+			<div class="module-completion-count">[[localize('modulesDone', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 		</div>
 
 	</template>
@@ -60,7 +61,7 @@
 		@memberOf D2L.Polymer.Mixins;
 		@mixes CompletionStatusMixin
 		*/
-		class D2LLessonHeader extends D2L.Polymer.Mixins.CompletionStatusMixin( Polymer.Element ) {
+		class D2LLessonHeader extends Polymer.mixinBehaviors(D2L.PolymerBehaviors.LocalizeBehavior, D2L.Polymer.Mixins.CompletionStatusMixin(Polymer.Element)) {
 			static get is() {
 				return 'd2l-lesson-header';
 			}
@@ -89,6 +90,11 @@
 					optionalTotal: 0,
 					total: 0
 				};
+			}
+
+			connectedCallback() {
+				super.connectedCallback();
+				this.loadResources(this.resolveUrl('../locales.json'));
 			}
 
 			_getPercentCompleted() {
