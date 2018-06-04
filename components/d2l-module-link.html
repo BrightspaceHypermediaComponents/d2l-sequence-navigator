@@ -309,7 +309,9 @@
 			getSubEntities(entity) {
 				return entity.getSubEntities()
 					.filter( subEntity =>
-						(subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href )
+						( subEntity.class === 'sequenced-activity' &&
+						subEntity.properties &&
+						Object.keys(subEntity.properties).length > 0) || subEntity.href )
 					.map(this._getHref);
 			}
 
