@@ -209,7 +209,7 @@
 					},
 					completionCount: {
 						type: Object,
-						computed: '_getStatus(completionStatus, entity)',
+						computed: '_getStatus(entity)',
 						observer: '_getPercentCompleted'
 					},
 					subEntities: {
@@ -317,8 +317,9 @@
 				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
 			}
 
-			_getStatus(completionStatus) {
-				if ( !this.entity || !completionStatus ) {
+			_getStatus(entity) {
+				const completionEntity = entity.getSubEntityByClass('completion');
+				if ( !completionEntity || !completionEntity.properties) {
 					return {
 						completed: 0,
 						optionalViewed: 0,
@@ -326,7 +327,7 @@
 						total: 0
 					};
 				}
-				return completionStatus;
+				return completionEntity.properties;
 			}
 
 			_getPercentCompleted() {
