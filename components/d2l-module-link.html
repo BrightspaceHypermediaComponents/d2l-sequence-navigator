@@ -342,10 +342,6 @@
 				return childEntity.class[0] === 'sequenced-activity' && Object.keys(childEntity.properties).length > 0;
 			}
 
-			isModule(childEntity) {
-				return childEntity.class[1] === 'sequence-description';
-			}
-
 			toggleSelected() {
 				this.selectedModule = (this.selectedModule === '') ?
 					this._getLinkByRel(this.entity, 'self').href :
@@ -358,7 +354,7 @@
 
 			_getIsSelected(selectedModule) {
 				var selected = this.entity && this._getLinkByRel(this.entity, 'self').href === selectedModule;
-				return (selected) ? 'selected' : 'totally-not-selected';
+				return (selected) ? 'selected' : 'not-selected';
 			}
 
 			_getIsCurrent(childLink, currentActivity) {
