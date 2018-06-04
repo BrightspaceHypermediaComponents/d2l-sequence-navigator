@@ -309,9 +309,8 @@
 			getSubEntities(entity) {
 				return entity.getSubEntities()
 					.filter( subEntity =>
-						( subEntity.class === 'sequenced-activity' &&
-						subEntity.properties &&
-						Object.keys(subEntity.properties).length > 0) || subEntity.href )
+						( this._isActivity(subEntity) && subEntity.properties ) ||
+						subEntity.href )
 					.map(this._getHref);
 			}
 
@@ -339,7 +338,7 @@
 				return entity.getSubEntities().length !== 0;
 			}
 
-			isActivity(childEntity) {
+			_isActivity(childEntity) {
 				return childEntity.class[0] === 'sequenced-activity' && Object.keys(childEntity.properties).length > 0;
 			}
 
