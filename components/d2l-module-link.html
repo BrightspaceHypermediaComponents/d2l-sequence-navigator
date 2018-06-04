@@ -346,13 +346,6 @@
 				return childEntity.class[1] === 'sequence-description';
 			}
 
-			isComplete(activity) {
-				return activity
-					.getSubEntityByRel('about')
-					.getSubEntityByClass('completion')
-					.hasClass('completed');
-			}
-
 			toggleSelected() {
 				this.selectedModule = (this.selectedModule === '') ?
 					this._getLinkByRel(this.entity, 'self').href :
