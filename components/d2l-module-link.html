@@ -209,7 +209,8 @@
 					},
 					selectedModule: {
 						type: String,
-						value: ''
+						value: '',
+						notify: true
 					},
 					completionCount: {
 						type: Object,
@@ -328,6 +329,7 @@
 				if (!this.completionCount || this.completionCount.total === 0) return 0;
 				this.percentCompleted = 100 * this.completionCount.completed / this.completionCount.total;
 			}
+
 			_hasChildren(entity) {
 				return entity.getSubEntities().length !== 0;
 			}
