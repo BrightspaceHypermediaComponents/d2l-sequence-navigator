@@ -308,9 +308,7 @@
 
 			getSubEntities(entity) {
 				return entity.getSubEntities()
-					.filter( subEntity =>
-						( this._isActivity(subEntity) && subEntity.properties ) ||
-						subEntity.href )
+					.filter( subEntity => this._isActivity(subEntity) || subEntity.href )
 					.map(this._getHref);
 			}
 
