@@ -31,7 +31,6 @@
 			</template>
 		</test-fixture>
 		<script>
-			/*global TestHelpers */
 			suite('d2l-module-link for module with children', () => {
 
 				let element;
@@ -137,7 +136,6 @@
 				test('should not show any counts when the accordion is open', function() {
 					const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 					accordionElement.addEventListener('click', function() {
-						TestHelpers.forceXIfStamp(element);
 						expect(element.shadowRoot.querySelector('.countStatus')).to.be.null;
 					});
 					accordionElement.$.trigger.click();
@@ -220,19 +218,21 @@
 				});
 
 				test('should not show the count or divider icon when the accordion is open', function() {
-					const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-					accordionElement.addEventListener('click', function() {
-						const dynamicElements = accordionElement.shadowRoot.querySelectorAll('dom-if');
-						if (dynamicElements) {
-							for (let i = 0; i < dynamicElements.length; i++) {
-								dynamicElements[i].render();
+					flush(function() {
+						const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
+						accordionElement.addEventListener('click', function() {
+							const dynamicElements = accordionElement.shadowRoot.querySelectorAll('dom-if');
+							if (dynamicElements) {
+								for (let i = 0; i < dynamicElements.length; i++) {
+									dynamicElements[i].render();
+								}
 							}
-						}
-						const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
-						expect(optionalStatus).to.exist;
-						assert.equal(optionalStatus.style.display, 'none');
+							const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
+							expect(optionalStatus).to.exist;
+							assert.equal(optionalStatus.style.display, 'none');
+						});
+						accordionElement.$.trigger.click();
 					});
-					accordionElement.$.trigger.click();
 				});
 			});
 
@@ -260,9 +260,11 @@
 				});
 
 				test('should not show the count or the divider, when the accordion is closed', function() {
-					expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
-					const countStatus = element.shadowRoot.querySelector('.countStatus');
-					expect(countStatus).to.be.null;
+					flush(function() {
+						expect(element.shadowRoot.querySelector('.divider-icon')).to.be.null;
+						const countStatus = element.shadowRoot.querySelector('.countStatus');
+						expect(countStatus).to.be.null;
+					});
 				});
 
 				test('should show count for a open accordion that has no completed required activites', function() {
