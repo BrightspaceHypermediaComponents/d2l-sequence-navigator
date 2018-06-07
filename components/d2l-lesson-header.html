@@ -84,13 +84,18 @@
 			}
 
 			_getStatus(entity) {
-				const completionStatus = entity.getSubEntityByClass('completion').properties;
-				return completionStatus || {
+				const defaultStatus = {
 					completed: 0,
 					optionalViewed: 0,
 					optionalTotal: 0,
 					total: 0
 				};
+
+				const completion = entity.getSubEntityByClass('completion');
+
+				return completion
+					? Object.assign(defaultStatus, completion.properties)
+					: defaultStatus;
 			}
 
 			connectedCallback() {
