@@ -4,11 +4,14 @@ node_js:
 sudo: false
 script:
 - npm run lint
-- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then polymer test --skip-plugin local; fi'
-- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "false" ]; then polymer test --skip-plugin sauce; fi'
-
+- if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then polymer test --skip-plugin local;
+  fi
+- if [ "$TRAVIS_SECURE_ENV_VARS" = "false" ]; then polymer test --skip-plugin sauce;
+  fi
 env:
   global:
+  #SAUCE_USERNAME
+  - secure: R7tcnhPMCrZommGNEE9nekFWnzwh76o+64XwbzJ9s7OOXhZASBHnS0tJdICXPRBZdC75qhQL53flT2aYROlbH2TYanpiKUESNKXA1B8kczqo6T+7DrMzOuqRR1ZpILFwx0noqSBRfgV8c9C/uMMLsBL1lfuCpXo2GiTGlsFI1HO7QsDeRLdBbyDEY9AwlVYh3TLDLqsu8WtnZI0UQxb62q1nVW27wlDEqOq+UE1dZGSF6Z0LNsT8cOVejODCrr26PvU5UpLKnYpzmvPBCH8Cq733sge5q4DiaPOWM/rUFkUwH2+JY79csaF9JygvlkwcQSA61Cf0W038BuRqzg5RJvOVgLr0OsgycmKGo46OftONz6T9y0W7C6AImvqPQC95Es1Inv3rjgbVnRiwGlIfamNLsA50pUXrgdGZRYEqYytf8BrqPcTTSZjnZQXchx0VDOh5Gj2cjA3DAthI0NrqWCYs1+zHDxnEQTF2blhcLsiY+V+wgwQFEmER4weB7UigVhTtgsi6V0zoLV7646Jn9b6ZwGw56Oz1QotCusSNiKhHeBkDXZFtghPw77UpjpdsjCF74FtFw03ntEz3gmd198Z+mW+50SJ3fNwwd66WiWx7Gl5lke5YFUt/l+eFJ/2UPzvj7A5qJSw7tTcZ1ERQmEcjekH1u9XBBy4nfLitvco=
   #SAUCE_ACCESS_KEY
-  - SAUCE_USERNAME: Horgan
-  - secure: iME63mjMbPrtr3EqKfROFtUYfX8pMz98HfSi49N8LIkWBYxcOeR5h69fkQHZixtc0bUWEP5BTcGkXUK6dYPF2yNjEgf8ac2+v0qRYeS0nVF65FueOhqWayerQ8Q0EIESxznnre8brrVQs7+C+9x0v9xGKRgIfC89dy66t68qM+qncNnUoUneknaeha/47ehGw9pFbH3F0f8k6zoBD6kRxTieYW3EEML9WwTXQum2kgAUAGfXdYsU990q0vHwUxJMltIV3Isd71xIbv3r0VlNRCrqcG3zppNx2mhVykC23WGG/4jgXIC/RNiqIqSXIXK5VK/+jNMRPDRD0k9UcbDtB5eMlO9PSh8b3eenory8EuLSvcTLnUuqtwNPclygzZnhI0szMJZqbZOADRGRsBrh1feq92e77Fyi+KFnDPeBoCD6eDQ7JZtwDle/WllbR7nKQ3zDP+qn7+jebx1HFQZJnh/dmhya6SnpM0tiY5hDbf/wFrJVQVxpxKMx0ETksf/dW13fN00ZiDHIPnjYuuuvNkqFgh6S6T/J0s4nL0qxOcmAIL30LYanFcQbqbnr9CuDhBOJDIZXWejcYT3Vu+pKzGxpLFqo3xQiA4iAZD1dMwyTHMrskEHmGSQvbiPSq3vzTkjsd8th6TDMN9pZWN9Pn4DiwTVomN8ftZIZs2c80Qc=
+  - secure: 3LmRNqsw5jwrEzbZ1KF/PWeGeei0Du8CSlJDOiGxLuGfQf+30O57K2LyWbQJZXoHUJRjR+Ds4aaDhfA1nRaStyFQ05FmB4mqJ6JHnb5/Rn2I0EQ60htUmqXgEDLa11iWPAJGDQr7OkfdzR+Fdxnsm2p0HqWXjoDSxaGXzaoDiwNv19plV+O1Nq3LvgJJAyvWC+vDsduEZSm2sl+Z9xoSHslujfULI4RdRkKFVUnUplEE3vpQBK2RQi9xF+ERokpd0x6MSYnGyh7w7/SF1i3H76RvExvUS/I7OIjPKBOm+thaxmSHDDDlTg12X1+eMQ2UBXVZNIXeLN/WHOdkKJOSAWJl/Y4JgBfSC4hxNMp6yeUrMFaL/YV2QH3/rVbxFJfvaYnnd6alRtyvG479VJx2LSQKu9KPYq3tNOmdwApDJ6g3x5UUEuM46udXDVQBK6QB7LwIRSfFueheS/fvFe5iMHt3XjEahSR4v/onlxVQAES6IS1/UP/5Wz+vjpZzlZeAjCjk6U8HOH7S9tYHapOatHc/3oaTueguJ0gMr6wo3Tx6Rg44kUdPSBqgyK6pgI+dw40ooLvhiI3BRS4IjWSxGNudFHgrJsBkbDS404HJcQGyVilvza7zdRDoidR7x69zXAun97igqaHFzTr5UqA49nE8KSE3E21X1sk80mE2yLI=
+
