@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
 <script>
-    /* eslint-disable */
     window.D2L = window.D2L || {};
     window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
     window.D2L.PolymerBehaviors.SequenceNavigator = window.D2L.PolymerBehaviors.SequenceNavigator || {};
@@ -18,7 +17,7 @@
              */
     		resources: {
     			value: function() {
-                    return {"ar":{},"de":{},"en":{"countStatus":"{completed} of {total}","endOfLesson":"END OF LESSON","moduleHasNoTopics":"This module has no topics","modulesDone":"Done {completed}/{total}","optional":"optional"},"es":{},"fr":{},"ja":{},"ko":{},"nb":{},"nl":{},"pt":{},"sv":{},"tr":{},"zh-TW":{},"zh":{}};
+                    return {{> locales }};
                 }
     		}
     	}
