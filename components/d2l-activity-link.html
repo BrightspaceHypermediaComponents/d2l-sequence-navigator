@@ -25,13 +25,12 @@
 				background-color: #f2f8fc;
 			}
 
-			#activityLink {				
-				white-space: nowrap;
+			#activityLink {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				float: left;
 				display: table-cell;
-				width: 65%;
+				width: 100%;
 
 				/* Compact Body Text - Lato Regular 16 */
 				font-size: 16px;
@@ -40,23 +39,37 @@
 				letter-spacing: 0.2px;
 			}
 
+			#activityLink.exempt, #activityLink.optional {
+				white-space: nowrap;
+			}
+
+			#activityLink.required {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2; /* number of lines to show */
+				line-height: 24px; /* fallback */
+				max-height: 48px; /* fallback */
+			}
+
 			d2l-completion-requirement {
 				float: left;
 				display: table-cell;
-				width: 65%;
+				width: 77%;
 			}
 
 			d2l-completion-status {
 				text-align: right;
-				float: right;
 				display: table-cell;
-				width: 35%;
+				width: 23%;
+				vertical-align: middle;
 			}
 
 		</style>
 		<div class="container">
-			<a id="activityLink" on-click="setCurrent">
-				[[entity.properties.title]]				
+			<a id="activityLink" on-click="setCurrent" class$=[[completionRequirement]]>
+				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
 				<d2l-completion-requirement
@@ -64,7 +77,11 @@
 					token="[[token]]">
 				</d2l-completion-requirement>
 			</template>
-			<d2l-completion-status href="[[href]]" token="[[token]]"></d2l-completion-status>
+			<d2l-completion-status
+				href="[[href]]"
+				token="[[token]]"
+				class$=[[completionRequirement]]>
+			</d2l-completion-status>
 		</div>
 
 	</template>
