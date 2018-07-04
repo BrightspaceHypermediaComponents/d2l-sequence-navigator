@@ -1,5 +1,6 @@
 <link rel="import" href="../utility/completion-status-mixin.html">
 <link rel="import" href="d2l-completion-status.html">
+<link rel="import" href="d2l-completion-requirement.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../d2l-typography/d2l-typography.html">
 
@@ -39,6 +40,12 @@
 				letter-spacing: 0.2px;
 			}
 
+			d2l-completion-requirement {
+				float: left;
+				display: table-cell;
+				width: 65%;
+			}
+
 			d2l-completion-status {
 				text-align: right;
 				float: right;
@@ -48,7 +55,15 @@
 
 		</style>
 		<div class="container">
-			<a id="activityLink" on-click="setCurrent">[[entity.properties.title]]</a>
+			<a id="activityLink" on-click="setCurrent">
+				[[entity.properties.title]]				
+			</a>
+			<template is="dom-if" if="[[showCompletionRequirement]]">
+				<d2l-completion-requirement
+					href="[[href]]"
+					token="[[token]]">
+				</d2l-completion-requirement>
+			</template>
 			<d2l-completion-status href="[[href]]" token="[[token]]"></d2l-completion-status>
 		</div>
 
@@ -68,6 +83,15 @@
 						type: String,
 						value: '',
 						notify: true
+					},
+					completionRequirement: {
+						type: String,
+						computed: '_getCompletionRequirement(entity)',
+						observer: '_showCompletionRequirement'
+					},
+					showCompletionRequirement: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
@@ -90,6 +114,15 @@
 						this.$.activityLink.classList.remove('current');
 					}
 					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
+				}
+			}
+
+			_showCompletionRequirement( exemption ) {
+				switch ( exemption ) {
+					case 'exempt':
+					case 'optional':
+						this.showCompletionRequirement = true;
+						break;
 				}
 			}
 		}
