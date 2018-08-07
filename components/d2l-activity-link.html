@@ -51,6 +51,19 @@
 				max-height: 48px; /* fallback */
 			}
 
+			.lessonChild {
+				/* background-color: red; */
+				margin: -15px;
+				width: calc(100% + 30px);
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+			}
+
+			.lessonChild #activityLink {
+				margin: 15px;
+				width: calc(100% - 30px);
+			}
+
 			d2l-completion-requirement {
 				float: left;
 				display: table-cell;
@@ -65,7 +78,7 @@
 			}
 
 		</style>
-		<div class="container">
+		<div class="container" id="container">
 			<a id="activityLink" on-click="setCurrent" class$=[[completionRequirement]]>
 				[[entity.properties.title]]
 			</a>
@@ -81,6 +94,7 @@
 				class$=[[completionRequirement]]>
 			</d2l-completion-status>
 		</div>
+		</template>
 
 	</template>
 	<script>
@@ -107,6 +121,11 @@
 					showCompletionRequirement: {
 						type: Boolean,
 						value: false
+					},
+					isLessonChild: {
+						type: Boolean,
+						value: false,
+						observer: '_showLessonChild'
 					}
 				};
 			}
@@ -124,9 +143,9 @@
 				if ( currentActivity && entity ) {
 					var current = this._getLinkByRel( entity, 'self').href === currentActivity;
 					if ( current ) {
-						this.$.activityLink.classList.add('current');
+						this.$.container.classList.add('current');
 					} else {
-						this.$.activityLink.classList.remove('current');
+						this.$.container.classList.remove('current');
 					}
 					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
 				}
@@ -138,6 +157,14 @@
 					case 'optional':
 						this.showCompletionRequirement = true;
 						break;
+				}
+			}
+
+			_showLessonChild( isLessonChild ) {
+				if ( isLessonChild ) {
+					this.$.container.classList.add('lessonChild');
+				} else {
+					this.$.container.classList.remove('lessonChild');
 				}
 			}
 		}
