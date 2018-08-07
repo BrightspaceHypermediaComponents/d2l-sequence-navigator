@@ -61,12 +61,17 @@
 
 			_getCompletionRequirement(activity) {
 				var itemSubEntity = activity.getSubEntityByRel('item');
+				var aboutSubEntity =  activity.getSubEntityByRel('about');
 				if (itemSubEntity
 					&& itemSubEntity.getSubEntityByClass('exemption')
 					&& itemSubEntity.getSubEntityByClass('exemption').hasClass('exempted')) {
 					return 'exempt';
 				}
-				var aboutSubEntity =  activity.getSubEntityByRel('about');
+				if (aboutSubEntity
+					&& aboutSubEntity.getSubEntityByClass('exemption')
+					&& aboutSubEntity.getSubEntityByClass('exemption').hasClass('exempted')) {
+					return 'exempt';
+				}
 				if (aboutSubEntity && !aboutSubEntity.getSubEntityByClass('completion')) {
 					return 'optional';
 				}
