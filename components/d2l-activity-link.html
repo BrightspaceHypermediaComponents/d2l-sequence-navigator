@@ -15,7 +15,7 @@
 				padding-right: 15px;
 			}
 
-			.container {
+			#activityLink {
 				display: table;
 				table-layout: fixed;
 				width: 100%;
@@ -25,7 +25,7 @@
 				background-color: #f2f8fc;
 			}
 
-			#activityLink {
+			#activityTitle {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				float: left;
@@ -39,11 +39,11 @@
 				letter-spacing: 0.2px;
 			}
 
-			#activityLink.exempt, #activityLink.optional {
+			#activityTitle.exempt, #activityTitle.optional {
 				white-space: nowrap;
 			}
 
-			#activityLink.required {
+			#activityTitle.required {
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
@@ -75,8 +75,8 @@
 			}
 
 		</style>
-		<div class="container" id="container">
-			<a id="activityLink" on-click="setCurrent" class$=[[completionRequirement]]>
+		<div id="activityLink">
+			<a id="activityTitle" on-click="setCurrent" class$=[[completionRequirement]]>
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
@@ -140,9 +140,9 @@
 				if ( currentActivity && entity ) {
 					var current = this._getLinkByRel( entity, 'self').href === currentActivity;
 					if ( current ) {
-						this.$.container.classList.add('current');
+						this.$.activityLink.classList.add('current');
 					} else {
-						this.$.container.classList.remove('current');
+						this.$.activityLink.classList.remove('current');
 					}
 					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
 				}
@@ -159,9 +159,9 @@
 
 			_showLessonChild( isLessonChild ) {
 				if ( isLessonChild ) {
-					this.$.container.classList.add('lessonChild');
+					this.$.activityLink.classList.add('lessonChild');
 				} else {
-					this.$.container.classList.remove('lessonChild');
+					this.$.activityLink.classList.remove('lessonChild');
 				}
 			}
 		}
