@@ -23,8 +23,19 @@
 
 		d2l-sequence-navigator-item {
 			background-color: white;
+			border: 1px solid var(--d2l-color-mica);
 			width: 100% - 15px;
-			margin-top: 30px;
+			margin-top: 15px;
+			border-radius: 8px;
+		}
+
+		d2l-sequence-navigator-item.lessonChild.current,
+		d2l-sequence-navigator-item.lessonChild:hover {
+			background-color: #f2f8fc;
+			border: 1px solid #99c5e5;
+			border-bottom: 1px solid #99c5e5;
+			position: relative;
+			z-index: 0.5;
 		}
 
 		.module-item-list {
@@ -84,15 +95,27 @@
 			<ol class="module-item-list">
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li>
-
-						<d2l-sequence-navigator-item
-							href="[[childLink.href]]"
-							token="[[token]]"
-							current-activity="{{href}}"
-							selected-module="{{selected-module}}"
-							is-lesson-child
-						>
-						</d2l-sequence-navigator-item>
+						<template is="dom-if" if="[[isActivity(childLink)]]">
+								<d2l-sequence-navigator-item
+								href="[[childLink.href]]"
+								token="[[token]]"
+								current-activity="{{href}}"
+								selected-module="{{selected-module}}"
+								is-lesson-child
+								class="lessonChild"
+							>
+							</d2l-sequence-navigator-item>
+						</template>
+						<template is="dom-if" if="[[!isActivity(childLink)]]">
+							<d2l-sequence-navigator-item
+								href="[[childLink.href]]"
+								token="[[token]]"
+								current-activity="{{href}}"
+								selected-module="{{selected-module}}"
+								is-lesson-child
+							>
+							</d2l-sequence-navigator-item>
+						</template>
 					</li>
 				</template>
 			</ol>
@@ -178,6 +201,9 @@
 				}
 			}
 
+			isActivity( link ) {
+				return link && (link.class[0] === 'sequenced-activity' || link.class[1] === 'sequenced-activity');
+			}
 		}
 
 		window.customElements.define(D2LSequenceNavigator.is, D2LSequenceNavigator);

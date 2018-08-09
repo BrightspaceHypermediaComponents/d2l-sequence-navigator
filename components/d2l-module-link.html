@@ -16,7 +16,7 @@
 			.header-container {
 				padding: 15px;
 				background-color: var(--d2l-color-gypsum);
-				border-radius: 8px 8px 8px 8px;
+				border-radius: 8px;
 			}
 
 			d2l-accordion-collapse[opened] .header-container {
@@ -73,11 +73,6 @@
 				@include d2l-body-small;
 			}
 
-			d2l-accordion-collapse {
-				border: 1px solid var(--d2l-color-mica);
-				border-radius: 8px;
-			}
-
 			.module-item-list {
 				list-style-type: none;
 				border-collapse: collapse;
@@ -101,7 +96,7 @@
 
 			d2l-sequence-navigator-item:not(.current):not(:hover) {
 				border: 1px solid var(--d2l-color-mica);
-				border-bottom: 1px solid var(--d2l-color-mica);
+				background-color: white;
 			}
 
 			d2l-sequence-navigator-item.current, d2l-sequence-navigator-item:hover {
