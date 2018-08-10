@@ -77,6 +77,12 @@
 							.not.to
 							.exist;
 					});
+
+					it('should say that it is an activity', () => {
+						expect(element._isActivity(element.entity))
+							.to
+							.equal(true);
+					});
 				});
 			});
 		</script>
