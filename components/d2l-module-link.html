@@ -309,7 +309,7 @@
 			}
 
 			_isActivity(childEntity) {
-				return childEntity.class[0] === 'sequenced-activity' && Object.keys(childEntity.properties).length > 0;
+				return this._hasClass(childEntity, 'sequenced-activity');
 			}
 
 			toggleSelected() {
