@@ -130,6 +130,12 @@
 				color: var(--d2l-color-mica) !important;
 			}
 
+			.offscreen {
+				position: absolute;
+				left: -1000px;
+				top: -1000px;
+			}
+
 		</style>
 
 		<d2l-accordion-collapse
@@ -148,9 +154,10 @@
 							<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
 						</template>
 						<template is="dom-if" if="[[showCount]]">
-							<span class="countStatus">
+							<span class="countStatus" aria-hidden="true">
 								[[localize('countStatus', 'completed', completionCompleted, 'total', completionTotal)]]
 							</span>
+							<div class="offscreen">[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 						</template>
 						<template is="dom-if" if="[[showCheckmark]]">
 							<span class="completedStatus">
