@@ -1,0 +1,94 @@
+<link rel="import" href="../utility/completion-status-mixin.html">
+<link rel="import" href="d2l-completion-status.html">
+<link rel="import" href="d2l-completion-requirement.html">
+<link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../d2l-typography/d2l-typography.html">
+
+<dom-module id="d2l-end-of-lesson-link">
+	<template>
+		<style>
+			:host {
+				display: block;
+				font-family: 'Lato', sans-serif;
+				color: var(--d2l-color-ferrite);
+				padding: 10px 15px 10px 15px;
+			}
+
+			#activityLink:hover {
+				cursor: pointer;
+			}
+
+			#activityTitle {
+				color: var(--d2l-color-celestine);
+
+				/* Label Text - Lato Bold 14 */
+				font-size: 14px;
+				line-height: 20px;
+				font-weight: 700; /* bold */
+				letter-spacing: 0.2px;
+			}
+
+		</style>
+		<div id="activityLink">
+			<a id="activityTitle" on-click="setCurrent">
+				[[entity.properties.title]]
+			</a>
+		</div>
+		</template>
+
+	</template>
+	<script>
+		/*
+		@memberOf window.D2L.Polymer.Mixins;
+		@mixes D2L.Polymer.Mixins.CompletionStatusMixin
+		*/
+		class D2LEndOfLessonLink extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+			static get is() {
+				return 'd2l-end-of-lesson-link';
+			}
+			static get properties() {
+				return {
+					currentActivity: {
+						type: String,
+						value: '',
+						notify: true
+					}
+				};
+			}
+			static get observers() {
+				return [
+					'onCurrentActivityChanged(currentActivity, entity)'
+				];
+			}
+
+			ready() {
+				super.ready();
+				this.addEventListener('keypress', this._onKeyPress);
+			}
+
+			_onKeyPress(event) {
+				if ( event.key !== 'Enter' ) {
+					return;
+				}
+				this.setCurrent();
+			}
+
+			setCurrent() {
+				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
+			}
+
+			onCurrentActivityChanged( currentActivity, entity ) {
+				if ( currentActivity && entity ) {
+					var current = entity.getLinkByRel('self').href === currentActivity;
+					if ( current ) {
+						this.$.activityLink.classList.add('current');
+					} else {
+						this.$.activityLink.classList.remove('current');
+					}
+					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
+				}
+			}
+		}
+		customElements.define(D2LEndOfLessonLink.is, D2LEndOfLessonLink);
+	</script>
+</dom-module>
