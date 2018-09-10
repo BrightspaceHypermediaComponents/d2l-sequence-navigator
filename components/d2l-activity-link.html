@@ -63,7 +63,7 @@
 
 		</style>
 		<div id="activityLink">
-			<a id="activityTitle" on-click="setCurrent" class$=[[completionRequirement]]>
+			<a id="activityTitle" on-click="setCurrent" class$="[[_getActivityLinkClass(currentActivity, entity)]]">
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
@@ -108,11 +108,6 @@
 					}
 				};
 			}
-			static get observers() {
-				return [
-					'onCurrentActivityChanged(currentActivity, entity)'
-				];
-			}
 
 			ready() {
 				super.ready();
@@ -130,16 +125,10 @@
 				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
 			}
 
-			onCurrentActivityChanged( currentActivity, entity ) {
-				if ( currentActivity && entity ) {
-					var current = entity.getLinkByRel('self').href === currentActivity;
-					if ( current ) {
-						this.$.activityLink.classList.add('current');
-					} else {
-						this.$.activityLink.classList.remove('current');
-					}
-					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
-				}
+			_getActivityLinkClass(currentActivity, entity) {
+				return entity && entity.getLinkByRel('self').href === currentActivity
+					? 'current'
+					: '';
 			}
 
 			_showCompletionRequirement( exemption ) {

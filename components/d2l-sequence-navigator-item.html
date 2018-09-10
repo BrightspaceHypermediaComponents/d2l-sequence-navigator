@@ -50,8 +50,7 @@
 				class="standalone"
 			></d2l-activity-link>
 		</template>
-		<template is="dom-if" if="[[isEndOfLessonActivity]]">
-			<!-- <d2l-link main class="end-of-lesson">[[localize('endOfLesson')]]</d2l-link> -->
+		<template is="dom-if" if="[[_isEndOfLessonActivity(entity)]]">
 			<d2l-end-of-lesson-link
 				href="[[getHref(entity)]]"
 				token="[[token]]"
@@ -122,10 +121,6 @@
 					isStandaloneActivity: {
 						type: Boolean,
 						computed: '_isStandaloneActivity(entity)'
-					},
-					isEndOfLessonActivity: {
-						type: Boolean,
-						computed: '_isEndOfLessonActivity(entity)'
 					},
 					isModuleActivity: {
 						type: Boolean,

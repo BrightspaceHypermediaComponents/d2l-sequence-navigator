@@ -55,11 +55,6 @@
 					}
 				};
 			}
-			static get observers() {
-				return [
-					'onCurrentActivityChanged(currentActivity, entity)'
-				];
-			}
 
 			ready() {
 				super.ready();
@@ -75,18 +70,6 @@
 
 			setCurrent() {
 				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
-			}
-
-			onCurrentActivityChanged( currentActivity, entity ) {
-				if ( currentActivity && entity ) {
-					var current = entity.getLinkByRel('self').href === currentActivity;
-					if ( current ) {
-						this.$.activityLink.classList.add('current');
-					} else {
-						this.$.activityLink.classList.remove('current');
-					}
-					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
-				}
 			}
 		}
 		customElements.define(D2LEndOfLessonLink.is, D2LEndOfLessonLink);
