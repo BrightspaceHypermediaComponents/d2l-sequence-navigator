@@ -1,0 +1,42 @@
+<link rel="import" href="../utility/completion-status-mixin.html">
+<script>
+	(function() {
+		function ActivityLinkMixin() {
+			return class extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+
+				static get properties() {
+					return {
+						currentActivity: {
+							type: String,
+							value: '',
+							notify: true
+						}
+					};
+				}
+
+				ready() {
+					super.ready();
+					this.addEventListener('keypress', this._onKeyPress);
+				}
+
+				_onKeyPress(event) {
+					if ( event.key !== 'Enter' ) {
+						return;
+					}
+					this.setCurrent();
+				}
+
+				setCurrent() {
+					this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
+				}
+			};
+		}
+
+		window.D2L = window.D2L || {};
+		window.D2L.Polymer = window.D2L.Polymer || {};
+		window.D2L.Polymer.Mixins = window.D2L.Polymer.Mixins || {};
+		window.D2L.Polymer.Mixins.Sequences = window.D2L.Polymer.Mixins.Sequences || {};
+		window.D2L.Polymer.Mixins.CompletionStatusMixin = window.D2L.Polymer.Mixins.CompletionStatusMixin || {};
+		window.D2L.Polymer.Mixins.ActivityLinkMixin = ActivityLinkMixin;
+	})();
+</script>

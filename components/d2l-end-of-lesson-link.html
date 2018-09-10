@@ -1,6 +1,4 @@
-<link rel="import" href="../utility/completion-status-mixin.html">
-<link rel="import" href="d2l-completion-status.html">
-<link rel="import" href="d2l-completion-requirement.html">
+<link rel="import" href="../utility/activity-link-mixin.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../d2l-typography/d2l-typography.html">
 
@@ -40,36 +38,11 @@
 	<script>
 		/*
 		@memberOf window.D2L.Polymer.Mixins;
-		@mixes D2L.Polymer.Mixins.CompletionStatusMixin
+		@mixes D2L.Polymer.Mixins.ActivityLinkMixin
 		*/
-		class D2LEndOfLessonLink extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+		class D2LEndOfLessonLink extends D2L.Polymer.Mixins.ActivityLinkMixin() {
 			static get is() {
 				return 'd2l-end-of-lesson-link';
-			}
-			static get properties() {
-				return {
-					currentActivity: {
-						type: String,
-						value: '',
-						notify: true
-					}
-				};
-			}
-
-			ready() {
-				super.ready();
-				this.addEventListener('keypress', this._onKeyPress);
-			}
-
-			_onKeyPress(event) {
-				if ( event.key !== 'Enter' ) {
-					return;
-				}
-				this.setCurrent();
-			}
-
-			setCurrent() {
-				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
 			}
 		}
 		customElements.define(D2LEndOfLessonLink.is, D2LEndOfLessonLink);
