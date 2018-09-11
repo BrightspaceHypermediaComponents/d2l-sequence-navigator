@@ -2,14 +2,12 @@
 <link rel="import" href="d2l-completion-status.html">
 <link rel="import" href="d2l-completion-requirement.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
-<link rel="import" href="../../d2l-typography/d2l-typography.html">
 
 <dom-module id="d2l-activity-link">
 	<template>
 		<style>
 			:host {
 				display: block;
-				font-family: 'Lato', sans-serif;
 				color: var(--d2l-color-ferrite);
 				padding: 10px 15px 10px 15px;
 			}
@@ -62,8 +60,8 @@
 			}
 
 		</style>
-		<div id="activityLink">
-			<a id="activityTitle" on-click="setCurrent" class$="[[_getActivityLinkClass(currentActivity, entity)]]">
+		<div id="activityLink" class$="[[_getActivityLinkClass(currentActivity, entity)]]">
+			<a id="activityTitle" on-click="setCurrent">
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
