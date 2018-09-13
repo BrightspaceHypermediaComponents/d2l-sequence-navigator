@@ -1,0 +1,36 @@
+<link rel="import" href="../utility/activity-link-mixin.html">
+
+<dom-module id="d2l-end-of-lesson-link">
+	<template>
+		<style>
+			:host {
+				display: block;
+				padding: 10px 15px 10px 15px;
+			}
+
+			#activityLink:hover {
+				cursor: pointer;
+			}
+
+		</style>
+		<div id="activityLink">
+			<a id="activityTitle" on-click="setCurrent">
+				[[entity.properties.title]]
+			</a>
+		</div>
+		</template>
+
+	</template>
+	<script>
+		/*
+		@memberOf window.D2L.Polymer.Mixins;
+		@mixes D2L.Polymer.Mixins.ActivityLinkMixin
+		*/
+		class D2LEndOfLessonLink extends D2L.Polymer.Mixins.ActivityLinkMixin() {
+			static get is() {
+				return 'd2l-end-of-lesson-link';
+			}
+		}
+		customElements.define(D2LEndOfLessonLink.is, D2LEndOfLessonLink);
+	</script>
+</dom-module>
