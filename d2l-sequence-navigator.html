@@ -38,9 +38,6 @@
 		.end-of-lesson {
 			color: var(--d2l-color-celestine);
 			text-decoration: none;
-			padding: 0;
-			border: none;
-			background: none;
 			cursor: pointer;
 
 			/* Label Text - Lato Bold 14 */
@@ -101,7 +98,7 @@
 			</ol>
 
 			<div class="end-of-lesson-holder">
-				<button on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</button>
+				<a on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</a>
 			</div>
 		</d2l-accordion>
 	</template>
