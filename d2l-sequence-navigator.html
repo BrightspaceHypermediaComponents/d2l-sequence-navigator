@@ -38,6 +38,10 @@
 		.end-of-lesson {
 			color: var(--d2l-color-celestine);
 			text-decoration: none;
+			padding: 0;
+			border: none;
+			background: none;
+			cursor: pointer;
 
 			/* Label Text - Lato Bold 14 */
 			font-size: 14px;
@@ -76,7 +80,7 @@
 		<d2l-lesson-header class="module-header" id="sidebarHeader"
 			href="[[_rootHref]]"
 			token="[[token]]"
-			entity="{{_lessonEntity}}"
+			entity="{{_lessonEntrity}}"
 			tabindex="0"
 		></d2l-lesson-header>
 		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
@@ -97,7 +101,7 @@
 			</ol>
 
 			<div class="end-of-lesson-holder">
-				<a href="javascript:void(0);" class="end-of-lesson">[[localize('endOfLesson')]]</a>
+				<button on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</button>
 			</div>
 		</d2l-accordion>
 	</template>
@@ -173,6 +177,10 @@
 
 			_getHref(entity) {
 				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
+			}
+
+			showEndOfLesson() {
+				this.href = this._rootHref + '/end-of-sequence';
 			}
 
 			onSidebarScroll() {
