@@ -35,6 +35,7 @@
 				current-activity="{{currentActivity}}"
 				tabindex="0"
 				class="standalone"
+				launch-page="[[launchPage]]"
 			></d2l-activity-link>
 		</template>
 		<template is="dom-if" if="[[isModule]]">
@@ -43,6 +44,7 @@
 				token="[[token]]"
 				current-activity="{{currentActivity}}"
 				selected-module="{{selectedModule}}"
+				launch-page="[[launchPage]]"
 			></d2l-module-link>
 		</template>
 		<template is="dom-if" if="[[isModuleActivity]]">
@@ -51,6 +53,7 @@
 				token="[[token]]"
 				current-activity="{{currentActivity}}"
 				tabindex="0"
+				launch-page="[[launchPage]]"
 			></d2l-activity-link>
 		</template>
 	</template>
@@ -102,6 +105,10 @@
 					isModuleActivity: {
 						type: Boolean,
 						computed: '_isModuleActivity(entity)'
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}

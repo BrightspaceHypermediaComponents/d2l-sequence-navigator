@@ -2,6 +2,7 @@
 <link rel="import" href="d2l-completion-status.html">
 <link rel="import" href="d2l-completion-requirement.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../d2l-icons/d2l-icon.html">
 
 <dom-module id="d2l-activity-link">
 	<template>
@@ -53,11 +54,24 @@
 				width: 13%;
 				vertical-align: middle;
 				line-height: 24px;
+				color: var(--d2l-color-olivine);
+			}
+
+			.launch-page d2l-completion-status {
+				padding-right: 6px;
+				color: var(--d2l-color-celestine);
+			}
+
+			.activity-icon {
+				margin-right: 10px;
 			}
 
 		</style>
-		<div id="activityLink">
-			<a id="activityTitle" on-click="setCurrent" class$=[[completionRequirement]]>
+		<div id="activityLink" class$="[[_getLaunchPageClass(launchPage)]]">
+			<a id="activityTitle" on-click="setCurrent" class$="[[completionRequirement]]">
+				<template is="dom-if" if="[[launchPage]]">
+					<d2l-icon icon="d2l-tier1:file-video" class="activity-icon"></d2l-icon>
+				</template>
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
@@ -97,6 +111,10 @@
 						observer: '_showCompletionRequirement'
 					},
 					showCompletionRequirement: {
+						type: Boolean,
+						value: false
+					},
+					launchPage: {
 						type: Boolean,
 						value: false
 					}
@@ -143,6 +161,10 @@
 						this.showCompletionRequirement = true;
 						break;
 				}
+			}
+
+			_getLaunchPageClass(launchPage) {
+				return launchPage ? 'launch-page' : '';
 			}
 		}
 		customElements.define(D2LActivityLink.is, D2LActivityLink);

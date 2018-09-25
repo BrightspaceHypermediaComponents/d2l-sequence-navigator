@@ -19,6 +19,7 @@
 		:host {
 			display: block;
 			height: 100%;
+			background-color: var(--d2l-color-regolith);
 		}
 
 		d2l-sequence-navigator-item {
@@ -68,13 +69,15 @@
 		</style>
 		<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
 		<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
-		<d2l-lesson-header class="module-header" id="sidebarHeader"
-			href="[[_rootHref]]"
-			token="[[token]]"
-			entity="{{_lessonEntity}}"
-			tabindex="0"
-		></d2l-lesson-header>
-		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
+		<template is="dom-if" if="[[!launchPage]]">
+			<d2l-lesson-header class="module-header" id="sidebarHeader"
+				href="[[_rootHref]]"
+				token="[[token]]"
+				entity="{{_lessonEntity}}"
+				tabindex="0"
+			></d2l-lesson-header>
+		</template>
+		<d2l-accordion auto-close="[[!launchPage]]" class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
 
 			<ol class="module-item-list">
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
@@ -85,15 +88,18 @@
 							current-activity="{{href}}"
 							selected-module="{{selected-module}}"
 							is-lesson-child
+							launch-page="[[launchPage]]"
 						>
 						</d2l-sequence-navigator-item>
 					</li>
 				</template>
 			</ol>
 
-			<div class="end-of-lesson-holder">
-				<a on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</a>
-			</div>
+			<template is="dom-if" if="[[!launchPage]]">
+				<div class="end-of-lesson-holder">
+					<a on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</a>
+				</div>
+			</template>
 		</d2l-accordion>
 	</template>
 	<script>
@@ -138,6 +144,10 @@
 					},
 					_lessonEntity:{
 						type: Object
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
