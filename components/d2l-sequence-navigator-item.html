@@ -11,6 +11,10 @@
 				display: block;
 			}
 
+			d2l-activity-link.launch-page {
+				box-shadow: 0 -15px 0 -14px var(--d2l-color-mica);
+			}
+
 			d2l-activity-link:hover {
 				cursor: pointer;
 			}
@@ -27,6 +31,10 @@
 				border-radius: 8px;
 			}
 
+			d2l-module-link.launch-page, d2l-activity-link.standalone.launch-page {
+				border: none;
+			}
+
 		</style>
 		<template is="dom-if" if="[[isStandaloneActivity]]">
 			<d2l-activity-link
@@ -34,7 +42,7 @@
 				token="[[token]]"
 				current-activity="{{currentActivity}}"
 				tabindex="0"
-				class="standalone"
+				class$="standalone [[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
 			></d2l-activity-link>
 		</template>
@@ -44,6 +52,7 @@
 				token="[[token]]"
 				current-activity="{{currentActivity}}"
 				selected-module="{{selectedModule}}"
+				class$="[[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
 			></d2l-module-link>
 		</template>
@@ -53,6 +62,7 @@
 				token="[[token]]"
 				current-activity="{{currentActivity}}"
 				tabindex="0"
+				class$="[[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
 			></d2l-activity-link>
 		</template>
@@ -131,6 +141,10 @@
 
 			_isModuleActivity( entity ) {
 				return this._isActivity( entity ) && !this.isLessonChild;
+			}
+
+			_getLaunchPageClass(launchPage) {
+				return launchPage ? 'launch-page' : '';
 			}
 		}
 		customElements.define(D2LSequenceNavigatorItem.is, D2LSequenceNavigatorItem);

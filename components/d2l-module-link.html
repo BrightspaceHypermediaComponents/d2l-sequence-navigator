@@ -105,6 +105,11 @@
 				background-color: white;
 			}
 
+			.launch-page .nav-item:not(.current):not(:hover) {
+				border: none;
+				background-color: none;
+			}
+
 			/* .launch-page .nav-item:not(.current):not(:hover) {
 				border-left: none;
 				border-right: none;
@@ -117,10 +122,15 @@
 			.nav-item:hover {
 				background-color: #f2f8fc;
 				border: 1px solid #99c5e5;
-				border-bottom: 1px solid #99c5e5;
-				/* width: calc(100% - 30px); */
 				position: relative;
-				/* left: 15px; */
+			}
+
+			.launch-page .nav-item.current,
+			.launch-page .nav-item:hover {
+				background-color: #f2f8fc;
+				border: none;
+				outline: 1px solid #99c5e5;
+				position: relative;
 				z-index: 0.5;
 			}
 
