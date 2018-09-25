@@ -39,12 +39,12 @@
 
 		</style>
 
-		<div>
+		<template is="dom-if" if="[[!launchPage]]">
 			<div class="module-title">[[entity.properties.title]]</div>
 			<d2l-progress-bar percent-completed=[[percentCompleted]] aria-hidden="true"></d2l-progress-bar>
 			<div class="module-completion-count" aria-hidden="true">[[localize('modulesDone', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 			<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
-		</div>
+		</template>
 
 	</template>
 	<script>
@@ -62,6 +62,10 @@
 						type: String,
 						value: '',
 						notify: true
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
