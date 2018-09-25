@@ -140,11 +140,28 @@
 				color: var(--d2l-color-mica) !important;
 			}
 
-			.launch-page .expand-icon {
+			.launch-page[opened] .expand-icon {
+				visibility: hidden;
+				width: 0px;
+			}
+
+			.launch-page[opened] .collapse-icon {
 				vertical-align: middle;
 				top: -16px;
 				position: relative;
 				color: white;
+			}
+
+			.launch-page:not([opened]) .expand-icon {
+				vertical-align: middle;
+				top: -16px;
+				position: relative;
+				color: white;
+			}
+
+			.launch-page:not([opened]) .collapse-icon {
+				visibility: hidden;
+				width: 0px;
 			}
 
 		</style>
@@ -161,6 +178,7 @@
 					<span class="module-title">[[entity.properties.title]]</span>
 					<template is="dom-if" if="[[launchPage]]">
 						<d2l-icon icon="d2l-tier1:arrow-expand" class="expand-icon"></d2l-icon>
+						<d2l-icon icon="d2l-tier1:arrow-collapse" class="collapse-icon"></d2l-icon>
 					</template>
 					<span class="module-completion-count">
 						<template is="dom-if" if="[[showDivider]]">
