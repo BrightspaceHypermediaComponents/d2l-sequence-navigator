@@ -185,9 +185,23 @@
 							<d2l-icon icon="d2l-tier1:divider-solid" class="divider-icon"></d2l-icon>
 						</template>
 						<template is="dom-if" if="[[showCount]]">
-							<span class="countStatus" aria-hidden="true">
-								[[localize('countStatus', 'completed', completionCompleted, 'total', completionTotal)]]
-							</span>
+							<template is="dom-if" if="[[!launchPage]]">
+								<span class="countStatus" aria-hidden="true">
+									[[localize('countStatus', 'completed', completionCompleted, 'total', completionTotal)]]
+								</span>
+							</template>
+							<template is="dom-if" if="[[launchPage]]">
+								<template is="dom-if" if="[[hasNotStarted]]">
+									<span class="countStatus" aria-hidden="true">
+										[[localize('notStarted')]]
+									</span>
+								</template>
+								<template is="dom-if" if="[[!hasNotStarted]]">
+									<span class="countStatus" aria-hidden="true">
+										[[localize('countStatusVerbose', 'completed', completionCompleted, 'total', completionTotal)]]
+									</span>
+								</template>
+							</template>
 							<d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen>
 						</template>
 						<template is="dom-if" if="[[showCheckmark]]">
@@ -280,6 +294,11 @@
 						value: false,
 						computed: '_showDivider(showCount, showCheckmark, showOptional)'
 					},
+					hasNotStarted: {
+						type: Boolean,
+						value: false,
+						computed: '_hasNotStarted(completionCount)'
+					},
 					showExpandIcon: {
 						type: Boolean,
 						value: true
@@ -342,6 +361,10 @@
 
 			_showDivider(showCount, showCheckmark, showOptional) {
 				return !this.launchPage && ( showCount || showCheckmark || showOptional );
+			}
+
+			_hasNotStarted(completionCount) {
+				return completionCount === 0;
 			}
 
 			getSubEntities(entity) {
