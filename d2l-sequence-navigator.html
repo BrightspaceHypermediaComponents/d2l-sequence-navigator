@@ -17,9 +17,13 @@
 <dom-module id="d2l-sequence-navigator">
 	<template>
 		<style>
-		:host {
+
+		.sequence-navigator-container {
 			display: block;
 			height: 100%;
+		}
+
+		.launch-page.sequence-navigator-container {
 			background-color: var(--d2l-color-sylvite);
 		}
 
@@ -101,7 +105,7 @@
 
 		</style>
 
-		<div class$="[[_getLaunchPageClass(launchPage)]]" style$="--theme-color: [[themeColor]]">
+		<div class$="sequence-navigator-container [[_getLaunchPageClass(launchPage)]]" style$="--theme-color: [[themeColor]]">
 			<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
 			<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
 			<template is="dom-if" if="[[!launchPage]]">
