@@ -49,6 +49,7 @@
 				tabindex="0"
 				class$="standalone [[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
+				theme-color="[[themeColor]]"
 			></d2l-activity-link>
 		</template>
 		<template is="dom-if" if="[[isModule]]">
@@ -59,6 +60,7 @@
 				selected-module="{{selectedModule}}"
 				class$="[[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
+				theme-color="[[themeColor]]"
 			></d2l-module-link>
 		</template>
 		<template is="dom-if" if="[[isModuleActivity]]">
@@ -69,6 +71,7 @@
 				tabindex="0"
 				class$="[[_getLaunchPageClass(launchPage)]]"
 				launch-page="[[launchPage]]"
+				theme-color="[[themeColor]]"
 			></d2l-activity-link>
 		</template>
 	</template>
@@ -124,6 +127,9 @@
 					launchPage: {
 						type: Boolean,
 						value: false
+					},
+					themeColor: {
+						type: String
 					}
 				};
 			}

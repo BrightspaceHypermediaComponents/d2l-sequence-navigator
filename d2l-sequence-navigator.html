@@ -75,7 +75,8 @@
 		.lesson-banner-image {
 			width: 100%;
 			height: 210px;
-			background-color: var(--d2l-color-celestine-plus-1);
+			background-color: var(--theme-color);
+			opacity: 0.5;
 		}
 
 		.launch-page d2l-progress-resume-card {
@@ -100,7 +101,7 @@
 
 		</style>
 
-		<div class$="[[_getLaunchPageClass(launchPage)]]">
+		<div class$="[[_getLaunchPageClass(launchPage)]]" style$="--theme-color: [[themeColor]]">
 			<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
 			<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
 			<template is="dom-if" if="[[!launchPage]]">
@@ -133,6 +134,7 @@
 								selected-module="{{selected-module}}"
 								is-lesson-child
 								launch-page="[[launchPage]]"
+								theme-color="[[themeColor]]"
 							>
 							</d2l-sequence-navigator-item>
 						</li>
@@ -193,6 +195,10 @@
 					launchPage: {
 						type: Boolean,
 						value: false
+					},
+					themeColor: {
+						type: String,
+						value: '#565a5c'
 					}
 				};
 			}

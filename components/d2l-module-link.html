@@ -19,7 +19,8 @@
 			}
 
 			.launch-page .header-container {
-				background-color: var(--d2l-color-celestine);
+				background-color: var(--theme-color);
+				/* opacity: 0.5; */
 				padding-left: 20px;
 				padding-right: 15px;
 			}
@@ -137,7 +138,7 @@
 			}
 
 			.moduleComplete {
-				color: var(--d2l-color-olivine);
+				color: var(--theme-color);
 			}
 
 			.divider-icon {
@@ -310,6 +311,9 @@
 					launchPage: {
 						type: Boolean,
 						value: false
+					},
+					themeColor: {
+						type: String
 					}
 				};
 			}
