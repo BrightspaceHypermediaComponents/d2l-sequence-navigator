@@ -47,6 +47,10 @@
 				line-height: 24px;
 			}
 
+			.launch-page d2l-completion-requirement {
+				padding-left: 32px;
+			}
+
 			d2l-completion-status {
 				text-align: right;
 				display: table-cell;
@@ -68,7 +72,7 @@
 		<div id="activityLink" class$="[[_getLaunchPageClass(launchPage)]]">
 			<a id="activityTitle" on-click="setCurrent" class$="[[completionRequirement]]">
 				<template is="dom-if" if="[[launchPage]]">
-					<d2l-icon icon="d2l-tier1:file-video" class="activity-icon"></d2l-icon>
+					<d2l-icon icon$="[[_getActivityIcon(entity)]]" class="activity-icon"></d2l-icon>
 				</template>
 				[[entity.properties.title]]
 			</a>
@@ -124,6 +128,30 @@
 				];
 			}
 
+			static get fileActivity() {
+				return 'file-activity';
+			}
+
+			static get linkActivity() {
+				return 'link-activity';
+			}
+
+			static get contentClass() {
+				return 'link-content-service';
+			}
+
+			static get mimeType() {
+				return new Map([
+					['application/pdf', 'd2l-tier1:file-video'],
+					['image/bmp', 'd2l-tier1:file-image'],
+					['image/gif', 'd2l-tier1:file-image'],
+					['image/jpeg', 'd2l-tier1:file-image'],
+					['image/png', 'd2l-tier1:file-image'],
+					['image/svg+xml', 'd2l-tier1:file-image'],
+					['text/html', 'd2l-tier1:file-document']
+				]);
+			}
+
 			ready() {
 				super.ready();
 				this.addEventListener('keypress', this._onKeyPress);
@@ -163,6 +191,41 @@
 
 			_getLaunchPageClass(launchPage) {
 				return launchPage ? 'launch-page' : '';
+			}
+
+			_getActivityIcon(entity) {
+				if (!entity || !entity.entities) {
+					return 'd2l-tier1:help';
+				}
+				for (let i = 0; i < entity.entities.length; i++) {
+					const subEntity = entity.entities[i];
+					// hypermedia classes tend to be more specific at the end of the array
+					for (let j = subEntity.class.length - 1; j >= 0; --j) {
+						switch (subEntity.class[j]) {
+							case D2LActivityLink.fileActivity:
+								return this._getFileEntityType(subEntity);
+							case D2LActivityLink.linkActivity:
+								return this._getLinkEntityType(subEntity);
+							case D2LActivityLink.contentClass:
+								return 'd2l-tier1:table-of-contents';
+						}
+					}
+				}
+				return 'd2l-tier1:help';
+			}
+
+			_getFileEntityType(fileActivity) {
+				const file = fileActivity.getSubEntityByClass('file');
+				const mimeType = file && file.properties && file.properties.type;
+				return D2LActivityLink.mimeType.get(mimeType) || 'd2l-tier1:help';
+			}
+
+			_getLinkEntityType(linkActivity) {
+				const link = linkActivity.getLinkByRel('about');
+				if (link && link.href.startsWith('https://')) {
+					return 'd2l-tier1:link';
+				}
+				return 'd2l-tier1:new-window';
 			}
 		}
 		customElements.define(D2LActivityLink.is, D2LActivityLink);
