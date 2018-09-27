@@ -84,6 +84,7 @@
 			width: 100%;
 			height: 210px;
 			background-color: var(--theme-color);
+			background-image: var(--banner-image-url);
 			margin-bottom: 10px;
 		}
 
@@ -108,7 +109,10 @@
 
 		</style>
 
-		<div class$="sequence-navigator-container [[_getLaunchPageClass(launchPage)]]" style$="--theme-color: [[themeColor]]">
+		<div
+			class$="sequence-navigator-container [[_getLaunchPageClass(launchPage)]]"
+			style$="--theme-color: [[themeColor]]; --banner-image-url: url([[bannerImageUrl]])"
+		>
 			<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
 			<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
 			<div id="sidebarHeader">
@@ -200,13 +204,16 @@
 					_lessonEntity:{
 						type: Object
 					},
-					launchPage: {
-						type: Boolean,
-						value: false
-					},
 					themeColor: {
 						type: String,
 						value: '#565a5c'
+					},
+					bannerImageUrl: {
+						type: String
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
