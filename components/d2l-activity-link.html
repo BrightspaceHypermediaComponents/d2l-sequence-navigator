@@ -48,7 +48,7 @@
 			}
 
 			.launch-page d2l-completion-requirement {
-				padding-left: 39px;
+				padding-left: 32px;
 			}
 
 			d2l-completion-status {
@@ -172,11 +172,11 @@
 				if (!entity || !entity.entities) {
 					return 'd2l-tier1:help';
 				}
-				for (let i = 0; i < entity.entities.length; i++) {
+				for (let i = 0; i < entity.entities.length - 1; i++) {
 					const subEntity = entity.entities[i];
 					// hypermedia classes tend to be more specific at the end of the array
 					for (let j = subEntity.class.length - 1; j >= 0; --j) {
-						if (subEntity.class[j] === 'icon') {
+						if (subEntity.class[j] === 'icon' && subEntity.class[j + 1] === 'tier1') {
 							return subEntity.properties.iconSetKey;
 						}
 					}
