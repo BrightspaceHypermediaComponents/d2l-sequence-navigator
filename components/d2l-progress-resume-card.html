@@ -1,0 +1,103 @@
+<link rel="import" href="d2l-progress-bar.html">
+<link rel="import" href="../utility/completion-status-mixin.html">
+<link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../d2l-offscreen/d2l-offscreen.html">
+<link rel="import" href="../../d2l-button/d2l-button.html">
+<link rel="import" href="../../d2l-content-icons/d2l-content-icons.html">
+<!--
+'d2l-progress-resume-card'
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-progress-resume-card">
+	<template>
+		<style>
+
+		.progress-resume-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			flex-flow: row;
+			width: 300px;
+			height: 170px;
+			background-color: white;
+			border-radius: 8px;
+		}
+
+		.progress-resume-icon {
+			zoom: 0.6;
+		}
+
+		.progress-resume-left-col {
+			padding: 20px;
+			flex: 0 0 10px;
+		}
+
+		.progress-resume-right-col {
+			margin: 20px 20px 20px 0px;
+			padding: 0px 0px 0px 0px;
+			width: 70%;
+			
+			display: flex;
+			flex-direction: column;
+		}
+
+		.progress-resume-label {
+			@apply --d2l-body-small-text;
+			display: block;
+			flex: 1 1 10px;
+			margin: 0px;
+		}
+
+		.progress-resume-title {
+			display: block;
+			flex: 1 1 10px;
+			margin-top: 3px;
+			margin-bottom: 10px;
+		}
+
+		.progress-resume-button {
+			display: block;
+			flex: 1 1 10px;
+			margin: 0px;
+		}
+
+		</style>
+
+		<div class="progress-resume-container">
+			<div class="progress-resume-left-col">
+				<d2l-content-icons icon="file" class="progress-resume-icon"></d2l-content-icons>
+			</div>
+			<div class="progress-resume-right-col">
+				<p class="progress-resume-label">Up next</p>
+				<p class="progress-resume-title">[[entity.properties.title]]</p>
+				<d2l-button class="progress-resume-button" primary>Continue</d2l-button>
+			</div>
+		</div>
+
+	</template>
+	<script>
+		/*
+		@memberOf D2L.Polymer.Mixins;
+		@mixes CompletionStatusMixin
+		*/
+		class D2LProgressResumeCard extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+			static get is() {
+				return 'd2l-progress-resume-card';
+			}
+			static get properties() {
+				return {
+					currentActivity: {
+						type: String,
+						value: '',
+						notify: true
+					}
+				};
+			}
+		}
+
+		window.customElements.define(D2LProgressResumeCard.is, D2LProgressResumeCard);
+	</script>
+</dom-module>

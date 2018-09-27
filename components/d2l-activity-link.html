@@ -2,6 +2,7 @@
 <link rel="import" href="d2l-completion-status.html">
 <link rel="import" href="d2l-completion-requirement.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../d2l-icons/d2l-icon.html">
 
 <dom-module id="d2l-activity-link">
 	<template>
@@ -9,7 +10,6 @@
 			:host {
 				display: block;
 				color: var(--d2l-color-ferrite);
-				padding: 10px 15px 10px 15px;
 			}
 
 			#activityLink {
@@ -47,17 +47,29 @@
 				line-height: 24px;
 			}
 
+			.launch-page d2l-completion-requirement {
+				padding-left: 32px;
+			}
+
 			d2l-completion-status {
 				text-align: right;
 				display: table-cell;
 				width: 13%;
 				vertical-align: middle;
 				line-height: 24px;
+				color: var(--theme-color);
+			}
+
+			.activity-icon {
+				margin-right: 10px;
 			}
 
 		</style>
-		<div id="activityLink">
-			<a id="activityTitle" on-click="setCurrent" class$=[[completionRequirement]]>
+		<div id="activityLink" class$="[[_getLaunchPageClass(launchPage)]]">
+			<a id="activityTitle" on-click="setCurrent" class$="[[completionRequirement]]">
+				<template is="dom-if" if="[[launchPage]]">
+					<d2l-icon icon$="[[_getActivityIcon(entity)]]" class="activity-icon"></d2l-icon>
+				</template>
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
@@ -99,6 +111,13 @@
 					showCompletionRequirement: {
 						type: Boolean,
 						value: false
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
+					},
+					themeColor: {
+						type: String
 					}
 				};
 			}
@@ -143,6 +162,26 @@
 						this.showCompletionRequirement = true;
 						break;
 				}
+			}
+
+			_getLaunchPageClass(launchPage) {
+				return launchPage ? 'launch-page' : '';
+			}
+
+			_getActivityIcon(entity) {
+				if (!entity || !entity.entities) {
+					return 'd2l-tier1:help';
+				}
+				for (let i = 0; i < entity.entities.length - 1; i++) {
+					const subEntity = entity.entities[i];
+					// hypermedia classes tend to be more specific at the end of the array
+					for (let j = subEntity.class.length - 1; j >= 0; --j) {
+						if (subEntity.class[j] === 'icon' && subEntity.class[j + 1] === 'tier1') {
+							return subEntity.properties.iconSetKey;
+						}
+					}
+				}
+				return 'd2l-tier1:help';
 			}
 		}
 		customElements.define(D2LActivityLink.is, D2LActivityLink);

@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-polymer-siren-behaviors/store/entity-behavior.html">
 <link rel="import" href="./components/d2l-sequence-navigator-item.html">
+<link rel="import" href="./components/d2l-progress-resume-card.html">
 <link rel="import" href="./components/d2l-lesson-header.html">
 <link rel="import" href="../d2l-accordion/d2l-accordion.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
@@ -16,9 +17,14 @@
 <dom-module id="d2l-sequence-navigator">
 	<template>
 		<style>
-		:host {
+		.sequence-navigator-container {
 			display: block;
 			height: 100%;
+		}
+
+		.launch-page.sequence-navigator-container {
+			background-color: var(--d2l-color-sylvite);
+			overflow-y: scroll;
 		}
 
 		d2l-sequence-navigator-item {
@@ -46,7 +52,12 @@
 			padding-top: 30px;
 		}
 
-		.module-header {
+		#sidebarHeader {
+			position: relative;
+			z-index: 1;
+		}
+
+		.lesson-header {
 			padding-top: 40px;
 			padding-left: 30px;
 			padding-right: 30px;
@@ -65,36 +76,90 @@
 			padding-bottom: 40px;
 		}
 
+		.launch-page .module-content {
+			height: 100%;
+		}
+
+		.lesson-banner {
+			width: 100%;
+			height: 210px;
+			background-color: var(--theme-color);
+			background-image: var(--banner-image-url);
+			margin-bottom: 10px;
+		}
+
+		.launch-page d2l-progress-resume-card {
+			position: relative;
+			top: 20px;
+			z-index: 1;
+			width: 100%;
+			left: calc(50% - 900px/2 + 30px);
+		}
+
+		.launch-page d2l-accordion {
+			width: 900px;
+			margin: auto;
+		}
+
+		@media(max-width: 960px) {
+			.launch-page d2l-progress-resume-card {
+				left: 30px;
+			}
+		}
+
 		</style>
-		<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
-		<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
-		<d2l-lesson-header class="module-header" id="sidebarHeader"
-			href="[[_rootHref]]"
-			token="[[token]]"
-			entity="{{_lessonEntity}}"
-			tabindex="0"
-		></d2l-lesson-header>
-		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
 
-			<ol class="module-item-list">
-				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
-					<li>
-						<d2l-sequence-navigator-item
-							href="[[childLink.href]]"
-							token="[[token]]"
-							current-activity="{{href}}"
-							selected-module="{{selected-module}}"
-							is-lesson-child
-						>
-						</d2l-sequence-navigator-item>
-					</li>
+		<div
+			class$="sequence-navigator-container [[_getLaunchPageClass(launchPage)]]"
+			style$="--theme-color: [[themeColor]]; --banner-image-url: url([[bannerImageUrl]])"
+		>
+			<siren-entity href="[[_moduleHref]]" token="[[token]]" entity="{{_moduleEntity}}"></siren-entity>
+			<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
+			<div id="sidebarHeader">
+				<template is="dom-if" if="[[!launchPage]]">
+					<d2l-lesson-header class="lesson-header"
+						href="[[_rootHref]]"
+						token="[[token]]"
+						entity="{{_lessonEntity}}"
+						tabindex="0"
+					></d2l-lesson-header>
 				</template>
-			</ol>
-
-			<div class="end-of-lesson-holder">
-				<a on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</a>
+				<template is="dom-if" if="[[launchPage]]">
+					<div class="lesson-banner">
+						<d2l-progress-resume-card
+							href="[[_rootHref]]"
+							token="[[token]]"
+							entity="{{_lessonEntity}}"
+						></d2l-progress-resume-card>
+					</div>
+				</template>
 			</div>
-		</d2l-accordion>
+			<d2l-accordion auto-close="[[!launchPage]]" class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
+
+				<ol class="module-item-list">
+					<template is="dom-repeat" items="[[subEntities]]" as="childLink">
+						<li>
+							<d2l-sequence-navigator-item
+								href="[[childLink.href]]"
+								token="[[token]]"
+								current-activity="{{href}}"
+								selected-module="{{selected-module}}"
+								is-lesson-child
+								launch-page="[[launchPage]]"
+								theme-color="[[themeColor]]"
+							>
+							</d2l-sequence-navigator-item>
+						</li>
+					</template>
+				</ol>
+
+				<template is="dom-if" if="[[!launchPage]]">
+					<div class="end-of-lesson-holder">
+						<a on-click="showEndOfLesson" class="end-of-lesson">[[localize('endOfLesson')]]</a>
+					</div>
+				</template>
+			</d2l-accordion>
+		</div>
 	</template>
 	<script>
 		/*
@@ -138,6 +203,17 @@
 					},
 					_lessonEntity:{
 						type: Object
+					},
+					themeColor: {
+						type: String,
+						value: '#565a5c'
+					},
+					bannerImageUrl: {
+						type: String
+					},
+					launchPage: {
+						type: Boolean,
+						value: false
 					}
 				};
 			}
@@ -175,6 +251,9 @@
 			}
 
 			onSidebarScroll() {
+				if ( this.launchPage ) {
+					return;
+				}
 				if ( this.$.sidebarContent.scrollTop === 0 ) {
 					if ( this.$.sidebarHeader.classList.contains('shadowed') ) {
 						this.$.sidebarHeader.classList.remove('shadowed');
@@ -184,6 +263,10 @@
 						this.$.sidebarHeader.classList.add('shadowed');
 					}
 				}
+			}
+
+			_getLaunchPageClass(launchPage) {
+				return launchPage ? 'launch-page' : '';
 			}
 		}
 
