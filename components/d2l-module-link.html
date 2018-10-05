@@ -336,7 +336,8 @@
 
 			_onActivityClicked(e) {
 				var newActivityLink = e.model.__data.childLink.href;
-				if ( this.currentActivity !== newActivityLink ) {
+				if ( e.model.__data.childLink.class.includes('sequenced-activity')
+					&& this.currentActivity !== newActivityLink ) {
 					this.currentActivity = newActivityLink;
 				}
 			}
