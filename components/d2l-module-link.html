@@ -288,7 +288,8 @@
 			}
 
 			_hasChildren(entity) {
-				return entity && entity.getSubEntities().length !== 0;
+				return entity && entity.getSubEntities()
+					.filter( subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || ( subEntity.href && subEntity.hasClass('sequence-description') ) ).length !== 0;
 			}
 
 			toggleSelected() {
