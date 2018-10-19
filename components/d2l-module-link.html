@@ -197,6 +197,10 @@
 						type: Array,
 						computed: 'getSubEntities(entity)'
 					},
+					hasChildTopics: {
+						type: Boolean,
+						computed: '_hasChildTopics(entity)'
+					},
 					hasChildren: {
 						type: Boolean,
 						computed: '_hasChildren(entity)'
@@ -244,7 +248,7 @@
 			}
 
 			_showCount() {
-				if ( !this.hasChildren ) {
+				if ( !this.hasChildTopics ) {
 					return false;
 				}
 				if ( this._isAccordionOpen() ) {
@@ -254,7 +258,7 @@
 			}
 
 			_showCheckmark() {
-				if ( !this.hasChildren ) {
+				if ( !this.hasChildTopics ) {
 					return false;
 				}
 				if ( this._isAccordionOpen() ) {
@@ -264,7 +268,7 @@
 			}
 
 			_showOptional() {
-				if ( !this.hasChildren ) {
+				if ( !this.hasChildTopics ) {
 					return false;
 				}
 				if ( this._isAccordionOpen() ) {
@@ -285,6 +289,11 @@
 
 			_getHref(entity) {
 				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
+			}
+
+			_hasChildTopics(entity) {
+				return entity && entity.getSubEntities()
+					.filter( subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) ).length !== 0;
 			}
 
 			_hasChildren(entity) {
