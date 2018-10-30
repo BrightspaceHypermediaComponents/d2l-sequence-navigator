@@ -5,7 +5,7 @@
 <link rel="import" href="../../d2l-icons/d2l-icons.html">
 <link rel="import" href="../../d2l-offscreen/d2l-offscreen.html">
 
-<dom-module id="d2l-outer-module">
+<dom-module id="d2l-inner-module">
 	<template>
 		<style>
 			:host {
@@ -16,7 +16,7 @@
 				padding: 12px 20px;
 			}
 
-			.outer-module .header-container {
+			.inner-module .header-container {
 				padding-right: 25px;
 				padding-top: 15px;
 			}
@@ -25,7 +25,18 @@
 				background-color: white;
 			}
 
-			.outer-module {
+			d2l-accordion-collapse[opened].inner-module {
+				border-radius: 8px;
+				background-color: var(--d2l-color-sylvite);
+				box-shadow: 0px 0px 0px 5px white;
+			}
+
+			.inner-module {
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+			.inner-module {
 				border-bottom: 1px solid var(--d2l-color-mica);
 			}
 
@@ -47,13 +58,21 @@
 				padding-bottom: 5px;
 			}
 
-			.outer-module .module-title {
+			.inner-module .module-title {
 				@apply --d2l-body-compact-text;
 				font-weight: 700;
 				color: var(--d2l-color-ferrite);
 
 				width: calc(100% - 2rem);
 				max-height: 2rem; /* fallback */
+			}
+
+			.inner-module .module-title {
+				@apply --d2l-body-small-text;
+				color: var(--d2l-color-tungsten);
+
+				width: 100%;
+				max-height: 1.6rem; /* fallback */
 			}
 
 			.module-completion-count {
@@ -81,14 +100,15 @@
 				padding: 0px;
 			}
 
-			.outer-module .module-item-list {
-				padding-right: 10px;
-			}
-
 			.nav-item {
 				@apply --d2l-body-compact-text;
 
 				width: 100%;
+			}
+
+			.inner-module .nav-item {
+				width: calc(100% - 20px);
+				padding: 0px 10px;
 			}
 
 			.nav-item.current,
@@ -104,11 +124,13 @@
 		</style>
 
 		<d2l-accordion-collapse
-			class$="[[_getIsSelected(selectedModule)]] outer-module"
+			class$="[[_getIsSelected(selectedModule)]] inner-module"
 			on-click="toggleSelected"
 			id="moduleLink"
 			no-icons
 			flex
+			opened
+			disabled
 		>
 			<div slot="header" class="header-container">
 				<div class="module-header">
@@ -160,9 +182,9 @@
 		@memberOf window.D2L.Polymer.Mixins;
 		@mixes D2L.Polymer.Mixins.CompletionStatusMixin
 		*/
-		class D2LOuterModule extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+		class D2LInnerModule extends D2L.Polymer.Mixins.CompletionStatusMixin() {
 			static get is() {
-				return 'd2l-outer-module';
+				return 'd2l-inner-module';
 			}
 			static get properties() {
 				return {
@@ -226,33 +248,15 @@
 			}
 
 			_showCount() {
-				if ( !this.hasChildren ) {
-					return false;
-				}
-				if ( this._isAccordionOpen() ) {
-					return true;
-				}
-				return !this._isOptionalModule() && !this._isAllRequiredViewed();
+				return false;
 			}
 
 			_showCheckmark() {
-				if ( !this.hasChildren ) {
-					return false;
-				}
-				if ( this._isAccordionOpen() ) {
-					return false;
-				}
-				return !this._isOptionalModule() && this._isAllRequiredViewed();
+				return false;
 			}
 
 			_showOptional() {
-				if ( !this.hasChildren ) {
-					return false;
-				}
-				if ( this._isAccordionOpen() ) {
-					return false;
-				}
-				return this._isOptionalModule();
+				return false;
 			}
 
 			getSubEntities(entity) {
@@ -305,7 +309,7 @@
 				}
 			}
 		}
-		customElements.define(D2LOuterModule.is, D2LOuterModule);
+		customElements.define(D2LInnerModule.is, D2LInnerModule);
 
 	</script>
 </dom-module>
