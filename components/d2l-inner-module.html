@@ -13,19 +13,11 @@
 			}
 
 			.header-container {
-				padding: 12px 20px;
-			}
-
-			.inner-module .header-container {
-				padding-right: 25px;
-				padding-top: 15px;
+				padding: 15px 25px 12px 20px;
 			}
 
 			d2l-accordion-collapse[opened] {
 				background-color: white;
-			}
-
-			d2l-accordion-collapse[opened].inner-module {
 				border-radius: 8px;
 				background-color: var(--d2l-color-sylvite);
 				box-shadow: 0px 0px 0px 5px white;
@@ -34,10 +26,7 @@
 			.inner-module {
 				margin-top: 10px;
 				margin-bottom: 10px;
-			}
-
-			.inner-module {
-				border-bottom: 1px solid var(--d2l-color-mica);
+				/* border-bottom: 1px solid var(--d2l-color-mica); */
 			}
 
 			.module-header {
@@ -56,35 +45,12 @@
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
 				padding-bottom: 5px;
-			}
 
-			.inner-module .module-title {
-				@apply --d2l-body-compact-text;
-				font-weight: 700;
-				color: var(--d2l-color-ferrite);
-
-				width: calc(100% - 2rem);
-				max-height: 2rem; /* fallback */
-			}
-
-			.inner-module .module-title {
 				@apply --d2l-body-small-text;
 				color: var(--d2l-color-tungsten);
 
 				width: 100%;
 				max-height: 1.6rem; /* fallback */
-			}
-
-			.module-completion-count {
-				@apply --d2l-body-small-text;
-				font-weight: 700;
-				color: var(--d2l-color-tungsten);
-
-				text-align: right;
-				float: right;
-				display: table-cell;
-				width: 2rem;
-				line-height: inherit !important;
 			}
 
 			.no-topics {
@@ -104,9 +70,6 @@
 				@apply --d2l-body-compact-text;
 
 				width: 100%;
-			}
-
-			.inner-module .nav-item {
 				width: calc(100% - 20px);
 				padding: 0px 10px;
 			}
@@ -124,7 +87,7 @@
 		</style>
 
 		<d2l-accordion-collapse
-			class$="[[_getIsSelected(selectedModule)]] inner-module"
+			class$="[[_getIsSelected(selectedModule)]]"
 			on-click="toggleSelected"
 			id="moduleLink"
 			no-icons
@@ -135,24 +98,6 @@
 			<div slot="header" class="header-container">
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
-					<span class="module-completion-count">
-						<template is="dom-if" if="[[showCount]]">
-							<span class="countStatus" aria-hidden="true">
-								[[localize('countStatus', 'completed', completionCompleted, 'total', completionTotal)]]
-							</span>
-							<d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen>
-						</template>
-						<template is="dom-if" if="[[showCheckmark]]">
-							<span class="completedStatus">
-								<d2l-icon aria-label$="[[localize('completed')]]" icon="d2l-tier1:check"></d2l-icon>
-							</span>
-						</template>
-						<template is="dom-if" if="[[showOptional]]">
-							<span class="optionalStatus">
-								[[localize('optional')]]
-							</span>
-						</template>
-					</span>
 				</div>
 			</div>
 
@@ -213,21 +158,6 @@
 					hasChildModulesOrTopics: {
 						type: Boolean,
 						computed: '_hasChildModulesOrTopics(entity)'
-					},
-					showCount: {
-						type: Boolean,
-						value: false,
-						computed: '_showCount(completionCount, selectedModule, hasCurrentActivity)'
-					},
-					showCheckmark: {
-						type: Boolean,
-						value: false,
-						computed: '_showCheckmark(completionCount, selectedModule, hasCurrentActivity)'
-					},
-					showOptional: {
-						type: Boolean,
-						value: false,
-						computed: '_showOptional(completionCount, selectedModule, hasCurrentActivity)'
 					}
 				};
 			}
@@ -245,18 +175,6 @@
 
 			_isAllRequiredViewed() {
 				return this.completionCount && this.completionCount.total > 0 && this.completionCount.total === this.completionCount.completed;
-			}
-
-			_showCount() {
-				return false;
-			}
-
-			_showCheckmark() {
-				return false;
-			}
-
-			_showOptional() {
-				return false;
 			}
 
 			getSubEntities(entity) {
