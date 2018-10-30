@@ -12,10 +12,6 @@
 				display: block;
 			}
 
-			.header-container {
-				padding: 12px 20px;
-			}
-
 			d2l-accordion-collapse {
 				margin-top: 10px;
 				margin-bottom: 10px;
@@ -27,6 +23,10 @@
 				box-shadow: 0px 0px 0px 5px white;
 			}
 
+			.header-container {
+				padding: 12px 20px;
+			}
+
 			.module-header {
 				display: table;
 				table-layout: fixed;
@@ -34,20 +34,17 @@
 			}
 
 			.module-title {	
-				overflow: hidden;
-				text-overflow: ellipsis;
-				float: left;
-				display: table-cell;
-
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 2; /* number of lines to show */
-				padding-bottom: 5px;
-
 				@apply --d2l-body-small-text;
 				color: var(--d2l-color-tungsten);
 
 				width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				float: left;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2; /* number of lines to show */
+				padding-bottom: 5px;
 				max-height: 1.6rem; /* fallback */
 			}
 
@@ -82,7 +79,6 @@
 		<d2l-accordion-collapse
 			class$="[[_getIsSelected(selectedModule)]]"
 			on-click="toggleSelected"
-			id="moduleLink"
 			no-icons
 			flex
 			opened
@@ -179,7 +175,6 @@
 
 			_getIsCurrent(childLink, currentActivity) {
 				if ( childLink.href === currentActivity ) {
-					this.shadowRoot.querySelector('#moduleLink').setAttribute('opened', '');
 					this.hasCurrentActivity = true;
 					return 'current';
 				}
