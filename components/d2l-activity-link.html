@@ -20,52 +20,58 @@
 				width: 100%;
 			}
 
+			#activityLink:hover {
+				cursor: pointer;
+			}
+
+			d2l-icon,
+			#activityTitle,
+			d2l-completion-requirement,
+			d2l-completion-status {
+				display: table-cell;
+				vertical-align: top;
+			}
+
+			#activityTitle,
+			d2l-completion-requirement {
+				float: left;
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+
 			#activityTitle {
 				@apply --d2l-body-compact-text;
 
 				overflow: hidden;
 				text-overflow: ellipsis;
-				float: left;
-				display: table-cell;
-				width: 100%;
+				
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				max-height: 3.0rem;
 			}
 
-			#activityTitle.exempt, #activityTitle.optional {
-				white-space: nowrap;
+			#activityTitle.exempt,
+			#activityTitle.optional {
+				-webkit-line-clamp: 1; /* number of lines to show */
 			}
 
 			#activityTitle.required {
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
-				line-height: 24px; /* fallback */
-				max-height: 48px; /* fallback */
-			}
-
-			d2l-completion-requirement {
-				float: left;
-				display: table-cell;
-				width: 87%;
-				line-height: 24px;
 			}
 
 			d2l-completion-status {
-				text-align: right;
-				display: table-cell;
-				width: 13%;
-				vertical-align: middle;
-				line-height: 24px;
+				width: 6%;
 			}
 			
 			d2l-icon {
 				margin-right: 1rem;
+				padding-top: 3px;
 			}
 
 		</style>
 		<div id="activityLink">
-			
+			<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
 			<a id="activityTitle" on-click="setCurrent" class$=[[completionRequirement]]>
-				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
 				[[entity.properties.title]]
 			</a>
 			<template is="dom-if" if="[[showCompletionRequirement]]">
