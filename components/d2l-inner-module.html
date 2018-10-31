@@ -40,14 +40,7 @@
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
-				padding-bottom: 5px;
-				max-height: 1.6rem; /* fallback */
-			}
-
-			.no-topics {
-				padding: 10px;
-				line-height: 24px;
-				color: var(--d2l-color-tungsten);
+				max-height: 2.0rem; /* fallback */
 			}
 
 			ol {
@@ -97,11 +90,6 @@
 						</d2l-sequence-navigator-item>
 					</li>
 				</template>
-				<template is="dom-if" if="[[!hasChildModulesOrTopics]]">
-					<div class="no-topics">
-						[[localize('moduleHasNoTopics')]]
-					</div>
-				</template>
 			</ol>
 		</div>
 	</template>
@@ -134,10 +122,6 @@
 					subEntities: {
 						type: Array,
 						computed: 'getSubEntities(entity)'
-					},
-					hasChildModulesOrTopics: {
-						type: Boolean,
-						computed: '_hasChildModulesOrTopics(entity)'
 					}
 				};
 			}
@@ -150,11 +134,6 @@
 
 			_getHref(entity) {
 				return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
-			}
-
-			_hasChildModulesOrTopics(entity) {
-				return entity && entity.getSubEntities()
-					.filter( subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || ( subEntity.href && subEntity.hasClass('sequence-description') ) ).length !== 0;
 			}
 
 			toggleSelected() {

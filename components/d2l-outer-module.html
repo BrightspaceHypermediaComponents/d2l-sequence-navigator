@@ -38,8 +38,8 @@
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
-				padding-bottom: 5px;
-				max-height: 2rem; /* fallback */
+				max-height: 2.4rem; /* fallback */
+				margin-top: -2px;
 			}
 
 			.module-completion-count {
@@ -52,12 +52,6 @@
 				display: table-cell;
 				width: 2rem;
 				line-height: inherit !important;
-			}
-
-			.no-topics {
-				padding: 10px;
-				line-height: 24px;
-				color: var(--d2l-color-tungsten);
 			}
 
 			ol {
@@ -129,11 +123,6 @@
 						</d2l-sequence-navigator-item>
 					</li>
 				</template>
-				<template is="dom-if" if="[[!hasChildModulesOrTopics]]">
-					<div class="no-topics">
-						[[localize('moduleHasNoTopics')]]
-					</div>
-				</template>
 			</ol>
 		</d2l-accordion-collapse>
 	</template>
@@ -170,10 +159,6 @@
 					hasChildren: {
 						type: Boolean,
 						computed: '_hasChildren(entity)'
-					},
-					hasChildModulesOrTopics: {
-						type: Boolean,
-						computed: '_hasChildModulesOrTopics(entity)'
 					},
 					showCount: {
 						type: Boolean,
@@ -250,11 +235,6 @@
 
 			_hasChildren(entity) {
 				return entity && entity.getSubEntities().length !== 0;
-			}
-
-			_hasChildModulesOrTopics(entity) {
-				return entity && entity.getSubEntities()
-					.filter( subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || ( subEntity.href && subEntity.hasClass('sequence-description') ) ).length !== 0;
 			}
 
 			toggleSelected() {
