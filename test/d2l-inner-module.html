@@ -130,7 +130,7 @@
 						element = await SirenFixture.load('data/l4-optional-completion-module.json', fixture('Empty'));
 					});
 
-					it('should show only the title in the header, when the accordion is open', () => {
+					it('should show only the title in the header', () => {
 
 						const titleElement = element.shadowRoot.querySelector('.module-title');
 						const countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -152,7 +152,7 @@
 						element = await SirenFixture.load('data/l4-required-completion-module.json', fixture('Empty'));
 					});
 
-					it('should show only the title in the header, when the accordion is open', () => {
+					it('should show only the title in the header', () => {
 
 						const titleElement = element.shadowRoot.querySelector('.module-title');
 						const countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -174,7 +174,7 @@
 						element = await SirenFixture.load('data/l1-module2.json', fixture('Empty'));
 					});
 
-					it('should show only the title in the header, when the accordion is open', () => {
+					it('should show only the title in the header', () => {
 
 						const titleElement = element.shadowRoot.querySelector('.module-title');
 						const countStatus = element.shadowRoot.querySelector('.countStatus');
