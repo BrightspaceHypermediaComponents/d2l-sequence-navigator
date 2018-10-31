@@ -68,11 +68,14 @@
 			}
 
 			d2l-sequence-navigator-item {
-				@apply --d2l-body-compact-text;
 				width: 100%;
+				padding: 0px;
 			}
 
-			d2l-sequence-navigator-item.current,
+			d2l-sequence-navigator-item.current {
+				background-color: var(--d2l-color-celestine-plus-1);
+			}
+
 			d2l-sequence-navigator-item:hover:not(.current),
 			.header-container:hover {
 				background-color: var(--d2l-color-celestine-plus-2);
