@@ -35,8 +35,12 @@
 			cursor: pointer;
 		}
 
-		.end-of-lesson-holder,
-		.root-header {
+		d2l-lesson-header {
+			margin-top: 10px;
+			margin-bottom: 15px;
+		}
+
+		.end-of-lesson-holder {
 			padding: 20px 40px 20px 20px;
 		}
 
@@ -53,10 +57,12 @@
 
 		</style>
 		<siren-entity href="[[_rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
-		<d2l-lesson-header class="root-header" id="sidebarHeader"
+		<d2l-lesson-header
+			id="sidebarHeader"
 			href="[[_rootHref]]"
 			token="[[token]]"
 			tabindex="0"
+			theme="[[lightTheme]]"
 		></d2l-lesson-header>
 		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
 
@@ -113,8 +119,28 @@
 						type: Array,
 						computed: 'getSubEntities(_lessonEntity)'
 					},
-					_lessonEntity:{
+					_lessonEntity: {
 						type: Object
+					},
+					lightOnDark: {
+						type: Boolean,
+						value: false
+					},
+					darkTheme: {
+						type: Object,
+						value: {
+							accentColor: 'var(--d2l-color-celestine-minus-1)',
+							primaryColor: 'var(--d2l-color-celestine)',
+							isDarkTheme: true
+						}
+					},
+					lightTheme: {
+						type: Object,
+						value: {
+							accentColor: 'var(--d2l-color-celestine-minus-1)',
+							primaryColor: '#fae3cf',
+							isDarkTheme: false
+						}
 					}
 				};
 			}

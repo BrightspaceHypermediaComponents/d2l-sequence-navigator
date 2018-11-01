@@ -18,7 +18,30 @@
 			display: block;
 		}
 
-		.module-title {
+		:host(:focus) {
+			outline: none;
+		}
+
+		#D2LLessonHeaderContainer {
+			position: relative;
+			width: inherit;
+			height: inherit;
+			padding: 20px 40px 15px 20px;
+			border-radius: 8px 0px 0px 8px;
+		}
+
+		#D2LLessonHeaderOverlay {
+			position: absolute; /* Sit on top of the page content */
+			margin-left: -20px;
+			margin-top: -20px;
+			width: 100%; /* Full width (cover the whole page) */
+			height: 100%; /* Full height (cover the whole page) */
+			background-color: white; /* Black background with opacity */
+			opacity: 0;
+			z-index: 1; /* Specify a stack order in case you're using a different order for other */
+		}
+
+		#D2LLessonHeaderTitle {
 			@apply --d2l-heading-3;
 
 			color: var(--d2l-color-ferrite);
@@ -32,23 +55,46 @@
 
 			margin-top: 0px;
 			margin-bottom: 0px;
+
+			position: relative;
+			z-index: 2;
 		}
 
-		.module-completion-count {
+		d2l-progress-bar {
+			position: relative;
+			z-index: 2;
+		}
+
+		#D2LLessonHeaderCompletionCount {
 			@apply --d2l-body-small-text;
 
-			color: var(--d2l-color-tungsten);
 			text-align: right;
 			padding-top: 10px;
 			padding-right: 3px;
+
+			position: relative;
+			z-index: 2;
 		}
 
 		</style>
 
-		<div class$="module-header">
-			<span class="module-title">[[entity.properties.title]]</span>
-			<d2l-progress-bar percent-completed=[[percentCompleted]] aria-hidden="true"></d2l-progress-bar>
-			<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+		<div
+			id="D2LLessonHeaderContainer"
+			on-mouseover="onHover"
+			on-mouseout="onUnhover"
+			on-click="onClick"
+		>
+			<div id="D2LLessonHeaderOverlay"></div>
+			<span id="D2LLessonHeaderTitle">[[entity.properties.title]]</span>
+			<d2l-progress-bar
+				percent-completed$="[[percentCompleted]]"
+				aria-hidden="true"
+				background-color$="{{progressBarBackgroundColor}}"
+				foreground-color$="{{progressBarForegroundColor}}"
+				border-color$="{{progressBarBorderColor}}"
+			>
+			</d2l-progress-bar>
+			<div id="D2LLessonHeaderCompletionCount" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 			<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
 		</div>
 
@@ -68,8 +114,133 @@
 						type: String,
 						value: '',
 						notify: true
+					},
+					progressBarBackgroundColor: {
+						type: String
+					},
+					progressBarForegroundColor: {
+						type: String
+					},
+					progressBarBorderColor: {
+						type: String
+					},
+					theme: {
+						type: Object,
+						observer: '_setStyling'
+					},
+					isSelected: {
+						type: Boolean,
+						value: false
+					},
+					isHovered: {
+						type: Boolean,
+						value: false
 					}
 				};
+			}
+
+			onHover() {
+				if ( !this.isHovered ) {
+					this.isHovered = true;
+					this._setStyling();
+				}
+			}
+
+			onUnhover() {
+				if ( this.isHovered ) {
+					this.isHovered = false;
+					this._setStyling();
+				}
+			}
+
+			_setStyling() {
+				if ( this.isSelected ) {
+					this._setSelectedStyling();
+				}
+				else {
+					if ( this.isHovered ) {
+						this._setHoverAndFocusStyling();
+					}
+					else {
+						this._setDefaultStyling();
+					}
+				}
+			}
+
+			_setHoverAndFocusStyling() {
+				this.$.D2LLessonHeaderContainer.style.backgroundColor = this.theme.primaryColor;
+
+				this.$.D2LLessonHeaderTitle.style.color = 'var(--d2l-color-ferrite)';
+
+				this.$.D2LLessonHeaderCompletionCount.style.color = 'var(--d2l-color-ferrite)';
+
+				this.progressBarBackgroundColor = '';
+				this.progressBarForegroundColor = 'var(--d2l-color-ferrite)';
+				this.progressBarBorderColor = 'var(--d2l-color-ferrite)';
+
+				if ( this.theme.isDarkTheme ) {
+					this.$.D2LLessonHeaderContainer.style.border = '';
+
+					this.$.D2LLessonHeaderOverlay.style.opacity = 0.82;
+				}
+				else {
+					this.$.D2LLessonHeaderContainer.style.border = '1px solid rgba(23,53,100,0.3)';
+					this.$.D2LLessonHeaderContainer.style.borderRight = '';
+
+					this.$.D2LLessonHeaderOverlay.style.opacity = 0.6;
+				}
+
+			}
+
+			_setDefaultStyling() {
+				this.$.D2LLessonHeaderContainer.style.backgroundColor = '';
+				this.$.D2LLessonHeaderContainer.style.border = '';
+
+				this.$.D2LLessonHeaderOverlay.style.opacity = 0;
+
+				this.$.D2LLessonHeaderTitle.style.color = 'var(--d2l-color-ferrite)';
+
+				this.progressBarBackgroundColor = 'var(--d2l-color-mica)';
+				this.progressBarForegroundColor = this.theme.accentColor;
+				this.progressBarBorderColor = 'white';
+
+				this.$.D2LLessonHeaderCompletionCount.style.color = 'var(--d2l-color-tungsten)';
+			}
+
+			_setSelectedStyling() {
+
+				this.$.D2LLessonHeaderContainer.style.backgroundColor = this.theme.primaryColor;
+
+				this.$.D2LLessonHeaderOverlay.style.opacity = 0;
+
+				if ( this.theme.isDarkTheme ) {
+					this.$.D2LLessonHeaderContainer.style.border = '';
+
+					this.$.D2LLessonHeaderTitle.style.color = 'white';
+
+					this.progressBarBackgroundColor = '';
+					this.progressBarForegroundColor = 'white';
+					this.progressBarBorderColor = 'white';
+
+					this.$.D2LLessonHeaderCompletionCount.style.color = 'white';
+				}
+				else {
+					this.$.D2LLessonHeaderContainer.style.border = '1px solid rgba(23,53,100,0.3)';
+					this.$.D2LLessonHeaderContainer.style.borderRight = '';
+
+					this.$.D2LLessonHeaderTitle.style.color = 'var(--d2l-color-ferrite)';
+
+					this.progressBarBackgroundColor = '';
+					this.progressBarForegroundColor = 'var(--d2l-color-ferrite)';
+					this.progressBarBorderColor = 'var(--d2l-color-ferrite)';
+
+					this.$.D2LLessonHeaderCompletionCount.style.color = 'var(--d2l-color-ferrite)';
+				}
+			}
+
+			onClick() {
+				this.isSelected = !this.isSelected;
+				this._setStyling();
 			}
 		}
 
