@@ -61,7 +61,7 @@
 		</style>
 		<div>
 			<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
-			<a on-click="setCurrent" class$="[[hasCompletionRequirementClass]]">
+			<a on-click="setCurrent" class$="[[completionRequirementClass]]">
 				[[entity.properties.title]]
 			</a>
 			<d2l-completion-requirement
@@ -92,9 +92,9 @@
 						value: '',
 						notify: true
 					},
-					hasCompletionRequirementClass: {
+					completionRequirementClass: {
 						type: String,
-						computed: '_hasCompletionRequirementClass(entity)'
+						computed: '_getCompletionRequirementClass(entity)'
 					}
 				};
 			}
@@ -120,8 +120,8 @@
 				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
 			}
 
-			onCurrentActivityChanged(currentActivity, entity ) {
-				if ( currentActivity && entity ) {
+			onCurrentActivityChanged(currentActivity, entity) {
+				if (currentActivity && entity) {
 					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
 				}
 			}
@@ -136,7 +136,7 @@
 				return (entity.getSubEntityByClass(tierClass)).properties.iconSetKey;
 			}
 
-			_hasCompletionRequirementClass( entity ) {
+			_getCompletionRequirementClass(entity) {
 				const completionRequirement = this._getCompletionRequirement(entity);
 				switch ( completionRequirement ) {
 					case 'exempt':
