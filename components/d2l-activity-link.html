@@ -63,7 +63,9 @@
 
 		</style>
 		<div>
-			<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
+			<template is="dom-if" if="[[hasIcon]]">
+				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
+			</template>
 			<a on-click="setCurrent" class$="[[completionRequirement]]">
 				[[entity.properties.title]]
 			</a>
@@ -105,6 +107,11 @@
 					showCompletionRequirement: {
 						type: Boolean,
 						value: false
+					},
+					hasIcon: {
+						type: Boolean,
+						value: false,
+						computed: '_hasIcon(entity)'
 					}
 				};
 			}
@@ -135,13 +142,14 @@
 					this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
 				}
 			}
+
+			_hasIcon(entity) {
+				var tierClass = 'tier1';
+				return entity && entity.getSubEntityByClass(tierClass);
+			}
+
 			_getIconSetKey(entity) {
 				var tierClass = 'tier1';
-
-				if (!entity || !entity.getSubEntityByClass(tierClass)) {
-					return 'd2l-tier1:help';
-				}
-		
 				return (entity.getSubEntityByClass(tierClass)).properties.iconSetKey;
 			}
 
