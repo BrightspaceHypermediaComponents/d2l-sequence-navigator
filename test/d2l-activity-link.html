@@ -126,10 +126,9 @@
 						element = await SirenFixture.load('data/activity3.json', fixture('ActivityWithIconTestFixture'));
 					});
 
-					it('should have the default icon', ()=> {
+					it('should not have a d2l-icon element', ()=> {
 						const el = element.shadowRoot.querySelector('d2l-icon');
-						expect(el).to.have.attribute('icon');
-						expect(el).attribute('icon').to.equal('d2l-tier1:help');
+						expect(el).not.to.exist;
 					});
 				});
 			});
