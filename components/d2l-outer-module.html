@@ -18,6 +18,23 @@
 
 			.header-container {
 				padding: 15px 25px 12px 20px;
+				position: relative;
+				width: inherit;
+				height: inherit;
+			}
+
+			/* Overlay styling */
+
+			.d2l-outer-module-header-container-overlay {
+				position: absolute;
+				margin-left: -20px;
+				margin-top: -57px;
+				width: 100%;
+				height: 100%;
+				background-color: white; 
+				opacity: 0;
+				z-index: 1;
+				/* border-radius: 8px 0px 0px 8px; */
 			}
 
 			.module-header {
@@ -40,6 +57,9 @@
 				-webkit-line-clamp: 2; /* number of lines to show */
 				max-height: 2.4rem; /* fallback */
 				margin-top: -2px;
+
+				position: relative;
+				z-index: 2;
 			}
 
 			.module-completion-count {
@@ -52,6 +72,9 @@
 				display: table-cell;
 				width: 2rem;
 				line-height: inherit !important;
+
+				position: relative;
+				z-index: 2;
 			}
 
 			ol {
@@ -97,6 +120,16 @@
 			.header-container.current,
 			.header-container:hover {
 				background-color: var(--outer-module-primary-color);
+			}
+
+			/* Overlay styling */
+			
+			.header-container:hover:not(.selected).dark .d2l-outer-module-header-container-overlay {
+				opacity: 0.82;
+			}
+
+			.header-container:hover:not(.selected).light .d2l-outer-module-header-container-overlay {
+				opacity: 0.6;
 			}
 
 			/* Module title styling */
@@ -151,6 +184,7 @@
 						</template>
 					</span>
 				</div>
+				<div class="d2l-outer-module-header-container-overlay"></div>
 			</div>
 
 			<ol>
