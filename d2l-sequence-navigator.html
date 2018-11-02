@@ -46,13 +46,23 @@
 		}
 
 		d2l-lesson-header.dark {
-			--primary-color: var(--dark-primary-color);
-			--accent-color: var(--dark-accent-color);
+			--lesson-header-primary-color: var(--dark-primary-color);
+			--lesson-header-accent-color: var(--dark-accent-color);
 		}
 
 		d2l-lesson-header.light {
-			--primary-color: var(--light-primary-color);
-			--accent-color: var(--light-accent-color);
+			--lesson-header-primary-color: var(--light-primary-color);
+			--lesson-header-accent-color: var(--light-accent-color);
+		}
+
+		d2l-sequence-navigator-item.dark {
+			--navigation-item-primary-color: var(--dark-primary-color);
+			--navigation-item-accent-color: var(--dark-accent-color);
+		}
+
+		d2l-sequence-navigator-item.light {
+			--navigation-item-primary-color: var(--light-primary-color);
+			--navigation-item-accent-color: var(--light-accent-color);
 		}
 
 		.end-of-lesson-holder {
@@ -76,8 +86,9 @@
 			id="sidebarHeader"
 			href="[[_rootHref]]"
 			token="[[token]]"
-			tabindex="0"
+			tabindex="0"			
 			dark-theme="[[darkTheme]]"
+			class$="[[darkOrLightClass]]"
 		></d2l-lesson-header>
 		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
 
@@ -90,6 +101,8 @@
 							current-activity="{{href}}"
 							selected-module="{{selectedModule}}"
 							is-lesson-child
+							dark-theme="[[darkTheme]]"
+							class$="[[darkOrLightClass]]"
 						>
 						</d2l-sequence-navigator-item>
 					</li>
@@ -137,33 +150,19 @@
 					_lessonEntity: {
 						type: Object
 					},
-					lightOnDark: {
-						type: Boolean,
-						value: false
-					},
 					darkTheme: {
 						type: Boolean,
-						value: true,
-						observer: '_setThemeClass'
+						value: true
+					},
+					darkOrLightClass: {
+						type: String,
+						computed: '_getDarkOrLightClass(darkTheme)'
 					}
 				};
 			}
 
-			_setThemeClass() {
-
-				if ( this.$.sidebarHeader.classList.contains('dark') ) {
-					this.$.sidebarHeader.classList.remove('dark');
-				}
-				if ( this.$.sidebarHeader.classList.contains('light') ) {
-					this.$.sidebarHeader.classList.remove('light');
-				}
-
-				if ( this.darkTheme ) {
-					this.$.sidebarHeader.classList.add('dark');
-				}
-				else {
-					this.$.sidebarHeader.classList.add('light');
-				}
+			_getDarkOrLightClass(darkTheme) {
+				return darkTheme ? 'dark' : 'light';
 			}
 
 			_getRootHref(entity) {
