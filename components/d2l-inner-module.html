@@ -50,6 +50,8 @@
 				padding: 0px;
 			}
 
+			/* Navigator item styling */
+
 			d2l-sequence-navigator-item {
 				@apply --d2l-body-compact-text;
 
@@ -57,13 +59,51 @@
 				padding: 0px 10px;
 			}
 
-			d2l-sequence-navigator-item.current {
-				background-color: var(--d2l-color-celestine-plus-1);
+			d2l-sequence-navigator-item:not(:hover):not(.current) {
+				--navigator-item-background-color: none;
+				--navigator-item-text-color: var(--d2l-color-ferrite);
+				--navigator-item-text-color-2: var(--d2l-color-tungsten);
 			}
 
-			d2l-sequence-navigator-item:hover:not(.current),
+			d2l-sequence-navigator-item.current.dark,
+			d2l-sequence-navigator-item:hover.dark {
+				--navigator-item-background-color: var(--inner-module-primary-color);
+				--navigator-item-text-color: white;
+				--navigator-item-text-color-2: white;
+			}
+
+			d2l-sequence-navigator-item.current.light,
+			d2l-sequence-navigator-item:hover.light {
+				--navigator-item-background-color: var(--inner-module-primary-color);
+				--navigator-item-text-color: var(--d2l-color-ferrite);
+				--navigator-item-text-color-2: var(--d2l-color-tungsten);
+			}
+
+			/* Header container styling */
+
+			.header-container:not(:hover):not(.current) {
+				background-color: none;
+			}
+
+			.header-container.current,
 			.header-container:hover {
-				background-color: var(--d2l-color-celestine-plus-2);
+				background-color: var(--inner-module-primary-color);
+			}
+
+			/* Module title styling */
+
+			.header-container:not(:hover):not(.current) .module-title {
+				color: var(--d2l-color-ferrite);
+			}
+
+			.header-container.current.dark .module-title,
+			.header-container:hover.dark .module-title {
+				color: white;
+			}
+
+			.header-container.current.light .module-title,
+			.header-container:hover.light .module-title {
+				color: var(--d2l-color-ferrite);
 			}
 
 		</style>
@@ -72,7 +112,7 @@
 			class$="[[_getIsSelected(selectedModule)]]"
 			on-click="toggleSelected"
 		>
-			<div class="header-container">
+			<div class$="header-container [[darkOrLightClass]]">
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</div>
@@ -81,11 +121,13 @@
 			<ol>
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li on-click="_onActivityClicked">
-						<d2l-sequence-navigator-item class$="[[_getIsCurrent(childLink, currentActivity)]]"
+						<d2l-sequence-navigator-item
+							class$="[[_getIsCurrent(childLink, currentActivity)]] [[darkOrLightClass]]"
 							href="[[childLink.href]]"
 							token="[[token]]"
 							current-activity="{{currentActivity}}"
 							selected-module="{{selectedModule}}"
+							dark-theme="[[darkTheme]]"
 						>
 						</d2l-sequence-navigator-item>
 					</li>
@@ -122,8 +164,20 @@
 					subEntities: {
 						type: Array,
 						computed: 'getSubEntities(entity)'
+					},
+					darkTheme: {
+						type: Boolean,
+						value: false
+					},
+					darkOrLightClass: {
+						type: String,
+						computed: '_getDarkOrLightClass(darkTheme)'
 					}
 				};
+			}
+
+			_getDarkOrLightClass(darkTheme) {
+				return darkTheme ? 'dark' : 'light';
 			}
 
 			getSubEntities(entity) {

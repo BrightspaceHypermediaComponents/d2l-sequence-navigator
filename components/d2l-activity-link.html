@@ -9,7 +9,7 @@
 		<style>
 			:host {
 				display: block;
-				color: var(--d2l-color-ferrite);
+				color: var(--activity-link-text-color);
 				padding: 10px;
 			}
 
@@ -37,6 +37,8 @@
 			a {
 				@apply --d2l-body-compact-text;
 
+				color: var(--activity-link-text-color);
+
 				overflow: hidden;
 				text-overflow: ellipsis;
 				
@@ -50,12 +52,18 @@
 				-webkit-line-clamp: 1; /* number of lines to show */
 			}
 
+			d2l-completion-requirement {
+				color: var(--activity-link-text-color-2);
+			}
+
 			d2l-completion-status {
 				width: 6%;
+				color: var(--activity-link-text-color);
 			}
 			
 			d2l-icon {
 				padding-top: 3px;
+				color: var(--activity-link-text-color);
 			}
 
 		</style>

@@ -45,7 +45,7 @@
 			.module-completion-count {
 				@apply --d2l-body-small-text;
 				font-weight: 700;
-				color: var(--d2l-color-tungsten);
+				color: var(--d2l-color-ferrite);
 
 				text-align: right;
 				float: right;
@@ -61,18 +61,60 @@
 				padding: 0px 10px 0px 0px;
 			}
 
+			/* Navigator item styling */
+
 			d2l-sequence-navigator-item {
 				width: 100%;
 				padding: 0px;
 			}
 
-			d2l-sequence-navigator-item.current {
-				background-color: var(--d2l-color-celestine-plus-1);
+			d2l-sequence-navigator-item:not(:hover):not(.current) {
+				--navigator-item-background-color: none;
+				--navigator-item-text-color: var(--d2l-color-ferrite);
+				--navigator-item-text-color-2: var(--d2l-color-tungsten);
 			}
 
-			d2l-sequence-navigator-item:hover:not(.current),
+			d2l-sequence-navigator-item.current.dark,
+			d2l-sequence-navigator-item:hover.dark {
+				--navigator-item-background-color: var(--outer-module-primary-color);
+				--navigator-item-text-color: white;
+				--navigator-item-text-color-2: white;
+			}
+
+			d2l-sequence-navigator-item.current.light,
+			d2l-sequence-navigator-item:hover.light {
+				--navigator-item-background-color: var(--outer-module-primary-color);
+				--navigator-item-text-color: var(--d2l-color-ferrite);
+				--navigator-item-text-color-2: var(--d2l-color-tungsten);
+			}
+
+			/* Header container styling */
+
+			.header-container:not(:hover):not(.current) {
+				background-color: none;
+			}
+
+			.header-container.current,
 			.header-container:hover {
-				background-color: var(--d2l-color-celestine-plus-2);
+				background-color: var(--outer-module-primary-color);
+			}
+
+			/* Module title styling */
+
+			.header-container:not(:hover):not(.current) .module-title {
+				color: var(--d2l-color-ferrite);
+			}
+
+			.header-container.current.dark .module-title,
+			.header-container:hover.dark .module-title,
+			.header-container.current.dark .module-completion-count,
+			.header-container:hover.dark .module-completion-count {
+				color: white;
+			}
+
+			.header-container.current.light .module-title,
+			.header-container:hover.light .module-title {
+				color: var(--d2l-color-ferrite);
 			}
 
 			.optionalStatus {
@@ -87,7 +129,7 @@
 			no-icons
 			flex
 		>
-			<div slot="header" class="header-container">
+			<div slot="header" class$="header-container [[darkOrLightClass]]">
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">
@@ -114,11 +156,13 @@
 			<ol>
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li on-click="_onActivityClicked">
-						<d2l-sequence-navigator-item class$="[[_getIsCurrent(childLink, currentActivity)]]"
+						<d2l-sequence-navigator-item
+							class$="[[_getIsCurrent(childLink, currentActivity)]] [[darkOrLightClass]]"
 							href="[[childLink.href]]"
 							token="[[token]]"
 							current-activity="{{currentActivity}}"
 							selected-module="{{selectedModule}}"
+							dark-theme="[[darkTheme]]"
 						>
 						</d2l-sequence-navigator-item>
 					</li>
@@ -174,8 +218,20 @@
 						type: Boolean,
 						value: false,
 						computed: '_showOptional(completionCount, selectedModule, hasCurrentActivity)'
+					},
+					darkTheme: {
+						type: Boolean,
+						value: false
+					},
+					darkOrLightClass: {
+						type: String,
+						computed: '_getDarkOrLightClass(darkTheme)'
 					}
 				};
+			}
+
+			_getDarkOrLightClass(darkTheme) {
+				return darkTheme ? 'dark' : 'light';
 			}
 
 			_isAccordionOpen() {
