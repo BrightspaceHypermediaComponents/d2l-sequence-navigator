@@ -21,6 +21,22 @@
 
 			.header-container {
 				padding: 12px 20px;
+				position: relative;
+				width: inherit;
+				height: inherit;
+			}
+
+			.d2l-inner-module-header-container-overlay {
+				position: absolute;
+				padding: 12px 20px;
+				margin-left: -20px;
+				margin-top: -12px;
+				width: calc(100% - 40px);
+				height: calc(100% - 24px);
+				background-color: white; 
+				opacity: 0;
+				z-index: 1;
+				/* border-radius: 8px 0px 0px 8px; */
 			}
 
 			.module-header {
@@ -41,6 +57,9 @@
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
 				max-height: 2.0rem; /* fallback */
+
+				position: relative;
+				z-index: 2;
 			}
 
 			ol {
@@ -90,19 +109,29 @@
 				background-color: var(--inner-module-primary-color);
 			}
 
+			/* Overlay styling */
+			
+			.header-container:hover:not(.selected).dark .d2l-inner-module-header-container-overlay {
+				opacity: 0.82;
+			}
+
+			.header-container:hover:not(.selected).light .d2l-inner-module-header-container-overlay {
+				opacity: 0.6;
+			}
+
 			/* Module title styling */
 
 			.header-container:not(:hover):not(.current) .module-title {
 				color: var(--d2l-color-ferrite);
 			}
 
-			.header-container.current.dark .module-title,
-			.header-container:hover.dark .module-title {
+			.header-container.current.dark .module-title {
 				color: white;
 			}
 
 			.header-container.current.light .module-title,
-			.header-container:hover.light .module-title {
+			.header-container:hover.light .module-title,
+			.header-container:hover.dark .module-title {
 				color: var(--d2l-color-ferrite);
 			}
 
@@ -114,6 +143,7 @@
 		>
 			<div class$="header-container [[darkOrLightClass]]">
 				<div class="module-header">
+					<div class="d2l-inner-module-header-container-overlay"></div>
 					<span class="module-title">[[entity.properties.title]]</span>
 				</div>
 			</div>
