@@ -21,6 +21,11 @@
 			height: 100%;
 			border-right: 1px solid var(--d2l-color-mica);
 			background-color: white;
+
+			--dark-primary-color: var(--d2l-color-celestine);
+			--dark-accent-color: var(--d2l-color-celestine-minus-1);
+			--light-primary-color: #fae3cf;
+			--light-accent-color: red;
 		}
 
 		.module-item-list {
@@ -38,6 +43,16 @@
 		d2l-lesson-header {
 			margin-top: 10px;
 			margin-bottom: 15px;
+		}
+
+		d2l-lesson-header.dark {
+			--primary-color: var(--dark-primary-color);
+			--accent-color: var(--dark-accent-color);
+		}
+
+		d2l-lesson-header.light {
+			--primary-color: var(--light-primary-color);
+			--accent-color: var(--light-accent-color);
 		}
 
 		.end-of-lesson-holder {
@@ -62,7 +77,7 @@
 			href="[[_rootHref]]"
 			token="[[token]]"
 			tabindex="0"
-			theme="[[lightTheme]]"
+			dark-theme="[[darkTheme]]"
 		></d2l-lesson-header>
 		<d2l-accordion auto-close class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
 
@@ -127,22 +142,28 @@
 						value: false
 					},
 					darkTheme: {
-						type: Object,
-						value: {
-							accentColor: 'var(--d2l-color-celestine-minus-1)',
-							primaryColor: 'var(--d2l-color-celestine)',
-							isDarkTheme: true
-						}
-					},
-					lightTheme: {
-						type: Object,
-						value: {
-							accentColor: 'var(--d2l-color-celestine-minus-1)',
-							primaryColor: '#fae3cf',
-							isDarkTheme: false
-						}
+						type: Boolean,
+						value: true,
+						observer: '_setThemeClass'
 					}
 				};
+			}
+
+			_setThemeClass() {
+
+				if ( this.$.sidebarHeader.classList.contains('dark') ) {
+					this.$.sidebarHeader.classList.remove('dark');
+				}
+				if ( this.$.sidebarHeader.classList.contains('light') ) {
+					this.$.sidebarHeader.classList.remove('light');
+				}
+
+				if ( this.darkTheme ) {
+					this.$.sidebarHeader.classList.add('dark');
+				}
+				else {
+					this.$.sidebarHeader.classList.add('light');
+				}
 			}
 
 			_getRootHref(entity) {

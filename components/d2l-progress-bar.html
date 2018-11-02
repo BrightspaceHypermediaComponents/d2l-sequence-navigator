@@ -5,16 +5,23 @@
 		<style>
 			:host {
 				display: block;
+
+				--progress-bar-background-color: var(--d2l-color-mica);
+				--progress-bar-foreground-color: var(--d2l-color-olivine);
+				--progress-bar-border-color: none;
 			}
 			#outerBar {
 				border-radius: 8px; /* (height of inner div) / 2 + padding */
 				margin-top: 15px;
 				width: 270px;
+				background-color: var(--progress-bar-background-color);
+				border: 1px solid var(--progress-bar-border-color);
 			}
 
 			#innerBar {
 				height: 12px;
 				border-radius: 8px;
+				background-color: var(--progress-bar-foreground-color);
 			}
 
 			#innerBar.zero {
@@ -49,18 +56,6 @@
 						type: Number,
 						value: 0,
 						observer: '_updateProgressBar'
-					},
-					backgroundColor: {
-						type: String,
-						observer: '_updateProgressBar'
-					},
-					foregroundColor: {
-						type: String,
-						observer: '_updateProgressBar'
-					},
-					borderColor: {
-						type: String,
-						observer: '_updateProgressBar'
 					}
 				};
 			}
@@ -74,10 +69,6 @@
 					this.$.innerBar.classList.remove('zero');
 				}
 				this.$.innerBar.setAttribute('aria-valuenow', Math.floor(this.percentCompleted) + '%');
-
-				this.$.outerBar.style.backgroundColor = this.backgroundColor;
-				this.$.outerBar.style.border = '1px solid ' + this.borderColor;
-				this.$.innerBar.style.backgroundColor = this.foregroundColor;
 			}
 
 		}
