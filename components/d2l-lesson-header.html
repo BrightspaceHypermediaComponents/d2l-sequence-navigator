@@ -3,6 +3,7 @@
 <link rel="import" href="../../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../d2l-typography/d2l-typography.html">
+<link rel="import" href="../d2l-sequence-navigator-styles.html">
 
 <!--
 'd2l-lesson-header'
@@ -17,6 +18,17 @@
 		:host {
 			display: table;
 			table-layout: fixed;
+		}
+
+		:host > div {
+			background-color: var(--d2l-accent-color);
+		}
+		:host > div:hover {
+			background-color: var(--d2l-hover-color);
+		}
+		:host > div.selected {
+			background-color: var(--d2l-selectedColor);
+
 		}
 
 		.module-title {
