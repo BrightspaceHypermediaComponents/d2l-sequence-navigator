@@ -17,6 +17,15 @@
 					height: 800px;
 					background: white;
 				}
+				html {
+					--d2l-branding-primary-color:#990000,
+					--d2l-branding-accent-color:#8e7cc3,
+					--d2l-branding-text-color:var(--d2l-color-white),
+					--d2l-branding-selected-text-color:var(--d2l-color-ferrite),
+					--d2l-branding-selected-color:var(--d2l-color-celestine),
+					--d2l-branding-hover-color:rbga(#8e7cc3, 0.18),
+					--d2l-branding-border-color:transparent
+				}
 			</style>
 		</custom-style>
 		<custom-style include="d2l-typography">
@@ -34,7 +43,7 @@
 			<demo-snippet>
 				<template>
 					<h4>Sequence navigator in a sidebar</h4>
-					<div class="sidebar">
+					<div class="sidebar" style="background-color: var(--d2l-branding-primary-color)">
 						<d2l-sequence-navigator
 							href="data/m2-activity2.json"
 							token="foozleberries"
