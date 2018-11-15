@@ -16,25 +16,29 @@
 	<template>
 		<style>
 		:host {
+			--d2l-lesson-header-text-color: var(--d2l-text-color);
+			--d2l-lesson-header-background-color: var(--d2l-primary-color);
 			display: table;
 			table-layout: fixed;
+			background-color: var(--d2l-lesson-header-background-color);
+			color: var(--d2l-lesson-header-text-color);
+			border: 1px solid var(--d2l-border-color);
+			padding: 20px 30px 20px 23px;
+			
+		}
+		:host(:hover) {
+			--d2l-lesson-header-text-color: var(--d2l-selected-text-color);
+			--d2l-lesson-header-background-color: var(--d2l-hover-color);
 		}
 
-		:host > div {
-			background-color: var(--d2l-accent-color);
-		}
-		:host > div:hover {
-			background-color: var(--d2l-hover-color);
-		}
-		:host > div.selected {
-			background-color: var(--d2l-selectedColor);
-
+		:host.selected {
+			--d2l-lesson-header-background-color: var(--d2l-selected-color);
+			color: var(--d2l-selected-text-color);
 		}
 
 		.module-title {
 			@apply --d2l-heading-3;
 
-			color: var(--d2l-color-ferrite);
 			overflow: hidden;
 			text-overflow: ellipsis;
 			
@@ -50,7 +54,7 @@
 		.module-completion-count {
 			@apply --d2l-body-small-text;
 
-			color: var(--d2l-color-tungsten);
+			color: var(--d2l-lesson-header-text-color);
 			text-align: right;
 			padding-top: 10px;
 			padding-right: 3px;
