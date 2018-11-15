@@ -3,7 +3,6 @@
 <link rel="import" href="../../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../d2l-typography/d2l-typography.html">
-
 <!--
 'd2l-lesson-header'
 
@@ -44,14 +43,24 @@
 			padding-right: 3px;
 		}
 
+		.header-link,
+		.header-link:hover {
+			cursor: pointer;
+			text-decoration: none;
+		}
+
 		</style>
 
-		<div>
-			<span class="module-title">[[entity.properties.title]]</span>
-			<d2l-progress-bar percent-completed=[[percentCompleted]] aria-hidden="true"></d2l-progress-bar>
-			<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
-			<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
-		</div>
+		<a
+			class="header-link"
+			on-click="_navigate">
+			<div>
+				<span class="module-title">[[entity.properties.title]]</span>
+				<d2l-progress-bar percent-completed=[[percentCompleted]] aria-hidden="true"></d2l-progress-bar>
+				<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+				<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
+			</div>
+		</a>
 
 	</template>
 	<script>
@@ -71,6 +80,17 @@
 						notify: true
 					}
 				};
+			}
+
+			_navigate() {
+				if (!this.entity || !this.entity.links) {
+					return;
+				}
+
+				const self = this.entity.links
+					.find( l => l.rel.includes('self') );
+
+				this.currentActivity = self.href;
 			}
 		}
 
