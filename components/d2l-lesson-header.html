@@ -86,7 +86,7 @@
 				};
 			}
 			_getHeaderClass(currentActivity) {
-				var selfLink = this.entity && this.entity.getLinkByRel('self').href;
+				const selfLink = this.entity && this.entity.getLinkByRel('self').href;
 				if ( currentActivity === selfLink ) {
 					return 'current';
 				}

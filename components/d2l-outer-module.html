@@ -250,7 +250,7 @@
 			}
 
 			_getIsSelected(selectedModule) {
-				var selected = this.entity && this.entity.getLinkByRel('self').href === selectedModule;
+				const selected = this.entity && this.entity.getLinkByRel('self').href === selectedModule;
 				return (selected) ? 'selected' : 'not-selected';
 			}
 
@@ -264,7 +264,7 @@
 			}
 
 			_onActivityClicked(e) {
-				var childLink =  e.model.__data.childLink;
+				const childLink =  e.model.__data.childLink;
 				if ( childLink.class.includes('sequenced-activity') && this.currentActivity !== childLink.href ) {
 					this.currentActivity = childLink.href;
 				}
