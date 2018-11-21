@@ -66,10 +66,6 @@
 				padding: 0px 10px 0px 0px;
 			}
 
-			d2l-activity-link:focus {
-				outline: none;
-			}
-
 			d2l-activity-link,
 			d2l-inner-module {
 				width: 100%;
@@ -83,6 +79,12 @@
 
 			.optionalStatus {
 				color: var(--d2l-color-tungsten);
+			}
+
+			.current-activity-link {
+				--d2l-activity-link-background-color: var(--d2l-asv-primary-color);
+				--d2l-activity-link-text-color: var(--d2l-asv-selected-text-color);
+				outline: 1px solid var(--d2l-border-color);
 			}
 
 		</style>
@@ -280,7 +282,7 @@
 				if ( childLink.href === currentActivity ) {
 					this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 					this.hasCurrentActivity = true;
-					return 'current';
+					return 'current-activity-link';
 				}
 				this.hasCurrentActivity = false;
 			}
