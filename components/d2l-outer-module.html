@@ -76,7 +76,7 @@
 				color: var(--d2l-color-tungsten);
 			}
 
-			.current-activity-link {
+			.d2l-outer-module-current-activity-link {
 				--d2l-activity-link-background-color: var(--d2l-asv-primary-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-selected-text-color);
 				outline: 1px solid var(--d2l-border-color);
@@ -277,7 +277,7 @@
 				if ( childLink.href === currentActivity ) {
 					this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 					this.hasCurrentActivity = true;
-					return 'current-activity-link';
+					return 'd2l-outer-module-current-activity-link';
 				}
 				this.hasCurrentActivity = false;
 			}
