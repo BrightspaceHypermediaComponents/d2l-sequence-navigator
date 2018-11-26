@@ -60,7 +60,6 @@
 
 			d2l-activity-link {
 				@apply --d2l-body-compact-text;
-
 				width: calc(100% - 20px);
 			}
 
@@ -75,10 +74,8 @@
 
 		</style>
 
-		<div
-			class$="[[_getIsSelected(selectedModule)]]"
-		>
-			<div class="header-container">
+		<div>
+			<div class$="header-container [[_getIsSelected()]]">
 				<a class="module-header" on-click="_onHeaderClicked">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</a>
@@ -151,8 +148,8 @@
 					'';
 			}
 
-			_getIsSelected(selectedModule) {
-				const selected = this.entity && this.entity.getLinkByRel('self').href === selectedModule;
+			_getIsSelected() {
+				const selected = this.entity && this.entity.getLinkByRel('self').href === this.currentActivity;
 				return (selected) ? 'selected' : 'not-selected';
 			}
 
