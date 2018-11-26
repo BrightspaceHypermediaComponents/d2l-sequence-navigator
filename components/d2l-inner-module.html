@@ -77,17 +77,16 @@
 
 		<div
 			class$="[[_getIsSelected(selectedModule)]]"
-			on-click="toggleSelected"
 		>
 			<div class="header-container">
-				<div class="module-header">
+				<a class="module-header" on-click="_onHeaderClicked">
 					<span class="module-title">[[entity.properties.title]]</span>
-				</div>
+				</a>
 			</div>
 
 			<ol>
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
-					<li on-click="_onActivityClicked">
+					<li>
 						<d2l-activity-link class$="[[_getIsCurrent(childLink, currentActivity)]]"
 							href="[[childLink.href]]"
 							token="[[token]]"
@@ -167,12 +166,10 @@
 				this.hasCurrentActivity = false;
 			}
 
-			_onActivityClicked(e) {
-				const childLink = e.model.__data.childLink;
-				if ( childLink.class.includes('sequenced-activity') && this.currentActivity !== childLink.href ) {
-					this.currentActivity = childLink.href;
-				}
+			_onHeaderClicked() {
+				this.currentActivity = this.entity.getLinkByRel('self').href;
 			}
+
 		}
 		customElements.define(D2LInnerModule.is, D2LInnerModule);
 

@@ -90,7 +90,7 @@
 			no-icons
 			flex
 		>
-			<div slot="header" class="header-container">
+			<div slot="header" class="header-container" on-click="_onHeaderClicked">
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">
@@ -293,6 +293,10 @@
 				if ( isChildActive ) {
 					this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 				}
+			}
+
+			_onHeaderClicked() {
+				this.currentActivity = this.entity.getLinkByRel('self').href;
 			}
 		}
 		customElements.define(D2LOuterModule.is, D2LOuterModule);
