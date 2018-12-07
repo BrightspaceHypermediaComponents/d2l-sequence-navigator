@@ -16,7 +16,7 @@
     "wct.conf.json"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0",
+    "polymer": "Polymer/polymer#^2",
     "d2l-accordion": "BrightspaceUI/accordion",
     "siren-entity": "BrightspaceHypermediaComponents/siren-entity",
     "d2l-typography": "^6.1.3",
