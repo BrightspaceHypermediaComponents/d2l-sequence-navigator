@@ -160,6 +160,7 @@
 
 			setCurrent() {
 				this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
+				this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
 			}
 
 			onCurrentActivityChanged(currentActivity, entity) {
@@ -189,6 +190,9 @@
 			}
 			_getIsSelected(currentActivity) {
 				const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
+				if ( selected ) {
+					this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
+				}
 				return (selected) ? 'd2l-asv-current' : '';
 			}
 		}

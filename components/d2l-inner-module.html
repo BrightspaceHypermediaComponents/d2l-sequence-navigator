@@ -94,6 +94,7 @@
 							token="[[token]]"
 							current-activity="{{currentActivity}}"
 							tabindex="0"
+							on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"
 						></d2l-activity-link>
 					</li>
 				</template>
@@ -145,6 +146,10 @@
 
 			_onHeaderClicked() {
 				this.currentActivity = this.entity.getLinkByRel('self').href;
+			}
+
+			childIsActiveEvent() {
+				this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-inner-module-current-activity', {detail: { href: this.href}}));
 			}
 
 		}
