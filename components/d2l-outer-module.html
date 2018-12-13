@@ -89,7 +89,6 @@
 		</style>
 
 		<d2l-accordion-collapse
-			on-click="toggleSelected"
 			no-icons
 			flex
 		>
@@ -125,6 +124,7 @@
 								token="[[token]]"
 								current-activity="{{currentActivity}}"
 								tabindex="0"
+								on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"
 							></d2l-activity-link>
 						</template>
 						<template is="dom-if" if="[[!_isActivity(childLink)]]">
@@ -132,8 +132,7 @@
 								href="[[childLink.href]]"
 								token="[[token]]"
 								current-activity="{{currentActivity}}"
-								selected-module="{{selectedModule}}"
-								is-child-active="{{isChildActive}}"
+								on-sequencenavigator-d2l-inner-module-current-activity="childIsActiveEvent"
 							></d2l-inner-module>
 						</template>
 					</li>
@@ -158,15 +157,6 @@
 						value: '',
 						notify: true
 					},
-					hasCurrentActivity: {
-						type: Boolean,
-						value: false
-					},
-					selectedModule: {
-						type: String,
-						value: '',
-						notify: true
-					},
 					subEntities: {
 						type: Array,
 						computed: 'getSubEntities(entity)'
@@ -178,21 +168,17 @@
 					showCount: {
 						type: Boolean,
 						value: false,
-						computed: '_showCount(completionCount, selectedModule, hasCurrentActivity)'
+						computed: '_showCount(completionCount)'
 					},
 					showCheckmark: {
 						type: Boolean,
 						value: false,
-						computed: '_showCheckmark(completionCount, selectedModule, hasCurrentActivity)'
+						computed: '_showCheckmark(completionCount)'
 					},
 					showOptional: {
 						type: Boolean,
 						value: false,
-						computed: '_showOptional(completionCount, selectedModule, hasCurrentActivity)'
-					},
-					isChildActive: {
-						type: Boolean,
-						observer: '_openAccordion'
+						computed: '_showOptional(completionCount)'
 					}
 				};
 			}
@@ -260,12 +246,6 @@
 				return entity && entity.getSubEntities().length !== 0;
 			}
 
-			toggleSelected() {
-				this.selectedModule = (this.selectedModule === '') ?
-					this.entity.getLinkByRel('self').href :
-					'';
-			}
-
 			_getIsSelected(currentActivity) {
 				const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
 				return (selected) ? 'd2l-asv-current' : '';
@@ -278,14 +258,12 @@
 				}
 			}
 
-			_openAccordion(isChildActive) {
-				if ( isChildActive ) {
-					this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
-				}
-			}
-
 			_onHeaderClicked() {
 				this.currentActivity = this.entity.getLinkByRel('self').href;
+			}
+
+			childIsActiveEvent() {
+				this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 			}
 		}
 		customElements.define(D2LOuterModule.is, D2LOuterModule);
