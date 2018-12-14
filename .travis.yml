@@ -1,6 +1,8 @@
 language: node_js
 node_js: 10
-sudo: false
+addons:
+  chrome: stable
+sudo: required
 branches:
   only:
   - master
