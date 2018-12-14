@@ -153,6 +153,11 @@
 			}
 			static get properties() {
 				return {
+					entity: {
+						type: Object,
+						notify: true,
+						observer: '_entityLoaded'
+					},
 					currentActivity: {
 						type: String,
 						value: '',
@@ -182,6 +187,14 @@
 						computed: '_showOptional(completionCount)'
 					}
 				};
+			}
+
+			_entityLoaded(entity, oldEntity) {
+				if ( !entity || oldEntity ) {
+					return;
+				}
+
+				this.dispatchEvent(new CustomEvent('entity-loaded', { detail: { href: this.href } }));
 			}
 
 			_isAccordionOpen() {

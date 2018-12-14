@@ -60,6 +60,7 @@
 							<d2l-outer-module
 								href="[[childLink.href]]"
 								token="[[token]]"
+								on-entity-loaded="_onEntityLoaded"
 								current-activity="{{href}}"
 							></d2l-outer-module>
 						</template>						
@@ -111,6 +112,14 @@
 					sidebarContent: {
 						type: Object,
 						computed: 'getSideBarContent()'
+					},
+					_loadedModules: {
+						type: Object,
+						value: new Set()
+					},
+					_moduleCount: {
+						type: Number,
+						computed: '_getModuleCount(subEntities)'
 					}
 				};
 			}
@@ -120,6 +129,25 @@
 				this.updateStyles(
 					styles
 				);
+			}
+
+			_onEntityLoaded({detail}) {
+				this._loadedModules.add(detail.href);
+
+				if ( this._loadedModules.size === this._moduleCount ) {
+					this.dispatchEvent(new CustomEvent('all-modules-loaded'));
+				}
+			}
+
+			_getModuleCount(subEntities) {
+				if ( !subEntities ) {
+					// if subEntities is null we haven't loaded them so 0 would be bad.
+					return -1;
+				}
+
+				return subEntities
+					.filter( link => !this._isActivity(link) )
+					.length;
 			}
 
 			_getRootHref(entity) {
