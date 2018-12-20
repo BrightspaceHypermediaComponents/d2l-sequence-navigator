@@ -23,12 +23,11 @@
 				--d2l-outer-module-border-color: var(--d2l-outer-module-background-color);
 
 				box-sizing: border-box;
-				border-radius: var(--d2l-outer-module-border-radius, 8px 0px 0px 8px);
 				padding: var(--d2l-activity-link-padding);
 				color: var(--d2l-outer-module-text-color);
 				background-color: var(--d2l-outer-module-background-color);
 				border-style: solid;
-				border-width: var(--d2l-outer-module-border-width, 2px 0px 2px 2px);
+				border-width: var(--d2l-outer-module-border-width, 2px 0px 2px 0);
 				border-color:  var(--d2l-outer-module-border-color);
 				
 			}
@@ -184,6 +183,9 @@
 					disabled: {
 						type: Boolean,
 						observer: '_disableAccordions'
+					},
+					isSidebar: {
+						type: Boolean
 					}
 				};
 			}
@@ -265,7 +267,7 @@
 			}
 
 			_padOnActivity(childLink) {
-				return this._isActivity(childLink)
+				return this.isSidebar || this._isActivity(childLink)
 					? ''
 					: 'should-pad';
 			}

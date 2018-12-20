@@ -56,6 +56,7 @@
 								token="[[token]]"
 								current-activity="{{href}}"
 								disabled="[[disabled]]"
+								is-sidebar="[[isSidebar]]"
 							></d2l-outer-module>
 						</template>						
 						<template is="dom-if" if="[[_isActivity(childLink)]]">
@@ -103,11 +104,10 @@
 					_lessonEntity:{
 						type: Object
 					},
-					sidebarContent: {
-						type: Object,
-						computed: 'getSideBarContent()'
-					},
 					disabled: {
+						type: Boolean
+					},
+					isSidebar: {
 						type: Boolean
 					}
 				};
