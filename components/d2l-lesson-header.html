@@ -35,12 +35,12 @@
 			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
 		}
 
-		:host-context(:focus) {
+		a:focus {
 			outline: none;
 		}
 
-		:host(:focus:not(.d2l-asv-current)),
-		:host(:hover) {
+		a:focus:not(.d2l-asv-current),
+		a:hover {
 			--d2l-lesson-header-background-color: var(--d2l-asv-hover-color);
 			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
 		}
@@ -71,11 +71,12 @@
 		.d2l-header-lesson-link,
 		.d2l-header-lesson-link:hover {
 			cursor: pointer;
+			color: var(--d2l-lesson-header-text-color);
 			text-decoration: none;
 		}
 
 		</style>
-		<a
+		<a href="javascript:void(0)"
 			class="d2l-header-lesson-link"
 			on-click="_onHeaderClicked">
 			<div>
