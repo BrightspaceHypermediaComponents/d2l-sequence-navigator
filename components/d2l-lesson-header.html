@@ -29,17 +29,17 @@
 			border-radius: 8px 0px 0px 8px;
 		}
 
-		:host-context(.d2l-asv-current) {
+		:host-context(.d2l-asv-current:not(:hover)){
 			--d2l-lesson-header-background-color: var(--d2l-asv-primary-color);
 			--d2l-lesson-header-text-color: var(--d2l-asv-selected-text-color);
 			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
 		}
-		:host-context(:focus){
+		:host(:focus) {
 			outline: none;
 		}
 
-		:host(:focus:not(.d2l-asv-current)),
-		:host(:hover:not(.d2l-asv-current)) {
+		:host(:focus),
+		:host(:hover) {
 			--d2l-lesson-header-background-color: var(--d2l-asv-hover-color);
 			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
 		}
