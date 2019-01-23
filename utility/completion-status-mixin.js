@@ -41,7 +41,7 @@ export function CompletionStatusMixin() {
 
 		_getStatus(entity) {
 			const completionEntity = entity && entity.getSubEntityByClass('completion');
-			if ( !completionEntity || !completionEntity.properties) {
+			if (!completionEntity || !completionEntity.properties) {
 				return {
 					completed: 0,
 					optionalViewed: 0,
@@ -61,7 +61,7 @@ export function CompletionStatusMixin() {
 		}
 
 		_stringifyCount(count) {
-			if ( count === undefined ||  count === null ) {
+			if (count === undefined ||  count === null) {
 				return '';
 			}
 			return `${count}`;
@@ -105,4 +105,4 @@ export function CompletionStatusMixin() {
 				: 'incomplete';
 		}
 	};
-};
+}

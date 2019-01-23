@@ -1,13 +1,12 @@
 /**
 'd2l-lesson-header'
 
-
 @demo demo/index.html
 */
 /*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
+	FIXME(polymer-modulizer): the above comments were extracted
+	from HTML and may be out of place here. Review them and
+	then delete this comment!
 */
 import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
 
@@ -21,8 +20,8 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes CompletionStatusMixin
 */
 class D2LLessonHeader extends CompletionStatusMixin() {
-  static get template() {
-	return html`
+	static get template() {
+		return html`
 		<style>
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
@@ -35,7 +34,7 @@ class D2LLessonHeader extends CompletionStatusMixin() {
 			padding: 20px 28px 20px 25px;
 			border-style: solid;
 			border-width: 2px 0px 2px 2px;
-			border-color:  var(--d2l-lesson-header-border-color);
+			border-color:	var(--d2l-lesson-header-border-color);
 			border-radius: 8px 0px 0px 8px;
 		}
 
@@ -131,37 +130,37 @@ class D2LLessonHeader extends CompletionStatusMixin() {
 			</div>
 		</a>
 `;
-  }
+	}
 
-  static get is() {
-	  return 'd2l-lesson-header';
-  }
-  static get properties() {
-	  return {
-		  class: {
-			  type: String,
-			  reflectToAttribute: true,
-			  computed:'_getHeaderClass(currentActivity, entity)'
-		  },
-		  currentActivity: {
-			  type: String,
-			  value: '',
-			  notify: true
-		  }
-	  };
-  }
+	static get is() {
+		return 'd2l-lesson-header';
+	}
+	static get properties() {
+		return {
+			class: {
+				type: String,
+				reflectToAttribute: true,
+				computed:'_getHeaderClass(currentActivity, entity)'
+			},
+			currentActivity: {
+				type: String,
+				value: '',
+				notify: true
+			}
+		};
+	}
 
-  _getHeaderClass(currentActivity, entity) {
-	  const selfLink = entity && entity.getLinkByRel('self').href;
-	  if ( currentActivity === selfLink ) {
-		  return 'd2l-asv-current';
-	  }
-	  return '';
-  }
+	_getHeaderClass(currentActivity, entity) {
+		const selfLink = entity && entity.getLinkByRel('self').href;
+		if (currentActivity === selfLink) {
+			return 'd2l-asv-current';
+		}
+		return '';
+	}
 
-  _onHeaderClicked() {
-	  this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
-  }
+	_onHeaderClicked() {
+		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
+	}
 }
 
 window.customElements.define(D2LLessonHeader.is, D2LLessonHeader);

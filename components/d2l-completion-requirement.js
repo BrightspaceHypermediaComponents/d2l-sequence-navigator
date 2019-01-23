@@ -8,8 +8,8 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes CompletionStatusMixin
 */
 class D2LCompletionRequirement extends CompletionStatusMixin() {
-  static get template() {
-	return html`
+	static get template() {
+		return html`
 		<style>
 			:host {
 				color: inherit;
@@ -28,39 +28,39 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 			</div>
 		</template>
 `;
-  }
+	}
 
-  static get is() {
-	  return 'd2l-completion-requirement';
-  }
-  static get properties() {
-	  return {
-		  completionRequirement: {
-			  type: String,
-			  computed: '_getCompletionRequirement(entity)',
-			  observer: '_showCompletionRequirementType'
-		  },
-		  isExempt: {
-			  type: Boolean
-		  },
-		  isOptional: {
-			  type: Boolean
-		  }
-	  };
-  }
+	static get is() {
+		return 'd2l-completion-requirement';
+	}
+	static get properties() {
+		return {
+			completionRequirement: {
+				type: String,
+				computed: '_getCompletionRequirement(entity)',
+				observer: '_showCompletionRequirementType'
+			},
+			isExempt: {
+				type: Boolean
+			},
+			isOptional: {
+				type: Boolean
+			}
+		};
+	}
 
-  _showCompletionRequirementType( exemption ) {
-	  switch ( exemption ) {
-		  case 'exempt':
-			  this.isExempt = true;
-			  break;
-		  case 'optional':
-			  this.isOptional = true;
-			  break;
-		  default:
-			  this.isExempt = false;
-			  this.isOptional = false;
-	  }
-  }
+	_showCompletionRequirementType(exemption) {
+		switch (exemption) {
+			case 'exempt':
+				this.isExempt = true;
+				break;
+			case 'optional':
+				this.isOptional = true;
+				break;
+			default:
+				this.isExempt = false;
+				this.isOptional = false;
+		}
+	}
 }
 customElements.define(D2LCompletionRequirement.is, D2LCompletionRequirement);

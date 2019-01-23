@@ -1,3 +1,4 @@
+/* eslint-disable */
 const locales = require('./locales.json');
 
 module.exports = function(plop) {
@@ -12,5 +13,5 @@ module.exports = function(plop) {
 			templateFile: './plop/localize-behavior.hbs',
 			force: true
 		}]
-	})
-}
+	});
+};

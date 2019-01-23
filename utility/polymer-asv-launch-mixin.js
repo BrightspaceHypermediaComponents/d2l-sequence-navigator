@@ -29,4 +29,4 @@ export function PolymerASVLaunchMixin(superClass) {
 			window.dispatchEvent(contentTopicClicked);
 		}
 	};
-};
+}

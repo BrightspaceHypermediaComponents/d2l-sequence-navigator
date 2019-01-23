@@ -1,13 +1,12 @@
 /**
 'd2l-sequence-navigator'
 
-
 @demo demo/index.html
 */
 /*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
+	FIXME(polymer-modulizer): the above comments were extracted
+	from HTML and may be out of place here. Review them and
+	then delete this comment!
 */
 import '@polymer/polymer/polymer-legacy.js';
 
@@ -30,8 +29,8 @@ class D2LSequenceNavigator extends mixinBehaviors([
 ],
 PolymerElement
 ) {
-  static get template() {
-	return html`
+	static get template() {
+		return html`
 		<style>
 		:host {
 			display: block;
@@ -80,84 +79,84 @@ PolymerElement
 			<slot name="end-of-lesson"></slot>
 		</d2l-accordion>
 `;
-  }
+	}
 
-  static get is() {
-	  return 'd2l-sequence-navigator';
-  }
-  static get properties() {
-	  return {
-		  href: {
-			  type: String,
-			  reflectToAttribute: true,
-			  notify: true
-		  },
-		  rootHref: {
-			  type: String,
-			  computed: '_getRootHref(entity)'
-		  },
-		  subEntities: {
-			  type: Array,
-			  computed: 'getSubEntities(_lessonEntity)'
-		  },
-		  _lessonEntity:{
-			  type: Object
-		  },
-		  disabled: {
-			  type: Boolean
-		  },
-		  isSidebar: {
-			  type: Boolean
-		  }
-	  };
-  }
+	static get is() {
+		return 'd2l-sequence-navigator';
+	}
+	static get properties() {
+		return {
+			href: {
+				type: String,
+				reflectToAttribute: true,
+				notify: true
+			},
+			rootHref: {
+				type: String,
+				computed: '_getRootHref(entity)'
+			},
+			subEntities: {
+				type: Array,
+				computed: 'getSubEntities(_lessonEntity)'
+			},
+			_lessonEntity:{
+				type: Object
+			},
+			disabled: {
+				type: Boolean
+			},
+			isSidebar: {
+				type: Boolean
+			}
+		};
+	}
 
-  ready() {
-	  super.ready();
-	  const styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
-	  this.updateStyles(
-		  styles
-	  );
-  }
+	ready() {
+		super.ready();
+		const styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
+		this.updateStyles(
+			styles
+		);
+	}
 
-  _getRootHref(entity) {
-	  const rootLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/sequence-root');
-	  return rootLink && rootLink.href || '';
-  }
+	_getRootHref(entity) {
+		const rootLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/sequence-root');
+		return rootLink && rootLink.href || '';
+	}
 
-  getSubEntities(entity) {
-	  return entity && entity.getSubEntities()
-		  .filter( subEntity =>
-			  (subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href )
-		  .map(this._getHref);
-  }
+	getSubEntities(entity) {
+		return entity && entity.getSubEntities()
+			.filter(subEntity =>
+				(subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href)
+			.map(this._getHref);
+	}
 
-  _isActivity( link ) {
-	  return link && link.hasClass('sequenced-activity');
-  }
+	_isActivity(link) {
+		return link && link.hasClass('sequenced-activity');
+	}
 
-  _getHref(entity) {
-	  return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
-  }
+	_getHref(entity) {
+		return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
+	}
 
-  onSidebarScroll() {
-	  const sidebarHeader = this.getSideBarHeader();
-	  if ( this.$.sidebarContent.scrollTop === 0 ) {
-		  if ( sidebarHeader.classList.contains('shadowed') ) {
-			  sidebarHeader.classList.remove('shadowed');
-		  }
-	  } else {
-		  if ( !sidebarHeader.classList.contains('shadowed') ) {
-			  sidebarHeader.classList.add('shadowed');
-		  }
-	  }
-  }
+	onSidebarScroll() {
+		const sidebarHeader = this.getSideBarHeader();
+		if (this.$.sidebarContent.scrollTop === 0) {
+			if (sidebarHeader.classList.contains('shadowed')) {
+				sidebarHeader.classList.remove('shadowed');
+			}
+		} else {
+			if (!sidebarHeader.classList.contains('shadowed')) {
+				sidebarHeader.classList.add('shadowed');
+			}
+		}
+	}
 
-  getSideBarHeader() {
-	  const sidebarHeaderSlot = this.shadowRoot.querySelector('slot');
-	  const sidebarHeader = sidebarHeaderSlot.assignedNodes()[0].querySelector('d2l-lesson-header#sidebarHeader');
-	  return sidebarHeader;
-  }
+	getSideBarHeader() {
+		const sidebarHeaderSlot = this.shadowRoot.querySelector('slot');
+		const sidebarHeader = sidebarHeaderSlot.assignedNodes()[0].querySelector('d2l-lesson-header#sidebarHeader');
+		return sidebarHeader;
+	}
 }
 
 window.customElements.define(D2LSequenceNavigator.is, D2LSequenceNavigator);

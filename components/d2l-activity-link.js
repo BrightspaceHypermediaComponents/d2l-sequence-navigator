@@ -11,8 +11,8 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes PolymerASVLaunchMixin
 */
 class D2LActivityLink extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
-  static get template() {
-	return html`
+	static get template() {
+		return html`
 		<style>
 			:host {
 				--d2l-activity-link-border-color: var(--d2l-activity-link-background-color);
@@ -120,87 +120,87 @@ class D2LActivityLink extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
 			</d2l-completion-status>
 		</div>
 `;
-  }
+	}
 
-  static get is() {
-	  return 'd2l-activity-link';
-  }
-  static get properties() {
-	  return {
-		  currentActivity: {
-			  type: String,
-			  value: '',
-			  notify: true
-		  },
-		  completionRequirementClass: {
-			  type: String,
-			  computed: '_getCompletionRequirementClass(entity)'
-		  },
-		  hasIcon: {
-			  type: Boolean,
-			  computed: '_hasIcon(entity)'
-		  },
-		  class: {
-			  type: String,
-			  computed: '_getIsSelected(currentActivity, entity)',
-			  reflectToAttribute: true
-		  }
-	  };
-  }
-  static get observers() {
-	  return [
-		  'onCurrentActivityChanged(currentActivity, entity)'
-	  ];
-  }
+	static get is() {
+		return 'd2l-activity-link';
+	}
+	static get properties() {
+		return {
+			currentActivity: {
+				type: String,
+				value: '',
+				notify: true
+			},
+			completionRequirementClass: {
+				type: String,
+				computed: '_getCompletionRequirementClass(entity)'
+			},
+			hasIcon: {
+				type: Boolean,
+				computed: '_hasIcon(entity)'
+			},
+			class: {
+				type: String,
+				computed: '_getIsSelected(currentActivity, entity)',
+				reflectToAttribute: true
+			}
+		};
+	}
+	static get observers() {
+		return [
+			'onCurrentActivityChanged(currentActivity, entity)'
+		];
+	}
 
-  ready() {
-	  super.ready();
-	  this.addEventListener('keypress', this._onKeyPress);
-  }
+	ready() {
+		super.ready();
+		this.addEventListener('keypress', this._onKeyPress);
+	}
 
-  _onKeyPress(event) {
-	  if ( event.key !== 'Enter' ) {
-		  return;
-	  }
-	  this.setCurrent();
-  }
+	_onKeyPress(event) {
+		if (event.key !== 'Enter') {
+			return;
+		}
+		this.setCurrent();
+	}
 
-  setCurrent() {
-	  this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
-	  this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
-  }
+	setCurrent() {
+		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href;
+		this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
+	}
 
-  onCurrentActivityChanged(currentActivity, entity) {
-	  if (currentActivity && entity) {
-		  this.dispatchEvent( new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true } ) );
-	  }
-  }
+	onCurrentActivityChanged(currentActivity, entity) {
+		if (currentActivity && entity) {
+			this.dispatchEvent(new CustomEvent('activitySelected', { detail:{ activityHref: currentActivity }, composed: true }));
+		}
+	}
 
-  _hasIcon(entity) {
-	  const tierClass = 'tier1';
-	  return entity && entity.getSubEntityByClass(tierClass);
-  }
+	_hasIcon(entity) {
+		const tierClass = 'tier1';
+		return entity && entity.getSubEntityByClass(tierClass);
+	}
 
-  _getIconSetKey(entity) {
-	  const tierClass = 'tier1';
-	  return (entity.getSubEntityByClass(tierClass)).properties.iconSetKey;
-  }
+	_getIconSetKey(entity) {
+		const tierClass = 'tier1';
+		return (entity.getSubEntityByClass(tierClass)).properties.iconSetKey;
+	}
 
-  _getCompletionRequirementClass(entity) {
-	  const completionRequirement = this._getCompletionRequirement(entity);
-	  switch ( completionRequirement ) {
-		  case 'exempt':
-		  case 'optional':
-			  return 'd2l-activity-link-one-line';
-	  }
-	  return '';
-  }
-  _getIsSelected(currentActivity, entity) {
-	  const selected = entity && entity.getLinkByRel('self').href === currentActivity;
-	  if ( selected ) {
-		  this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
-	  }
-	  return (selected) ? 'd2l-asv-current' : '';
-  }
+	_getCompletionRequirementClass(entity) {
+		const completionRequirement = this._getCompletionRequirement(entity);
+		switch (completionRequirement) {
+			case 'exempt':
+			case 'optional':
+				return 'd2l-activity-link-one-line';
+		}
+		return '';
+	}
+	_getIsSelected(currentActivity, entity) {
+		const selected = entity && entity.getLinkByRel('self').href === currentActivity;
+		if (selected) {
+			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
+		}
+		return (selected) ? 'd2l-asv-current' : '';
+	}
 }
 customElements.define(D2LActivityLink.is, D2LActivityLink);

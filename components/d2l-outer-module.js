@@ -13,8 +13,8 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes D2L.Polymer.Mixins.PolymerASVLaunchMixin
 */
 class D2LOuterModule extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
-  static get template() {
-	return html`
+	static get template() {
+		return html`
 		<style>
 			:host {
 				display: block;
@@ -34,7 +34,7 @@ class D2LOuterModule extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
 				background-color: var(--d2l-outer-module-background-color);
 				border-style: solid;
 				border-width: var(--d2l-outer-module-border-width, 2px 0px 2px 0);
-				border-color:  var(--d2l-outer-module-border-color);
+				border-color:	var(--d2l-outer-module-border-color);
 			}
 
 			d2l-accordion-collapse:focus-within {
@@ -147,153 +147,153 @@ class D2LOuterModule extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
 			</ol>
 		</d2l-accordion-collapse>
 `;
-  }
+	}
 
-  static get is() {
-	  return 'd2l-outer-module';
-  }
-  static get properties() {
-	  return {
-		  currentActivity: {
-			  type: String,
-			  value: '',
-			  notify: true
-		  },
-		  subEntities: {
-			  type: Array,
-			  computed: 'getSubEntities(entity)'
-		  },
-		  hasChildren: {
-			  type: Boolean,
-			  computed: '_hasChildren(entity)'
-		  },
-		  showCount: {
-			  type: Boolean,
-			  value: false,
-			  computed: '_showCount(completionCount)'
-		  },
-		  showCheckmark: {
-			  type: Boolean,
-			  value: false,
-			  computed: '_showCheckmark(completionCount)'
-		  },
-		  showOptional: {
-			  type: Boolean,
-			  value: false,
-			  computed: '_showOptional(completionCount)'
-		  },
-		  disabled: {
-			  type: Boolean,
-			  observer: '_disableAccordions'
-		  },
-		  isSidebar: {
-			  type: Boolean
-		  }
-	  };
-  }
+	static get is() {
+		return 'd2l-outer-module';
+	}
+	static get properties() {
+		return {
+			currentActivity: {
+				type: String,
+				value: '',
+				notify: true
+			},
+			subEntities: {
+				type: Array,
+				computed: 'getSubEntities(entity)'
+			},
+			hasChildren: {
+				type: Boolean,
+				computed: '_hasChildren(entity)'
+			},
+			showCount: {
+				type: Boolean,
+				value: false,
+				computed: '_showCount(completionCount)'
+			},
+			showCheckmark: {
+				type: Boolean,
+				value: false,
+				computed: '_showCheckmark(completionCount)'
+			},
+			showOptional: {
+				type: Boolean,
+				value: false,
+				computed: '_showOptional(completionCount)'
+			},
+			disabled: {
+				type: Boolean,
+				observer: '_disableAccordions'
+			},
+			isSidebar: {
+				type: Boolean
+			}
+		};
+	}
 
-  _keyUpListener(event) {
-	  if (event.keyCode === 13) {
-		  this._onHeaderClicked();
-	  }
-  }
+	_keyUpListener(event) {
+		if (event.keyCode === 13) {
+			this._onHeaderClicked();
+		}
+	}
 
-  _disableAccordions(disabled) {
-	  if ( !disabled || !this.shadowRoot || !this.shadowRoot.querySelector('d2l-accordion-collapse') ) {
-		  return;
-	  }
-	  this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
-	  this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('disabled', '');
-  }
+	_disableAccordions(disabled) {
+		if (!disabled || !this.shadowRoot || !this.shadowRoot.querySelector('d2l-accordion-collapse')) {
+			return;
+		}
+		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
+		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('disabled', '');
+	}
 
-  _isAccordionOpen() {
-	  if ( !this.shadowRoot || !this.shadowRoot.querySelector('d2l-accordion-collapse') ) {
-		  return false;
-	  }
-	  return this.shadowRoot.querySelector('d2l-accordion-collapse').hasAttribute('opened');
-  }
+	_isAccordionOpen() {
+		if (!this.shadowRoot || !this.shadowRoot.querySelector('d2l-accordion-collapse')) {
+			return false;
+		}
+		return this.shadowRoot.querySelector('d2l-accordion-collapse').hasAttribute('opened');
+	}
 
-  _isOptionalModule() {
-	  return this.completionCount && this.completionCount.total === 0 && this.completionCount.optionalTotal > 0;
-  }
+	_isOptionalModule() {
+		return this.completionCount && this.completionCount.total === 0 && this.completionCount.optionalTotal > 0;
+	}
 
-  _isAllRequiredViewed() {
-	  return this.completionCount && this.completionCount.total > 0 && this.completionCount.total === this.completionCount.completed;
-  }
+	_isAllRequiredViewed() {
+		return this.completionCount && this.completionCount.total > 0 && this.completionCount.total === this.completionCount.completed;
+	}
 
-  _isActivity( link ) {
-	  return link && link.hasClass('sequenced-activity');
-  }
+	_isActivity(link) {
+		return link && link.hasClass('sequenced-activity');
+	}
 
-  _showCount() {
-	  if ( !this.hasChildren ) {
-		  return false;
-	  }
-	  if ( this._isAccordionOpen() ) {
-		  return true;
-	  }
-	  return !this._isOptionalModule() && !this._isAllRequiredViewed();
-  }
+	_showCount() {
+		if (!this.hasChildren) {
+			return false;
+		}
+		if (this._isAccordionOpen()) {
+			return true;
+		}
+		return !this._isOptionalModule() && !this._isAllRequiredViewed();
+	}
 
-  _showCheckmark() {
-	  if ( !this.hasChildren ) {
-		  return false;
-	  }
-	  if ( this._isAccordionOpen() ) {
-		  return false;
-	  }
-	  return !this._isOptionalModule() && this._isAllRequiredViewed();
-  }
+	_showCheckmark() {
+		if (!this.hasChildren) {
+			return false;
+		}
+		if (this._isAccordionOpen()) {
+			return false;
+		}
+		return !this._isOptionalModule() && this._isAllRequiredViewed();
+	}
 
-  _showOptional() {
-	  if ( !this.hasChildren ) {
-		  return false;
-	  }
-	  if ( this._isAccordionOpen() ) {
-		  return false;
-	  }
-	  return this._isOptionalModule();
-  }
+	_showOptional() {
+		if (!this.hasChildren) {
+			return false;
+		}
+		if (this._isAccordionOpen()) {
+			return false;
+		}
+		return this._isOptionalModule();
+	}
 
-  getSubEntities(entity) {
-	  return entity && entity.getSubEntities()
-		  .filter( subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || ( subEntity.href && subEntity.hasClass('sequence-description') ) )
-		  .map(this._getHref);
-  }
+	getSubEntities(entity) {
+		return entity && entity.getSubEntities()
+			.filter(subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || (subEntity.href && subEntity.hasClass('sequence-description')))
+			.map(this._getHref);
+	}
 
-  _getHref(entity) {
-	  return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
-  }
+	_getHref(entity) {
+		return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
+	}
 
-  _hasChildren(entity) {
-	  return entity && entity.getSubEntities().length !== 0;
-  }
+	_hasChildren(entity) {
+		return entity && entity.getSubEntities().length !== 0;
+	}
 
-  _getIsSelected(currentActivity) {
-	  const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
-	  return (selected) ? 'd2l-asv-current' : '';
-  }
+	_getIsSelected(currentActivity) {
+		const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
+		return (selected) ? 'd2l-asv-current' : '';
+	}
 
-  _padOnActivity(childLink) {
-	  return this.isSidebar || this._isActivity(childLink)
-		  ? ''
-		  : 'should-pad';
-  }
+	_padOnActivity(childLink) {
+		return this.isSidebar || this._isActivity(childLink)
+			? ''
+			: 'should-pad';
+	}
 
-  _onActivityClicked(e) {
-	  const childLink =  e.model.__data.childLink;
-	  if ( childLink.class.includes('sequenced-activity') && this.currentActivity !== childLink.href ) {
-		  this.currentActivity = childLink.href;
-	  }
-  }
+	_onActivityClicked(e) {
+		const childLink =	e.model.__data.childLink;
+		if (childLink.class.includes('sequenced-activity') && this.currentActivity !== childLink.href) {
+			this.currentActivity = childLink.href;
+		}
+	}
 
-  _onHeaderClicked() {
-	  this.currentActivity = this.entity.getLinkByRel('self').href;
-	  this._contentObjectClick();
-  }
+	_onHeaderClicked() {
+		this.currentActivity = this.entity.getLinkByRel('self').href;
+		this._contentObjectClick();
+	}
 
-  childIsActiveEvent() {
-	  this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
-  }
+	childIsActiveEvent() {
+		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
+	}
 }
 customElements.define(D2LOuterModule.is, D2LOuterModule);
