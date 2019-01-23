@@ -16,7 +16,7 @@ import './components/d2l-outer-module.js';
 import 'd2l-accordion/d2l-accordion.js';
 import 'd2l-colors/d2l-colors.js';
 import 'siren-entity/siren-entity.js';
-import './localize-behavior.js';
+import { LocalizeBehavior } from './localize-behavior.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
@@ -26,7 +26,7 @@ import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 */
 class D2LSequenceNavigator extends mixinBehaviors([
 	D2L.PolymerBehaviors.Siren.EntityBehavior,
-	D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehavior
+	LocalizeBehavior
 ],
 PolymerElement
 ) {

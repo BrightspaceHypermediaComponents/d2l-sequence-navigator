@@ -8,7 +8,7 @@ module.exports = function(plop) {
 		prompts: [],
 		actions: [{
 			type: 'add',
-			path: './localize-behavior.html',
+			path: './localize-behavior.js',
 			templateFile: './plop/localize-behavior.hbs',
 			force: true
 		}]

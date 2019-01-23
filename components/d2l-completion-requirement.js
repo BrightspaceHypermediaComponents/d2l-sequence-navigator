@@ -1,13 +1,13 @@
-import '../utility/completion-status-mixin.js';
+import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
 import 'd2l-icons/d2l-icons.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf window.D2L.Polymer.Mixins;
-@mixes D2L.Polymer.Mixins.CompletionStatusMixin
+@mixes CompletionStatusMixin
 */
-class D2LCompletionRequirement extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+class D2LCompletionRequirement extends CompletionStatusMixin() {
   static get template() {
 	return html`
 		<style>

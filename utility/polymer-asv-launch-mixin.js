@@ -2,7 +2,7 @@
 	@polymerMixin
 	@memberOf D2L.Polymer.Mixins;
 */
-const PolymerASVLaunchMixin = function(superClass) {
+export function PolymerASVLaunchMixin(superClass) {
 	return class extends superClass {
 		static get properties() {
 			return {
@@ -30,7 +30,3 @@ const PolymerASVLaunchMixin = function(superClass) {
 		}
 	};
 };
-window.D2L = window.D2L || {};
-window.D2L.Polymer = window.D2L.Polymer || {};
-window.D2L.Polymer.Mixins = window.D2L.Polymer.Mixins || {};
-window.D2L.Polymer.Mixins.PolymerASVLaunchMixin = PolymerASVLaunchMixin;

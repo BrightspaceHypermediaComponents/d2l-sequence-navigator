@@ -1,5 +1,5 @@
-import '../utility/completion-status-mixin.js';
-import '../utility/polymer-asv-launch-mixin.js';
+import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
+import { PolymerASVLaunchMixin } from '../utility/polymer-asv-launch-mixin.js';
 import './d2l-completion-status.js';
 import './d2l-completion-requirement.js';
 import 'd2l-colors/d2l-colors.js';
@@ -7,10 +7,10 @@ import 'd2l-icons/d2l-icons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf window.D2L.Polymer.Mixins;
-@mixes D2L.Polymer.Mixins.CompletionStatusMixin
-@mixes D2L.Polymer.Mixins.PolymerASVLaunchMixin
+@mixes CompletionStatusMixin
+@mixes PolymerASVLaunchMixin
 */
-class D2LActivityLink extends D2L.Polymer.Mixins.PolymerASVLaunchMixin(D2L.Polymer.Mixins.CompletionStatusMixin()) {
+class D2LActivityLink extends PolymerASVLaunchMixin(CompletionStatusMixin()) {
   static get template() {
 	return html`
 		<style>

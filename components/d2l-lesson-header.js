@@ -9,7 +9,7 @@
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
-import '../utility/completion-status-mixin.js';
+import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
 
 import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-colors/d2l-colors.js';
@@ -20,7 +20,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @memberOf D2L.Polymer.Mixins;
 @mixes CompletionStatusMixin
 */
-class D2LLessonHeader extends D2L.Polymer.Mixins.CompletionStatusMixin() {
+class D2LLessonHeader extends CompletionStatusMixin() {
   static get template() {
 	return html`
 		<style>

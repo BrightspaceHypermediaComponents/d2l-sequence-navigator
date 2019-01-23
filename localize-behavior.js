@@ -6,25 +6,25 @@ window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 window.D2L.PolymerBehaviors.SequenceNavigator = window.D2L.PolymerBehaviors.SequenceNavigator || {};
 
 /**
- * THIS FILE IS GENERATED. RUN `npm run locales` TO REGENERATE.
- * Localizes the d2l-sequence-navigator component.
- * @polymerBehavior D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehavior
- */
-D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehaviorImpl = {
-	properties: {
-		/**
-		 * Localization resources.
-		 */
-		resources: {
-			value: function() {
-				return {"ar":{},"de":{},"en":{"countStatus":"{completed}/{total}","completedMofN":"Completed {completed}/{total}","requirementsCompleted":"{completed} of {total} requirements completed","optional":"Optional","exempt":"Exempt","completed":"completed"},"es":{},"fr":{},"ja":{},"ko":{},"nb":{},"nl":{},"pt":{},"sv":{},"tr":{},"zh-TW":{},"zh":{}};
-			}
-		}
-	}
+* THIS FILE IS GENERATED. RUN `npm run locales` TO REGENERATE.
+* Localizes the d2l-sequence-navigator component.
+* @polymerBehavior LocalizeBehavior
+*/
+const LocalizeBehaviorImpl = {
+properties: {
+/**
+* Localization resources.
+*/
+resources: {
+value: function () {
+return {"ar":{},"de":{},"en":{"countStatus":"{completed}/{total}","completedMofN":"Completed {completed}/{total}","requirementsCompleted":"{completed} of {total} requirements completed","optional":"Optional","exempt":"Exempt","completed":"completed"},"es":{},"fr":{},"ja":{},"ko":{},"nb":{},"nl":{},"pt":{},"sv":{},"tr":{},"zh-TW":{},"zh":{}};
+}
+}
+}
 };
 
-/** @polymerBehavior D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehavior */
-D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehavior = [
-	D2L.PolymerBehaviors.LocalizeBehavior,
-	D2L.PolymerBehaviors.SequenceNavigator.LocalizeBehaviorImpl
+/** @polymerBehavior LocalizeBehavior */
+export const LocalizeBehavior = [
+D2L.PolymerBehaviors.LocalizeBehavior,
+LocalizeBehaviorImpl
 ];
