@@ -1,7 +1,6 @@
 {
   "npm": true,
   "lint": {
-    "rules": ["polymer-3"],
-    "filesToIgnore": ["build/**/*","node_modules/**/*"]
+    "rules": ["polymer-3"]
   }
 }
