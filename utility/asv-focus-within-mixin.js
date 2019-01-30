@@ -23,5 +23,9 @@ export function ASVFocusWithinMixin(superClass) {
 		_focusWithinOnBlur() {
 			this.focusWithin = false;
 		}
+
+		_focusWithinClass(focusWithin) {
+			return focusWithin ? ' d2l-asv-focus-within' : '';
+		}
 	};
 }
