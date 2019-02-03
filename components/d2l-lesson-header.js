@@ -149,9 +149,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	_getHeaderClass(currentActivity, entity, focusWithin) {
 		const selfLink = entity && entity.getLinkByRel('self').href;
 		const selected = currentActivity === selfLink;
-		let classString = (selected) ? 'd2l-asv-current' : '';
-		classString += this._focusWithinClass(focusWithin);
-		return classString;
+		return this._getTrueClass(focusWithin, selected);
 	}
 
 	_onHeaderClicked() {

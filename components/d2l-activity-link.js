@@ -196,10 +196,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 		if (selected) {
 			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
 		}
-		let classString = (selected) ? 'd2l-asv-current' : '';
-		classString += this._focusWithinClass(focusWithin);
-		return classString;
-
+		return this._getTrueClass(focusWithin, selected);
 	}
 }
 customElements.define(D2LActivityLink.is, D2LActivityLink);

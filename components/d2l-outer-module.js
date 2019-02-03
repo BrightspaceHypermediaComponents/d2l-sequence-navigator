@@ -268,9 +268,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 	_getIsSelected(currentActivity, focusWithin) {
 		const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
-		let classString = (selected) ? 'd2l-asv-current' : '';
-		classString += this._focusWithinClass(focusWithin);
-		return classString;
+		return this._getTrueClass(focusWithin, selected);
 	}
 
 	_padOnActivity(childLink) {

@@ -144,9 +144,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		if (selected) {
 			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-inner-module-current-activity', {detail: { href: this.href}}));
 		}
-		let classString = (selected) ? 'd2l-asv-current' : '';
-		classString += this._focusWithinClass(focusWithin);
-		return classString;
+		this._getTrueClass(focusWithin, selected);
 	}
 
 	_onHeaderClicked() {
