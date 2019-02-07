@@ -204,10 +204,12 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	connectedCallback() {
+		super.connectedCallback();
 		this.addEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
 	}
 
 	disconnectedCallback() {
+		super.disconnectedCallback();
 		this.removeEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
 	}
 
