@@ -40,6 +40,12 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-color:	var(--d2l-outer-module-border-color);
 			}
 
+			#header-container.d2l-asv-current {
+				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
+				--d2l-outer-module-text-color: var(--d2l-asv-selected-text-color);
+				--d2l-outer-module-border-color: var(--d2l-asv-border-color);
+			}
+
 			#header-container.d2l-asv-focus-within,
 			#header-container:hover {
 				--d2l-outer-module-background-color: var(--d2l-asv-hover-color);
@@ -47,11 +53,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
 			}
 
-			#header-container.d2l-asv-current:not(:hover) {
-				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
-				--d2l-outer-module-text-color: var(--d2l-asv-selected-text-color);
-				--d2l-outer-module-border-color: var(--d2l-asv-border-color);
-			}
 
 			.module-header {
 				display: table;
@@ -211,6 +212,16 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		}
 		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('disabled', '');
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		this.addEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
+	}
+
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this.removeEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
 	}
 
 	_isAccordionOpen() {
