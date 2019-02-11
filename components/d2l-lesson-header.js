@@ -34,7 +34,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			color: var(--d2l-lesson-header-text-color);
 			padding: 20px 28px 20px 25px;
 			border-style: solid;
-			border-width: 2px 0px 2px 2px;
+			border-width: 1px 0px 1px 1px;
 			border-color:	var(--d2l-lesson-header-border-color);
 			border-radius: 8px 0px 0px 8px;
 		}
