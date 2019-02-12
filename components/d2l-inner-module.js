@@ -32,12 +32,16 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			#header-container {
 				--d2l-inner-module-border-color: var(--d2l-inner-module-background-color);
 				display: flex;
-				padding: 12px 0;
+				padding: 12px 0 0;
 				border-radius: 8px 8px 0 0;
 				border-style: solid;
 				border-width: var(--d2l-inner-module-border-width, 0);
 				border-color:	var(--d2l-inner-module-border-color, transparent);
 				height: 30px;
+			}
+
+			#header-container.inner-module-empty {
+				padding: 12px 0;
 			}
 
 			#module-header {
@@ -91,7 +95,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 		</style>
 
-		<div id="header-container">
+		<div id="header-container" class$="[[isEmpty(subEntities)]]">
 			<div id="module-header" class$="[[_getIsSelected(currentActivity, entity, focusWithin)]]" on-click="_onHeaderClicked">
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
@@ -164,6 +168,15 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		else{
 			return '';
 		};
+	}
+
+	isEmpty(subEntities) {
+		if(subEntities === null || subEntities.length === 0){
+			return 'inner-module-empty';
+		}
+		else{
+			return '';
+		}
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);

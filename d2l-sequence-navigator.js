@@ -73,10 +73,10 @@ PolymerElement
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li>
 						<template is="dom-if" if="[[!_isActivity(childLink)]]">
-							<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar]]"></d2l-outer-module>
+							<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
 						</template>						
 						<template is="dom-if" if="[[_isActivity(childLink)]]">
-							<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}"></d2l-activity-link>
+							<d2l-activity-link id$="[[isNextModuleOrLast(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}"></d2l-activity-link>
 						</template>
 					</li>
 				</template>
@@ -161,6 +161,27 @@ PolymerElement
 		const sidebarHeaderSlot = this.shadowRoot.querySelector('slot');
 		const sidebarHeader = sidebarHeaderSlot.assignedNodes()[0].querySelector('d2l-lesson-header#sidebarHeader');
 		return sidebarHeader;
+	}
+
+	isNextModuleOrLast(subEntities, index) {
+		if (index < subEntities.length - 1){
+			if(!this._isActivity(subEntities[index + 1])){
+				return 'outer-last';
+			}
+		}
+		if(this.isLast(subEntities, index) && this.isSidebar){
+			return 'outer-last';
+		}
+		return '';
+	}
+
+	isLast(entities, index) {
+		if(entities.length <= index + 1){
+			return true;
+		}
+		else{
+			return false;
+		};
 	}
 }
 
