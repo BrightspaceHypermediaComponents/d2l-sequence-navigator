@@ -1,7 +1,8 @@
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { ASVFocusWithinMixin } from '../utility/asv-focus-within-mixin.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-class D2LSequenceEnd extends PolymerElement {
+class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 	static get template() {
 		return html`
 			<style>
@@ -17,22 +18,16 @@ class D2LSequenceEnd extends PolymerElement {
 					border-radius: 8px 0px 0px 8px;
 					padding: 20px 40px 20px 20px;
 				}
+
 				#d2l-sequence-end-container.d2l-asv-current {
 					--d2l-sequence-end-background-color: var(--d2l-asv-primary-color);
 					--d2l-sequence-end-text-color: var(--d2l-asv-selected-text-color);
 					--d2l-sequence-end-border-color: var(--d2l-asv-border-color);
 				}
 
-				
+				#d2l-sequence-end-container.d2l-asv-focus-within,
 				#d2l-sequence-end-container:focus:not(.d2l-asv-current),
 				#d2l-sequence-end-container:hover {
-					--d2l-sequence-end-background-color: var(--d2l-asv-hover-color);
-					--d2l-sequence-end-border-color: var(--d2l-asv-border-color);
-					--d2l-sequence-end-text-color: var(--d2l-asv-text-color);
-					cursor: pointer;
-				}
-
-				#d2l-sequence-end-container:focus-within{
 					--d2l-sequence-end-background-color: var(--d2l-asv-hover-color);
 					--d2l-sequence-end-border-color: var(--d2l-asv-border-color);
 					--d2l-sequence-end-text-color: var(--d2l-asv-text-color);
@@ -47,7 +42,7 @@ class D2LSequenceEnd extends PolymerElement {
 				}
 			</style>
 			<div id="d2l-sequence-end-container" class$="[[_containerClass]]" on-click="showEndOfLesson">
-				<a on-click="showEndOfLesson" 
+				<a on-click="showEndOfLesson"
 					class="d2l-sequence-end-link"
 					href="javascript:void(0)">
 					[[text]]
@@ -65,7 +60,7 @@ class D2LSequenceEnd extends PolymerElement {
 			},
 			_containerClass:{
 				type: String,
-				computed: '_getContainerClass(currentActivity, href)'
+				computed: '_getContainerClass(currentActivity, href, focusWithin)'
 			},
 			currentActivity: {
 				type: String,
@@ -78,11 +73,9 @@ class D2LSequenceEnd extends PolymerElement {
 		};
 	}
 
-	_getContainerClass(currentActivity, href) {
-		if (href === currentActivity) {
-			return 'd2l-asv-current';
-		}
-		return '';
+	_getContainerClass(currentActivity, href, focusWithin) {
+		const isSelected = href === currentActivity;
+		return this._getTrueClass(focusWithin, isSelected);
 	}
 
 	showEndOfLesson() {

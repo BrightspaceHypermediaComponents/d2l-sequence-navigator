@@ -22,7 +22,8 @@ export function ASVFocusWithinMixin(superClass) {
 		}
 
 		_focusWithinOnFocus() {
-			this.fire('defocus-parent');
+			var event = new CustomEvent('defocus-parent', {bubbles: true, composed: true});
+			this.dispatchEvent(event);
 			this.focusWithin = true;
 		}
 
