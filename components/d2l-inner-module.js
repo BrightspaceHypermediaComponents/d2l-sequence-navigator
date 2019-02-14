@@ -32,20 +32,25 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			#header-container {
 				--d2l-inner-module-border-color: var(--d2l-inner-module-background-color);
 				display: flex;
-				padding: 10px 0;
+				padding: 12px 0 0;
 				border-radius: 8px 8px 0 0;
 				border-style: solid;
 				border-width: var(--d2l-inner-module-border-width, 0);
 				border-color:	var(--d2l-inner-module-border-color, transparent);
+				height: 30px;
+			}
+
+			#header-container.inner-module-empty {
+				padding: 12px 0;
 			}
 
 			#module-header {
 				display: flex;
 				flex-grow: 1;
-				padding: 0 14px;
+				padding: 4px 14px 0 14px;
 				background-color: var(--d2l-inner-module-background-color);
-				border: 2px solid var(--d2l-inner-module-border-color, transparent);
-				border-width: 2px 0;
+				border: 1px solid var(--d2l-inner-module-border-color, transparent);
+				border-width: 1px 0;
 			}
 
 			#module-header > a {
@@ -90,7 +95,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 		</style>
 
-		<div id="header-container">
+		<div id="header-container" class$="[[isEmpty(subEntities)]]">
 			<div id="module-header" class$="[[_getIsSelected(currentActivity, entity, focusWithin)]]" on-click="_onHeaderClicked">
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
@@ -101,7 +106,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		<ol>
 			<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 				<li>
-					<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
+					<d2l-activity-link inner-last$="[[isLast(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
 				</li>
 			</template>
 		</ol>
@@ -154,6 +159,24 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 	childIsActiveEvent() {
 		this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-inner-module-current-activity', {detail: { href: this.href}}));
+	}
+
+	isLast(entities, index) {
+		if (entities.length <= index + 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	isEmpty(subEntities) {
+		if (subEntities === null || subEntities.length === 0) {
+			return 'inner-module-empty';
+		}
+		else {
+			return '';
+		}
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);
