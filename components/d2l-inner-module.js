@@ -162,19 +162,19 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	isLast(entities, index) {
-		if(entities.length <= index + 1){
+		if (entities.length <= index + 1) {
 			return true;
 		}
-		else{
+		else {
 			return false;
-		};
+		}
 	}
 
 	isEmpty(subEntities) {
-		if(subEntities === null || subEntities.length === 0){
+		if (subEntities === null || subEntities.length === 0) {
 			return 'inner-module-empty';
 		}
-		else{
+		else {
 			return '';
 		}
 	}

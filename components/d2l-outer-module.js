@@ -354,19 +354,19 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	isLastOfSubModule(entities, index) {
-		if(entities.length <= index + 1 && !this._isActivity(entities[index]) && (!this.lastModule || this.isSidebar)) {
+		if (entities.length <= index + 1 && !this._isActivity(entities[index]) && (!this.lastModule || this.isSidebar)) {
 			return true;
 		}
 		else {
 			return false;
-		};
+		}
 	}
-	
+
 	isEmpty(subEntities) {
-		if((subEntities === null || subEntities.length === 0) && (!this.lastModule || this.isSidebar)){
+		if ((subEntities === null || subEntities.length === 0) && (!this.lastModule || this.isSidebar)) {
 			return 'empty-module-header-container';
 		}
-		else{
+		else {
 			return '';
 		}
 	}

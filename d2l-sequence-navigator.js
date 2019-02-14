@@ -179,8 +179,8 @@ PolymerElement
 	}
 
 	isBeforeModule(subEntities, index) {
-		if (index < subEntities.length - 1){
-			if(!this._isActivity(subEntities[index + 1])){
+		if (index < subEntities.length - 1) {
+			if (!this._isActivity(subEntities[index + 1])) {
 				return true;
 			}
 		}
@@ -188,15 +188,15 @@ PolymerElement
 	}
 
 	isLast(entities, index) {
-		if(entities.length <= index + 1){
+		if (entities.length <= index + 1) {
 			return true;
 		}
-		else{
+		else {
 			return false;
-		};
+		}
 	}
-	isSidebar(){
-		if(this.role === "navigation"){
+	isSidebar() {
+		if (this.role === 'navigation') {
 			return true;
 		}
 		return false;
