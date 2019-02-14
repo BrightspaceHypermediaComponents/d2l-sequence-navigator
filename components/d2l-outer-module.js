@@ -53,7 +53,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
 			}
 
-
 			.module-header {
 				display: table;
 				table-layout: fixed;
