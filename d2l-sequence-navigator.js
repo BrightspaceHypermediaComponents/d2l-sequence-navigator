@@ -64,6 +64,21 @@ PolymerElement
 			overflow-y: auto;
 		}
 
+		:host([role="navigation"]) li:last-of-type>d2l-activity-link,
+		d2l-activity-link[before-module] {
+			border-bottom: 1px solid var(--d2l-color-mica);
+		}
+
+		:host([role="navigation"]) li:last-of-type>d2l-activity-link:hover,
+		d2l-activity-link[before-module]:hover {
+			border-bottom: 1px solid var(--d2l-asv-border-color);
+		}
+
+		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-current:not(:hover),
+		d2l-activity-link[before-module].d2l-asv-current:not(:hover){
+			border-bottom: 1px solid var(--d2l-asv-border-color);
+		}
+
 		</style>
 		<siren-entity href="[[rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
 		<slot name="lesson-header"></slot>
@@ -73,10 +88,10 @@ PolymerElement
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li>
 						<template is="dom-if" if="[[!_isActivity(childLink)]]">
-							<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
+							<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar()]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
 						</template>						
 						<template is="dom-if" if="[[_isActivity(childLink)]]">
-							<d2l-activity-link id$="[[isNextModuleOrLast(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}"></d2l-activity-link>
+							<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" before-module$="[[isBeforeModule(subEntities, index)]]"></d2l-activity-link>
 						</template>
 					</li>
 				</template>
@@ -110,8 +125,8 @@ PolymerElement
 			disabled: {
 				type: Boolean
 			},
-			isSidebar: {
-				type: Boolean
+			role: {
+				type: String
 			}
 		};
 	}
@@ -163,16 +178,13 @@ PolymerElement
 		return sidebarHeader;
 	}
 
-	isNextModuleOrLast(subEntities, index) {
+	isBeforeModule(subEntities, index) {
 		if (index < subEntities.length - 1){
 			if(!this._isActivity(subEntities[index + 1])){
-				return 'outer-last';
+				return true;
 			}
 		}
-		if(this.isLast(subEntities, index) && this.isSidebar){
-			return 'outer-last';
-		}
-		return '';
+		return false;
 	}
 
 	isLast(entities, index) {
@@ -182,6 +194,12 @@ PolymerElement
 		else{
 			return false;
 		};
+	}
+	isSidebar(){
+		if(this.role === "navigation"){
+			return true;
+		}
+		return false;
 	}
 }
 

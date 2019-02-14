@@ -83,7 +83,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				display: table-cell;
 				width: 2rem;
 				line-height: inherit !important;
-				padding: 0 0 0 24px;
+				padding-left: 24px;
 			}
 
 			.should-pad {
@@ -128,11 +128,26 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				color: var(--d2l-asv-selected-text-color);
 			}
 
-			.end-of-module-hr {
+			hr {
 				border: solid var(--d2l-color-mica);
 				border-width: 1px 0 0 0;
 				width: 100%;
 				margin: 24px 0 0 0;
+			}
+
+			li:last-of-type>d2l-activity-link[is-sidebar],
+			li:last-of-type>d2l-activity-link:not([last-module]) {
+				border-bottom: 1px solid var(--d2l-color-mica);
+			}
+
+			li:last-of-type>d2l-activity-link[is-sidebar]:hover,
+			li:last-of-type>d2l-activity-link:hover:not([lastmodule]) {
+				border-bottom: 1px solid var(--d2l-asv-border-color);
+			}
+
+			li:last-of-type>d2l-activity-link.d2l-asv-current[is-sidebar]:not(:hover),
+			li:last-of-type>d2l-activity-link.d2l-asv-current:not([last-module]:hover) {
+				border-bottom: 1px solid var(--d2l-asv-border-color);
 			}
 
 		</style>
@@ -165,14 +180,14 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li on-click="_onActivityClicked" class$="[[_padOnActivity(childLink)]]">
 						<template is="dom-if" if="[[_isActivity(childLink)]]">
-							<d2l-activity-link id$="[[isLastActivity(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
+							<d2l-activity-link last-module$="[[lastModule]]" is-sidebar$="[[isSidebar]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
 						</template>
 						<template is="dom-if" if="[[!_isActivity(childLink)]]">
 							<d2l-inner-module href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-inner-module-current-activity="childIsActiveEvent"></d2l-inner-module>
 						</template>
 					</li>
-					<template is="dom-if" if="[[isLastModule(subEntities, index)]]">
-						<hr class="end-of-module-hr">
+					<template is="dom-if" if="[[isLastOfSubModule(subEntities, index)]]">
+						<hr>
 					</template>
 				</template>
 			</ol>
@@ -339,16 +354,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 	}
 
-	isLastActivity(entities, index) {
-		if(entities.length <= index + 1 && (!this.lastModule || this.isSidebar)){
-			return 'outer-last';
-		}
-		else {
-			return '';
-		};
-	}
-
-	isLastModule(entities, index) {
+	isLastOfSubModule(entities, index) {
 		if(entities.length <= index + 1 && !this._isActivity(entities[index]) && (!this.lastModule || this.isSidebar)) {
 			return true;
 		}

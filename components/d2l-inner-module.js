@@ -106,7 +106,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		<ol>
 			<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 				<li>
-					<d2l-activity-link id$="[[isLast(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
+					<d2l-activity-link inner-last$="[[isLast(subEntities, index)]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
 				</li>
 			</template>
 		</ol>
@@ -163,10 +163,10 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 	isLast(entities, index) {
 		if(entities.length <= index + 1){
-			return 'inner-last';
+			return true;
 		}
 		else{
-			return '';
+			return false;
 		};
 	}
 
