@@ -149,10 +149,22 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-bottom: 1px solid var(--d2l-asv-border-color);
 			}
 
+			d2l-activity-link[is-sidebar],
+			#header-container[is-sidebar]{
+				border-width: 1px 0 1px 1px;
+			}
+
+			d2l-activity-link[is-sidebar]:hover,
+			#header-container[is-sidebar]:hover,
+			d2l-activity-link[is-sidebar].d2l-asv-current:not(:hover),
+			#header-container[is-sidebar].d2l-asv-current:not(:hover) {
+				border-radius: 8px 0 0 8px;
+			}
+
 		</style>
 
 		<d2l-accordion-collapse no-icons="" flex="">
-			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]]" on-click="_onHeaderClicked">
+			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">

@@ -13,10 +13,12 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					background-color: var(--d2l-sequence-end-background-color);
 					color: var(--d2l-sequence-end-text-color);
 					border-style: solid;
-					border-width: 2px 0px 2px 2px;
+					border-width: 1px 0px 1px 1px;
 					border-color:  var(--d2l-sequence-end-border-color);
 					border-radius: 8px 0px 0px 8px;
 					padding: 20px 40px 20px 20px;
+					position: relative;
+					margin-top: -1px;
 				}
 
 				#d2l-sequence-end-container.d2l-asv-current {
