@@ -90,7 +90,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		progress.d2l-progress {
 			@apply --d2l-progress;
 			background-color: var(--d2l-color-gypsum);
-			width: 275px;
+			width: 100%;
 			height:12px;
 		}
 		/* this is necessary to avoid white bleed over rounded corners in chrome and safari */
