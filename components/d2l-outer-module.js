@@ -150,7 +150,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			d2l-activity-link[is-sidebar],
-			#header-container[is-sidebar]{
+			#header-container[is-sidebar] {
 				border-width: 1px 0 1px 1px;
 			}
 

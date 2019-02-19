@@ -75,7 +75,7 @@ PolymerElement
 		}
 
 		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-current:not(:hover),
-		d2l-activity-link[before-module].d2l-asv-current:not(:hover){
+		d2l-activity-link[before-module].d2l-asv-current:not(:hover) {
 			border-bottom: 1px solid var(--d2l-asv-border-color);
 		}
 

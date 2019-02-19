@@ -37,7 +37,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				--d2l-activity-link-border-color: var(--d2l-asv-border-color);
 			}
 
-			:host(:focus){
+			:host(:focus) {
 				outline: none;
 			}
 
@@ -85,7 +85,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				-webkit-line-clamp: 1; /* number of lines to show */
 			}
 
-			d2l-completion-requirement{
+			d2l-completion-requirement {
 				--d2l-activity-link-subtext-color: var(--d2l-color-tungsten);
 				color: var(--d2l-activity-link-subtext-color);
 			}
@@ -102,7 +102,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				color: var(--d2l-activity-link-text-color);
 			}
 
-			:host([inner-last]){
+			:host([inner-last]) {
 				border-radius: 0 0 8px 8px;
 			}
 
