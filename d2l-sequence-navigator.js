@@ -83,22 +83,23 @@ PolymerElement
 		<siren-entity href="[[rootHref]]" token="[[token]]" entity="{{_lessonEntity}}"></siren-entity>
 		<slot name="lesson-header"></slot>
 		<d2l-accordion auto-close="" class="module-content" id="sidebarContent" on-scroll="onSidebarScroll">
-
 			<ol class="module-item-list">
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
-					<li>
-						<template is="dom-if" if="[[!_isActivity(childLink)]]">
-							<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar()]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
-						</template>						
-						<template is="dom-if" if="[[_isActivity(childLink)]]">
-							<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" before-module$="[[isBeforeModule(subEntities, index)]]"></d2l-activity-link>
-						</template>
-					</li>
+					<template is="dom-if" if="[[childLink.href]]">
+						<li>
+							<template is="dom-if" if="[[!_isActivity(childLink)]]">
+								<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar()]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
+							</template>						
+							<template is="dom-if" if="[[_isActivity(childLink)]]">
+								<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" before-module$="[[isBeforeModule(subEntities, index)]]"></d2l-activity-link>
+							</template>
+						</li>
+					</template>
 				</template>
 			</ol>
 			<slot name="end-of-lesson"></slot>
 		</d2l-accordion>
-`;
+		`;
 	}
 
 	static get is() {
