@@ -75,8 +75,21 @@ PolymerElement
 		}
 
 		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-current:not(:hover),
-		d2l-activity-link[before-module].d2l-asv-current:not(:hover){
+		d2l-activity-link[before-module].d2l-asv-current:not(:hover) {
 			border-bottom: 1px solid var(--d2l-asv-border-color);
+		}
+
+		:host([role="navigation"]) d2l-activity-link {
+			border-width: 1px 0 1px 1px;
+		}
+		
+		:host([role="navigation"]) d2l-activity-link:hover,
+		:host([role="navigation"]) d2l-activity-link.d2l-asv-current:not(:hover) {
+			border-radius: 8px 0 0 8px;
+		}
+		li:first-of-type d2l-activity-link,
+		li:first-of-type d2l-outer-module {
+			margin-top: 0px;
 		}
 
 		</style>
