@@ -70,7 +70,11 @@ PolymerElement
 		}
 
 		:host([role="navigation"]) li:last-of-type>d2l-activity-link:hover,
-		d2l-activity-link[before-module]:hover {
+		d2l-activity-link[before-module]:hover,
+		:host([role="navigation"]) li:last-of-type>d2l-activity-link:focus,
+		d2l-activity-link[before-module]:focus,
+		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-focus-within,
+		d2l-activity-link[before-module].d2l-asv-focus-within {
 			border-bottom: 1px solid var(--d2l-asv-border-color);
 		}
 
@@ -84,7 +88,9 @@ PolymerElement
 		}
 		
 		:host([role="navigation"]) d2l-activity-link:hover,
-		:host([role="navigation"]) d2l-activity-link.d2l-asv-current:not(:hover) {
+		:host([role="navigation"]) d2l-activity-link.d2l-asv-current:not(:hover),
+		:host([role="navigation"]) d2l-activity-link:focus,
+		:host([role="navigation"]) d2l-activity-link.d2l-asv-focus-within {
 			border-radius: 8px 0 0 8px;
 		}
 		li:first-of-type d2l-activity-link,

@@ -96,7 +96,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
-			<div id="module-header" class$="[[_getIsSelected(currentActivity, entity, focusWithin)]]" on-click="_onHeaderClicked">
+			<div id="module-header" class$="[[_getIsSelected(currentActivity, entity, focusWithin)]] module-header" on-click="_onHeaderClicked">
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</a>

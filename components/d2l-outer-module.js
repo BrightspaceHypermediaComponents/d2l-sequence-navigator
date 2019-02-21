@@ -140,7 +140,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			li:last-of-type>d2l-activity-link[is-sidebar]:hover,
-			li:last-of-type>d2l-activity-link:hover:not([lastmodule]) {
+			li:last-of-type>d2l-activity-link:hover:not([lastmodule]),
+			li:last-of-type>d2l-activity-link[is-sidebar]:focus,
+			li:last-of-type>d2l-activity-link:focus:not([lastmodule]),
+			li:last-of-type>d2l-activity-link[is-sidebar].d2l-asv-focus-within,
+			li:last-of-type>d2l-activity-link.d2l-asv-focus-within:not([lastmodule]) {
 				border-bottom: 1px solid var(--d2l-asv-border-color);
 			}
 
@@ -157,7 +161,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			d2l-activity-link[is-sidebar]:hover,
 			#header-container[is-sidebar]:hover,
 			d2l-activity-link[is-sidebar].d2l-asv-current:not(:hover),
-			#header-container[is-sidebar].d2l-asv-current:not(:hover) {
+			#header-container[is-sidebar].d2l-asv-current:not(:hover),
+			d2l-activity-link[is-sidebar]:focus,
+			#header-container[is-sidebar]:focus,
+			d2l-activity-link[is-sidebar].d2l-asv-focus-within,
+			#header-container[is-sidebar].d2l-asv-focus-within {
 				border-radius: 8px 0 0 8px;
 			}
 
