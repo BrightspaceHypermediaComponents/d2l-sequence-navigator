@@ -28,8 +28,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
 			--d2l-lesson-header-border-color: var(--d2l-lesson-header-background-color);
-			display: table;
-			table-layout: fixed;
 			background-color: var(--d2l-lesson-header-background-color);
 			color: var(--d2l-lesson-header-text-color);
 			padding: 20px 28px 20px 25px;
@@ -38,6 +36,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			border-color:	var(--d2l-lesson-header-border-color);
 			border-radius: 0px 0px 0px 8px;
 			margin-bottom: -1px;
+			display: block;
 		}
 
 		:host(.d2l-asv-current) {
@@ -90,7 +89,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		progress.d2l-progress {
 			@apply --d2l-progress;
 			background-color: var(--d2l-color-gypsum);
-			width: 100%;
 			height:12px;
 		}
 		/* this is necessary to avoid white bleed over rounded corners in chrome and safari */
