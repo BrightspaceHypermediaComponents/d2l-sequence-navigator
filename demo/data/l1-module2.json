@@ -4,29 +4,34 @@
 	},
 	"entities": [
 		{
-			"class": ["sequence", "sequenced-activity", "available"],
-			"rel": ["https://api.brightspace.com/rels/sequenced-activity"],
+			"class": ["sequenced-activity", "available"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequenced-activity"],
 			"href": "data/m2-activity1.json"
 		},
 		{
-			"class": ["sequence", "sequenced-activity", "available"],
-			"rel": ["https://api.brightspace.com/rels/sequenced-activity"],
+			"class": ["sequenced-activity", "available"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequenced-activity"],
 			"href": "data/m2-activity2.json"
 		},
 		{
-			"class": ["sequence", "sequenced-activity", "available"],
-			"rel": ["https://api.brightspace.com/rels/sequenced-activity"],
+			"class": ["sequenced-activity", "available"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequenced-activity"],
 			"href": "data/m2-activity3.json"
 		},
 		{
-			"class": ["sequence", "sequenced-activity", "available"],
-			"rel": ["https://api.brightspace.com/rels/sequenced-activity"],
+			"class": ["sequenced-activity", "available"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequenced-activity"],
 			"href": "data/m2-activity4.json"
 		},
 		{
-			"class": ["sequence", "sequenced-activity", "available"],
-			"rel": ["https://api.brightspace.com/rels/sequenced-activity"],
+			"class": ["sequenced-activity", "available"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequenced-activity"],
 			"href": "data/m2-activity5.json"
+		},
+		{
+			"class": ["sequence", "sequence-description"],
+			"rel": ["self", "https://api.brightspace.com/rels/sequence-description"],
+			"href": "data/l2-module1.json"
 		},
 		{
 			"class": [

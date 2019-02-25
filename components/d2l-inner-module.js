@@ -59,17 +59,18 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				outline: none;
 			}
 
-			#header-container.d2l-asv-current {
+			#module-header.d2l-asv-current {
 				--d2l-inner-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-inner-module-text-color: var(--d2l-asv-selected-text-color);
 				--d2l-inner-module-border-color: var(--d2l-asv-border-color);
 			}
 
-			#header-container.d2l-asv-focus-within,
-			#header-container:focus,
-			#header-container:hover {
+			#module-header.d2l-asv-focus-within,
+			#module-header:focus,
+			#module-header:hover {
 				--d2l-inner-module-background-color: var(--d2l-asv-hover-color);
 				--d2l-inner-module-border-color: var(--d2l-asv-border-color);
+				--d2l-inner-module-text-color: var(--d2l-asv-text-color);
 			}
 
 			.module-title {
@@ -96,13 +97,12 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
-			<div id="module-header" class$="[[_getIsSelected(currentActivity, entity, focusWithin)]] style-scope d2l-inner-module" on-click="_onHeaderClicked">
+			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]]" on-click="_onHeaderClicked">
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</a>
 			</div>
 		</div>
-
 		<ol>
 			<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 				<li>
@@ -133,7 +133,6 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 		};
 	}
-
 	getSubEntities(entity) {
 		return entity && entity.getSubEntities()
 			.filter(subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || (subEntity.href && subEntity.hasClass('sequence-description')))
@@ -143,13 +142,12 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	_getHref(entity) {
 		return entity && entity.getLinkByRel && entity.getLinkByRel('self') || entity || '';
 	}
-
-	_getIsSelected(currentActivity, entity, focusWithin) {
-		const selected = entity && entity.getLinkByRel('self').href === currentActivity;
+	_getIsSelected(currentActivity, focusWithin) {
+		const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
 		if (selected) {
 			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-inner-module-current-activity', {detail: { href: this.href}}));
 		}
-		this._getTrueClass(focusWithin, selected);
+		return this._getTrueClass(focusWithin, selected);
 	}
 
 	_onHeaderClicked() {
