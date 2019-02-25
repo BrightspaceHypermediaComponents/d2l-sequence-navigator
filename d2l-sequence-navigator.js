@@ -86,7 +86,7 @@ PolymerElement
 		:host([role="navigation"]) d2l-activity-link {
 			border-width: 1px 0 1px 1px;
 		}
-		
+
 		:host([role="navigation"]) d2l-activity-link:hover,
 		:host([role="navigation"]) d2l-activity-link.d2l-asv-current:not(:hover),
 		:host([role="navigation"]) d2l-activity-link:focus,
@@ -108,7 +108,7 @@ PolymerElement
 						<li>
 							<template is="dom-if" if="[[!_isActivity(childLink)]]">
 								<d2l-outer-module href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" disabled="[[disabled]]" is-sidebar="[[isSidebar()]]" last-module="[[isLast(subEntities, index)]]"></d2l-outer-module>
-							</template>						
+							</template>
 							<template is="dom-if" if="[[_isActivity(childLink)]]">
 								<d2l-activity-link href="[[childLink.href]]" token="[[token]]" current-activity="{{href}}" before-module$="[[isBeforeModule(subEntities, index)]]"></d2l-activity-link>
 							</template>
@@ -182,11 +182,11 @@ PolymerElement
 	onSidebarScroll() {
 		const sidebarHeader = this.getSideBarHeader();
 		if (this.$.sidebarContent.scrollTop === 0) {
-			if (sidebarHeader.classList.contains('shadowed')) {
+			if (sidebarHeader && sidebarHeader.classList && sidebarHeader.classList.contains('shadowed')) {
 				sidebarHeader.classList.remove('shadowed');
 			}
 		} else {
-			if (!sidebarHeader.classList.contains('shadowed')) {
+			if (sidebarHeader && sidebarHeader.classList && !sidebarHeader.classList.contains('shadowed')) {
 				sidebarHeader.classList.add('shadowed');
 			}
 		}
