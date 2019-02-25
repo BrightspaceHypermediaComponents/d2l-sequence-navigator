@@ -98,7 +98,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
 			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]]" on-click="_onHeaderClicked">
-				<a on-click="_onHeaderClicked" tabindex="1" href="javascript:void(0)">
+				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</a>
 			</div>
@@ -144,6 +144,9 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 	_getIsSelected(currentActivity, focusWithin) {
 		const selected = this.entity && this.entity.getLinkByRel('self').href === currentActivity;
+		if (selected) {
+			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-inner-module-current-activity', {detail: { href: this.href}}));
+		}
 		return this._getTrueClass(focusWithin, selected);
 	}
 
