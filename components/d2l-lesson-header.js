@@ -197,9 +197,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	isLightTheme() {
 		var styles = document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars');
 		if (styles) {
-			styles = styles.split("--d2l-asv-selected-text-color")[1].split(",",1);
+			styles = styles.split('--d2l-asv-selected-text-color')[1].split(',', 1);
 			var selected_text_color = styles[0].substring(9, styles[0].length - 2);
-			if (selected_text_color === "d2l-color-ferrite") {
+			if (selected_text_color === 'd2l-color-ferrite') {
 				return 'light-theme';
 			}
 		}
