@@ -23,7 +23,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	static get template() {
 		return html`
-		<style>
+		<style class$="styles">
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
@@ -195,15 +195,11 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
 	}
 	isLightTheme() {
-		var styles = document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars');
-		if (styles) {
-			styles = styles.split('--d2l-asv-selected-text-color')[1].split(',', 1);
-			var selected_text_color = styles[0].substring(9, styles[0].length - 2);
-			if (selected_text_color === 'd2l-color-ferrite') {
-				return 'light-theme';
-			}
+		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
+		if (styles && styles['--d2l-asv-selected-text-color'] === 'var(--d2l-color-ferrite)') {
+			return 'light-theme';
 		}
-		return '';
+		return;
 	}
 }
 
