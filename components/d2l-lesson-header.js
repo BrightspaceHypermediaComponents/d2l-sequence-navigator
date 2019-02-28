@@ -115,12 +115,51 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12837456/*/
 			background-color: var(--d2l-color-celestine, #006fbf);
 		}
+		
+		:host(.d2l-asv-current) progress.d2l-progress {
+			background-color: transparent;
+			border: 1px solid var(--d2l-asv-selected-text-color);
+			box-shadow: none;
+		}
+		:host(.d2l-asv-current) progress.d2l-progress::-webkit-progress-value {
+			background-color: var(--d2l-asv-selected-text-color);
+		}
+		:host(.d2l-asv-current) progress.d2l-progress::-moz-progress-bar {
+			background-color: var(--d2l-asv-selected-text-color);
+		}
+		:host(.d2l-asv-current) progress.d2l-progress::-ms-fill {
+			background-color: var(--d2l-asv-selected-text-color, #fff);
+		}
+		/* Added light-theme id as a workaround for Edge issue with variables in -ms-fill
+		https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12837456/ */
+		:host(.d2l-asv-current) progress.d2l-progress#light-theme::-ms-fill {
+			background-color: var(--d2l-asv-selected-text-color, #565a5c);
+		}
+
+		:host(.d2l-asv-focus-within) progress.d2l-progress,
+		:host(:hover) progress.d2l-progress {
+			background-color: transparent;
+			border: 1px solid var(--d2l-asv-text-color);
+			box-shadow: none;
+		}
+		:host(.d2l-asv-focus-within) progress.d2l-progress::-webkit-progress-value,
+		:host(:hover) progress.d2l-progress::-webkit-progress-value {
+			background-color: var(--d2l-asv-text-color);
+		}
+		:host(.d2l-asv-focus-within) progress.d2l-progress::-moz-progress-bar,
+		:host(:hover) progress.d2l-progress::-moz-progress-bar {
+			background-color: var(--d2l-asv-text-color);
+		}
+		:host(.d2l-asv-focus-within) progress.d2l-progress::-ms-fill,
+		:host(:hover) progress.d2l-progress::-ms-fill {
+			background-color: var(--d2l-asv-text-color, #565a5c);
+		}
 
 		</style>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div>
 				<span class="module-title">[[entity.properties.title]]</span>
-				<progress class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
+				<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
 				<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 				<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
 			</div>
@@ -154,6 +193,13 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 	_onHeaderClicked() {
 		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
+	}
+	isLightTheme() {
+		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
+		if (styles && styles['--d2l-asv-selected-text-color'] === 'var(--d2l-color-ferrite)') {
+			return 'light-theme';
+		}
+		return;
 	}
 }
 
