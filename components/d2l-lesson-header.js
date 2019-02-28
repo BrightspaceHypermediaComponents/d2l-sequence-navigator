@@ -23,7 +23,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	static get template() {
 		return html`
-		<style class$="styles">
+		<style>
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
