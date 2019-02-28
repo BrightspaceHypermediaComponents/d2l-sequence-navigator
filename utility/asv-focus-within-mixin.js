@@ -18,18 +18,19 @@ export function ASVFocusWithinMixin(superClass) {
 			super.ready();
 			this.addEventListener('focus', this._focusWithinOnFocus);
 			this.addEventListener('blur', this._focusWithinOnBlur);
-			this.addEventListener('defocus-parent', this._focusWithinOnBlur);
+			this.addEventListener('defocus-parent', ()=>{ this.focusWithin = false; });
 		}
 
-		_focusWithinOnFocus() {
-			var event = new CustomEvent('defocus-parent', {bubbles: true, composed: true});
+		_focusWithinOnFocus(e) {
+			e.stopPropagation(); //stop focus event from propagating up the parent components
+			var event = new CustomEvent('defocus-parent', { bubbles: true, composed: true });
 			this.dispatchEvent(event);
 			this.focusWithin = true;
 		}
 
-		_focusWithinOnBlur() {
+		_focusWithinOnBlur(e) {
+			e.stopPropagation(); //stop focus event from propagating up the parent components
 			this.focusWithin = false;
-
 		}
 
 		_focusWithinClass(focusWithin) {
