@@ -271,6 +271,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		}
 		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('opened', '');
 		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('disabled', '');
+		this.shadowRoot.querySelector('d2l-accordion-collapse').setAttribute('aria-disabled', true);
 	}
 
 	connectedCallback() {
