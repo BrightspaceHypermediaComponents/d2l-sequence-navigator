@@ -106,15 +106,15 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			d2l-accordion-collapse > a {
 				outline: none;
 			}
-			#header-container.empty-module-header-container, 
+			#header-container.empty-module-header-container,
 			d2l-accordion-collapse:not([opened]) #header-container {
 				border-bottom: 1px solid var(--d2l-color-mica);
 			}
-			#header-container.empty-module-header-container:hover, 
+			#header-container.empty-module-header-container:hover,
 			d2l-accordion-collapse:not([opened]) #header-container:hover {
 				border-bottom: var(--d2l-asv-border-color) solid 1px;
 			}
-			#header-container.empty-module-header-container.d2l-asv-current:not(:hover), 
+			#header-container.empty-module-header-container.d2l-asv-current:not(:hover),
 			d2l-accordion-collapse:not([opened]) #header-container.d2l-asv-current:not(:hover) {
 				border-bottom: 1px solid var(--d2l-asv-border-color);
 			}
@@ -199,7 +199,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li on-click="_onActivityClicked" class$="[[_padOnActivity(childLink)]]">
 						<template is="dom-if" if="[[_isActivity(childLink)]]">
-							<d2l-activity-link last-module$="[[lastModule]]" is-sidebar$="[[isSidebar]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
+							<d2l-activity-link visible="[[accordionOpened]]" last-module$="[[lastModule]]" is-sidebar$="[[isSidebar]]" href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-activity-link-current-activity="childIsActiveEvent"></d2l-activity-link>
 						</template>
 						<template is="dom-if" if="[[!_isActivity(childLink)]]">
 							<d2l-inner-module href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-inner-module-current-activity="childIsActiveEvent"></d2l-inner-module>
@@ -257,8 +257,15 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			lastModule: {
 				type: Boolean,
 				value: false
+			},
+			accordionOpened: {
+				type: Boolean,
 			}
 		};
+	}
+	ready() {
+		super.ready();
+		this.addEventListener('d2l-accordion-collapse-state-changed', (e)=> {this.accordionOpened = e.detail.opened;});
 	}
 
 	_accordionCollapseClass(focusWithin) {

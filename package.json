@@ -42,13 +42,14 @@
     "@polymer/polymer": "^3.0.0",
     "d2l-accordion": "BrightspaceUI/accordion#semver:^1",
     "d2l-colors": "BrightspaceUI/colors#semver:^4",
-    "siren-entity": "BrightspaceHypermediaComponents/siren-entity#semver:^1",
-    "d2l-typography": "BrightspaceUI/typography#semver:^7",
     "d2l-icons": "BrightspaceUI/icons#semver:^6",
     "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
     "d2l-polymer-siren-behaviors": "Brightspace/polymer-siren-behaviors#semver:^1",
-    "d2l-progress": "BrightspaceUI/progress#semver:^1"
+    "d2l-progress": "BrightspaceUI/progress#semver:^1",
+    "d2l-typography": "BrightspaceUI/typography#semver:^7",
+    "fastdom": "^1.0.9",
+    "siren-entity": "BrightspaceHypermediaComponents/siren-entity#semver:^1"
   },
   "lint-staged": {
     "*.html": [
