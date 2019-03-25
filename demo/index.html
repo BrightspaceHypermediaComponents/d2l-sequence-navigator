@@ -1,122 +1,105 @@
 <!doctype html>
-<html lang="en" style="font-size:20px; font-family: 'Lato', sans-serif;" data-asv-css-vars='{"--d2l-asv-primary-color":"#990000","--d2l-asv-accent-color":"rgb(142,124,195)","--d2l-asv-text-color":"var(--d2l-color-ferrite)","--d2l-asv-selected-text-color":"var(--d2l-color-white)","--d2l-asv-hover-color":"rgba(142,124,195, 0.18)","--d2l-asv-border-color":"transparent"}'>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-		<title>d2l-sequence-navigator demo</title>
-		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-		<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
-		<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
-		<script type="module" src="../d2l-sequence-navigator.js"></script>
-		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
-		<script type="module" src="../components/d2l-lesson-header.js"></script>
-		<script type="module" src="../components/d2l-sequence-end.js"></script>
-		<!-- FIXME(polymer-modulizer):
-		These imperative modules that innerHTML your HTML are
-		a hacky way to be sure that any mixins in included style
-		modules are ready before any elements that reference them are
-		instantiated, otherwise the CSS @apply mixin polyfill won't be
-		able to expand the underlying CSS custom properties.
-		See: https://github.com/Polymer/polymer-modulizer/issues/154
-		-->
-	<script type="module">
-const $_documentContainer = document.createElement('template');
+<html lang="en" style="font-size:20px; font-family: 'Lato', sans-serif;"
+	data-asv-css-vars='{"--d2l-asv-primary-color":"#990000","--d2l-asv-accent-color":"rgb(142,124,195)","--d2l-asv-text-color":"var(--d2l-color-ferrite)","--d2l-asv-selected-text-color":"var(--d2l-color-white)","--d2l-asv-hover-color":"rgba(142,124,195, 0.18)","--d2l-asv-border-color":"transparent"}'>
 
-$_documentContainer.innerHTML = `<custom-style>
-			<style is="custom-style" include="demo-pages-shared-styles"></style>
-			<style>
-				.sidebar {
-					width: 330px;
-					height: 800px;
-					background: white;
-				}
-				html {
-					--d2l-asv-primary-color: #990000;
-					--d2l-asv-accent-color: rgb(142,124,195);
-					--d2l-asv-text-color: var(--d2l-color-ferrite);
-					--d2l-asv-selected-text-color: white;
-					--d2l-asv-hover-color: rgba(142,124,195, 0.18);
-					--d2l-asv-border-color: transparent;
-				}
-			</style>
-		</custom-style>`;
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+	<title>d2l-sequence-navigator demo</title>
+	<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+	<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+	<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+	<script type="module" src="../d2l-sequence-navigator.js"></script>
+	<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+	<script type="module" src="../components/d2l-lesson-header.js"></script>
+	<script type="module" src="../components/d2l-sequence-end.js"></script>
 
-document.body.appendChild($_documentContainer.content);
-</script>
-		<script type="module">
-const $_documentContainer = document.createElement('template');
+	<custom-style>
+		<style is="custom-style" include="demo-pages-shared-styles"></style>
+		<style>
+			.sidebar {
+				width: 330px;
+				height: 800px;
+				background: white;
+			}
 
-$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
-			<style is="custom-style" include="d2l-typography"></style>
-			<style>
-				.body {
-					@apply --d2l-typography;
-				}
-			</style>
-		</custom-style>`;
+			html {
+				--d2l-asv-primary-color: #990000;
+				--d2l-asv-accent-color: rgb(142, 124, 195);
+				--d2l-asv-text-color: var(--d2l-color-ferrite);
+				--d2l-asv-selected-text-color: white;
+				--d2l-asv-hover-color: rgba(142, 124, 195, 0.18);
+				--d2l-asv-border-color: transparent;
+			}
+		</style>
+	</custom-style>
+	<custom-style include="d2l-typography">
+		<style is="custom-style" include="d2l-typography"></style>
+		<style>
+			.body {
+				@apply --d2l-typography;
+			}
+		</style>
+	</custom-style>
 
-document.body.appendChild($_documentContainer.content);
-</script>
-	</head>
-	<body class="d2l-typography">
-		<script type="module">
-const $_documentContainer = document.createElement('template');
+<body class="d2l-typography">
 
-$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
-			<h3>Simple sequence-navigator</h3>
-			<demo-snippet>
-				<template>
-					<h4>Sequence navigator in a sidebar</h4>
-					<div class="sidebar">
-						<d2l-sequence-navigator href="data/m2-activity2.json" token="foozleberries" current-activity="data/m2-activity2.json">
-							<d2l-lesson-header slot="lesson-header" href="data/lesson1.json" token="token">
-							</d2l-lesson-header>
-							<d2l-sequence-end slot="end-of-lesson" href="data/sequence-end.json" text="End of Sequence" token="foozleberries"></d2l-sequence-end>
-						</d2l-sequence-navigator>
-					</div>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Outer Module</h4>
-					<d2l-outer-module href="data/l1-module2.json" token="foozleberries">
-					</d2l-outer-module>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Inner Module</h4>
-					<d2l-inner-module href="data/l1-module2.json" token="foozleberries">
-					</d2l-inner-module>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Incomplete Activity</h4>
-					<d2l-activity-link href="data/activity1.json" token="foozleberries">
-					</d2l-activity-link>
-
-					<h4>Complete Activity</h4>
-					<d2l-activity-link href="data/activity2.json" token="foozleberries">
-					</d2l-activity-link>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<h4>Empty Module</h4>
-					<d2l-outer-module href="data/empty-module.json" token="emptytoken">
+	<div class="vertical-section-container centered">
+		<h3>Simple sequence-navigator</h3>
+		<demo-snippet>
+			<template>
+				<h4>Sequence navigator in a sidebar</h4>
+				<div class="sidebar">
+					<d2l-sequence-navigator href="data/m2-activity2.json" token="foozleberries"
+						current-activity="data/m2-activity2.json">
+						<d2l-lesson-header slot="lesson-header" href="data/lesson1.json" token="token">
+						</d2l-lesson-header>
+						<d2l-sequence-end slot="end-of-lesson" href="data/sequence-end.json" text="End of Sequence"
+							token="foozleberries"></d2l-sequence-end>
+					</d2l-sequence-navigator>
+				</div>
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<h4>Outer Module</h4>
+				<d2l-outer-module href="data/l1-module2.json" token="foozleberries">
 				</d2l-outer-module>
-				</template>
-			</demo-snippet>
-			<demo-snippet>
-				<template>
-					<d2l-lesson-header href="data/lesson1.json" token="token">
-					</d2l-lesson-header>
-				</template>
-			</demo-snippet>
-		</div>`;
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<h4>Inner Module</h4>
+				<d2l-inner-module href="data/l1-module2.json" token="foozleberries">
+				</d2l-inner-module>
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<h4>Incomplete Activity</h4>
+				<d2l-activity-link href="data/activity1.json" token="foozleberries">
+				</d2l-activity-link>
 
-document.body.appendChild($_documentContainer.content);
-</script>
-	</body>
+				<h4>Complete Activity</h4>
+				<d2l-activity-link href="data/activity2.json" token="foozleberries">
+				</d2l-activity-link>
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<h4>Empty Module</h4>
+				<d2l-outer-module href="data/empty-module.json" token="emptytoken">
+				</d2l-outer-module>
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<d2l-lesson-header href="data/lesson1.json" token="token">
+				</d2l-lesson-header>
+			</template>
+		</demo-snippet>
+	</div>
+	</script>
+</body>
+
 </html>
