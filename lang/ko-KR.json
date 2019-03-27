@@ -1,0 +1,8 @@
+{
+   "completed" : "완료됨",
+   "completedMofN" : "{completed}/{total} 완료됨",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "면제",
+   "optional" : "선택사항",
+   "requirementsCompleted" : "{completed} / {total} 요구사항 완료됨"
+}
