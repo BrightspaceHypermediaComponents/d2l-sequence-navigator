@@ -1,0 +1,8 @@
+{
+   "completed" : "已完成",
+   "completedMofN" : "Completed {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "免除",
+   "optional" : "可选",
+   "requirementsCompleted" : "{completed} of {total} requirements completed"
+}

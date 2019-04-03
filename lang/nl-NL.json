@@ -1,0 +1,8 @@
+{
+   "completed" : "voltooid",
+   "completedMofN" : "{completed}/{total} voltooid",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Vrijstellen",
+   "optional" : "Optioneel",
+   "requirementsCompleted" : "{completed} van {total} vereisten voltooid"
+}

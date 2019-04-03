@@ -1,0 +1,8 @@
+{
+   "completed" : "slutförda",
+   "completedMofN" : "Slutförda {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Undantagen",
+   "optional" : "Valfri",
+   "requirementsCompleted" : "{completed} av {total} krav slutförda"
+}
