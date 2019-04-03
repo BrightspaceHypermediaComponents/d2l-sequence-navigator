@@ -1,0 +1,8 @@
+{
+   "completed" : "تم الإكمال",
+   "completedMofN" : "تم الإكمال {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "إعفاء",
+   "optional" : "اختياري",
+   "requirementsCompleted" : "اكتمال {completed} من أصل {total} من المتطلبات"
+}

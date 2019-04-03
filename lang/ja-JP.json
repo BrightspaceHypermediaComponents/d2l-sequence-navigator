@@ -1,0 +1,8 @@
+{
+   "completed" : "完了",
+   "completedMofN" : "{completed}/{total} 完了",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "免除",
+   "optional" : "オプション",
+   "requirementsCompleted" : "{total} 件の要件のうち、{completed} 件が完了"
+}

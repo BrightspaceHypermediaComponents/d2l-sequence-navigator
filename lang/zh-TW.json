@@ -1,1 +1,8 @@
-{}
+{
+   "completed" : "已完成",
+   "completedMofN" : "已完成 {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "免除",
+   "optional" : "選擇性",
+   "requirementsCompleted" : "已完成 {completed} 項要求 (共有 {total} 項)"
+}
