@@ -1,0 +1,8 @@
+{
+   "completed" : "concluído",
+   "completedMofN" : "Concluído {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Isento",
+   "optional" : "Opcional",
+   "requirementsCompleted" : "{completed} de {total} requisitos concluídos"
+}

@@ -1,0 +1,8 @@
+{
+   "completed" : "tamamlandı",
+   "completedMofN" : "{completed}/{total} tamamlandı",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Muaf Tut",
+   "optional" : "İsteğe Bağlı",
+   "requirementsCompleted" : "{completed}/{total} gereklilik tamamlandı"
+}
