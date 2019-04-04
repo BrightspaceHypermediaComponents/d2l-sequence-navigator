@@ -13,7 +13,7 @@
     "test": "polymer test --skip-plugin sauce",
     "test-p": "polymer test --skip-plugin sauce -p",
     "locales": "gulp && npm run gen:localize",
-    "prestart": "npm run locales",
+    "prestart": "npm run locales && polymer analyze > analysis.json",
     "gen:localize": "plop localize",
     "start": "polymer serve"
   },
