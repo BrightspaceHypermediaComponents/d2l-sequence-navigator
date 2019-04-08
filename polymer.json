@@ -2,5 +2,11 @@
   "npm": true,
   "lint": {
     "rules": ["polymer-3"]
-  }
+  },
+  "entrypoint": "d2l-sequence-navigator.js",
+  "fragments": [
+    "components/*.js",
+    "utility/*.js",
+    "localize-behavior.js"
+  ]
 }

@@ -4,11 +4,22 @@
 
 [Polymer-3](https://www.polymer-project.org)-based web component for a D2L sequence navigator.
 
-
 ## Installation
 
 ```shell
-npm install d2l-sequence-navigator
+npm install
+```
+
+To start a local web server that hosts the demo page and tests:
+
+```shell
+polymer analyze > analysis.json && polymer serve
+```
+
+The demo will be available at http://127.0.0.1:port/components/d2l-sequence-navigator/demo/. Port is printed to console after the server starts. Alternatively, you can run the following command and then add /demo to the end of the URL:
+
+```shell
+polymer analyze > analysis.json && polymer serve --open
 ```
 
 ## Usage
