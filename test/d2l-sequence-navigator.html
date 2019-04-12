@@ -17,10 +17,20 @@
 				<d2l-sequence-navigator href="data/sample2.json" token="bamboozle"></d2l-sequence-navigator>
 			</template>
 		</test-fixture>
+		<test-fixture id="AvailabilityTestFixture">
+			<template>
+				<d2l-sequence-navigator href="data/unit3.json" token="bamboozle"></d2l-sequence-navigator>
+			</template>
+		</test-fixture>
 
 		<script type="module">
 import '@polymer/polymer/polymer-legacy.js';
 import '../d2l-sequence-navigator.js';
+async function delay(time) {
+	return new Promise(resolve => {
+		setTimeout(resolve, time);
+	});
+}
 describe('d2l-sequence-navigator for the root', () => {
 	it('should instantiate the element with default properties', () => {
 		const element = fixture('RootTestFixture');
@@ -31,6 +41,17 @@ describe('d2l-sequence-navigator for the root', () => {
 		expect(element.token)
 			.to
 			.equal('bamboozle');
+	});
+	it('should filter out unavailable activities', async() => {
+		const element = fixture('AvailabilityTestFixture');
+		await delay(250);
+		const activityList = element.shadowRoot.querySelector('ol').querySelectorAll('li');
+		expect(activityList.length)
+			.to
+			.equal(1);
+		expect(activityList[0].querySelector('d2l-activity-link').href)
+			.to
+			.equal('data/unit3-activity2.json');
 	});
 });
 </script>

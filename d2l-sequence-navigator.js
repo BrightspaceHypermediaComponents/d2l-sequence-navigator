@@ -167,7 +167,7 @@ PolymerElement
 	getSubEntities(entity) {
 		return entity && entity.getSubEntities()
 			.filter(subEntity =>
-				(subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href)
+				((subEntity.properties && Object.keys(subEntity.properties).length > 0) || subEntity.href) && !subEntity.hasClass('unavailable'))
 			.map(this._getHref);
 	}
 
