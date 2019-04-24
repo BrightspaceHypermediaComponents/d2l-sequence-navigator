@@ -1,8 +1,8 @@
 {
    "completed" : "terminé",
-   "completedMofN" : "{Completed}/{total} terminé(s)",
+   "completedMofN" : "{completed}/{total} terminés",
    "countStatus" : "{completed}/{total}",
-   "exempt" : "Exemption",
+   "exempt" : "Dispenser",
    "optional" : "Facultatif",
-   "requirementsCompleted" : "{completed} de {total} exigences terminées"
+   "requirementsCompleted" : "{completed} exigences remplies sur {total}"
 }
