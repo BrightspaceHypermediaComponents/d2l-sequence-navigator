@@ -1,0 +1,8 @@
+{
+   "completed" : "fuldført",
+   "completedMofN" : "Fuldført {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Foretag undtagelse",
+   "optional" : "Valgfri",
+   "requirementsCompleted" : "{completed} af {total} krav fuldført"
+}
