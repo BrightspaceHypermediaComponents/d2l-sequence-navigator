@@ -14,6 +14,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes D2L.Polymer.Mixins.PolymerASVLaunchMixin
 @mixes D2L.Polymer.Mixins.ASVFocusWithinMixin
 */
+
 class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(CompletionStatusMixin())) {
 	static get template() {
 		return html`
@@ -106,15 +107,15 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			d2l-accordion-collapse > a {
 				outline: none;
 			}
-			#header-container.empty-module-header-container, 
+			#header-container.empty-module-header-container,
 			d2l-accordion-collapse:not([opened]) #header-container {
 				border-bottom: 1px solid var(--d2l-color-mica);
 			}
-			#header-container.empty-module-header-container:hover, 
+			#header-container.empty-module-header-container:hover,
 			d2l-accordion-collapse:not([opened]) #header-container:hover {
 				border-bottom: var(--d2l-asv-border-color) solid 1px;
 			}
-			#header-container.empty-module-header-container.d2l-asv-current:not(:hover), 
+			#header-container.empty-module-header-container.d2l-asv-current:not(:hover),
 			d2l-accordion-collapse:not([opened]) #header-container.d2l-asv-current:not(:hover) {
 				border-bottom: 1px solid var(--d2l-asv-border-color);
 			}

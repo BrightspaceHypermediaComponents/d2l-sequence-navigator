@@ -12,6 +12,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @mixes D2L.Polymer.Mixins.PolymerASVLaunchMixin
 @mixes D2L.Polymer.Mixins.ASVFocusWithinMixin
 */
+
 class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(CompletionStatusMixin())) {
 	static get template() {
 		return html`

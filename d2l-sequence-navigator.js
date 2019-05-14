@@ -1,13 +1,3 @@
-/**
-'d2l-sequence-navigator'
-
-@demo demo/index.html
-*/
-/*
-	FIXME(polymer-modulizer): the above comments were extracted
-	from HTML and may be out of place here. Review them and
-	then delete this comment!
-*/
 import '@polymer/polymer/polymer-legacy.js';
 
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
@@ -23,6 +13,7 @@ import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 @memberOf D2L.Polymer.Mixins;
 @mixes SirenEntityMixin
 */
+
 class D2LSequenceNavigator extends mixinBehaviors([
 	D2L.PolymerBehaviors.Siren.EntityBehavior,
 	LocalizeBehavior
