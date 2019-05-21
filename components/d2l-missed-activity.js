@@ -47,7 +47,7 @@ class D2LMissedActivity extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Comple
 
 		</style>
 
- 		<d2l-accordion-collapse title="You have [[numberOfMissedActivity]] items left in this module." flex opened>
+ 		<d2l-accordion-collapse title="[[localize('missedItems', 'numberOfMissedActivities', numberOfMissedActivity)]]" flex opened>
 		<ol>
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
 					<li>
