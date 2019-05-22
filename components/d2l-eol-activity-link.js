@@ -91,7 +91,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
 			</template>
 			<div class="d2l-activity-link-title">
-				<a href="[[href]]" token="[[token]]">
+				<a href="javascript:void(0)" token="[[token]]" on-click="_onClick">
 					[[entity.properties.title]]
 				</a>
 			</div>
@@ -104,20 +104,29 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 	}
 	static get properties() {
 		return {
-			currentActivity: {
-				type: String,
-				value: '',
-				notify: true
-			},
 			hasIcon: {
 				type: Boolean,
 				computed: '_hasIcon(entity)'
 			},
+			href: {
+				type: String,
+				reflectToAttribute: true,
+			}
 		};
 	}
 
 	ready() {
 		super.ready();
+	}
+
+	_onClick() {
+		const event = new CustomEvent('hrefUpdated', {
+			detail: { href: this.href },
+			composed: true,
+			bubbles: true
+		});
+
+		this.dispatchEvent(event);
 	}
 
 	_hasIcon(entity) {
