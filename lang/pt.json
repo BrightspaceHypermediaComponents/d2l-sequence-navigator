@@ -1,8 +1,9 @@
 {
-	"completed": "concluído",
-	"completedMofN": "Concluído {completed}/{total}",
-	"countStatus": "{completed}/{total}",
-	"exempt": "Isento",
-	"optional": "Opcional",
-	"requirementsCompleted": "{completed} de {total} requisitos concluídos"
+   "completed" : "concluído(s)",
+   "completedMofN" : "Concluído {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Isento",
+   "missedItems" : "Você tem outros {numberOfMissedActivities, plural, one {# item} {# itens}} restantes neste módulo.",
+   "optional" : "Opcional",
+   "requirementsCompleted" : "{completed} de {total, plural, one {# requisito} other {# requisitos}} concluído(s)"
 }

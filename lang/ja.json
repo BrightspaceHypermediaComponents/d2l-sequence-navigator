@@ -1,8 +1,9 @@
 {
-	"completed": "完了",
-	"completedMofN": "{completed}/{total} 完了",
-	"countStatus": "{completed}/{total}",
-	"exempt": "免除",
-	"optional": "オプション",
-	"requirementsCompleted": "{total} 件の要件のうち、{completed} 件が完了"
+   "completed" : "項目完了",
+   "completedMofN" : "{completed}/{total} 完了",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "免除",
+   "missedItems" : "このモジュールに {numberOfMissedActivities, plural, one {# 項目} other {# 項目}} 残っています。",
+   "optional" : "オプション",
+   "requirementsCompleted" : "{total, plural, one {必須 # 項目} other {必須 # 項目}}のうち {completed} 項目完了"
 }

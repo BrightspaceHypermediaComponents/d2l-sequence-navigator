@@ -3,6 +3,7 @@
    "completedMofN" : "Fuldført {completed}/{total}",
    "countStatus" : "{completed}/{total}",
    "exempt" : "Foretag undtagelse",
+   "missedItems" : "Du har {numberOfMissedActivities, plural, one {# element} other {# elementer}} tilbage i dette modul.",
    "optional" : "Valgfri",
-   "requirementsCompleted" : "{completed} af {total} krav fuldført"
+   "requirementsCompleted" : "{completed} af {total, plural, one {# krav} other {# krav}} fuldført"
 }

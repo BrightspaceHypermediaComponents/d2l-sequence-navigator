@@ -1,8 +1,9 @@
 {
-	"completed": "slutförda",
-	"completedMofN": "Slutförda {completed}/{total}",
-	"countStatus": "{completed}/{total}",
-	"exempt": "Undantagen",
-	"optional": "Valfri",
-	"requirementsCompleted": "{completed} av {total} krav slutförda"
+   "completed" : "slutförda",
+   "completedMofN" : "Slutförda {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "exempt" : "Undantagen",
+   "missedItems" : "Du har {numberOfMissedActivities, plural, one {# objekt} other {# objekt}} kvar i den här modulen.",
+   "optional" : "Valfri",
+   "requirementsCompleted" : "{completed} av {total, plural, one {# krav} other {# krav}} slutförda"
 }
