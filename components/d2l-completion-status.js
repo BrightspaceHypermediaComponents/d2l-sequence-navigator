@@ -7,6 +7,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 @memberOf window.D2L.Polymer.Mixins;
 @mixes CompletionStatusMixin
 */
+
 class D2LCompletionStatus extends CompletionStatusMixin() {
 	static get template() {
 		return html`

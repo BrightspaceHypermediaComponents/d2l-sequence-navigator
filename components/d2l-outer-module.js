@@ -54,6 +54,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
 			}
 
+			.start-date-text {
+				margin: 0;
+				text-align: right;
+			}
+
 			.module-header {
 				display: table;
 				table-layout: fixed;
@@ -187,6 +192,9 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 							<span class="completedStatus">
 								<d2l-icon aria-label$="[[localize('completed')]]" icon="d2l-tier1:check"></d2l-icon>
 							</span>
+						</template>
+						<template is="dom-if" if="[[!showCheckmark]]">
+							<h6 class="start-date-text" aria-label$="[[entity.properties.startDateText]]" >[[entity.properties.startDateText]]</h6>
 						</template>
 						<template is="dom-if" if="[[showOptional]]">
 							<span class="optionalStatus">
