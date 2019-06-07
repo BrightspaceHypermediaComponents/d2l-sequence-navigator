@@ -2,6 +2,7 @@
    "completed" : "terminé",
    "completedMofN" : "{completed}/{total} terminés",
    "countStatus" : "{completed}/{total}",
+   "due":"Dû le",
    "exempt" : "Dispenser",
    "missedItems" : "Vous avez {numberOfMissedActivities, plural, one {# item} other {# items}} restantes dans ce module.",
    "optional" : "Facultatif",

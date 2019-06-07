@@ -98,12 +98,6 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				text-align: right;
 			}
 
-			.due-date-text {
-				color: red;
-				margin: 0;
-				text-align:right;
-			}
-
 			d2l-icon {
 				padding-top: 3px;
 				color: var(--d2l-activity-link-text-color);
@@ -135,9 +129,6 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			</div>
 			<d2l-completion-status href="[[href]]" token="[[token]]">
 			</d2l-completion-status>
-			<template is="dom-if" if="[[showDueDate]]">
-				<h6 class="due-date-text">[[entity.properties.dueDateText]]</h6>
-			</template>
 		</div>
 `;
 	}
@@ -168,10 +159,6 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			completionStatus: {
 				type: String,
 				computed: '_getCompletionStatus(entity)',
-			},
-			showDueDate: {
-				type: Boolean,
-				computed: '_shouldShowDueDate(entity, completionStatus)',
 			},
 		};
 	}
@@ -229,10 +216,6 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			this.dispatchEvent(new CustomEvent('sequencenavigator-d2l-activity-link-current-activity', {detail: { href: this.href}}));
 		}
 		return this._getTrueClass(focusWithin, selected);
-	}
-
-	_shouldShowDueDate(entity, completionStatus) {
-		return completionStatus === 'incomplete' && entity.properties.dueDateText;
 	}
 }
 customElements.define(D2LActivityLink.is, D2LActivityLink);
