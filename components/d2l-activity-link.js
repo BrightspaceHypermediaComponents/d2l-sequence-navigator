@@ -155,7 +155,11 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				type: String,
 				computed: '_getIsSelected(currentActivity, entity, focusWithin)',
 				reflectToAttribute: true
-			}
+			},
+			completionStatus: {
+				type: String,
+				computed: '_getCompletionStatus(entity)',
+			},
 		};
 	}
 	static get observers() {
