@@ -25,7 +25,7 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 				 display: flex;
 			}
 			d2l-status-indicator{
-				margin-right: 8px;
+				margin-right: 4px;
 			}
 
 		</style>
@@ -34,9 +34,11 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 			<template is="dom-if" if="[[isOverDue]]">
 				<d2l-status-indicator state="alert" text="overdue"></d2l-status-indicator>
 			</template>
-			<div id="dueDate">[[localize('due')]] [[date]]</div>
+
+			<div id="dueDate">[[dueDate]]</div>
+
 			<template is="dom-if" if="[[shouldShowBullet]]">
-				<d2l-icon  icon="d2l-tier1:bullet"></d2l-icon>
+				<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
 			</template>
 			<template is="dom-if" if="[[isExempt]]">
 				<div class="exempt">
@@ -58,6 +60,10 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 	static get is() {
 		return 'd2l-completion-requirement';
 	}
+	static get behaviors() {
+		D2L.PolymerBehaviors.LocalizeBehavior;
+	}
+
 	static get properties() {
 		return {
 			completionRequirement: {
@@ -71,22 +77,17 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 			isOptional: {
 				type: Boolean
 			},
-			date: {
+			dueDate: {
 				type: String,
 				computed: 'getFormatedDate(entity)'
 			},
 			isOverDue:{
 				type: Boolean,
-				computed: '_setOverDue(entity)',
-				default: false
-			},
-			shouldShowDuedate: {
-				type: Boolean,
-				computed: '_showDueDate(entity)'
+				computed: '_setOverDue(entity,isOptional,isExempt)',
 			},
 			shouldShowBullet: {
 				type: Boolean,
-				computed: '_showBullet(shouldShowDuedate)'
+				computed: '_showBullet(dueDate,isOptional,isExempt)'
 			}
 		};
 	}
@@ -105,33 +106,38 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 		}
 	}
 
-	_showBullet(shouldShowDuedate) {
-		return shouldShowDuedate && (this.isExempt || this.isOptional);
+	_showBullet(dueDate, optional, exempt) {
+		return dueDate && (optional || exempt);
 	}
-	_showDueDate(entity) {
-		return entity && entity.properties && entity.properties.dueDate;
-	}
-	_setOverDue(entity) {
+
+	_setOverDue(entity, optional, exempt) {
 		if (entity && entity.properties && entity.properties.overDue) {
-			this.$$('#dueDate').style = 'color: var(--d2l-color-cinnabar); ';
+			if (optional === false && exempt === false) {
+				this.$$('#dueDate').style = 'color: var(--d2l-color-cinnabar)';
+			}
 			return true;
 		}
 		return false;
 	}
 
 	getFormatedDate(entity) {
-		if (!entity || !entity.properties || !entity.properties.date) {
+		if (!entity || !entity.properties || !entity.properties.dueDate) {
 			return '';
 		}
-		const day = entity.properties.date.day;
-		const month = entity.properties.date.Month;
+		const year = entity.properties.dueDate.Year;
+		const day = entity.properties.dueDate.Day;
+		const month = entity.properties.dueDate.Month;
 		const formatter = new d2lIntl.DateTimeFormat(this.language, {
 			format: 'monthDay'
 		});
-		const result = formatter.formatDate(
-			new Date(null, month, day),
+		const longResult = formatter.formatDate(
+			new Date(year, month, day),
 		);
-		return result;
+
+		// d2lIntl short month format is not working, also it does not have short month and date formate
+		const result = longResult.replace(longResult.substring(0, longResult.indexOf(' ')),
+			longResult.substring(0, 3));
+		return this.localize('due') + ' ' + result;
 	}
 }
 customElements.define(D2LCompletionRequirement.is, D2LCompletionRequirement);
