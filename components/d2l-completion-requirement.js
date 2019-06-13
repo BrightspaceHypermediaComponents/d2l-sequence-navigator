@@ -126,7 +126,7 @@ class D2LCompletionRequirement extends CompletionStatusMixin() {
 		}
 		const year = entity.properties.dueDate.Year;
 		const day = entity.properties.dueDate.Day;
-		const month = entity.properties.dueDate.Month;
+		const month = entity.properties.dueDate.Month - 1;
 		const formatter = new d2lIntl.DateTimeFormat(this.language, {
 			format: 'monthDay'
 		});
