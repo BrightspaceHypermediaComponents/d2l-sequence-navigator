@@ -7,6 +7,7 @@ import 'd2l-accordion/d2l-accordion.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-icons/d2l-icons.js';
 import 'd2l-offscreen/d2l-offscreen.js';
+import d2lIntl from 'd2l-intl';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf window.D2L.Polymer.Mixins;
@@ -175,6 +176,13 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-radius: 8px 0 0 8px;
 			}
 
+			#startDate{
+				color: var(--d2l-body-small-text_-_color, inherit);
+				font-size: var(--d2l-body-small-text_-_font-size);
+				font-weight: var(--d2l-body-small-text_-_font-weight);
+				line-height: var(--d2l-body-small-text_-_line-height);
+			}
+
 		</style>
 
 		<d2l-accordion-collapse no-icons="" flex="">
@@ -203,6 +211,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 						</template>
 					</span>
 				</div>
+				<div id ="startDate">[[startDate]]</div>
 			</div>
 			<ol>
 				<template is="dom-repeat" items="[[subEntities]]" as="childLink">
@@ -226,6 +235,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	static get is() {
 		return 'd2l-outer-module';
 	}
+
+	static get behaviors() {
+		D2L.PolymerBehaviors.LocalizeBehavior;
+	}
+
 	static get properties() {
 		return {
 			currentActivity: {
@@ -266,7 +280,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			lastModule: {
 				type: Boolean,
 				value: false
-			}
+			},
+			startDate: {
+				type: String,
+				computed: 'getFormatedDate(entity)'
+			},
 		};
 	}
 
@@ -399,6 +417,23 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		else {
 			return '';
 		}
+	}
+
+	getFormatedDate(entity) {
+		if (!entity || !entity.properties || !entity.properties.startDate) {
+			return '';
+		}
+		const year = entity.properties.startDate.Year;
+		const day = entity.properties.startDate.Day;
+		const month = entity.properties.startDate.Month - 1;
+		const formatter = new d2lIntl.DateTimeFormat(this.language, {
+			format: 'medium'
+		});
+		const longResult = formatter.formatDate(
+			new Date(year, month, day),
+		);
+
+		return this.localize('starts') + ' ' + longResult;
 	}
 
 }

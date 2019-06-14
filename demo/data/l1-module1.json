@@ -1,6 +1,15 @@
 {
 	"properties": {
-		"title": "Introduction and Module One Pretest"
+		"title": "Introduction and Module One Pretest",
+		"startDate": {
+			"Year": 2019,
+			"Month": 6,
+			"Day": 13,
+			"Hour": 11,
+			"Minute": 10,
+			"Second": 0,
+			"Millisecond": 0
+		}
 	},
 	"entities": [
 		{
