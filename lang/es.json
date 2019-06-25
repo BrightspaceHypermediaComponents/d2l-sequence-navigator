@@ -2,8 +2,10 @@
    "completed" : "completado",
    "completedMofN" : "Completados {completed}/{total}",
    "countStatus" : "{completed}/{total}",
+   "due" : "Fecha de entrega",
    "exempt" : "Eximir",
    "missedItems" : "Le queda(n) {numberOfMissedActivities, plural, one {# elemento} other {# elementos}} en este módulo.",
    "optional" : "Opcional",
-   "requirementsCompleted" : "{completed} de {total, plural, one {# requisito} other {# requisitos}} completado(s)"
+   "requirementsCompleted" : "{completed} de {total, plural, one {# requisito} other {# requisitos}} completado(s)",
+   "starts" : "Comienza el"
 }

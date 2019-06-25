@@ -2,8 +2,10 @@
    "completed" : "Abgeschlossen",
    "completedMofN" : "{completed}/{total} abgeschlossen",
    "countStatus" : "{completed}/{total}",
+   "due" : "Abgabetermin:",
    "exempt" : "Ausgenommen",
-   "missedItems" : "You have {numberOfMissedActivities, plural, one {# item} other {# items}} left in this module.",
+   "missedItems" : "Es sind noch {numberOfMissedActivities, plural, one {# Element} other {# Elemente}} in diesem Modul übrig.",
    "optional" : "Optional",
-   "requirementsCompleted" : "{completed} of {total, plural, one {# requirement} other {# requirements}} completed"
+   "requirementsCompleted" : "{completed} von {total, plural, one {# Erforderlichen} other {# Erforderlichen}} abgeschlossen",
+   "starts" : "Start"
 }

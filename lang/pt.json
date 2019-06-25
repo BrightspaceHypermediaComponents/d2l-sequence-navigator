@@ -2,8 +2,10 @@
    "completed" : "concluído(s)",
    "completedMofN" : "Concluído {completed}/{total}",
    "countStatus" : "{completed}/{total}",
+   "due" : "Vencimento em",
    "exempt" : "Isento",
    "missedItems" : "Você tem outros {numberOfMissedActivities, plural, one {# item} {# itens}} restantes neste módulo.",
    "optional" : "Opcional",
-   "requirementsCompleted" : "{completed} de {total, plural, one {# requisito} other {# requisitos}} concluído(s)"
+   "requirementsCompleted" : "{completed} de {total, plural, one {# requisito} other {# requisitos}} concluído(s)",
+   "starts" : "Começa em"
 }
