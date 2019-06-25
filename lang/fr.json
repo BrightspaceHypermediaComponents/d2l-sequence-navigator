@@ -4,7 +4,7 @@
    "countStatus" : "{completed}/{total}",
    "due":"Dû le",
    "exempt" : "Dispenser",
-   "missedItems" : "Vous avez {numberOfMissedActivities, plural, one {# item} other {# items}} restantes dans ce module.",
+   "missedItems" : "Vous avez {numberOfMissedActivities, plural, one {# élément} other {# éléments}} restantes dans ce module.",
    "optional" : "Facultatif",
-   "requirementsCompleted" : "{completed} de {total, plural, one {# requirement} other {# requirements}} terminées"
+   "requirementsCompleted" : "{completed} de {total, plural, one {# exigence} other {# exigences}} terminées"
 }
