@@ -1,9 +1,12 @@
 {
-	"completed": "fuldført",
-	"completedMofN": "Fuldført {completed}/{total}",
-	"countStatus": "{completed}/{total}",
-	"exempt": "Foretag undtagelse",
+	"completed" : "fuldført",
+	"completedMofN" : "Fuldført {completed}/{total}",
+	"countStatus" : "{completed}/{total}",
+	"exempt" : "Foretag undtagelse",
+	"due": "Due",
 	"missedItems" : "Du har {numberOfMissedActivities, plural, one {# element} other {# elementer}} tilbage i dette modul.",
 	"optional" : "Valgfri",
-	"requirementsCompleted" : "{completed} af {total, plural, one {# krav} other {# krav}} fuldført"
-}
+	"requirementsCompleted" : "{completed} af {total, plural, one {# krav} other {# krav}} fuldført",
+	"starts": "Starts"
+ }
+ 

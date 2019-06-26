@@ -2,8 +2,10 @@
    "completed" : "slutförda",
    "completedMofN" : "Slutförda {completed}/{total}",
    "countStatus" : "{completed}/{total}",
+   "due" : "Förfallodatum",
    "exempt" : "Undantagen",
    "missedItems" : "Du har {numberOfMissedActivities, plural, one {# objekt} other {# objekt}} kvar i den här modulen.",
    "optional" : "Valfri",
-   "requirementsCompleted" : "{completed} av {total, plural, one {# krav} other {# krav}} slutförda"
+   "requirementsCompleted" : "{completed} av {total, plural, one {# krav} other {# krav}} slutförda",
+   "starts" : "Börjar"
 }
