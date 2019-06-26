@@ -2,8 +2,10 @@
    "completed" : "مُكتمَل(ة)",
    "completedMofN" : "تم الإكمال {completed}/{total}",
    "countStatus" : "{completed}/{total}",
+   "due" : "تاريخ الاستحقاق",
    "exempt" : "إعفاء",
    "missedItems" : "يتبقّى {numberOfMissedActivities, plural, one {# عنصر} other {# من العناصر}} في هذه الوحدة النمطية.",
    "optional" : "اختياري",
-   "requirementsCompleted" : "اكتمال {completed} من أصل {total, plural, one {# متطلب} other {# من المتطلبات}}"
+   "requirementsCompleted" : "اكتمال {completed} من أصل {total, plural, one {# متطلب} other {# من المتطلبات}}",
+   "starts" : "يبدأ"
 }

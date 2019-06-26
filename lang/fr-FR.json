@@ -6,5 +6,6 @@
    "exempt" : "Dispenser",
    "missedItems" : "Il vous reste {numberOfMissedActivities, plural, one {# élément} other {# éléments}} activités dans ce module.",
    "optional" : "Facultatif",
-   "requirementsCompleted" : "{completed} activité(s) terminée(s) sur {total, plural, one {# exigence} other {# exigences}}"
+   "requirementsCompleted" : "{completed} activité(s) terminée(s) sur {total, plural, one {# exigence} other {# exigences}}",
+   "starts" : "Commencement"
 }

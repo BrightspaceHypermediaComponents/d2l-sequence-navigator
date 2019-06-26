@@ -2,8 +2,10 @@
    "completed" : "項已完成",
    "completedMofN" : "已完成 {completed}/{total}",
    "countStatus" : "{completed}/{total}",
+   "due" : "截止",
    "exempt" : "免除",
-   "missedItems" : "您在此單元還有 {numberOfMissedActivities, plural, one {# 個項目} other {# 個項目}}。",
+   "missedItems" : "您在此單元還有 {numberOfMissedActivities, plural, one {# 個項目} other {# 個項目}} 未完成。",
    "optional" : "選擇性",
-   "requirementsCompleted" : "已完成 {completed}/{total, plural, one {# 個要求} other {# 個要求}}"
+   "requirementsCompleted" : "已完成 {completed}/{total, plural, one {# 個要求} other {# 個要求}}",
+   "starts" : "開始"
 }
