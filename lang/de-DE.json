@@ -3,6 +3,7 @@
    "completedMofN" : "{completed}/{total} abgeschlossen",
    "countStatus" : "{completed}/{total}",
    "exempt" : "Ausgenommen",
+   "missedItems" : "You have {numberOfMissedActivities, plural, one {# item} other {# items}} left in this module.",
    "optional" : "Optional",
-   "requirementsCompleted" : "{completed} von {total} Anforderungen abgeschlossen"
+   "requirementsCompleted" : "{completed} of {total, plural, one {# requirement} other {# requirements}} completed"
 }

@@ -3,6 +3,7 @@
    "completedMofN" : "{completed}/{total} voltooid",
    "countStatus" : "{completed}/{total}",
    "exempt" : "Vrijstellen",
+   "missedItems" : "Je hebt nog {numberOfMissedActivities, plural, one {# item} other {# items}} in deze module.",
    "optional" : "Optioneel",
-   "requirementsCompleted" : "{completed} van {total} vereisten voltooid"
+   "requirementsCompleted" : "{completed} van {total, plural, one {# vereiste} other {# vereisten}} voltooid"
 }

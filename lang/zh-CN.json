@@ -3,6 +3,7 @@
    "completedMofN" : "Completed {completed}/{total}",
    "countStatus" : "{completed}/{total}",
    "exempt" : "免除",
+   "missedItems" : "此模块中剩余 {numberOfMissedActivities, plural, one {# 个项目} other {# 个项目}}。",
    "optional" : "可选",
-   "requirementsCompleted" : "{completed} of {total} requirements completed"
+   "requirementsCompleted" : "已完成 {completed} 个要求（共 {total, plural, one {# 个} other {# 个}}"
 }

@@ -3,6 +3,7 @@
    "completedMofN" : "{completed}/{total} tamamlandı",
    "countStatus" : "{completed}/{total}",
    "exempt" : "Muaf Tut",
+   "missedItems" : "Bu modülde {numberOfMissedActivities, plural, one {# öğeniz} other {# öğeniz}} kaldı.",
    "optional" : "İsteğe Bağlı",
-   "requirementsCompleted" : "{completed}/{total} gereklilik tamamlandı"
+   "requirementsCompleted" : "{completed} / {total, plural, one {# gereklilik} other {# gereklilik}} tamamlandı"
 }
