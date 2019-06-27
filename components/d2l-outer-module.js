@@ -423,17 +423,36 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		if (!entity || !entity.properties || !entity.properties.startDate) {
 			return '';
 		}
-		const year = entity.properties.startDate.Year;
-		const day = entity.properties.startDate.Day;
-		const month = entity.properties.startDate.Month - 1;
+		const startYear = entity.properties.startDate.Year;
+		const startmonth = entity.properties.startDate.Month - 1;
+		const startday = entity.properties.startDate.Day;
+		const startDate = new Date(startYear, startmonth, startday);
+		const currentDate = new Date();
 		const formatter = new d2lIntl.DateTimeFormat(this.language, {
 			format: 'medium'
 		});
-		const longResult = formatter.formatDate(
-			new Date(year, month, day),
-		);
+		let result = '';
+		// the module is not started
+		if (startDate > currentDate) {
+			result = formatter.formatDate(
+				startDate,
+			);
+			return this.localize('starts') + ' ' + result;
+		} else {
+			// has dueDate to show
+			if (entity.properties.dueDate) {
+				const dueYear = entity.properties.dueDate.Year;
+				const dueDay = entity.properties.dueDate.Day;
+				const dueMonth = entity.properties.dueDate.Month - 1;
+				result = formatter.formatDate(
+					new Date(dueYear, dueMonth, dueDay),
+				);
+				return this.localize('due') + ' ' + result;
+			} else {
+				return result;
+			}
+		}
 
-		return this.localize('starts') + ' ' + longResult;
 	}
 
 }
