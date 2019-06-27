@@ -48,7 +48,6 @@
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
     "d2l-polymer-siren-behaviors": "Brightspace/polymer-siren-behaviors#semver:^1",
     "d2l-progress": "BrightspaceUI/progress#semver:^1",
-    "d2l-status-indicator": "BrightspaceUI/status-indicator#semver:^3",
     "d2l-typography": "BrightspaceUI/typography#semver:^7",
     "siren-entity": "BrightspaceHypermediaComponents/siren-entity#semver:^1"
   },

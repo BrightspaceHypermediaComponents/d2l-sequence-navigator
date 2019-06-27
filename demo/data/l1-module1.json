@@ -9,6 +9,15 @@
 			"Minute": 10,
 			"Second": 0,
 			"Millisecond": 0
+		},
+		"dueDate": {
+			"Year": 2020,
+			"Month": 10,
+			"Day": 28,
+			"Hour": 11,
+			"Minute": 10,
+			"Second": 0,
+			"Millisecond": 0
 		}
 	},
 	"entities": [
