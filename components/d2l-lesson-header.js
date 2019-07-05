@@ -231,7 +231,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_checkModuleIndex(moduleProperties) {
-		console.log(this.localize('currentModule', 'current', 4, 'total', 6));
 		return moduleProperties && moduleProperties.moduleIndex && moduleProperties.numberOfSiblingModules;
 	}
 
