@@ -196,6 +196,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			moduleProperties: Object,
 			_useModuleIndex: {
 				type: Boolean,
+				value: false,
 				computed: '_checkModuleIndex(moduleProperties)'
 			},
 			_moduleIndex: {

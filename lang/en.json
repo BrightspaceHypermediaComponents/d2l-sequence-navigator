@@ -1,7 +1,7 @@
 {
 	"countStatus": "{completed}/{total}",
 	"completedMofN": "Completed {completed}/{total}",
-	"currentModule": "Module {current} of {total}",
+	"currentModule": "Unit {current} of {total}",
 	"requirementsCompleted":"{completed} of {total, plural, one {# requirement} other {# requirements}} completed",
 	"optional":"Optional",
 	"exempt":"Exempt",
