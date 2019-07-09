@@ -14,7 +14,7 @@ import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import 'd2l-progress/d2l-progress.js';
-import 'd2l-icons/d2l-icon.js';
+import 'd2l-icons/d2l-icons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf D2L.Polymer.Mixins;
