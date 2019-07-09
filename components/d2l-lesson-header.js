@@ -14,6 +14,7 @@ import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import 'd2l-progress/d2l-progress.js';
+import 'd2l-icons/d2l-icon.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf D2L.Polymer.Mixins;
@@ -115,7 +116,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12837456/*/
 			background-color: var(--d2l-color-celestine, #006fbf);
 		}
-		
+
 		:host(.d2l-asv-current) progress.d2l-progress {
 			background-color: transparent;
 			border: 1px solid var(--d2l-asv-selected-text-color);
@@ -158,7 +159,17 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		</style>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div>
-				<span class="module-title">[[entity.properties.title]]</span>
+				<template is="dom-if" if="[[_useModuleIndex]]">
+					<div>
+						<span>[[_moduleTitle]]</span>
+						<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
+						<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
+					</div>
+					<span class="module-title">[[entity.properties.title]]</span>
+				</template>
+				<template is="dom-if" if="[[!_useModuleIndex]]">
+					<span class="module-title">[[entity.properties.title]]</span>
+				</template>
 				<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
 				<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 				<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
@@ -181,6 +192,24 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				type: String,
 				value: '',
 				notify: true
+			},
+			moduleProperties: Object,
+			_useModuleIndex: {
+				type: Boolean,
+				value: false,
+				computed: '_checkModuleIndex(moduleProperties)'
+			},
+			_moduleIndex: {
+				type: Number,
+				computed: '_getModuleIndex(moduleProperties)'
+			},
+			_siblingModules: {
+				type: Number,
+				computed: '_getSiblingModules(moduleProperties)'
+			},
+			_moduleTitle: {
+				type: String,
+				computed: '_getModuleTitle(moduleProperties)'
 			}
 		};
 	}
@@ -200,6 +229,22 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			return 'light-theme';
 		}
 		return;
+	}
+
+	_checkModuleIndex(moduleProperties) {
+		return moduleProperties && moduleProperties.moduleIndex && moduleProperties.numberOfSiblingModules;
+	}
+
+	_getModuleIndex(moduleProperties) {
+		return moduleProperties && moduleProperties.moduleIndex;
+	}
+
+	_getModuleTitle(moduleProperties) {
+		return moduleProperties && moduleProperties.title;
+	}
+
+	_getSiblingModules(moduleProperties) {
+		return moduleProperties && moduleProperties.numberOfSiblingModules;
 	}
 }
 
