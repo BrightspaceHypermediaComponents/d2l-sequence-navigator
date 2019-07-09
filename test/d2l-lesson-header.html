@@ -60,6 +60,16 @@ describe('d2l-lesson-header', () => {
 				.text( 'Lesson 1' );
 		});
 
+		it('should display module index given index and total', () => {
+			const useModuleIndex = !!element._checkModuleIndex({
+				moduleIndex: 2,
+				numberOfSiblingModules: 4
+			});
+			expect( useModuleIndex )
+				.to
+				.equal(true);
+		});
+
 		it('should create progress bar element with correct percentage completion', () => {
 			const progressBar = element.shadowRoot.querySelector('progress');
 			expect( progressBar )
