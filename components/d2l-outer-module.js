@@ -427,27 +427,27 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		const currentDate = new Date();
 		let startDate;
 		let result = '';
-		if(entity && entity.properties && entity.properties.startDate) {
+		if (entity && entity.properties && entity.properties.startDate) {
 			const startYear = entity.properties.startDate.Year;
 			const startMonth = entity.properties.startDate.Month - 1;
 			const startDay = entity.properties.startDate.Day;
 			startDate = new Date(startYear, startMonth, startDay);
 		}
 		let dueDate;
-		if(entity && entity.properties && entity.properties.dueDate) {
+		if (entity && entity.properties && entity.properties.dueDate) {
 			const dueYear = entity.properties.dueDate.Year;
 			const dueMonth = entity.properties.dueDate.Month - 1;
 			const dueDay = entity.properties.dueDate.Day;
 			dueDate = new Date(dueYear, dueMonth, dueDay);
 		}
 
-		if(startDate && startDate > currentDate) {
+		if (startDate && startDate > currentDate) {
 			result = formatter.formatDate(
 				startDate
 			);
 			return this.localize('starts', 'startDate', result);
 		}
-		if(dueDate) {
+		if (dueDate) {
 			result = formatter.formatDate(
 				dueDate
 			);
