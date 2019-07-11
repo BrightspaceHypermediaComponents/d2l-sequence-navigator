@@ -420,39 +420,40 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	getFormatedDate(entity) {
-		if (!entity || !entity.properties || !entity.properties.startDate) {
-			return '';
-		}
-		const startYear = entity.properties.startDate.Year;
-		const startmonth = entity.properties.startDate.Month - 1;
-		const startday = entity.properties.startDate.Day;
-		const startDate = new Date(startYear, startmonth, startday);
-		const currentDate = new Date();
+
 		const formatter = new d2lIntl.DateTimeFormat(this.language, {
 			format: 'medium'
 		});
+		const currentDate = new Date();
+		let startDate;
 		let result = '';
-		// the module is not started
-		if (startDate > currentDate) {
-			result = formatter.formatDate(
-				startDate,
-			);
-			return this.localize('starts') + ' ' + result;
-		} else {
-			// has dueDate to show
-			if (entity.properties.dueDate) {
-				const dueYear = entity.properties.dueDate.Year;
-				const dueDay = entity.properties.dueDate.Day;
-				const dueMonth = entity.properties.dueDate.Month - 1;
-				result = formatter.formatDate(
-					new Date(dueYear, dueMonth, dueDay),
-				);
-				return this.localize('due') + ' ' + result;
-			} else {
-				return result;
-			}
+		if (entity && entity.properties && entity.properties.startDate) {
+			const startYear = entity.properties.startDate.Year;
+			const startMonth = entity.properties.startDate.Month - 1;
+			const startDay = entity.properties.startDate.Day;
+			startDate = new Date(startYear, startMonth, startDay);
+		}
+		let dueDate;
+		if (entity && entity.properties && entity.properties.dueDate) {
+			const dueYear = entity.properties.dueDate.Year;
+			const dueMonth = entity.properties.dueDate.Month - 1;
+			const dueDay = entity.properties.dueDate.Day;
+			dueDate = new Date(dueYear, dueMonth, dueDay);
 		}
 
+		if (startDate && startDate > currentDate) {
+			result = formatter.formatDate(
+				startDate
+			);
+			return this.localize('starts', 'startDate', result);
+		}
+		if (dueDate) {
+			result = formatter.formatDate(
+				dueDate
+			);
+			return this.localize('due', 'dueDate', result);
+		}
+		return result;
 	}
 
 }

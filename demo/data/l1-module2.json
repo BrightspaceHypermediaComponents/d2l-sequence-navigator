@@ -1,6 +1,11 @@
 {
 	"properties": {
-		"title": "Module 2"
+		"title": "Module 2",
+		"startDate": {
+		  "Year": 2050,
+		  "Month": 3,
+		  "Day": 7
+		}
 	},
 	"entities": [
 		{

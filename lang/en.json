@@ -5,8 +5,8 @@
 	"requirementsCompleted":"{completed} of {total, plural, one {# requirement} other {# requirements}} completed",
 	"optional":"Optional",
 	"exempt":"Exempt",
-	"due": "Due",
-	"starts": "Starts",
+	"due": "Due {dueDate}",
+	"starts": "Starts {startDate}",
 	"completed": "completed",
 	"missedItems": "You have {numberOfMissedActivities, plural, one {# item} other {# items}} left in this module."
 }
