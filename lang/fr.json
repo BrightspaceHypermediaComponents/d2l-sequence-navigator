@@ -2,10 +2,11 @@
    "completed" : "terminé",
    "completedMofN" : "{completed}/{total} terminés",
    "countStatus" : "{completed}/{total}",
-   "due" : "Échéance",
+   "currentModule" : "Unité {current} de {total}",
+   "due" : "Échéance le {dueDate}",
    "exempt" : "Dispenser",
    "missedItems" : "Vous avez {numberOfMissedActivities, plural, one {# élément} other {# éléments}} restantes dans ce module.",
    "optional" : "Facultatif",
    "requirementsCompleted" : "{completed} de {total, plural, one {# requirement} other {# requirements}} terminées",
-   "starts" : "Commencement"
+   "starts" : "Débute le {startDate}"
 }
