@@ -2,10 +2,11 @@
    "completed" : "완료됨",
    "completedMofN" : "{completed}/{total} 완료됨",
    "countStatus" : "{completed}/{total}",
-   "due" : "기한:",
+   "currentModule" : "단위 {current}/{total}",
+   "due" : "기한 {dueDate}일",
    "exempt" : "면제",
    "missedItems" : "이 모듈에 {numberOfMissedActivities, plural, one {# item} other {# items}}개가 남아 있습니다.",
    "optional" : "선택사항",
    "requirementsCompleted" : "{completed}/{total, plural, one {# requirement} other {# requirements}}개 완료됨",
-   "starts" : "시작"
+   "starts" : "{startDate}에 시작"
 }
