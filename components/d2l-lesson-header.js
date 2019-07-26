@@ -13,6 +13,7 @@ import { ASVFocusWithinMixin } from '../utility/asv-focus-within-mixin.js';
 import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
+import '@brightspace-ui/core/components/meter/meter-circle.js';
 import 'd2l-progress/d2l-progress.js';
 import 'd2l-icons/d2l-icons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
@@ -156,6 +157,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-asv-text-color, #565a5c);
 		}
 
+		div.title-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
 		</style>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div>
@@ -165,13 +172,23 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 						<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
 						<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
 					</div>
-					<span class="module-title">[[entity.properties.title]]</span>
 				</template>
-				<template is="dom-if" if="[[!_useModuleIndex]]">
-					<span class="module-title">[[entity.properties.title]]</span>
+				<template is="dom-if" if="[[_useNewProgressBar]]">
+					<div class="title-container">
+						<span class="module-title">[[entity.properties.title]]</span>
+						<d2l-meter-circle
+							id$="[[isLightTheme()]]"
+							class="d2l-progress"
+							value="[[completionCount.completed]]"
+							max="[[completionCount.total]]">
+						</d2l-meter-circle>
+					</div>
 				</template>
-				<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
-				<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+				<template is="dom-if" if="[[!_useNewProgressBar]]">
+					<span class="module-title">[[entity.properties.title]]</span>
+					<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
+					<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+				</template>
 				<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
 			</div>
 		</a>
@@ -210,6 +227,11 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			_moduleTitle: {
 				type: String,
 				computed: '_getModuleTitle(moduleProperties)'
+			},
+			_useNewProgressBar: {
+				type: Boolean,
+				value: false,
+				computed: '_getUseNewProgressBar(moduleProperties)'
 			}
 		};
 	}
@@ -245,6 +267,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 	_getSiblingModules(moduleProperties) {
 		return moduleProperties && moduleProperties.numberOfSiblingModules;
+	}
+
+	_getUseNewProgressBar(moduleProperties) {
+		return moduleProperties && moduleProperties.useNewProgressBar;
 	}
 }
 
