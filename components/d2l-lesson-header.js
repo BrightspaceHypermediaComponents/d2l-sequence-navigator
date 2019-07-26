@@ -160,32 +160,37 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		div.title-container {
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-start;
+		}
+		d2l-meter-circle {
+			width: 48px;
+			min-width: 48px;
 		}
 
 		</style>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div>
-				<template is="dom-if" if="[[_useModuleIndex]]">
+				<div class="title-container">
 					<div>
-						<span>[[_moduleTitle]]</span>
-						<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
-						<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
-					</div>
-				</template>
-				<template is="dom-if" if="[[_useNewProgressBar]]">
-					<div class="title-container">
+						<template is="dom-if" if="[[_useModuleIndex]]">
+							<div>
+								<span>[[_moduleTitle]]</span>
+								<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
+								<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
+							</div>
+						</template>
 						<span class="module-title">[[entity.properties.title]]</span>
+					</div>
+					<template is="dom-if" if="[[_useNewProgressBar]]">
 						<d2l-meter-circle
 							id$="[[isLightTheme()]]"
 							class="d2l-progress"
 							value="[[completionCount.completed]]"
 							max="[[completionCount.total]]">
 						</d2l-meter-circle>
-					</div>
-				</template>
+					</template>
+				</div>
 				<template is="dom-if" if="[[!_useNewProgressBar]]">
-					<span class="module-title">[[entity.properties.title]]</span>
 					<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
 					<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
 				</template>
