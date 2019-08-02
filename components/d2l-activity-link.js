@@ -17,17 +17,19 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 		return html`
 		<style>
 			:host {
-				--d2l-activity-link-border-color: var(--d2l-activity-link-background-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
+				--d2l-activity-link-opacity: 1;
 				display: block;
 				cursor: pointer;
 				@apply --d2l-body-compact-text;
-				background-color: var(--d2l-activity-link-background-color);
 				padding: var(--d2l-activity-link-padding, 10px 24px);
 				border-collapse: separate;
 				box-sizing: border-box;
-				border: 1px solid var(--d2l-activity-link-border-color, transparent);
+				border: 1px solid transparent;
 				border-width: 1px 0;
+				position: relative;
+				z-index: 0;
+				background-color: transparent;
 				margin-top: -1px;
 			}
 
@@ -35,26 +37,50 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				--d2l-activity-link-background-color: var(--d2l-asv-primary-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-selected-text-color);
 				--d2l-activity-link-subtext-color: var(--d2l-asv-selected-text-color);
-				--d2l-activity-link-border-color: var(--d2l-asv-border-color);
+				--d2l-activity-link-border-color: rgba(0, 0, 0, 0.6);
 			}
 
 			:host(:focus) {
 				outline: none;
+				--d2l-activity-link-opacity: 0.26;
 			}
 
 			:host(.d2l-asv-focus-within),
 			:host(:focus),
 			:host(:hover) {
-				--d2l-activity-link-background-color: var(--d2l-asv-hover-color);
+				--d2l-activity-link-background-color: var(--d2l-asv-primary-color);
 				--d2l-activity-link-subtext-color: var(--d2l-asv-text-color);
-				--d2l-activity-link-border-color: var(--d2l-asv-border-color);
+				--d2l-activity-link-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
+				--d2l-activity-link-opacity: 0.26;
 			}
 
 			:host > div {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
+			}
+
+			div.bkgd, div.border {
+				position: absolute;
+				left: 0;
+				top: -1px;
+				width: calc(100% - 1px);
+			}
+
+			div.bkgd {
+				opacity: var(--d2l-activity-link-opacity);
+				background-color: var(--d2l-activity-link-background-color);
+				z-index: -2;
+				position: absolute;
+				height: calc(100% + 2px);
+			}
+
+			div.border {
+				border: 1px solid var(--d2l-activity-link-border-color, transparent);
+				border-width: 1px 0;
+				z-index: -1;
+				height: 100%;
 			}
 
 			d2l-icon,
@@ -116,6 +142,8 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			}
 
 		</style>
+		<div class="bkgd"></div>
+		<div class="border"></div>
 		<div on-click="_contentObjectClick">
 			<template is="dom-if" if="[[hasIcon]]">
 				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>

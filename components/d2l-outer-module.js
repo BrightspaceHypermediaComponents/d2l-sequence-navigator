@@ -33,26 +33,52 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 			#header-container {
 				--d2l-outer-module-border-color: var(--d2l-outer-module-background-color);
+				--d2l-outer-module-opacity: 1;
 				box-sizing: border-box;
 				padding: var(--d2l-activity-link-padding);
 				color: var(--d2l-outer-module-text-color);
-				background-color: var(--d2l-outer-module-background-color);
+				background-color: transparent;
 				border-style: solid;
 				border-width: var(--d2l-outer-module-border-width, 1px 0px 1px 0);
-				border-color:	var(--d2l-outer-module-border-color);
+				border-color: transparent;
+				position: relative;
+				z-index: 0;
 			}
 
 			#header-container.d2l-asv-current {
 				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-outer-module-text-color: var(--d2l-asv-selected-text-color);
-				--d2l-outer-module-border-color: var(--d2l-asv-border-color);
+				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.6);
 			}
 
 			#header-container.d2l-asv-focus-within,
 			#header-container:hover {
-				--d2l-outer-module-background-color: var(--d2l-asv-hover-color);
-				--d2l-outer-module-border-color: var(--d2l-asv-border-color);
+				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
+				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
+				--d2l-outer-module-opacity: 0.26;
+			}
+
+			div.bkgd, div.border {
+				position: absolute;
+				top: -1px;
+				left: 0;
+				width: calc(100% - 1px);
+			}
+
+			div.bkgd {
+				opacity: var(--d2l-outer-module-opacity);
+				background-color: var(--d2l-outer-module-background-color);
+				z-index: -2;
+				position: absolute;
+				height: calc(100% + 2px);
+			}
+
+			div.border {
+				border-style: solid;
+				border-width: var(--d2l-outer-module-border-width, 1px 0px 1px 0);
+				z-index: -1;
+				height: 100%;
 			}
 
 			.start-date-text {
@@ -187,6 +213,8 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 		<d2l-accordion-collapse no-icons="" flex="">
 			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
+				<div class="bkgd"></div>
+				<div class="border"></div>
 				<div class="module-header">
 					<span class="module-title">[[entity.properties.title]]</span>
 					<span class="module-completion-count">

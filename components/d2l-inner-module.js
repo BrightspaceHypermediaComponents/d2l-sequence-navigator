@@ -37,7 +37,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-radius: 8px 8px 0 0;
 				border-style: solid;
 				border-width: var(--d2l-inner-module-border-width, 0);
-				border-color:	var(--d2l-inner-module-border-color, transparent);
+				border-color: transparent;
 				height: 30px;
 			}
 
@@ -46,12 +46,35 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			#module-header {
+				--d2l-inner-module-opacity: 1;
 				display: flex;
 				flex-grow: 1;
 				padding: 4px 14px 0 14px;
+				z-index: 0;
+				position: relative;
+				background-color: transparent;
+			}
+
+			div.bkgd, div.border {
+				position: absolute;
+				top: -1px;
+				left: 0;
+				width: calc(100% - 1px);
+			}
+
+			div.bkgd {
+				opacity: var(--d2l-inner-module-opacity);
 				background-color: var(--d2l-inner-module-background-color);
+				z-index: -2;
+				position: absolute;
+				height: calc(100% + 2px);
+			}
+
+			div.border {
 				border: 1px solid var(--d2l-inner-module-border-color, transparent);
 				border-width: 1px 0;
+				z-index: -1;
+				height: 100%;
 			}
 
 			#module-header > a {
@@ -63,15 +86,16 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			#module-header.d2l-asv-current {
 				--d2l-inner-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-inner-module-text-color: var(--d2l-asv-selected-text-color);
-				--d2l-inner-module-border-color: var(--d2l-asv-border-color);
+				--d2l-inner-module-border-color: rgba(0, 0, 0, 0.6);
 			}
 
 			#module-header.d2l-asv-focus-within,
 			#module-header:focus,
 			#module-header:hover {
-				--d2l-inner-module-background-color: var(--d2l-asv-hover-color);
-				--d2l-inner-module-border-color: var(--d2l-asv-border-color);
+				--d2l-inner-module-background-color: var(--d2l-asv-primary-color);
+				--d2l-inner-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-inner-module-text-color: var(--d2l-asv-text-color);
+				--d2l-inner-module-opacity: 0.26;
 			}
 
 			.module-title {
@@ -99,6 +123,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
 			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]]" on-click="_onHeaderClicked">
+				<div class="bkgd"></div>
+				<div class="border"></div>
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>
 				</a>
