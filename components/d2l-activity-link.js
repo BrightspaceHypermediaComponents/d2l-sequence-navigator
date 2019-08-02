@@ -17,6 +17,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 		return html`
 		<style>
 			:host {
+				--d2l-activity-link-border-color: var(--d2l-activity-link-background-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
 				--d2l-activity-link-opacity: 1;
 				display: block;

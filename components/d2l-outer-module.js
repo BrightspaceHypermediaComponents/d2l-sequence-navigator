@@ -77,6 +77,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			div.border {
 				border-style: solid;
 				border-width: var(--d2l-outer-module-border-width, 1px 0px 1px 0);
+				border-color:	var(--d2l-outer-module-border-color);
 				z-index: -1;
 				height: 100%;
 			}
