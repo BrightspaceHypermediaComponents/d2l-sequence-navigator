@@ -45,6 +45,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 			#module-header {
 				--d2l-inner-module-opacity: 1;
+				--d2l-inner-module-backdrop-opacity: 0;
 				display: flex;
 				flex-grow: 1;
 				padding: 4px 14px 0 14px;
@@ -54,7 +55,9 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				cursor: pointer;
 			}
 
-			div.bkgd, div.border {
+			div.bkgd,
+			div.border,
+			div.bkgd-backdrop {
 				position: absolute;
 				top: -1px;
 				left: 0;
@@ -68,6 +71,14 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				position: absolute;
 				height: calc(100% + 2px);
 				width: 100%;
+			}
+
+			div.bkgd-backdrop {
+				background-color: #FFFFFF;
+				height: calc(100% + 2px);
+				width: 100%;
+				z-index: -3;
+				opacity: var(--d2l-inner-module-backdrop-opacity);
 			}
 
 			div.border {
@@ -97,6 +108,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				--d2l-inner-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-inner-module-text-color: var(--d2l-asv-text-color);
 				--d2l-inner-module-opacity: 0.26;
+				--d2l-inner-module-backdrop-opacity: 1;
 			}
 
 			.module-title {
@@ -121,8 +133,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			li {
-				padding-top: 5px;
-				padding-bottom: 5px;
+				padding-top: 6px;
+				padding-bottom: 6px;
 			}
 
 		</style>
@@ -130,6 +142,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
 			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]]" on-click="_onHeaderClicked">
 				<div class="bkgd"></div>
+				<div class="bkgd-backdrop"></div>
 				<div class="border"></div>
 				<a on-click="_onHeaderClicked" href="javascript:void(0)">
 					<span class="module-title">[[entity.properties.title]]</span>

@@ -70,7 +70,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				opacity: var(--d2l-outer-module-opacity);
 				background-color: var(--d2l-outer-module-background-color);
 				z-index: -2;
-				position: absolute;
 				height: calc(100% + 2px);
 				width: calc(100% + 2px);
 			}

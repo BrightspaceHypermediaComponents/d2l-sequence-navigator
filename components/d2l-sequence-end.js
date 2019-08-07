@@ -50,7 +50,6 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					opacity: var(--d2l-sequence-end-opacity);
 					background-color: var(--d2l-sequence-end-background-color);
 					z-index: -2;
-					position: absolute;
 					height: calc(100% + 2px);
 					width: calc(100% + 2px);
 				}

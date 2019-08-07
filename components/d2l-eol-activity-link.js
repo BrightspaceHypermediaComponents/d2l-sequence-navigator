@@ -18,6 +18,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				--d2l-activity-link-border-color: var(--d2l-activity-link-background-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
 				--d2l-activity-link-opacity: 1;
+				--d2l-activity-link-backdrop-opacity: 0;
 				display: block;
 				cursor: pointer;
 				@apply --d2l-body-compact-text;
@@ -42,6 +43,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 			:host(:focus) {
 				outline: none;
 				--d2l-activity-link-opacity: 0.26;
+				--d2l-activity-link-backdrop-opacity: 1;
 			}
 
 			:host(.d2l-asv-focus-within),
@@ -52,6 +54,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				--d2l-activity-link-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
 				--d2l-activity-link-opacity: 0.26;
+				--d2l-activity-link-backdrop-opacity: 1;
 			}
 
 			:host > div {
@@ -60,10 +63,12 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				justify-content: space-between;
 			}
 
-			div.bkgd, div.border {
+			div.bkgd,
+			div.border,
+			div.bkgd-backdrop {
 				position: absolute;
 				top: -1px;
-				left: 0%;
+				left: 0;
 				border-radius: 8px;
 			}
 
@@ -71,9 +76,16 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				opacity: var(--d2l-activity-link-opacity);
 				background-color: var(--d2l-activity-link-background-color);
 				z-index: -2;
-				position: absolute;
 				height: calc(100% + 2px);
 				width: 100%;
+			}
+
+			div.bkgd-backdrop {
+				background-color: #FFFFFF;
+				z-index: -3;
+				height: calc(100% + 2px);
+				width: 100%;
+				opacity: var(--d2l-activity-link-backdrop-opacity);
 			}
 
 			div.border {
@@ -118,6 +130,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 		</style>
 		<div class="bkgd"></div>
 		<div class="border"></div>
+		<div class="bkgd-backdrop"></div>
 		<div on-click="_contentObjectClick">
 			<template is="dom-if" if="[[hasIcon]]">
 				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>
