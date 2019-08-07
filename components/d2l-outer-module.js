@@ -211,9 +211,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 							<d2l-inner-module href="[[childLink.href]]" token="[[token]]" current-activity="{{currentActivity}}" on-sequencenavigator-d2l-inner-module-current-activity="childIsActiveEvent"></d2l-inner-module>
 						</template>
 					</li>
-					<template is="dom-if" if="[[isLastOfSubModule(subEntities, index)]]">
-						<hr>
-					</template>
 				</template>
 			</ol>
 		</d2l-accordion-collapse>

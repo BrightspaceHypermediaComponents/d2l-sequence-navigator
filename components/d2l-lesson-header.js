@@ -69,7 +69,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			opacity: var(--d2l-lesson-header-opacity);
 			background-color: var(--d2l-lesson-header-background-color);
 			z-index: -2;
-			height: calc(100% + 1px);
+			height: 100%;
 			width: calc(100% + 2px);
 		}
 
@@ -78,7 +78,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			border-width: 1px 0;
 			border-color: var(--d2l-lesson-header-border-color);
 			z-index: -1;
-			height: calc(100% - 1px);
+			height: calc(100% - 2px);
 			width: 100%;
 		}
 
