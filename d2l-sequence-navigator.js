@@ -66,12 +66,12 @@ PolymerElement
 		d2l-activity-link[before-module]:focus,
 		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-focus-within,
 		d2l-activity-link[before-module].d2l-asv-focus-within {
-			border-bottom: 1px solid var(--d2l-asv-border-color);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.42);
 		}
 
 		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-current:not(:hover),
 		d2l-activity-link[before-module].d2l-asv-current:not(:hover) {
-			border-bottom: 1px solid var(--d2l-asv-border-color);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 		}
 
 		:host([role="navigation"]) d2l-activity-link {
