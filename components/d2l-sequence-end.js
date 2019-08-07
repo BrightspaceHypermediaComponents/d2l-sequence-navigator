@@ -20,7 +20,7 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					padding: 20px 40px 20px 20px;
 					position: relative;
 					z-index: 0;
-					margin-top: -1px;
+					margin-top: 10px;
 				}
 
 				#d2l-sequence-end-container.d2l-asv-current {

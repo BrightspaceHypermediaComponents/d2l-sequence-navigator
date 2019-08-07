@@ -22,7 +22,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		<style>
 			:host {
 				display: block;
-				cursor: pointer;
 				@apply --d2l-body-compact-text;
 				width: 100%;
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
@@ -43,6 +42,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-color: transparent;
 				position: relative;
 				z-index: 0;
+				cursor: pointer;
 			}
 
 			#header-container.d2l-asv-current {
