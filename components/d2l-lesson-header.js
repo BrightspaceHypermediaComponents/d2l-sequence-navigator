@@ -29,15 +29,11 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
-			--d2l-lesson-header-border-color: var(--d2l-lesson-header-background-color);
+			--d2l-lesson-header-border-color: var(--d2l-color-mica);
 			--d2l-lesson-header-opacity: 1;
 			background-color: transparent;
 			color: var(--d2l-lesson-header-text-color);
 			padding: 20px 28px 20px 25px;
-			border-style: solid;
-			border-width: 1px 0px 1px 1px;
-			border-color: transparent;
-			border-radius: 0px 0px 0px 8px;
 			margin-bottom: -1px;
 			display: block;
 			position: relative;
@@ -66,9 +62,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		div.bkgd, div.border {
 			position: absolute;
 			top: -1px;
-			left: 0;
-			width: calc(100% - 1px);
-			border-radius: 0px 0px 0px 8px;
+			left: -1px;
 		}
 
 		div.bkgd {
@@ -76,15 +70,17 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-lesson-header-background-color);
 			z-index: -2;
 			position: absolute;
-			height: calc(100% + 2px);
+			height: calc(100% + 1px);
+			width: calc(100% + 2px);
 		}
 
 		div.border {
 			border-style: solid;
-			border-width: 1px 0px 1px 1px;
-			border-color:	var(--d2l-lesson-header-border-color);
+			border-width: 1px 0;
+			border-color: var(--d2l-lesson-header-border-color);
 			z-index: -1;
-			height: 100%;
+			height: calc(100% - 1px);
+			width: 100%;
 		}
 
 		.module-title {

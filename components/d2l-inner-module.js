@@ -58,8 +58,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			div.bkgd, div.border {
 				position: absolute;
 				top: -1px;
-				left: 0;
-				width: calc(100% - 1px);
+				left: -1px;
+				border-radius: 8px;
 			}
 
 			div.bkgd {
@@ -68,13 +68,15 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				z-index: -2;
 				position: absolute;
 				height: calc(100% + 2px);
+				width: calc(100% + 2px);
 			}
 
 			div.border {
 				border: 1px solid var(--d2l-inner-module-border-color, transparent);
-				border-width: 1px 0;
+				border-width: 1px;
 				z-index: -1;
 				height: 100%;
+				width: 100%;
 			}
 
 			#module-header > a {
@@ -117,6 +119,11 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-collapse: collapse;
 				margin: 0px;
 				padding: 0px;
+			}
+
+			li {
+				margin-top: 10px;
+				margin-bottom: 10px;
 			}
 
 		</style>

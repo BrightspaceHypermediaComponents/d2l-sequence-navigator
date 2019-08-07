@@ -54,39 +54,15 @@ PolymerElement
 			position: relative;
 			overflow-y: auto;
 		}
-
-		:host([role="navigation"]) li:last-of-type>d2l-activity-link,
-		d2l-activity-link[before-module] {
-			border-bottom: 1px solid var(--d2l-color-mica);
-		}
-
-		:host([role="navigation"]) li:last-of-type>d2l-activity-link:hover,
-		d2l-activity-link[before-module]:hover,
-		:host([role="navigation"]) li:last-of-type>d2l-activity-link:focus,
-		d2l-activity-link[before-module]:focus,
-		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-focus-within,
-		d2l-activity-link[before-module].d2l-asv-focus-within {
-			border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-		}
-
-		:host([role="navigation"]) li:last-of-type>d2l-activity-link.d2l-asv-current:not(:hover),
-		d2l-activity-link[before-module].d2l-asv-current:not(:hover) {
-			border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-		}
-
-		:host([role="navigation"]) d2l-activity-link {
-			border-width: 1px 0 1px 1px;
-		}
-
-		:host([role="navigation"]) d2l-activity-link:hover,
-		:host([role="navigation"]) d2l-activity-link.d2l-asv-current:not(:hover),
-		:host([role="navigation"]) d2l-activity-link:focus,
-		:host([role="navigation"]) d2l-activity-link.d2l-asv-focus-within {
-			border-radius: 8px 0 0 8px;
-		}
 		li:first-of-type d2l-activity-link,
 		li:first-of-type d2l-outer-module {
 			margin-top: 0px;
+		}
+
+		li {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid var(--d2l-color-mica);
 		}
 
 		</style>

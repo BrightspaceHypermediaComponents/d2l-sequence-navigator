@@ -63,8 +63,8 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 			div.bkgd, div.border {
 				position: absolute;
 				top: -1px;
-				left: 0;
-				width: calc(100% - 1px);
+				left: 0%;
+				border-radius: 8px;
 			}
 
 			div.bkgd {
@@ -73,13 +73,15 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				z-index: -2;
 				position: absolute;
 				height: calc(100% + 2px);
+				width: 100%;
 			}
 
 			div.border {
 				border: 1px solid var(--d2l-activity-link-border-color, transparent);
-				border-width: 1px 0;
+				border-width: 1px;
 				z-index: -1;
 				height: 100%;
+				width: calc(100% - 2px);
 			}
 
 			.d2l-activity-link-title {
