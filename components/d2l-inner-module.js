@@ -121,8 +121,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			li {
-				margin-top: 10px;
-				margin-bottom: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
 			}
 
 		</style>

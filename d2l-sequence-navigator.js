@@ -60,8 +60,8 @@ PolymerElement
 		}
 
 		li {
-			padding-top: 10px;
-			padding-bottom: 10px;
+			padding-top: 6px;
+			padding-bottom: 6px;
 			border-bottom: 1px solid var(--d2l-color-mica);
 		}
 
