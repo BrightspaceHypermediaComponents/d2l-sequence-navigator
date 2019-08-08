@@ -17,15 +17,19 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 			:host {
 				--d2l-activity-link-border-color: var(--d2l-activity-link-background-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
+				--d2l-activity-link-opacity: 1;
+				--d2l-activity-link-backdrop-opacity: 0;
 				display: block;
 				cursor: pointer;
 				@apply --d2l-body-compact-text;
-				background-color: var(--d2l-activity-link-background-color);
 				padding: var(--d2l-activity-link-padding, 10px 24px);
 				border-collapse: separate;
 				box-sizing: border-box;
-				border: 1px solid var(--d2l-activity-link-border-color, transparent);
+				border: 1px solid transparent;
 				border-width: 1px 0;
+				z-index: 0;
+				position: relative;
+				background-color: transparent;
 				margin-top: -1px;
 			}
 
@@ -33,11 +37,13 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				--d2l-activity-link-background-color: var(--d2l-asv-primary-color);
 				--d2l-activity-link-text-color: var(--d2l-asv-selected-text-color);
 				--d2l-activity-link-subtext-color: var(--d2l-asv-selected-text-color);
-				--d2l-activity-link-border-color: var(--d2l-asv-border-color);
+				--d2l-activity-link-border-color: rgba(0, 0, 0, 0.6);
 			}
 
 			:host(:focus) {
 				outline: none;
+				--d2l-activity-link-opacity: 0.26;
+				--d2l-activity-link-backdrop-opacity: 1;
 			}
 
 			:host(.d2l-asv-focus-within),
@@ -45,8 +51,10 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 			:host(:hover) {
 				--d2l-activity-link-background-color: var(--d2l-asv-hover-color);
 				--d2l-activity-link-subtext-color: var(--d2l-asv-text-color);
-				--d2l-activity-link-border-color: var(--d2l-asv-border-color);
+				--d2l-activity-link-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
+				--d2l-activity-link-opacity: 0.26;
+				--d2l-activity-link-backdrop-opacity: 1;
 			}
 
 			:host > div {
@@ -54,6 +62,40 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				flex-direction: row;
 				justify-content: space-between;
 			}
+
+			div.bkgd,
+			div.border,
+			div.bkgd-backdrop {
+				position: absolute;
+				top: -1px;
+				left: 0;
+				border-radius: 8px;
+			}
+
+			div.bkgd {
+				opacity: var(--d2l-activity-link-opacity);
+				background-color: var(--d2l-activity-link-background-color);
+				z-index: -2;
+				height: calc(100% + 2px);
+				width: 100%;
+			}
+
+			div.bkgd-backdrop {
+				background-color: #FFFFFF;
+				z-index: -3;
+				height: calc(100% + 2px);
+				width: 100%;
+				opacity: var(--d2l-activity-link-backdrop-opacity);
+			}
+
+			div.border {
+				border: 1px solid var(--d2l-activity-link-border-color, transparent);
+				border-width: 1px;
+				z-index: -1;
+				height: 100%;
+				width: calc(100% - 2px);
+			}
+
 			.d2l-activity-link-title {
 				padding-left: 15px;
 				flex: 1 100%;
@@ -86,6 +128,9 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 			}
 
 		</style>
+		<div class="bkgd"></div>
+		<div class="border"></div>
+		<div class="bkgd-backdrop"></div>
 		<div on-click="_contentObjectClick">
 			<template is="dom-if" if="[[hasIcon]]">
 				<d2l-icon icon="[[_getIconSetKey(entity)]]"></d2l-icon>

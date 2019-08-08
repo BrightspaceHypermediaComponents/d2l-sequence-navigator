@@ -10,30 +10,57 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					--d2l-sequence-end-text-color: var(--d2l-asv-text-color);
 					--d2l-sequence-end-background-color: transparent;
 					--d2l-sequence-end-border-color: var(--d2l-sequence-end-background-color);
-					background-color: var(--d2l-sequence-end-background-color);
+					--d2l-sequence-end-opacity: 1;
+					background-color: transparent;
 					color: var(--d2l-sequence-end-text-color);
 					border-style: solid;
-					border-width: 1px 0px 1px 1px;
-					border-color:  var(--d2l-sequence-end-border-color);
+					border-width: 1px;
+					border-color: transparent;
 					border-radius: 8px 0px 0px 8px;
 					padding: 20px 40px 20px 20px;
 					position: relative;
-					margin-top: -1px;
+					z-index: 0;
+					margin-top: 6px;
 				}
 
 				#d2l-sequence-end-container.d2l-asv-current {
 					--d2l-sequence-end-background-color: var(--d2l-asv-primary-color);
 					--d2l-sequence-end-text-color: var(--d2l-asv-selected-text-color);
-					--d2l-sequence-end-border-color: var(--d2l-asv-border-color);
+					--d2l-sequence-end-border-color: rgba(0, 0, 0, 0.6);
 				}
 
 				#d2l-sequence-end-container.d2l-asv-focus-within,
 				#d2l-sequence-end-container:focus:not(.d2l-asv-current),
 				#d2l-sequence-end-container:hover {
-					--d2l-sequence-end-background-color: var(--d2l-asv-hover-color);
-					--d2l-sequence-end-border-color: var(--d2l-asv-border-color);
+					--d2l-sequence-end-background-color: var(--d2l-asv-primary-color);
+					--d2l-sequence-end-border-color: rgba(0, 0, 0, 0.42);
 					--d2l-sequence-end-text-color: var(--d2l-asv-text-color);
+					--d2l-sequence-end-opacity: 0.26;
 					cursor: pointer;
+				}
+
+				div.bkgd, div.border {
+					position: absolute;
+					top: -1px;
+					left: -1px;
+					border-radius: 8px;
+				}
+
+				div.bkgd {
+					opacity: var(--d2l-sequence-end-opacity);
+					background-color: var(--d2l-sequence-end-background-color);
+					z-index: -2;
+					height: calc(100% + 2px);
+					width: calc(100% + 2px);
+				}
+
+				div.border {
+					border-style: solid;
+					border-width: 1px;
+					border-color:  var(--d2l-sequence-end-border-color);
+					z-index: -1;
+					height: 100%;
+					width: 100%;
 				}
 
 				.d2l-sequence-end-link {
@@ -44,6 +71,8 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 				}
 			</style>
 			<div id="d2l-sequence-end-container" class$="[[_containerClass]]" on-click="showEndOfLesson">
+				<div class="bkgd"></div>
+				<div class="border"></div>
 				<a on-click="showEndOfLesson"
 					class="d2l-sequence-end-link"
 					href="javascript:void(0)">

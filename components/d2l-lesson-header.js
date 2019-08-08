@@ -29,22 +29,22 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
-			--d2l-lesson-header-border-color: var(--d2l-lesson-header-background-color);
-			background-color: var(--d2l-lesson-header-background-color);
+			--d2l-lesson-header-border-color: var(--d2l-color-mica);
+			--d2l-lesson-header-opacity: 1;
+			background-color: transparent;
 			color: var(--d2l-lesson-header-text-color);
 			padding: 20px 28px 20px 25px;
-			border-style: solid;
-			border-width: 1px 0px 1px 1px;
-			border-color:	var(--d2l-lesson-header-border-color);
-			border-radius: 0px 0px 0px 8px;
 			margin-bottom: -1px;
 			display: block;
+			position: relative;
+			z-index: 0;
+
 		}
 
 		:host(.d2l-asv-current) {
 			--d2l-lesson-header-background-color: var(--d2l-asv-primary-color);
 			--d2l-lesson-header-text-color: var(--d2l-asv-selected-text-color);
-			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
+			--d2l-lesson-header-border-color: rgba(0, 0, 0, 0.6);
 		}
 
 		a:focus {
@@ -53,9 +53,33 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 		:host(.d2l-asv-focus-within),
 		:host(:hover) {
-			--d2l-lesson-header-background-color: var(--d2l-asv-hover-color);
-			--d2l-lesson-header-border-color: var(--d2l-asv-border-color);
+			--d2l-lesson-header-background-color: var(--d2l-asv-primary-color);
+			--d2l-lesson-header-border-color: rgba(0, 0, 0, 0.42);
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
+			--d2l-lesson-header-opacity: 0.26;
+		}
+
+		div.bkgd, div.border {
+			position: absolute;
+			top: -1px;
+			left: -1px;
+		}
+
+		div.bkgd {
+			opacity: var(--d2l-lesson-header-opacity);
+			background-color: var(--d2l-lesson-header-background-color);
+			z-index: -2;
+			height: 100%;
+			width: calc(100% + 2px);
+		}
+
+		div.border {
+			border-style: solid;
+			border-width: 1px 0;
+			border-color: var(--d2l-lesson-header-border-color);
+			z-index: -1;
+			height: calc(100% - 2px);
+			width: 100%;
 		}
 
 		.module-title {
@@ -168,6 +192,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		}
 
 		</style>
+		<div class="bkgd"></div>
+		<div class="border"></div>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div>
 				<div class="title-container">
