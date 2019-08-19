@@ -15,7 +15,7 @@ import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import '@brightspace-ui/core/components/meter/meter-circle.js';
 import 'd2l-progress/d2l-progress.js';
-import 'd2l-icons/d2l-icons.js';
+import '@brightspace-ui/core/components/icons/icon.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf D2L.Polymer.Mixins;
@@ -185,10 +185,15 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
+			font-size: 14px;
 		}
 		d2l-meter-circle {
 			width: 48px;
 			min-width: 48px;
+		}
+
+		d2l-icon {
+			color: var(--d2l-lesson-header-text-color);
 		}
 
 		</style>

@@ -86,6 +86,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			.start-date-text {
 				margin: 0;
 				text-align: right;
+				color: var(--d2l-outer-module-text-color);
 			}
 
 			.module-header {
@@ -163,7 +164,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			#startDate{
-				color: var(--d2l-body-small-text_-_color, inherit);
+				color: var(--d2l-outer-module-text-color, inherit);
 				font-size: var(--d2l-body-small-text_-_font-size);
 				font-weight: var(--d2l-body-small-text_-_font-weight);
 				line-height: var(--d2l-body-small-text_-_line-height);
