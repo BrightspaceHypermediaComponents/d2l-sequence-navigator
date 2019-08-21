@@ -185,7 +185,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
-			font-size: 14px;
+			font-size: 0.7rem;
 		}
 		d2l-meter-circle {
 			width: 48px;
