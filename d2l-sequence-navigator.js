@@ -28,6 +28,7 @@ PolymerElement
 			height: 100%;
 			border-right: var(--d2l-sequence-navigator-border-right, 1px solid var(--d2l-color-mica));
 			background-color: white;
+			border-top: 1px solid var(--d2l-color-mica);
 		}
 
 		.module-item-list {
@@ -57,6 +58,10 @@ PolymerElement
 		li:first-of-type d2l-activity-link,
 		li:first-of-type d2l-outer-module {
 			margin-top: 0px;
+		}
+
+		li:first-of-type {
+			border-top: 1px solid var(--d2l-color-mica);
 		}
 
 		li {

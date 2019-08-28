@@ -77,14 +77,14 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				background-color: var(--d2l-activity-link-background-color);
 				z-index: -2;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 			}
 
 			div.bkgd-backdrop {
 				background-color: #FFFFFF;
 				z-index: -3;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 				opacity: var(--d2l-activity-link-backdrop-opacity);
 			}
 
@@ -93,7 +93,7 @@ class D2LEolActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Compl
 				border-width: 1px;
 				z-index: -1;
 				height: 100%;
-				width: calc(100% - 2px);
+				width: 100%;
 			}
 
 			.d2l-activity-link-title {

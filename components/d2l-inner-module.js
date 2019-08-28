@@ -70,13 +70,13 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				z-index: -2;
 				position: absolute;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 			}
 
 			div.bkgd-backdrop {
 				background-color: #FFFFFF;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 				z-index: -3;
 				opacity: var(--d2l-inner-module-backdrop-opacity);
 			}
@@ -86,7 +86,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-width: 1px;
 				z-index: -1;
 				height: 100%;
-				width: calc(100% - 2px);
+				width: 100%;
 			}
 
 			#module-header > a {
@@ -123,6 +123,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 2; /* number of lines to show */
 				max-height: 2.0rem; /* fallback */
+				font-size: 14px;
 			}
 
 			ol {

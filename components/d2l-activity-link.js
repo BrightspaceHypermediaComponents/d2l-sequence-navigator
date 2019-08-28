@@ -79,14 +79,14 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				background-color: var(--d2l-activity-link-background-color);
 				z-index: -2;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 			}
 
 			div.bkgd-backdrop {
 				background-color: #FFFFFF;
 				z-index: -3;
 				height: calc(100% + 2px);
-				width: 100%;
+				width: calc(100% + 2px);
 				opacity: var(--d2l-activity-link-backdrop-opacity);
 			}
 
@@ -95,7 +95,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				border-width: 1px;
 				z-index: -1;
 				height: 100%;
-				width: calc(100% - 2px);
+				width: 100%;
 			}
 
 			d2l-icon,
