@@ -44,7 +44,7 @@ PolymerElement
 		}
 
 		.module-content {
-			height: calc( 100% - 259px );
+			height: calc( 100% - 230px );
 		}
 
 		d2l-activity-link:focus {
