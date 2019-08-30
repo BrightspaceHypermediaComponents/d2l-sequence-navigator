@@ -26,9 +26,8 @@ PolymerElement
 		:host {
 			display: block;
 			height: 100%;
-			border-right: var(--d2l-sequence-navigator-border-right, 1px solid var(--d2l-color-mica));
 			background-color: white;
-			border-top: 1px solid var(--d2l-color-mica);
+			border: 1px solid var(--d2l-color-mica);
 		}
 
 		.module-item-list {
