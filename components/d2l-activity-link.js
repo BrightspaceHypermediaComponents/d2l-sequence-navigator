@@ -85,8 +85,8 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			div.bkgd-backdrop {
 				background-color: #FFFFFF;
 				z-index: -3;
-				height: calc(100% - 2px);
-				width: calc(100% - 2px);
+				height: 100%;
+				width: 100%;
 				opacity: var(--d2l-activity-link-backdrop-opacity);
 			}
 
@@ -94,8 +94,8 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				border: 1px solid var(--d2l-activity-link-border-color, transparent);
 				border-width: 1px;
 				z-index: -1;
-				height: 100%;
-				width: 100%;
+				height: calc(100% - 2px);
+				width: calc(100% - 2px);
 			}
 
 			d2l-icon,
