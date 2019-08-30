@@ -59,7 +59,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			div.border,
 			div.bkgd-backdrop {
 				position: absolute;
-				top: -1px;
+				top: 0;
 				left: 0;
 				border-radius: 8px;
 			}
@@ -69,14 +69,14 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				background-color: var(--d2l-inner-module-background-color);
 				z-index: -2;
 				position: absolute;
-				height: calc(100% + 2px);
-				width: calc(100% + 2px);
+				height: 100%;
+				width: 100%;
 			}
 
 			div.bkgd-backdrop {
 				background-color: #FFFFFF;
-				height: calc(100% + 2px);
-				width: calc(100% + 2px);
+				height: 100%;
+				width: 100%;
 				z-index: -3;
 				opacity: var(--d2l-inner-module-backdrop-opacity);
 			}
@@ -85,8 +85,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border: 1px solid var(--d2l-inner-module-border-color, transparent);
 				border-width: 1px;
 				z-index: -1;
-				height: 100%;
-				width: 100%;
+				height: calc(100% - 2px);
+				width: calc(100% - 2px);
 			}
 
 			#module-header > a {

@@ -21,6 +21,8 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					position: relative;
 					z-index: 0;
 					margin-top: 6px;
+					margin-right: var(--d2l-sequence-nav-padding);
+					margin-left: var(--d2l-sequence-nav-padding);
 				}
 
 				#d2l-sequence-end-container.d2l-asv-current {
@@ -41,8 +43,8 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 
 				div.bkgd, div.border {
 					position: absolute;
-					top: -1px;
-					left: -1px;
+					top: 0px;
+					left: 0px;
 					border-radius: 8px;
 				}
 
@@ -50,8 +52,8 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					opacity: var(--d2l-sequence-end-opacity);
 					background-color: var(--d2l-sequence-end-background-color);
 					z-index: -2;
-					height: calc(100% + 2px);
-					width: calc(100% + 2px);
+					height: 100%;
+					width: 100%;
 				}
 
 				div.border {
@@ -59,8 +61,8 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 					border-width: 1px;
 					border-color:  var(--d2l-sequence-end-border-color);
 					z-index: -1;
-					height: 100%;
-					width: 100%;
+					height: calc(100% - 2px);
+					width: calc(100% - 2px);
 				}
 
 				.d2l-sequence-end-link {

@@ -62,8 +62,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 		div.bkgd, div.border {
 			position: absolute;
-			top: -1px;
-			left: -1px;
+			top: 0;
+			left: 0;
 			border-radius: 8px;
 		}
 
@@ -71,8 +71,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			opacity: var(--d2l-lesson-header-opacity);
 			background-color: var(--d2l-lesson-header-background-color);
 			z-index: -2;
-			height: calc(100% + 2px);
-			width: calc(100% + 2px);
+			height: 100%;
+			width: 100%;
 		}
 
 		div.border {
@@ -80,8 +80,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			border-width: 1px;
 			border-color: var(--d2l-lesson-header-border-color);
 			z-index: -1;
-			height: 100%;
-			width: 100%;
+			height: calc(100% - 2px);
+			width: calc(100% - 2px);
 		}
 
 		.module-title {
@@ -220,7 +220,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 					</div>
 					<template is="dom-if" if="[[_useNewProgressBar]]">
 						<d2l-meter-circle
-							id$="[[isLightTheme()]]"
 							class="d2l-progress"
 							value="[[completionCount.completed]]"
 							max="[[completionCount.total]]"
@@ -298,7 +297,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
 
 		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isAccessible(bkgdColour, ferrite);
-		console.log(`Light meter: ${this._lightMeter}`);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
