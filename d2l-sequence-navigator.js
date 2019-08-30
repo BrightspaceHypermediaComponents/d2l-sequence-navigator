@@ -44,7 +44,8 @@ PolymerElement
 		}
 
 		.module-content {
-			height: calc( 100% - 230px );
+			height: calc( 100% - 235px );
+			border-top: 1px solid var(--d2l-color-mica);
 		}
 
 		d2l-activity-link:focus {
@@ -58,10 +59,6 @@ PolymerElement
 		li:first-of-type d2l-activity-link,
 		li:first-of-type d2l-outer-module {
 			margin-top: 0px;
-		}
-
-		li:first-of-type {
-			border-top: 1px solid var(--d2l-color-mica);
 		}
 
 		li {
