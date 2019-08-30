@@ -54,6 +54,7 @@ PolymerElement
 		#sidebarContent {
 			position: relative;
 			overflow-y: auto;
+			overflow-x: hidden;
 		}
 		li:first-of-type d2l-activity-link,
 		li:first-of-type d2l-outer-module {
