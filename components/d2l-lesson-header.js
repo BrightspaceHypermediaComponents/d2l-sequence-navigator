@@ -15,7 +15,8 @@ import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import '@brightspace-ui/core/components/meter/meter-circle.js';
 import 'd2l-progress/d2l-progress.js';
-import 'd2l-icons/d2l-icons.js';
+import '@brightspace-ui/core/components/icons/icon.js';
+import { isAccessible } from '@brightspace-ui/core/helpers/contrast.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf D2L.Polymer.Mixins;
@@ -29,12 +30,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
-			--d2l-lesson-header-border-color: var(--d2l-color-mica);
+			--d2l-lesson-header-border-color: transparent;
 			--d2l-lesson-header-opacity: 1;
 			background-color: transparent;
 			color: var(--d2l-lesson-header-text-color);
-			padding: 20px 28px 20px 25px;
-			margin-bottom: -1px;
+			margin: 10px var(--d2l-sequence-nav-padding) 10px var(--d2l-sequence-nav-padding);
+			padding: 6px;
 			display: block;
 			position: relative;
 			z-index: 0;
@@ -61,8 +62,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 		div.bkgd, div.border {
 			position: absolute;
-			top: -1px;
-			left: -1px;
+			top: 0;
+			left: 0;
+			border-radius: 8px;
 		}
 
 		div.bkgd {
@@ -70,20 +72,21 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-lesson-header-background-color);
 			z-index: -2;
 			height: 100%;
-			width: calc(100% + 2px);
+			width: 100%;
 		}
 
 		div.border {
 			border-style: solid;
-			border-width: 1px 0;
+			border-width: 1px;
 			border-color: var(--d2l-lesson-header-border-color);
 			z-index: -1;
 			height: calc(100% - 2px);
-			width: 100%;
+			width: calc(100% - 2px);
 		}
 
 		.module-title {
 			@apply --d2l-heading-3;
+			font-size: 24px;
 
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -191,6 +194,14 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			min-width: 48px;
 		}
 
+		d2l-icon {
+			color: var(--d2l-lesson-header-text-color);
+		}
+
+		div.unit-info {
+			font-size: 14px;
+		}
+
 		</style>
 		<div class="bkgd"></div>
 		<div class="border"></div>
@@ -199,7 +210,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				<div class="title-container">
 					<div>
 						<template is="dom-if" if="[[_useModuleIndex]]">
-							<div>
+							<div class="unit-info">
 								<span>[[_moduleTitle]]</span>
 								<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
 								<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
@@ -209,10 +220,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 					</div>
 					<template is="dom-if" if="[[_useNewProgressBar]]">
 						<d2l-meter-circle
-							id$="[[isLightTheme()]]"
 							class="d2l-progress"
 							value="[[completionCount.completed]]"
-							max="[[completionCount.total]]">
+							max="[[completionCount.total]]"
+							foreground-light$="[[_lightMeter]]">
 						</d2l-meter-circle>
 					</template>
 				</div>
@@ -263,8 +274,29 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				type: Boolean,
 				value: false,
 				computed: '_getUseNewProgressBar(moduleProperties)'
+			},
+			_lightMeter: {
+				type: Boolean,
+				value: false
 			}
 		};
+	}
+
+	ready() {
+		super.ready();
+		this.addEventListener('mouseover', this._lightenMeter);
+		this.addEventListener('mouseout', this._lightenMeter);
+		this.addEventListener('blur', this._lightenMeter);
+		this._lightenMeter();
+	}
+
+	_lightenMeter() {
+		const style = getComputedStyle(this);
+		const bkgdColour = style.getPropertyValue('--d2l-lesson-header-background-color').trim();
+		const opacity = style.getPropertyValue('--d2l-lesson-header-opacity');
+		const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
+
+		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isAccessible(bkgdColour, ferrite);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {

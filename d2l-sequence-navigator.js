@@ -26,8 +26,8 @@ PolymerElement
 		:host {
 			display: block;
 			height: 100%;
-			border-right: var(--d2l-sequence-navigator-border-right, 1px solid var(--d2l-color-mica));
 			background-color: white;
+			border: 1px solid var(--d2l-color-mica);
 		}
 
 		.module-item-list {
@@ -43,7 +43,8 @@ PolymerElement
 		}
 
 		.module-content {
-			height: calc( 100% - 259px );
+			height: calc( 100% - 235px );
+			border-top: 1px solid var(--d2l-color-mica);
 		}
 
 		d2l-activity-link:focus {
@@ -64,6 +65,8 @@ PolymerElement
 			padding-top: 6px;
 			padding-bottom: 6px;
 			border-bottom: 1px solid var(--d2l-color-mica);
+			padding-left: var(--d2l-sequence-nav-padding, 0);
+			padding-right: var(--d2l-sequence-nav-padding, 0);
 		}
 
 		</style>

@@ -61,8 +61,8 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 			div.bkgd, div.border {
 				position: absolute;
-				top: -1px;
-				left: -1px;
+				top: 0;
+				left: 0;
 				border-radius: 8px;
 			}
 
@@ -70,8 +70,8 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				opacity: var(--d2l-outer-module-opacity);
 				background-color: var(--d2l-outer-module-background-color);
 				z-index: -2;
-				height: calc(100% + 2px);
-				width: calc(100% + 2px);
+				height: 100%;
+				width: 100%;
 			}
 
 			div.border {
@@ -79,13 +79,14 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				border-width: 1px;
 				border-color:	var(--d2l-outer-module-border-color);
 				z-index: -1;
-				height: 100%;
-				width: 100%;
+				height: calc(100% - 2px);
+				width: calc(100% - 2px);
 			}
 
 			.start-date-text {
 				margin: 0;
 				text-align: right;
+				color: var(--d2l-outer-module-text-color);
 			}
 
 			.module-header {
@@ -163,7 +164,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 
 			#startDate{
-				color: var(--d2l-body-small-text_-_color, inherit);
+				color: var(--d2l-outer-module-text-color, inherit);
 				font-size: var(--d2l-body-small-text_-_font-size);
 				font-weight: var(--d2l-body-small-text_-_font-weight);
 				line-height: var(--d2l-body-small-text_-_line-height);
