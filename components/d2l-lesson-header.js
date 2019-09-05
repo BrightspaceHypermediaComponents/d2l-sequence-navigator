@@ -16,7 +16,7 @@ import 'd2l-typography/d2l-typography.js';
 import '@brightspace-ui/core/components/meter/meter-circle.js';
 import 'd2l-progress/d2l-progress.js';
 import '@brightspace-ui/core/components/icons/icon.js';
-import { isAccessible } from '@brightspace-ui/core/helpers/contrast.js';
+import { isColorAccessible } from '@brightspace-ui/core/helpers/contrast.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 /*
 @memberOf D2L.Polymer.Mixins;
@@ -296,7 +296,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		const opacity = style.getPropertyValue('--d2l-lesson-header-opacity');
 		const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
 
-		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isAccessible(bkgdColour, ferrite);
+		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isColorAccessible(bkgdColour, ferrite);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
