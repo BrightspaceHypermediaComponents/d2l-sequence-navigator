@@ -283,7 +283,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			_selfLink: {
 				type: String,
 				value: '',
-				computed: '_getSelfLink(entity',
+				computed: '_getSelfLink(entity)',
 				observer: '_lightenMeter'
 			}
 		};
@@ -298,11 +298,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 	_lightenMeter() {
 		const style = getComputedStyle(this);
-		const bkgdColour = style.getPropertyValue('--d2l-lesson-header-background-color').trim();
+		// const bkgdColour = style.getPropertyValue('--d2l-lesson-header-background-color').trim();
 		const opacity = style.getPropertyValue('--d2l-lesson-header-opacity');
-		const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
+		// const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
 
-		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isColorAccessible(bkgdColour, ferrite);
+		this._lightMeter = opacity >= 1 && this.currentActivity === this._selfLink;
+			// bkgdColour !== 'transparent' && !isColorAccessible(bkgdColour, ferrite) ||
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
