@@ -250,7 +250,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			currentActivity: {
 				type: String,
 				value: '',
-				notify: true
+				notify: true,
+				observer: '_currentActivityChanged'
 			},
 			moduleProperties: Object,
 			_useModuleIndex: {
@@ -287,7 +288,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		this.addEventListener('mouseover', this._lightenMeter);
 		this.addEventListener('mouseout', this._lightenMeter);
 		this.addEventListener('blur', this._lightenMeter);
-		this._lightenMeter();
 	}
 
 	_lightenMeter() {
@@ -334,6 +334,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 	_getUseNewProgressBar(moduleProperties) {
 		return moduleProperties && moduleProperties.useNewProgressBar;
+	}
+
+	_currentActivityChanged(currentActivity) {
+		this._lightenMeter();
 	}
 }
 
