@@ -251,7 +251,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				type: String,
 				value: '',
 				notify: true,
-				observer: '_currentActivityChanged'
+				observer: '_lightenMeter'
 			},
 			moduleProperties: Object,
 			_useModuleIndex: {
@@ -279,6 +279,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			_lightMeter: {
 				type: Boolean,
 				value: false
+			},
+			_selfLink: {
+				type: String,
+				value: '',
+				computed: '_getSelfLink(entity',
+				observer: '_lightenMeter'
 			}
 		};
 	}
@@ -305,8 +311,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		return this._getTrueClass(focusWithin, selected);
 	}
 
+	_getSelfLink(entity) {
+		return entity && entity.getLinkByRel('self').href || '';
+	}
+
 	_onHeaderClicked() {
-		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
+		this.currentActivity = this._selfLink;
 	}
 	isLightTheme() {
 		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
@@ -334,10 +344,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 
 	_getUseNewProgressBar(moduleProperties) {
 		return moduleProperties && moduleProperties.useNewProgressBar;
-	}
-
-	_currentActivityChanged(currentActivity) {
-		this._lightenMeter();
 	}
 }
 
