@@ -1,7 +1,11 @@
 language: node_js
 node_js: 10
 dist: trusty
+before_install:
+  -sudo apt-get install -y dpkg
 addons:
+  apt:
+    update: true
   chrome: stable
 sudo: required
 branches:
