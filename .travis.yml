@@ -8,6 +8,10 @@ branches:
   only:
   - master
   - /^v.*$/
+before_script:
+  - wget http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - export CHROME_BIN=chromium-browser
 script:
 - npm run lint
 - npm run test
