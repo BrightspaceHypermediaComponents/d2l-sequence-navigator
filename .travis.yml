@@ -8,10 +8,11 @@ branches:
   only:
   - master
   - /^v.*$/
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install chromium-chromedriver
 before_script:
-  - wget http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
-  - export CHROME_BIN=chromium-browser
+  - "export PATH=$PATH:/usr/lib/chromium-browser/"
 script:
 - npm run lint
 - npm run test
