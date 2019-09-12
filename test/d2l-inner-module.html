@@ -75,19 +75,6 @@ describe('d2l-inner-module', () => {
 				.null;
 		});
 
-		it('should create empty text', () => {
-			flush(() => {
-				const item = element.shadowRoot.querySelector('.no-topics');
-				expect(item)
-					.to
-					.exist;
-
-				expect(item)
-					.to.contain.trimmed
-					.text('This module has no topics');
-			});
-		});
-
 		it('should show only the title in the header', () => {
 
 			const titleElement = element.shadowRoot.querySelector('.module-title');

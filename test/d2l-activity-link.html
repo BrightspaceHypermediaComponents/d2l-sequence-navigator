@@ -120,10 +120,13 @@ describe('d2l-activity-link', () => {
 			element = await SirenFixture('data/activity4-with-icon.json', fixture('ActivityWithIconTestFixture'));
 		});
 
-		it('should have the correct icon property', ()=> {
-			const el = element.shadowRoot.querySelector('d2l-icon');
-			expect(el).to.have.attribute('icon');
-			expect(el).attribute('icon').to.equal('d2l-tier1:discussions');
+		it('should have the correct icon property', done=> {
+			flush(() => {
+				const el = element.shadowRoot.querySelector('d2l-icon');
+				expect(el.hasAttribute('icon')).to.equal(true);
+				expect(el.getAttribute('icon')).to.equal('d2l-tier1:discussions');
+				done();
+			});
 		});
 	});
 

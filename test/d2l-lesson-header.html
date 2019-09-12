@@ -142,7 +142,7 @@ describe('d2l-lesson-header', () => {
 			element = await SirenFixture('data/lesson1.json', fixture('DarkBackgroundFixture'));
 		});
 
-		it('should lighten the meter when selected and not hovered over', (done) => {
+		it('should lighten the meter when selected and not hovered over', done => {
 			element.classList.add('d2l-asv-current');
 			flush(() => {
 				const meter = element.shadowRoot.querySelector('d2l-meter-circle');
@@ -161,7 +161,7 @@ describe('d2l-lesson-header', () => {
 			element = await SirenFixture('data/lesson1.json', fixture('LightBackgroundFixture'));
 		});
 
-		it('should not lighten the meter when selected and not hovered over', (done) => {
+		it('should not lighten the meter when selected and not hovered over', done => {
 			element.classList.add('d2l-asv-current');
 			flush(() => {
 				const meter = element.shadowRoot.querySelector('d2l-meter-circle');
