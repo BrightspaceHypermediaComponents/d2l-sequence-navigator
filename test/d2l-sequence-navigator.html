@@ -26,6 +26,7 @@
 		<script type="module">
 import '@polymer/polymer/polymer-legacy.js';
 import '../d2l-sequence-navigator.js';
+import SirenFixture from 'polymer-siren-test-helpers';
 async function delay(time) {
 	return new Promise(resolve => {
 		setTimeout(resolve, time);
@@ -40,26 +41,41 @@ after(async() => {
 });
 
 describe('d2l-sequence-navigator for the root', () => {
-	it('should instantiate the element with default properties', () => {
-		const element = fixture('RootTestFixture');
-		expect(element.href)
-			.to
-			.equal('data/sample2.json');
+	describe('root', () => {
+		let element;
 
-		expect(element.token)
-			.to
-			.equal('bamboozle');
+		beforeEach(async() => {
+			element = await SirenFixture('data/sample2.json', fixture('RootTestFixture'));
+		});
+
+		it('should instantiate the element with default properties', () => {
+			expect(element.href)
+				.to
+				.equal('data/sample2.json');
+
+			expect(element.token)
+				.to
+				.equal('bamboozle');
+		});
 	});
-	it('should filter out unavailable activities', async() => {
-		const element = fixture('AvailabilityTestFixture');
-		await delay(250);
-		const activityList = element.shadowRoot.querySelector('ol').querySelectorAll('li');
-		expect(activityList.length)
-			.to
-			.equal(1);
-		expect(activityList[0].querySelector('d2l-activity-link').href)
-			.to
-			.equal('data/unit3-activity2.json');
+	describe('availability', () => {
+		let element;
+
+		beforeEach(async() => {
+			element = await SirenFixture('data/unit3.json', fixture('RootTestFixture'));
+		});
+
+		it('should filter out unavailable activities', async () => {
+			// this test will be extremely flaky if we're waiting on data/unit3.json to load
+			await delay(250);
+			const activityList = element.shadowRoot.querySelector('ol').querySelectorAll('li');
+			expect(activityList.length)
+				.to
+				.equal(1);
+			expect(activityList[0].querySelector('d2l-activity-link').href)
+				.to
+				.equal('data/unit3-activity2.json');
+		});
 	});
 });
 

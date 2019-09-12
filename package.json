@@ -12,6 +12,7 @@
     "polymer-lint": "polymer lint -i components/*.js, utility/*.js, d2l-sequence-navigator.js",
     "test": "polymer test --skip-plugin sauce",
     "test-p": "polymer test --skip-plugin sauce -p",
+    "test-sauce": "polymer test --skip-plugin local",
     "locales": "gulp && npm run gen:localize",
     "prestart": "npm run locales && polymer analyze > analysis.json",
     "gen:localize": "plop localize",

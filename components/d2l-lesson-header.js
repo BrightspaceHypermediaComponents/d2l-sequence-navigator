@@ -250,7 +250,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			currentActivity: {
 				type: String,
 				value: '',
-				notify: true
+				notify: true,
+				observer: '_lightenMeter'
 			},
 			moduleProperties: Object,
 			_useModuleIndex: {
@@ -278,6 +279,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			_lightMeter: {
 				type: Boolean,
 				value: false
+			},
+			_selfLink: {
+				type: String,
+				value: '',
+				computed: '_getSelfLink(entity)',
+				observer: '_lightenMeter'
 			}
 		};
 	}
@@ -287,7 +294,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		this.addEventListener('mouseover', this._lightenMeter);
 		this.addEventListener('mouseout', this._lightenMeter);
 		this.addEventListener('blur', this._lightenMeter);
-		this._lightenMeter();
 	}
 
 	_lightenMeter() {
@@ -296,7 +302,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		const opacity = style.getPropertyValue('--d2l-lesson-header-opacity');
 		const ferrite = style.getPropertyValue('--d2l-color-ferrite').trim();
 
-		this._lightMeter = opacity >= 1 && bkgdColour !== 'transparent' && !isColorAccessible(bkgdColour, ferrite);
+		this._lightMeter = opacity >= 1 &&
+			this.currentActivity === this._selfLink &&
+			bkgdColour !== 'transparent' &&
+			!isColorAccessible(bkgdColour, ferrite);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
@@ -305,8 +314,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		return this._getTrueClass(focusWithin, selected);
 	}
 
+	_getSelfLink(entity) {
+		return entity && entity.getLinkByRel('self').href || '';
+	}
+
 	_onHeaderClicked() {
-		this.currentActivity = this.entity && this.entity.getLinkByRel('self').href || '';
+		this.currentActivity = this._selfLink;
 	}
 	isLightTheme() {
 		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));

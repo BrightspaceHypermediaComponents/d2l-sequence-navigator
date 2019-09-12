@@ -9,7 +9,6 @@
 		<script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="../../wct-browser-legacy/browser.js"></script>
 		<script src="../node_modules/chai-dom/chai-dom.js"></script>
-		<script src="../node_modules/polymer-siren-test-helpers/dist/index.js"></script>
 		<script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
 		<script type="module" src="../components/d2l-inner-module.js"></script>
 
@@ -74,19 +73,6 @@ describe('d2l-inner-module', () => {
 			expect(element.shadowRoot.querySelector('d2l-activity-link'))
 				.to.be
 				.null;
-		});
-
-		it('should create empty text', () => {
-			flush(() => {
-				const item = element.shadowRoot.querySelector('.no-topics');
-				expect(item)
-					.to
-					.exist;
-
-				expect(item)
-					.to.contain.trimmed
-					.text('This module has no topics');
-			});
 		});
 
 		it('should show only the title in the header', () => {

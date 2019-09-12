@@ -2,6 +2,8 @@ language: node_js
 node_js: 10
 dist: trusty
 addons:
+  apt:
+    update: true
   chrome: stable
 sudo: required
 branches:
@@ -10,7 +12,7 @@ branches:
   - /^v.*$/
 script:
 - npm run lint
-- npm run test
+- npm run test-sauce
 after_success:
 - frauci-update-version && export TRAVIS_TAG=$(frauci-get-version)
 deploy:

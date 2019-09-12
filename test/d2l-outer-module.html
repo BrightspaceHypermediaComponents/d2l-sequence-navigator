@@ -9,7 +9,6 @@
 		<script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="../../wct-browser-legacy/browser.js"></script>
 		<script src="../node_modules/chai-dom/chai-dom.js"></script>
-		<script src="../node_modules/polymer-siren-test-helpers/dist/index.js"></script>
 		<script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
 		<script type="module" src="../components/d2l-outer-module.js"></script>
 
@@ -67,18 +66,19 @@ describe('d2l-outer-module', () => {
 				.exist;
 		});
 
-		it('should select the module by clicking on it', () => {
+		it('should select the module by clicking on it', done => {
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
-
-			expect(accordionElement)
+			const headerElement = element.shadowRoot.querySelector('#header-container');
+			expect(headerElement)
 				.not.to.have
 				.class('d2l-asv-current');
 
 			accordionElement.$.trigger.click();
-			flush( function() {
-				expect(accordionElement)
+			flush(() => {
+				expect(headerElement)
 					.to.have
 					.class('d2l-asv-current');
+				done();
 			});
 
 		});
@@ -101,19 +101,6 @@ describe('d2l-outer-module', () => {
 				.null;
 		});
 
-		it('should create empty text', () => {
-			flush(() => {
-				const item = element.shadowRoot.querySelector('.no-topics');
-				expect(item)
-					.to
-					.exist;
-
-				expect(item)
-					.to.contain.trimmed
-					.text('This module has no topics');
-			});
-		});
-
 		it('should not show anything in the header, when the accordion is closed', () => {
 
 			const countStatus = element.shadowRoot.querySelector('.countStatus');
@@ -127,7 +114,7 @@ describe('d2l-outer-module', () => {
 			expect(checkmark).to.be.hidden;
 		});
 
-		it('should not show anything in the header, when the accordion is open', () => {
+		it('should not show anything in the header, when the accordion is open', done => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
@@ -151,6 +138,7 @@ describe('d2l-outer-module', () => {
 				expect(optionalStatus).to.be.hidden;
 
 				expect(checkmark).to.be.hidden;
+				done();
 			});
 		});
 	});
@@ -178,11 +166,11 @@ describe('d2l-outer-module', () => {
 			expect(checkmark).to.be.hidden;
 		});
 
-		it('should only show the count, when the accordion is open', () => {
+		it('should only show the count, when the accordion is open', done => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
-				const dynamicElements = accordionElement.shadowRoot.querySelectorAll('dom-if');
+				const dynamicElements = accordionElement.querySelectorAll('dom-if');
 				if (dynamicElements) {
 					for (let i = 0; i < dynamicElements.length; i++) {
 						dynamicElements[i].render();
@@ -204,6 +192,7 @@ describe('d2l-outer-module', () => {
 				expect(optionalStatus).to.be.hidden;
 
 				expect(checkmark).to.be.hidden;
+				done();
 			});
 		});
 	});
@@ -231,7 +220,7 @@ describe('d2l-outer-module', () => {
 			expect(checkmark).to.be.hidden;
 		});
 
-		it('should only show the count, when the accordion is open', () => {
+		it('should only show the count, when the accordion is open', done => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
@@ -257,6 +246,7 @@ describe('d2l-outer-module', () => {
 				expect(optionalStatus).to.be.hidden;
 
 				expect(checkmark).to.be.hidden;
+				done();
 			});
 		});
 	});
@@ -284,7 +274,7 @@ describe('d2l-outer-module', () => {
 			expect(checkmark).to.be.hidden;
 		});
 
-		it('should only show the count, when the accordion is open', () => {
+		it('should only show the count, when the accordion is open', done => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
@@ -310,6 +300,7 @@ describe('d2l-outer-module', () => {
 				expect(optionalStatus).to.be.hidden;
 
 				expect(checkmark).to.be.hidden;
+				done();
 			});
 		});
 	});
@@ -336,7 +327,7 @@ describe('d2l-outer-module', () => {
 			expect(checkmark).to.be.visible;
 		});
 
-		it('should only show the count, when accordion is open', () => {
+		it('should only show the count, when accordion is open', done => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
@@ -362,6 +353,7 @@ describe('d2l-outer-module', () => {
 				expect(optionalStatus).to.be.hidden;
 
 				expect(checkmark).to.be.hidden;
+				done();
 			});
 		});
 	});
@@ -374,7 +366,7 @@ describe('d2l-outer-module', () => {
 			element = await SirenFixture('data/lesson1.json', fixture('DisabledModuleWithChildrenFixture'));
 		});
 
-		it('should have the d2l-accordion-collapse elements opened and disabled, regardless of clicked', () => {
+		it('should have the d2l-accordion-collapse elements opened and disabled, regardless of clicked', done => {
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
 				const dynamicElements = accordionElement.shadowRoot.querySelectorAll('dom-if');
@@ -400,6 +392,7 @@ describe('d2l-outer-module', () => {
 				accordionElement.$.trigger.click();
 				expect(accordionElement.opened).to.be.true;
 				expect(accordionElement.disabled).to.be.true;
+				done();
 			});
 		});
 	});

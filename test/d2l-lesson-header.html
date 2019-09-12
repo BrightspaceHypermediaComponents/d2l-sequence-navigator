@@ -9,10 +9,17 @@
 		<script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="../../wct-browser-legacy/browser.js"></script>
 		<script src="../node_modules/chai-dom/chai-dom.js"></script>
-		<script src="../node_modules/polymer-siren-test-helpers/dist/index.js"></script>
 		<script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
 		<script type="module" src="../components/d2l-lesson-header.js"></script>
+		<style>
+			#DarkBackgroundFixture {
+				--d2l-asv-primary-color: #990000;
 
+			}
+			#LightBackgroundFixture {
+				--d2l-asv-primary-color: #6ffaff;
+			}
+		</style>
 	</head>
 	<body>
 		<test-fixture id="LessonFixture">
@@ -24,6 +31,22 @@
 		<test-fixture id="BadLessonFixture">
 			<template>
 				<d2l-lesson-header token="bamboozle"></d2l-lesson-header>
+			</template>
+		</test-fixture>
+		<test-fixture id="DarkBackgroundFixture">
+			<template>
+				<d2l-lesson-header  token="bamboozle"
+									current-activity="data/lesson1.json"
+									module-properties='{"useNewProgressBar":true}'>
+				</d2l-lesson-header>
+			</template>
+		</test-fixture>
+		<test-fixture id="LightBackgroundFixture">
+			<template>
+				<d2l-lesson-header  token="bamboozle"
+									current-activity="data/lesson1.json"
+									module-properties='{"useNewProgressBar":true}'>
+ 				</d2l-lesson-header>
 			</template>
 		</test-fixture>
 		<script type="module">
@@ -109,6 +132,44 @@ describe('d2l-lesson-header', () => {
 			expect( completionCount )
 				.to.contain
 				.text('Completed 0/0');
+		});
+	});
+
+	describe('dark background meter behaviour', () => {
+		let element;
+
+		beforeEach(async() => {
+			element = await SirenFixture('data/lesson1.json', fixture('DarkBackgroundFixture'));
+		});
+
+		it('should lighten the meter when selected and not hovered over', done => {
+			element.classList.add('d2l-asv-current');
+			flush(() => {
+				const meter = element.shadowRoot.querySelector('d2l-meter-circle');
+				expect(meter.hasAttribute('foreground-light'))
+					.to
+					.equal(true);
+				done();
+			});
+		});
+	});
+
+	describe('light background meter behaviour', () => {
+		let element;
+
+		beforeEach(async() => {
+			element = await SirenFixture('data/lesson1.json', fixture('LightBackgroundFixture'));
+		});
+
+		it('should not lighten the meter when selected and not hovered over', done => {
+			element.classList.add('d2l-asv-current');
+			flush(() => {
+				const meter = element.shadowRoot.querySelector('d2l-meter-circle');
+				expect(meter.hasAttribute('foreground-light'))
+					.to
+					.equal(false);
+				done();
+			});
 		});
 	});
 });

@@ -9,7 +9,6 @@
 		<script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="../../wct-browser-legacy/browser.js"></script>
 		<script src="../node_modules/chai-dom/chai-dom.js"></script>
-		<script src="../node_modules/polymer-siren-test-helpers/dist/index.js"></script>
 		<script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
 		<script src="../../sinonjs/sinon.js"></script>
 		<script type="module" src="../components/d2l-activity-link.js"></script>
@@ -121,10 +120,13 @@ describe('d2l-activity-link', () => {
 			element = await SirenFixture('data/activity4-with-icon.json', fixture('ActivityWithIconTestFixture'));
 		});
 
-		it('should have the correct icon property', ()=> {
-			const el = element.shadowRoot.querySelector('d2l-icon');
-			expect(el).to.have.attribute('icon');
-			expect(el).attribute('icon').to.equal('d2l-tier1:discussions');
+		it('should have the correct icon property', done=> {
+			flush(() => {
+				const el = element.shadowRoot.querySelector('d2l-icon');
+				expect(el.hasAttribute('icon')).to.equal(true);
+				expect(el.getAttribute('icon')).to.equal('d2l-tier1:discussions');
+				done();
+			});
 		});
 	});
 
