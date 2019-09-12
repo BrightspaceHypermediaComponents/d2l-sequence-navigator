@@ -170,7 +170,7 @@ describe('d2l-outer-module', () => {
 
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
-				const dynamicElements = accordionElement.shadowRoot.querySelectorAll('dom-if');
+				const dynamicElements = accordionElement.querySelectorAll('dom-if');
 				if (dynamicElements) {
 					for (let i = 0; i < dynamicElements.length; i++) {
 						dynamicElements[i].render();
