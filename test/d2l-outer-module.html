@@ -41,6 +41,7 @@
 import '@polymer/polymer/polymer-legacy.js';
 import '../components/d2l-outer-module.js';
 import SirenFixture from 'polymer-siren-test-helpers';
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status';
 
 describe('d2l-outer-module', () => {
 	describe('for module with children', () => {
@@ -74,7 +75,7 @@ describe('d2l-outer-module', () => {
 				.class('d2l-asv-current');
 
 			accordionElement.$.trigger.click();
-			flush(() => {
+			afterNextRender(element, () => {
 				expect(headerElement)
 					.to.have
 					.class('d2l-asv-current');
@@ -127,8 +128,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -167,7 +167,6 @@ describe('d2l-outer-module', () => {
 		});
 
 		it('should only show the count, when the accordion is open', done => {
-
 			const accordionElement = element.shadowRoot.querySelector('d2l-accordion-collapse');
 			accordionElement.addEventListener('click', () => {
 				const dynamicElements = accordionElement.querySelectorAll('dom-if');
@@ -179,8 +178,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -233,7 +231,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
+			afterNextRender(element, () => {
 
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
@@ -287,8 +285,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -340,8 +337,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -377,7 +373,7 @@ describe('d2l-outer-module', () => {
 				}
 			});
 
-			flush(() => {
+			afterNextRender(element, () => {
 				expect(accordionElement.opened).to.be.true;
 				expect(accordionElement.disabled).to.be.true;
 
