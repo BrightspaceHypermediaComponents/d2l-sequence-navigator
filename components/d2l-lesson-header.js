@@ -26,7 +26,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	static get template() {
 		return html`
-		<style>		
+		<style>
 		:host {
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
 			--d2l-lesson-header-background-color: transparent;
@@ -186,6 +186,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			display: flex;
 			justify-content: space-between;
 		}
+		div.title {
+			width: calc(100% - var(--d2l-meter-size));
+		}
 		d2l-meter-circle {
 			width: var(--d2l-meter-size);
 			min-width: var(--d2l-meter-size);
@@ -204,7 +207,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		<div class="border"></div>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
 			<div class="title-container">
-				<div style="width: calc(100% - var(--d2l-meter-size))">
+				<div class="title">
 					<template is="dom-if" if="[[_useModuleIndex]]">
 						<div class="unit-info">
 							<span>[[_moduleTitle]]</span>
