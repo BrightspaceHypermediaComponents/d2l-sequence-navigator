@@ -75,7 +75,7 @@ describe('d2l-outer-module', () => {
 				.class('d2l-asv-current');
 
 			accordionElement.$.trigger.click();
-			flush(() => {
+			afterNextRender(element, () => {
 				expect(headerElement)
 					.to.have
 					.class('d2l-asv-current');
@@ -128,8 +128,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -232,7 +231,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
+			afterNextRender(element, () => {
 
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
@@ -286,8 +285,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -339,8 +337,7 @@ describe('d2l-outer-module', () => {
 			});
 			accordionElement.$.trigger.click();
 
-			flush(() => {
-
+			afterNextRender(element, () => {
 				const countStatus = element.shadowRoot.querySelector('.countStatus');
 				const optionalStatus = element.shadowRoot.querySelector('.optionalStatus');
 				const checkmark = element.shadowRoot.querySelector('.completedStatus');
@@ -376,7 +373,7 @@ describe('d2l-outer-module', () => {
 				}
 			});
 
-			flush(() => {
+			afterNextRender(element, () => {
 				expect(accordionElement.opened).to.be.true;
 				expect(accordionElement.disabled).to.be.true;
 
