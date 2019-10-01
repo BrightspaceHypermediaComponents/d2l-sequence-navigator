@@ -32,6 +32,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			--d2l-lesson-header-background-color: transparent;
 			--d2l-lesson-header-border-color: transparent;
 			--d2l-lesson-header-opacity: 1;
+			--d2l-meter-size: 48px;
 			background-color: transparent;
 			color: var(--d2l-lesson-header-text-color);
 			margin: 10px var(--d2l-sequence-nav-padding) 10px var(--d2l-sequence-nav-padding);
@@ -39,7 +40,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			display: block;
 			position: relative;
 			z-index: 0;
-
 		}
 
 		:host(.d2l-asv-current) {
@@ -87,15 +87,13 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		.module-title {
 			@apply --d2l-heading-3;
 			font-size: 24px;
-
 			overflow: hidden;
+			word-wrap: break-word;
 			text-overflow: ellipsis;
-
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2; /* number of lines to show */
 			max-height: 3rem; /* fallback */
-
 			margin-top: 0px;
 			margin-bottom: 0px;
 		}
@@ -187,11 +185,13 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		div.title-container {
 			display: flex;
 			justify-content: space-between;
-			align-items: flex-start;
+		}
+		div.title {
+			width: calc(100% - var(--d2l-meter-size));
 		}
 		d2l-meter-circle {
-			width: 48px;
-			min-width: 48px;
+			width: var(--d2l-meter-size);
+			min-width: var(--d2l-meter-size);
 		}
 
 		d2l-icon {
@@ -206,33 +206,31 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		<div class="bkgd"></div>
 		<div class="border"></div>
 		<a href="javascript:void(0)" class="d2l-header-lesson-link" on-click="_onHeaderClicked">
-			<div>
-				<div class="title-container">
-					<div>
-						<template is="dom-if" if="[[_useModuleIndex]]">
-							<div class="unit-info">
-								<span>[[_moduleTitle]]</span>
-								<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
-								<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
-							</div>
-						</template>
-						<span class="module-title">[[entity.properties.title]]</span>
-					</div>
-					<template is="dom-if" if="[[_useNewProgressBar]]">
-						<d2l-meter-circle
-							class="d2l-progress"
-							value="[[completionCount.completed]]"
-							max="[[completionCount.total]]"
-							foreground-light$="[[_lightMeter]]">
-						</d2l-meter-circle>
+			<div class="title-container">
+				<div class="title">
+					<template is="dom-if" if="[[_useModuleIndex]]">
+						<div class="unit-info">
+							<span>[[_moduleTitle]]</span>
+							<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
+							<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
+						</div>
 					</template>
+					<span class="module-title">[[entity.properties.title]]</span>
 				</div>
-				<template is="dom-if" if="[[!_useNewProgressBar]]">
-					<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
-					<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+				<template is="dom-if" if="[[_useNewProgressBar]]">
+					<d2l-meter-circle
+						class="d2l-progress"
+						value="[[completionCount.completed]]"
+						max="[[completionCount.total]]"
+						foreground-light$="[[_lightMeter]]">
+					</d2l-meter-circle>
 				</template>
-				<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
 			</div>
+			<template is="dom-if" if="[[!_useNewProgressBar]]">
+				<progress id$="[[isLightTheme()]]" class="d2l-progress" value="[[percentCompleted]]" max="100"></progress>
+				<div class="module-completion-count" aria-hidden="true">[[localize('completedMofN', 'completed', completionCompleted, 'total', completionTotal)]]</div>
+			</template>
+			<div><d2l-offscreen>[[localize('requirementsCompleted', 'completed', completionCompleted, 'total', completionTotal)]]</d2l-offscreen></div>
 		</a>
 `;
 	}
