@@ -21,6 +21,9 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 				--d2l-activity-link-text-color: var(--d2l-asv-text-color);
 				--d2l-activity-link-opacity: 1;
 				--d2l-activity-link-backdrop-opacity: 0;
+				--d2l-left-icon-padding: 15px;
+				--d2l-right-icon-padding: 24px;
+				--d2l-icon-size: 18px;
 				display: block;
 				cursor: pointer;
 				@apply --d2l-body-compact-text;
@@ -106,8 +109,14 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			}
 
 			.d2l-activity-link-title {
-				padding-left: 15px;
-				flex: 1 100%;
+				padding-right: var(--d2l-right-icon-padding);
+				word-wrap: break-word;
+				width: calc(
+					100% - 
+					var(--d2l-left-icon-padding) -
+					var(--d2l-right-icon-padding) -
+					(var(--d2l-icon-size) * 2)
+				);
 			}
 
 			a {
@@ -133,14 +142,12 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			}
 
 			d2l-completion-status {
-				width: 6%;
 				color: var(--d2l-activity-link-text-color);
-				padding-left: 24px;
-				text-align: right;
 			}
 
 			d2l-icon {
 				padding-top: 3px;
+				padding-right: var(--d2l-left-icon-padding);
 				color: var(--d2l-activity-link-text-color);
 			}
 

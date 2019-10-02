@@ -50,7 +50,7 @@
 		<h3>Simple sequence-navigator</h3>
 		<demo-snippet>
 			<template>
-				<h4>Sequence navigator in a sidebar</h4>
+				<h4>Sequence navigator with no outer container</h4>
 				<d2l-sequence-navigator href="data/m2-activity2.json" token="foozleberries"
 					current-activity="data/m2-activity2.json">
 					<d2l-lesson-header slot="lesson-header"
@@ -61,6 +61,23 @@
 					<d2l-sequence-end slot="end-of-lesson" href="data/sequence-end.json" text="End of Sequence"
 						token="foozleberries"></d2l-sequence-end>
 				</d2l-sequence-navigator>
+			</template>
+		</demo-snippet>
+		<demo-snippet>
+			<template>
+				<h4>Sequence navigator contained in a 380px wide container</h4>
+				<div style="width: 380px">
+					<d2l-sequence-navigator href="data/m2-activity2.json" token="foozleberries"
+											current-activity="data/m2-activity2.json">
+						<d2l-lesson-header slot="lesson-header"
+										   href="data/lesson1.json"
+										   token="token"
+										   module-properties='{"moduleIndex":2,"numberOfSiblingModules":6,"title":"Testo Courso","useNewProgressBar":true}'>
+						</d2l-lesson-header>
+						<d2l-sequence-end slot="end-of-lesson" href="data/sequence-end.json" text="End of Sequence"
+										  token="foozleberries"></d2l-sequence-end>
+					</d2l-sequence-navigator>
+				</div>
 			</template>
 		</demo-snippet>
 		<demo-snippet>
