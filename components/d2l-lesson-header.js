@@ -212,7 +212,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 						<div class="unit-info">
 							<span>[[_moduleTitle]]</span>
 							<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
-							<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
+							<span>[[_completionProgress]]</span>
 						</div>
 					</template>
 					<span class="module-title">[[entity.properties.title]]</span>
@@ -283,6 +283,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				value: '',
 				computed: '_getSelfLink(entity)',
 				observer: '_lightenMeter'
+			},
+			_completionProgress: {
+				type: String,
+				computed: '_getCompletionProgress(moduleProperties)'
 			}
 		};
 	}
@@ -325,6 +329,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			return 'light-theme';
 		}
 		return;
+	}
+
+	_getCompletionProgress(moduleProperties) {
+		return moduleProperties && moduleProperties.completionProgressLangTerm || '';
 	}
 
 	_checkModuleIndex(moduleProperties) {
