@@ -109,7 +109,6 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 			}
 
 			.d2l-activity-link-title {
-				padding-right: var(--d2l-right-icon-padding);
 				word-wrap: break-word;
 				width: calc(
 					100% - 
@@ -143,6 +142,7 @@ class D2LActivityLink extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completi
 
 			d2l-completion-status {
 				width: var(--d2l-icon-size);
+				padding-left: var(--d2l-right-icon-padding);
 				color: var(--d2l-activity-link-text-color);
 			}
 
