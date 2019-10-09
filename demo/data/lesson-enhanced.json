@@ -37,7 +37,7 @@
 	],
 	"links": [{
 		"rel": ["self", "describes"],
-		"href": "data/lesson1.json"
+		"href": "data/lesson-enhanced.json"
 	}, {
 		"rel": ["next"],
 		"href": "data/l1-module2.json"

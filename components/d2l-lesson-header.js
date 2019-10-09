@@ -303,8 +303,6 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			this.currentActivity === this._selfLink &&
 			bkgdColour !== 'transparent' &&
 			!isColorAccessible(bkgdColour, ferrite);
-		console.log(style.getPropertyValue('--d2l-asv-primary-color'));
-		console.log(bkgdColour);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
