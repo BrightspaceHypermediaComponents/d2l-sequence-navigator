@@ -1,12 +1,6 @@
-hr/**
+/**
 'd2l-lesson-header'
-
 @demo demo/index.html
-*/
-/*
-	FIXME(polymer-modulizer): the above comments were extracted
-	from HTML and may be out of place here. Review them and
-	then delete this comment!
 */
 import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
 import { ASVFocusWithinMixin } from '../utility/asv-focus-within-mixin.js';
@@ -285,8 +279,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			},
 			_completionProgress: {
 				type: String,
-				computed: '_getCompletionProgress(entity.properties)'
-			}
+				computed: '_getCompletionProgress(entity.properties, _self)'
+			},
+			_self: Object
 		};
 	}
 
@@ -295,6 +290,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		this.addEventListener('mouseover', this._lightenMeter);
 		this.addEventListener('mouseout', this._lightenMeter);
 		this.addEventListener('blur', this._lightenMeter);
+		this._self = this;
 	}
 
 	_lightenMeter() {
@@ -307,6 +303,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			this.currentActivity === this._selfLink &&
 			bkgdColour !== 'transparent' &&
 			!isColorAccessible(bkgdColour, ferrite);
+		console.log(style.getPropertyValue('--d2l-asv-primary-color'));
+		console.log(bkgdColour);
 	}
 
 	_getHeaderClass(currentActivity, entity, focusWithin) {
@@ -330,10 +328,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		return;
 	}
 
-	_getCompletionProgress(entity) {
-		debugger;
-		return entity && entity.properties && entity.properties.completionProgressLangTerm
-		|| this.localize('currentModule', 'current', this._moduleIndex, 'total', this._siblingModules)
+	_getCompletionProgress(properties) {
+		return properties &&  properties.completionProgressLangTerm
+		|| this._self && this._self.localize('currentModule', 'current', this._moduleIndex, 'total', this._siblingModules)
 		|| '';
 	}
 

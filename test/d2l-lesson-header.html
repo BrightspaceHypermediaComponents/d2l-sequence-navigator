@@ -36,16 +36,14 @@
 		<test-fixture id="DarkBackgroundFixture">
 			<template>
 				<d2l-lesson-header  token="bamboozle"
-									current-activity="data/lesson1.json"
-									module-properties='{"useNewProgressBar":true}'>
+									current-activity="data/lesson-enhanced.json">
 				</d2l-lesson-header>
 			</template>
 		</test-fixture>
 		<test-fixture id="LightBackgroundFixture">
 			<template>
 				<d2l-lesson-header  token="bamboozle"
-									current-activity="data/lesson1.json"
-									module-properties='{"useNewProgressBar":true}'>
+									current-activity="data/lesson-enhanced.json">
  				</d2l-lesson-header>
 			</template>
 		</test-fixture>
@@ -139,7 +137,7 @@ describe('d2l-lesson-header', () => {
 		let element;
 
 		beforeEach(async() => {
-			element = await SirenFixture('data/lesson1.json', fixture('DarkBackgroundFixture'));
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('DarkBackgroundFixture'));
 		});
 
 		it('should lighten the meter when selected and not hovered over', done => {
@@ -158,7 +156,7 @@ describe('d2l-lesson-header', () => {
 		let element;
 
 		beforeEach(async() => {
-			element = await SirenFixture('data/lesson1.json', fixture('LightBackgroundFixture'));
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('LightBackgroundFixture'));
 		});
 
 		it('should not lighten the meter when selected and not hovered over', done => {
