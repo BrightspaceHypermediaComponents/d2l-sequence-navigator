@@ -1,4 +1,4 @@
-/**
+hr/**
 'd2l-lesson-header'
 
 @demo demo/index.html
@@ -251,28 +251,27 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				notify: true,
 				observer: '_lightenMeter'
 			},
-			moduleProperties: Object,
 			_useModuleIndex: {
 				type: Boolean,
 				value: false,
-				computed: '_checkModuleIndex(moduleProperties)'
+				computed: '_checkModuleIndex(entity.properties)'
 			},
 			_moduleIndex: {
 				type: Number,
-				computed: '_getModuleIndex(moduleProperties)'
+				computed: '_getModuleIndex(entity.properties)'
 			},
 			_siblingModules: {
 				type: Number,
-				computed: '_getSiblingModules(moduleProperties)'
+				computed: '_getSiblingModules(entity.properties)'
 			},
 			_moduleTitle: {
 				type: String,
-				computed: '_getModuleTitle(moduleProperties)'
+				computed: '_getModuleTitle(entity.properties)'
 			},
 			_useNewProgressBar: {
 				type: Boolean,
 				value: false,
-				computed: '_getUseNewProgressBar(moduleProperties)'
+				computed: '_getUseNewProgressBar(entity.properties)'
 			},
 			_lightMeter: {
 				type: Boolean,
@@ -286,7 +285,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			},
 			_completionProgress: {
 				type: String,
-				computed: '_getCompletionProgress(moduleProperties)'
+				computed: '_getCompletionProgress(entity.properties)'
 			}
 		};
 	}
@@ -331,28 +330,31 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		return;
 	}
 
-	_getCompletionProgress(moduleProperties) {
-		return moduleProperties && moduleProperties.completionProgressLangTerm || '';
+	_getCompletionProgress(entity) {
+		debugger;
+		return entity && entity.properties && entity.properties.completionProgressLangTerm
+		|| this.localize('currentModule', 'current', this._moduleIndex, 'total', this._siblingModules)
+		|| '';
 	}
 
-	_checkModuleIndex(moduleProperties) {
-		return moduleProperties && moduleProperties.moduleIndex && moduleProperties.numberOfSiblingModules;
+	_checkModuleIndex(properties) {
+		return properties && properties.moduleIndex && properties.numberOfSiblingModules;
 	}
 
-	_getModuleIndex(moduleProperties) {
-		return moduleProperties && moduleProperties.moduleIndex;
+	_getModuleIndex(properties) {
+		return properties && properties.moduleIndex;
 	}
 
-	_getModuleTitle(moduleProperties) {
-		return moduleProperties && moduleProperties.title;
+	_getModuleTitle(properties) {
+		return properties && properties.title;
 	}
 
-	_getSiblingModules(moduleProperties) {
-		return moduleProperties && moduleProperties.numberOfSiblingModules;
+	_getSiblingModules(properties) {
+		return properties && properties.numberOfSiblingModules;
 	}
 
-	_getUseNewProgressBar(moduleProperties) {
-		return moduleProperties && moduleProperties.useNewProgressBar;
+	_getUseNewProgressBar(properties) {
+		return properties && properties.useNewProgressBar;
 	}
 }
 
