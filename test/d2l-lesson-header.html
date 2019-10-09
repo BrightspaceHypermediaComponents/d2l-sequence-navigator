@@ -70,6 +70,7 @@ describe('d2l-lesson-header', () => {
 				.equal('bamboozle');
 		});
 
+
 		it('should create module title element', () => {
 			const moduleTitle = element.shadowRoot.querySelector('.module-title');
 			expect( moduleTitle )
@@ -169,6 +170,35 @@ describe('d2l-lesson-header', () => {
 				done();
 			});
 		});
+	});
+
+	describe('with unit completionProgressLangTerm', () => {
+		let element;
+		beforeEach(async()=> {
+			element = await SirenFixture('data/lesson-enhanced-langterm.json', fixture('LightBackgroundFixture'));
+		});
+		it('should use the referenced lang term', async() => {
+			const entity = await fetch('data/lesson-enhanced-langterm.json').then( res=> res.json());
+			const unitInfo = element.shadowRoot.querySelector('.unit-info :last-child');
+			expect(unitInfo.innerText)
+				.to
+				.equal(entity.properties.completionProgressLangTerm);
+		});
+
+	});
+
+	describe('without unit completionProgressLangTerm', () => {
+		let element;
+		beforeEach(async()=> {
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('LightBackgroundFixture'));
+		});
+		it('should use the referenced lang term', async() => {
+			const unitInfo = element.shadowRoot.querySelector('.unit-info :last-child');
+			expect(unitInfo.innerText)
+				.to
+				.equal('Unit 2 of 4');
+		});
+
 	});
 });
 </script>
