@@ -313,6 +313,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_getSelfLink(entity) {
+		console.log(`lesson header entity: ${JSON.stringify(entity)}`);
 		return entity && entity.getLinkByRel('self').href || '';
 	}
 
