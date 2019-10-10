@@ -36,16 +36,14 @@
 		<test-fixture id="DarkBackgroundFixture">
 			<template>
 				<d2l-lesson-header  token="bamboozle"
-									current-activity="data/lesson1.json"
-									module-properties='{"useNewProgressBar":true}'>
+									current-activity="data/lesson-enhanced.json">
 				</d2l-lesson-header>
 			</template>
 		</test-fixture>
 		<test-fixture id="LightBackgroundFixture">
 			<template>
 				<d2l-lesson-header  token="bamboozle"
-									current-activity="data/lesson1.json"
-									module-properties='{"useNewProgressBar":true}'>
+									current-activity="data/lesson-enhanced.json">
  				</d2l-lesson-header>
 			</template>
 		</test-fixture>
@@ -71,6 +69,7 @@ describe('d2l-lesson-header', () => {
 				.to
 				.equal('bamboozle');
 		});
+
 
 		it('should create module title element', () => {
 			const moduleTitle = element.shadowRoot.querySelector('.module-title');
@@ -139,7 +138,7 @@ describe('d2l-lesson-header', () => {
 		let element;
 
 		beforeEach(async() => {
-			element = await SirenFixture('data/lesson1.json', fixture('DarkBackgroundFixture'));
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('DarkBackgroundFixture'));
 		});
 
 		it('should lighten the meter when selected and not hovered over', done => {
@@ -158,7 +157,7 @@ describe('d2l-lesson-header', () => {
 		let element;
 
 		beforeEach(async() => {
-			element = await SirenFixture('data/lesson1.json', fixture('LightBackgroundFixture'));
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('LightBackgroundFixture'));
 		});
 
 		it('should not lighten the meter when selected and not hovered over', done => {
@@ -171,6 +170,35 @@ describe('d2l-lesson-header', () => {
 				done();
 			});
 		});
+	});
+
+	describe('with unit completionProgressLangTerm', () => {
+		let element;
+		beforeEach(async()=> {
+			element = await SirenFixture('data/lesson-enhanced-langterm.json', fixture('LightBackgroundFixture'));
+		});
+		it('should use the referenced lang term', async() => {
+			const entity = await fetch('data/lesson-enhanced-langterm.json').then( res=> res.json());
+			const unitInfo = element.shadowRoot.querySelector('.unit-info :last-child');
+			expect(unitInfo.innerText)
+				.to
+				.equal(entity.properties.completionProgressLangTerm);
+		});
+
+	});
+
+	describe('without unit completionProgressLangTerm', () => {
+		let element;
+		beforeEach(async()=> {
+			element = await SirenFixture('data/lesson-enhanced.json', fixture('LightBackgroundFixture'));
+		});
+		it('should use the referenced lang term', async() => {
+			const unitInfo = element.shadowRoot.querySelector('.unit-info :last-child');
+			expect(unitInfo.innerText)
+				.to
+				.equal('Unit 2 of 4');
+		});
+
 	});
 });
 </script>

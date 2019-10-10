@@ -1,12 +1,6 @@
 /**
 'd2l-lesson-header'
-
 @demo demo/index.html
-*/
-/*
-	FIXME(polymer-modulizer): the above comments were extracted
-	from HTML and may be out of place here. Review them and
-	then delete this comment!
 */
 import { CompletionStatusMixin } from '../utility/completion-status-mixin.js';
 import { ASVFocusWithinMixin } from '../utility/asv-focus-within-mixin.js';
@@ -212,7 +206,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 						<div class="unit-info">
 							<span>[[_moduleTitle]]</span>
 							<d2l-icon icon="d2l-tier1:bullet"></d2l-icon>
-							<span>[[localize('currentModule', 'current', _moduleIndex, 'total', _siblingModules)]]</span>
+							<span>[[_completionProgress]]</span>
 						</div>
 					</template>
 					<span class="module-title">[[entity.properties.title]]</span>
@@ -251,28 +245,27 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				notify: true,
 				observer: '_lightenMeter'
 			},
-			moduleProperties: Object,
 			_useModuleIndex: {
 				type: Boolean,
 				value: false,
-				computed: '_checkModuleIndex(moduleProperties)'
+				computed: '_checkModuleIndex(entity.properties)'
 			},
 			_moduleIndex: {
 				type: Number,
-				computed: '_getModuleIndex(moduleProperties)'
+				computed: '_getModuleIndex(entity.properties)'
 			},
 			_siblingModules: {
 				type: Number,
-				computed: '_getSiblingModules(moduleProperties)'
+				computed: '_getSiblingModules(entity.properties)'
 			},
 			_moduleTitle: {
 				type: String,
-				computed: '_getModuleTitle(moduleProperties)'
+				computed: '_getModuleTitle(entity.properties)'
 			},
 			_useNewProgressBar: {
 				type: Boolean,
 				value: false,
-				computed: '_getUseNewProgressBar(moduleProperties)'
+				computed: '_getUseNewProgressBar(entity.properties)'
 			},
 			_lightMeter: {
 				type: Boolean,
@@ -283,7 +276,12 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 				value: '',
 				computed: '_getSelfLink(entity)',
 				observer: '_lightenMeter'
-			}
+			},
+			_completionProgress: {
+				type: String,
+				computed: '_getCompletionProgress(entity.properties, _self)'
+			},
+			_self: Object
 		};
 	}
 
@@ -292,6 +290,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		this.addEventListener('mouseover', this._lightenMeter);
 		this.addEventListener('mouseout', this._lightenMeter);
 		this.addEventListener('blur', this._lightenMeter);
+		this._self = this;
 	}
 
 	_lightenMeter() {
@@ -327,24 +326,30 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		return;
 	}
 
-	_checkModuleIndex(moduleProperties) {
-		return moduleProperties && moduleProperties.moduleIndex && moduleProperties.numberOfSiblingModules;
+	_getCompletionProgress(properties) {
+		return properties &&  properties.completionProgressLangTerm
+		|| this._self && this._self.localize('currentModule', 'current', this._moduleIndex, 'total', this._siblingModules)
+		|| '';
 	}
 
-	_getModuleIndex(moduleProperties) {
-		return moduleProperties && moduleProperties.moduleIndex;
+	_checkModuleIndex(properties) {
+		return properties && properties.moduleIndex && properties.numberOfSiblingModules;
 	}
 
-	_getModuleTitle(moduleProperties) {
-		return moduleProperties && moduleProperties.title;
+	_getModuleIndex(properties) {
+		return properties && properties.moduleIndex;
 	}
 
-	_getSiblingModules(moduleProperties) {
-		return moduleProperties && moduleProperties.numberOfSiblingModules;
+	_getModuleTitle(properties) {
+		return properties && properties.courseName;
 	}
 
-	_getUseNewProgressBar(moduleProperties) {
-		return moduleProperties && moduleProperties.useNewProgressBar;
+	_getSiblingModules(properties) {
+		return properties && properties.numberOfSiblingModules;
+	}
+
+	_getUseNewProgressBar(properties) {
+		return properties && properties.useNewProgressBar;
 	}
 }
 

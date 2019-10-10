@@ -34,10 +34,10 @@ async function delay(time) {
 }
 
 before(async() => {
-	window.D2L.Siren.WhitelistBehavior._testMode(true);
+	window.D2L.Siren.WhitelistBehavior && window.D2L.Siren.WhitelistBehavior._testMode(true);
 });
 after(async() => {
-	window.D2L.Siren.WhitelistBehavior._testMode(false);
+	window.D2L.Siren.WhitelistBehavior && window.D2L.Siren.WhitelistBehavior._testMode(false);
 });
 
 describe('d2l-sequence-navigator for the root', () => {
