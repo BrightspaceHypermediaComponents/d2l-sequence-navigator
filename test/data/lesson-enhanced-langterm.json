@@ -3,6 +3,7 @@
 		"title": "Lesson 1",
 		"moduleIndex": 2,
 		"numberOfSiblingModules": 4,
+		"courseName": "My best course",
 		"useNewProgressBar": true,
 		"completionProgressLangTerm": "Completion Progress from Entity 17 / 11"
 	},

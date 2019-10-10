@@ -4,6 +4,7 @@
 		"moduleIndex": 2,
 		"numberOfSiblingModules": 4,
 		"useNewProgressBar": true,
+		"courseName": "My best course",
 		"completionProgressLangTerm": "Completion Progress from Entity 17 / 11"
 	},
 	"entities": [
