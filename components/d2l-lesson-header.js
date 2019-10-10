@@ -341,7 +341,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_getModuleTitle(properties) {
-		return properties && properties.title;
+		return properties && properties.courseName;
 	}
 
 	_getSiblingModules(properties) {
