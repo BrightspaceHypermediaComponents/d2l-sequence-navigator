@@ -1,8 +1,13 @@
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { ASVFocusWithinMixin } from '../utility/asv-focus-within-mixin.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
+import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 
-class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
+class D2LSequenceEnd extends ASVFocusWithinMixin(
+		mixinBehaviors([
+			D2L.PolymerBehaviors.Siren.EntityBehavior
+		], PolymerElement)) {
 	static get template() {
 		return html`
 			<style>
@@ -78,7 +83,7 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 				<a on-click="showEndOfLesson"
 					class="d2l-sequence-end-link"
 					href="javascript:void(0)">
-					[[text]]
+					[[endOfSequenceLangTerm]]
 				</a>
 			</div>
 		`;
@@ -102,6 +107,10 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 			},
 			text:{
 				type: String
+			},
+			endOfSequenceLangTerm: {
+				type: String,
+				computed: '_getEndOfSequenceLangTerm(entity)'
 			}
 		};
 	}
@@ -113,6 +122,10 @@ class D2LSequenceEnd extends ASVFocusWithinMixin(PolymerElement) {
 
 	showEndOfLesson() {
 		this.currentActivity = this.href;
+	}
+
+	_getEndOfSequenceLangTerm(entity) {
+		return entity && entity.properties && entity.properties.title || this.text || '';
 	}
 }
 customElements.define(D2LSequenceEnd.is, D2LSequenceEnd);
