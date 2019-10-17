@@ -5,9 +5,9 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 
 class D2LSequenceEnd extends ASVFocusWithinMixin(
-		mixinBehaviors([
-			D2L.PolymerBehaviors.Siren.EntityBehavior
-		], PolymerElement)) {
+	mixinBehaviors([
+		D2L.PolymerBehaviors.Siren.EntityBehavior
+	], PolymerElement)) {
 	static get template() {
 		return html`
 			<style>
