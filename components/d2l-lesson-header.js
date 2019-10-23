@@ -46,8 +46,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			outline: none;
 		}
 
-		:host(.d2l-asv-focus-within),
-		:host(:hover) {
+		:host(.d2l-asv-focus-within):not(.disable-hover),
+		:host(:hover):not(.disable-hover) {
 			--d2l-lesson-header-background-color: var(--d2l-asv-primary-color);
 			--d2l-lesson-header-border-color: rgba(0, 0, 0, 0.42);
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
@@ -157,21 +157,21 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-asv-selected-text-color, #565a5c);
 		}
 
-		:host(.d2l-asv-focus-within) progress.d2l-progress,
+		:host(.d2l-asv-focus-within):not(.disable-hover) progress.d2l-progress,
 		:host(:hover) progress.d2l-progress {
 			background-color: transparent;
 			border: 1px solid var(--d2l-asv-text-color);
 			box-shadow: none;
 		}
-		:host(.d2l-asv-focus-within) progress.d2l-progress::-webkit-progress-value,
+		:host(.d2l-asv-focus-within):not(.disable-hover) progress.d2l-progress::-webkit-progress-value,
 		:host(:hover) progress.d2l-progress::-webkit-progress-value {
 			background-color: var(--d2l-asv-text-color);
 		}
-		:host(.d2l-asv-focus-within) progress.d2l-progress::-moz-progress-bar,
+		:host(.d2l-asv-focus-within):not(.disable-hover) progress.d2l-progress::-moz-progress-bar,
 		:host(:hover) progress.d2l-progress::-moz-progress-bar {
 			background-color: var(--d2l-asv-text-color);
 		}
-		:host(.d2l-asv-focus-within) progress.d2l-progress::-ms-fill,
+		:host(.d2l-asv-focus-within):not(.disable-hover) progress.d2l-progress::-ms-fill,
 		:host(:hover) progress.d2l-progress::-ms-fill {
 			background-color: var(--d2l-asv-text-color, #565a5c);
 		}
@@ -308,7 +308,11 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	_getHeaderClass(currentActivity, entity, focusWithin) {
 		const selfLink = entity && entity.getLinkByRel('self').href;
 		const selected = currentActivity === selfLink;
-		return this._getTrueClass(focusWithin, selected);
+		let trueClasses = this._getTrueClass(focusWithin, selected);
+		if( entity && entity.hasClass('hide-description') ) {
+			trueClasses += ' disable-hover';
+		}
+		return trueClasses;
 	}
 
 	_getSelfLink(entity) {
@@ -316,7 +320,9 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_onHeaderClicked() {
-		this.currentActivity = this._selfLink;
+		if ( !( this.entity && this.entity.hasClass('hide-description') ) ) {
+			this.currentActivity = this._selfLink;
+		}
 	}
 	isLightTheme() {
 		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
