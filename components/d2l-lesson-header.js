@@ -161,7 +161,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		}
 
 		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress,
-		:host(:hover) progress.d2l-progress {
+		:host(:hover:not(.hide-description)) progress.d2l-progress {
 			background-color: transparent;
 			border: 1px solid var(--d2l-asv-text-color);
 			box-shadow: none;
