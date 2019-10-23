@@ -136,7 +136,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12837456/*/
 			background-color: var(--d2l-color-celestine, #006fbf);
 		}
-
+		:host(.disable-hover) .d2l-header-lesson-link,
+		:host(.disable-hover) .d2l-header-lesson-link:hover {
+			cursor:default;
+		}
 		:host(.d2l-asv-current) progress.d2l-progress {
 			background-color: transparent;
 			border: 1px solid var(--d2l-asv-selected-text-color);
