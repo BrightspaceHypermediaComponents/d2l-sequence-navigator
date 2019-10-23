@@ -200,6 +200,19 @@ describe('d2l-lesson-header', () => {
 		});
 
 	});
+
+	describe('with the hide-description class', () => {
+		let element;
+		beforeEach(async() => {
+			element = await SirenFixture('data/hide-description.json', fixture('LessonFixture'));
+		});
+		it('should have a hide-description class', () => {
+			expect(element.classList.contains('hide-description'))
+				.to
+				.be
+				.true;
+		});
+	});
 });
 </script>
 	</body>

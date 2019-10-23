@@ -46,8 +46,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			outline: none;
 		}
 
-		:host(.d2l-asv-focus-within:not(.disable-hover)),
-		:host(:hover:not(.disable-hover)) {
+		:host(.d2l-asv-focus-within:not(.hide-description)),
+		:host(:hover:not(.hide-description)) {
 			--d2l-lesson-header-background-color: var(--d2l-asv-primary-color);
 			--d2l-lesson-header-border-color: rgba(0, 0, 0, 0.42);
 			--d2l-lesson-header-text-color: var(--d2l-asv-text-color);
@@ -136,8 +136,8 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12837456/*/
 			background-color: var(--d2l-color-celestine, #006fbf);
 		}
-		:host(.disable-hover) .d2l-header-lesson-link,
-		:host(.disable-hover) .d2l-header-lesson-link:hover {
+		:host(.hide-description) .d2l-header-lesson-link,
+		:host(.hide-description) .d2l-header-lesson-link:hover {
 			cursor:default;
 		}
 		:host(.d2l-asv-current) progress.d2l-progress {
@@ -160,21 +160,21 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-asv-selected-text-color, #565a5c);
 		}
 
-		:host(.d2l-asv-focus-within:not(.disable-hover)) progress.d2l-progress,
+		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress,
 		:host(:hover) progress.d2l-progress {
 			background-color: transparent;
 			border: 1px solid var(--d2l-asv-text-color);
 			box-shadow: none;
 		}
-		:host(.d2l-asv-focus-within:not(.disable-hover)) progress.d2l-progress::-webkit-progress-value,
+		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress::-webkit-progress-value,
 		:host(:hover) progress.d2l-progress::-webkit-progress-value {
 			background-color: var(--d2l-asv-text-color);
 		}
-		:host(.d2l-asv-focus-within:not(.disable-hover)) progress.d2l-progress::-moz-progress-bar,
+		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress::-moz-progress-bar,
 		:host(:hover) progress.d2l-progress::-moz-progress-bar {
 			background-color: var(--d2l-asv-text-color);
 		}
-		:host(.d2l-asv-focus-within:not(.disable-hover)) progress.d2l-progress::-ms-fill,
+		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress::-ms-fill,
 		:host(:hover) progress.d2l-progress::-ms-fill {
 			background-color: var(--d2l-asv-text-color, #565a5c);
 		}
@@ -313,7 +313,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		const selected = currentActivity === selfLink;
 		let trueClasses = this._getTrueClass(focusWithin, selected);
 		if( entity && entity.hasClass('hide-description') ) {
-			trueClasses += ' disable-hover';
+			trueClasses += ' hide-description';
 		}
 		return trueClasses;
 	}
