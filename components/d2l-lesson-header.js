@@ -171,11 +171,11 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 			background-color: var(--d2l-asv-text-color);
 		}
 		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress::-moz-progress-bar,
-		:host(:hover) progress.d2l-progress::-moz-progress-bar {
+		:host(:hover:not(.hide-description)) progress.d2l-progress::-moz-progress-bar {
 			background-color: var(--d2l-asv-text-color);
 		}
 		:host(.d2l-asv-focus-within:not(.hide-description)) progress.d2l-progress::-ms-fill,
-		:host(:hover) progress.d2l-progress::-ms-fill {
+		:host(:hover:not(.hide-description)) progress.d2l-progress::-ms-fill {
 			background-color: var(--d2l-asv-text-color, #565a5c);
 		}
 
