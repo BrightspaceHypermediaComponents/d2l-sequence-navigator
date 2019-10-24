@@ -219,6 +219,13 @@ describe('d2l-lesson-header', () => {
 				.be
 				.true;
 		});
+		it('should not change the current activity', () => {
+			const oldCurrent = element.currentActivity;
+			element.click();
+			expect(element.currentActivity)
+				.to
+				.equal(oldCurrent);
+		});
 	});
 });
 </script>
