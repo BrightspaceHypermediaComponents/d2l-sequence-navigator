@@ -463,7 +463,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		return result.length > 0;
 	}
 
-	_updateHeaderClass(event) {
+	_updateHeaderClass() {
 		if (this.isSidebar && this._hideModuleDescription) {
 			const active = this.hasActiveChild && !this._isAccordionOpen();
 			this.$['header-container'].setAttribute('class', this._getTrueClass(this.focusWithin, active));
