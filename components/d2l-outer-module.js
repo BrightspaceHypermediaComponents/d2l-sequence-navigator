@@ -215,7 +215,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				</template>
 			</ol>
 		</d2l-accordion-collapse>
-`;
+		`;
 	}
 
 	static get is() {
@@ -271,6 +271,14 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				type: String,
 				computed: 'getFormatedDate(entity)'
 			},
+			_hideModuleDescription: {
+				type: Boolean,
+				computed: '_getHideModuleDescription(entity)'
+			},
+			hasActiveChild: {
+				type: Boolean,
+				computed: '_getHasActiveChild(entity, currentActivity)'
+			}
 		};
 	}
 
@@ -290,11 +298,13 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	connectedCallback() {
 		super.connectedCallback();
 		this.addEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
+		this.addEventListener('d2l-accordion-collapse-state-changed', this._updateHeaderClass);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		this.removeEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
+		this.removeEventListener('d2l-accordion-collapse-state-changed', this._updateHeaderClass);
 	}
 
 	_isAccordionOpen() {
@@ -379,7 +389,9 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_onHeaderClicked() {
-		this.currentActivity = this.entity.getLinkByRel('self').href;
+		if (!this._hideModuleDescription) {
+			this.currentActivity = this.entity.getLinkByRel('self').href;
+		}
 		this._contentObjectClick();
 	}
 
@@ -442,5 +454,20 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		return result;
 	}
 
+	_getHideModuleDescription(entity) {
+		return entity && entity.hasClass('hide-description') || false;
+	}
+
+	_getHasActiveChild(entity, currentActivity) {
+		const result = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
+		return result.length > 0;
+	}
+
+	_updateHeaderClass(event) {
+		if (this.isSidebar && this._hideModuleDescription) {
+			const active = this.hasActiveChild && !this._isAccordionOpen();
+			this.$['header-container'].setAttribute('class', this._getTrueClass(this.focusWithin, active));
+		}
+	}
 }
 customElements.define(D2LOuterModule.is, D2LOuterModule);
