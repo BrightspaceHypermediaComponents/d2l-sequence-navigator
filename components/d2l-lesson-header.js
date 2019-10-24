@@ -323,7 +323,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_onHeaderClicked() {
-		if ( !( this.entity && this.entity.hasClass('hide-description') ) ) {
+		if ( !this.entity || !this.entity.hasClass('hide-description') ) {
 			this.currentActivity = this._selfLink;
 		}
 	}
