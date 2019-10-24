@@ -219,7 +219,7 @@ describe('d2l-lesson-header', () => {
 				.be
 				.true;
 		});
-		it('should not change the current activity', () => {
+		it('should not change the current activity on click', () => {
 			const oldCurrent = element.currentActivity;
 			element.click();
 			expect(element.currentActivity)
