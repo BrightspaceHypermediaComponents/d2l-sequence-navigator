@@ -312,7 +312,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 		const selfLink = entity && entity.getLinkByRel('self').href;
 		const selected = currentActivity === selfLink;
 		let trueClasses = this._getTrueClass(focusWithin, selected);
-		if( entity && entity.hasClass('hide-description') ) {
+		if (entity && entity.hasClass('hide-description')) {
 			trueClasses += ' hide-description';
 		}
 		return trueClasses;
@@ -323,7 +323,7 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_onHeaderClicked() {
-		if ( !this.entity || !this.entity.hasClass('hide-description') ) {
+		if (!this.entity || !this.entity.hasClass('hide-description')) {
 			this.currentActivity = this._selfLink;
 		}
 	}
