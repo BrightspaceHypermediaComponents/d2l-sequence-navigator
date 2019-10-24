@@ -323,9 +323,10 @@ class D2LLessonHeader extends ASVFocusWithinMixin(CompletionStatusMixin()) {
 	}
 
 	_onHeaderClicked() {
-		if (!this.entity || !this.entity.hasClass('hide-description')) {
-			this.currentActivity = this._selfLink;
+		if (entity && entity.hasClass('hide-description')) {
+			return;
 		}
+		this.currentActivity = this._selfLink;
 	}
 	isLightTheme() {
 		var styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));

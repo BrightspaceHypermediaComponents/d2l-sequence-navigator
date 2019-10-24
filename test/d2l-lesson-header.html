@@ -113,6 +113,13 @@ describe('d2l-lesson-header', () => {
 				.to.contain
 				.text('Completed 4/5');
 		});
+
+		it('should not have a hide-description class', () => {
+			expect(element.classList.contains('hide-description'))
+				.to
+				.be
+				.false;
+		});
 	});
 
 	describe('with no completion status', () => {
