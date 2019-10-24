@@ -101,9 +101,14 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				--d2l-inner-module-border-color: rgba(0, 0, 0, 0.6);
 			}
 
-			#module-header.d2l-asv-focus-within,
-			#module-header:focus,
-			#module-header:hover {
+			#module-header.hide-description,
+			#module-header.hide-description > a {
+				cursor: default;
+			}
+
+			#module-header.d2l-asv-focus-within:not(.hide-description),
+			#module-header:focus:not(.hide-description),
+			#module-header:hover:not(.hide-description) {
 				--d2l-inner-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-inner-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-inner-module-text-color: var(--d2l-asv-text-color);
@@ -141,7 +146,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
-			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]]" on-click="_onHeaderClicked">
+			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[hideDescription(entity)]]" on-click="_onHeaderClicked">
 				<div class="bkgd"></div>
 				<div class="bkgd-backdrop"></div>
 				<div class="border"></div>
@@ -198,6 +203,9 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_onHeaderClicked() {
+		if (this.entity && this.entity.hasClass('hide-description')) {
+			return;
+		}
 		this.currentActivity = this.entity.getLinkByRel('self').href;
 		this._contentObjectClick();
 	}
@@ -222,6 +230,14 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		else {
 			return '';
 		}
+	}
+
+	hideDescription(entity) {
+		if (this.entity && this.entity.hasClass('hide-description')) {
+			return 'hide-description';
+		}
+		return '';
+
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);
