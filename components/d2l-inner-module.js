@@ -146,7 +146,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<div id="header-container" class$="[[isEmpty(subEntities)]]">
-			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[hideDescription(entity)]]" on-click="_onHeaderClicked">
+			<div id="module-header" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[_getHideDescriptionClass(_hideDescription)]]" on-click="_onHeaderClicked">
 				<div class="bkgd"></div>
 				<div class="bkgd-backdrop"></div>
 				<div class="border"></div>
@@ -175,6 +175,10 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				value: '',
 				notify: true
 			},
+			_hideDescription: {
+				type: Boolean,
+				computed: '_getHideDesciption(entity)'
+			},
 			hasCurrentActivity: {
 				type: Boolean,
 				value: false
@@ -185,10 +189,15 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			}
 		};
 	}
+
 	getSubEntities(entity) {
 		return entity && entity.getSubEntities()
 			.filter(subEntity => (subEntity.hasClass('sequenced-activity') && subEntity.hasClass('available')) || (subEntity.href && subEntity.hasClass('sequence-description')))
 			.map(this._getHref);
+	}
+
+	_getHideDesciption(entity) {
+		return entity && entity.hasClass('hide-description');
 	}
 
 	_getHref(entity) {
@@ -203,7 +212,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_onHeaderClicked() {
-		if (this.entity && this.entity.hasClass('hide-description')) {
+		if (this._hideDescription) {
 			return;
 		}
 		this.currentActivity = this.entity.getLinkByRel('self').href;
@@ -232,11 +241,8 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		}
 	}
 
-	hideDescription(entity) {
-		if (entity && entity.hasClass('hide-description')) {
-			return 'hide-description';
-		}
-		return '';
+	_getHideDescriptionClass(hideDescription) {
+		return hideDescription ? 'hide-description' : '';
 
 	}
 }
