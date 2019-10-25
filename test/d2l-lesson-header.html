@@ -220,11 +220,11 @@ describe('d2l-lesson-header', () => {
 				.true;
 		});
 		it('should not change the current activity on click', () => {
-			const oldCurrent = element.currentActivity;
 			element.click();
-			expect(element.currentActivity)
+			expect(element.classList.contains('d2l-asv-current'))
 				.to
-				.equal(oldCurrent);
+				.be
+				.false;
 		});
 	});
 });
