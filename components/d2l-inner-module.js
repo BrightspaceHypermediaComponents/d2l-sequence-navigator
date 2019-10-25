@@ -197,7 +197,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_getHideDesciption(entity) {
-		return entity && entity.hasClass('hide-description');
+		return entity && entity.hasClass('hide-description') || false;
 	}
 
 	_getHref(entity) {
