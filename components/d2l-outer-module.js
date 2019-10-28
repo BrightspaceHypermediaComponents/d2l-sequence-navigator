@@ -391,8 +391,8 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	_onHeaderClicked() {
 		if (!this._hideModuleDescription) {
 			this.currentActivity = this.entity.getLinkByRel('self').href;
+			this._contentObjectClick();
 		}
-		this._contentObjectClick();
 	}
 
 	childIsActiveEvent() {
