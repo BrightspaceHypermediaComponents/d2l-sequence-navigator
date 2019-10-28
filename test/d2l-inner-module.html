@@ -176,6 +176,28 @@ describe('d2l-inner-module', () => {
 			expect(checkmark).to.be.null;
 		});
 	});
+
+	describe('for module for with a hide-description entity', () => {
+		let element;
+		let header;
+		beforeEach(async() => {
+			element = await SirenFixture('data/hide-description.json', fixture('Empty'));
+			header = element.shadowRoot.querySelector('#module-header')
+		});
+		it('should have a hide-description class', () => {
+			expect(header.classList.contains('hide-description'))
+				.to
+				.be
+				.true;
+		});
+		it('should not change the current activity on click', () => {
+			header.click();
+			expect(header.classList.contains('d2l-asv-current'))
+				.to
+				.be
+				.false;
+		});
+	});
 });
 </script>
 	</body>
