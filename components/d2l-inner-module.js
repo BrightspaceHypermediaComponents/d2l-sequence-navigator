@@ -186,6 +186,11 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			subEntities: {
 				type: Array,
 				computed: 'getSubEntities(entity)'
+			},
+			hasActiveChild: {
+				type: Boolean,
+				computed: '_getHasActiveChild(entity, currentActivity)',
+				reflectToAttribute: true
 			}
 		};
 	}
@@ -244,6 +249,11 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	_getHideDescriptionClass(hideDescription) {
 		return hideDescription ? 'hide-description' : '';
 
+	}
+
+	_getHasActiveChild(entity, currentActivity) {
+		const result = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
+		return result.length > 0;
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);

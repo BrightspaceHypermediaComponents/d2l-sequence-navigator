@@ -45,14 +45,18 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				cursor: pointer;
 			}
 
+			#header-container.hide-description {
+				cursor: default;
+			}
+
 			#header-container.d2l-asv-current {
 				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-outer-module-text-color: var(--d2l-asv-selected-text-color);
 				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.6);
 			}
 
-			#header-container.d2l-asv-focus-within,
-			#header-container:hover {
+			#header-container.d2l-asv-focus-within:not(.hide-description),
+			#header-container:hover:not(.hide-description) {
 				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
@@ -173,7 +177,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<d2l-accordion-collapse no-icons="" flex="">
-			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
+			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]] [[_getHideDescriptionClass(_hideModuleDescription)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
 				<div class="bkgd"></div>
 				<div class="border"></div>
 				<div class="module-header">
@@ -274,10 +278,6 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			_hideModuleDescription: {
 				type: Boolean,
 				computed: '_getHideModuleDescription(entity)'
-			},
-			hasActiveChild: {
-				type: Boolean,
-				computed: '_getHasActiveChild(entity, currentActivity)'
 			}
 		};
 	}
@@ -458,16 +458,23 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		return entity && entity.hasClass('hide-description') || false;
 	}
 
-	_getHasActiveChild(entity, currentActivity) {
-		const result = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
-		return result.length > 0;
+	_hasActiveChild(entity, currentActivity) {
+		const hasActiveTopic = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
+		const innerModules = this.shadowRoot && this.shadowRoot.querySelectorAll('d2l-inner-module') || [];
+		const hasActiveModule = [...innerModules].filter(innerMod => innerMod.hasAttribute('has-active-child'));
+
+		return hasActiveTopic.length > 0 || hasActiveModule.length > 0;
 	}
 
 	_updateHeaderClass() {
 		if (this.isSidebar && this._hideModuleDescription) {
-			const active = this.hasActiveChild && !this._isAccordionOpen();
+			const active = this._hasActiveChild(this.entity, this.currentActivity) && !this._isAccordionOpen();
 			this.$['header-container'].setAttribute('class', this._getTrueClass(this.focusWithin, active));
 		}
+	}
+
+	_getHideDescriptionClass(_hideModuleDescription) {
+		return _hideModuleDescription ? 'hide-description' : '';
 	}
 }
 customElements.define(D2LOuterModule.is, D2LOuterModule);
