@@ -248,12 +248,10 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 	_getHideDescriptionClass(hideDescription) {
 		return hideDescription ? 'hide-description' : '';
-
 	}
 
 	_getHasActiveChild(entity, currentActivity) {
-		const result = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
-		return result.length > 0;
+		return entity && entity.entities.some(subEntity => subEntity.href === currentActivity) || false;
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);

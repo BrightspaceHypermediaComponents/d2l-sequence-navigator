@@ -459,11 +459,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_hasActiveChild(entity, currentActivity) {
-		const hasActiveTopic = entity && entity.entities.filter(subEntity => subEntity.href === currentActivity) || [];
+		const hasActiveTopic = entity && entity.entities.some(subEntity => subEntity.href === currentActivity) || false;
 		const innerModules = this.shadowRoot && this.shadowRoot.querySelectorAll('d2l-inner-module') || [];
-		const hasActiveModule = [...innerModules].filter(innerMod => innerMod.hasAttribute('has-active-child'));
+		const hasActiveModule = [...innerModules].some(innerMod => innerMod.hasAttribute('has-active-child'));
 
-		return hasActiveTopic.length > 0 || hasActiveModule.length > 0;
+		return hasActiveTopic || hasActiveModule;
 	}
 
 	_updateHeaderClass() {
