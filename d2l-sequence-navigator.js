@@ -97,10 +97,17 @@ PolymerElement
 	}
 	static get properties() {
 		return {
+			dataAsvCssVars: String,
+			disabled: {
+				type: Boolean
+			},
 			href: {
 				type: String,
 				reflectToAttribute: true,
 				notify: true
+			},
+			role: {
+				type: String
 			},
 			rootHref: {
 				type: String,
@@ -112,19 +119,15 @@ PolymerElement
 			},
 			_lessonEntity:{
 				type: Object
-			},
-			disabled: {
-				type: Boolean
-			},
-			role: {
-				type: String
 			}
 		};
 	}
 
 	ready() {
 		super.ready();
-		const styles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
+		const styles = this.dataAsvCssVars && JSON.parse(this.dataAsvCssVars) ||
+			JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
+
 		this.updateStyles(
 			styles
 		);
