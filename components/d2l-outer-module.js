@@ -177,7 +177,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<d2l-accordion-collapse no-icons="" flex="">
-			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]] [[_getHideDescriptionClass(_hideModuleDescription)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
+			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]] [[_getHideDescriptionClass(_hideModuleDescription, isSidebar)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
 				<div class="bkgd"></div>
 				<div class="border"></div>
 				<div class="module-header">
@@ -455,11 +455,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_getHideModuleDescription(entity) {
-		return Boolean(entity && entity.hasClass('hide-description'));
+		return Boolean(entity) && entity.hasClass('hide-description');
 	}
 
 	_hasActiveChild(entity, currentActivity) {
-		const hasActiveTopic = Boolean(entity && entity.entities.some(subEntity => subEntity.href === currentActivity));
+		const hasActiveTopic = Boolean(entity) && entity.entities.some(subEntity => subEntity.href === currentActivity);
 		const innerModules = this.shadowRoot && this.shadowRoot.querySelectorAll('d2l-inner-module') || [];
 		const hasActiveModule = [...innerModules].some(innerMod => innerMod.hasAttribute('has-active-child'));
 
@@ -473,8 +473,8 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		}
 	}
 
-	_getHideDescriptionClass(_hideModuleDescription) {
-		return _hideModuleDescription ? 'hide-description' : '';
+	_getHideDescriptionClass(_hideModuleDescription, isSidebar) {
+		return _hideModuleDescription && !isSidebar ? 'hide-description' : '';
 	}
 }
 customElements.define(D2LOuterModule.is, D2LOuterModule);
