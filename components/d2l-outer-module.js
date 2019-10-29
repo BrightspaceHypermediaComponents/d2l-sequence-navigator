@@ -455,11 +455,11 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_getHideModuleDescription(entity) {
-		return entity && entity.hasClass('hide-description') || false;
+		return Boolean(entity && entity.hasClass('hide-description'));
 	}
 
 	_hasActiveChild(entity, currentActivity) {
-		const hasActiveTopic = entity && entity.entities.some(subEntity => subEntity.href === currentActivity) || false;
+		const hasActiveTopic = Boolean(entity && entity.entities.some(subEntity => subEntity.href === currentActivity));
 		const innerModules = this.shadowRoot && this.shadowRoot.querySelectorAll('d2l-inner-module') || [];
 		const hasActiveModule = [...innerModules].some(innerMod => innerMod.hasAttribute('has-active-child'));
 
