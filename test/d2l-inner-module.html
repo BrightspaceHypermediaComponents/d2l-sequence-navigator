@@ -31,6 +31,11 @@
 				<d2l-inner-module token="bamboozle"></d2l-inner-module>
 			</template>
 		</test-fixture>
+		<test-fixture id="ModuleWithCurrentActivityFixture">
+			<template>
+				<d2l-inner-module token="bamboozle" current-activity="data/activity1.json" ></d2l-inner-module>
+			</template>
+		</test-fixture>
 		<script type="module">
 import '@polymer/polymer/polymer-legacy.js';
 import '../components/d2l-inner-module.js';
@@ -196,6 +201,17 @@ describe('d2l-inner-module', () => {
 				.to
 				.be
 				.false;
+		});
+	});
+
+	describe('for module with current activity', () => {
+		let element;
+		beforeEach(async() => {
+			element = await SirenFixture('data/l1-module1.json', fixture('ModuleWithCurrentActivityFixture'));
+		});
+		it('should have has-active-child attribute', () => {
+			const hasActiveChild = element.hasAttribute('has-active-child');
+			expect(hasActiveChild).to.be.true;
 		});
 	});
 });
