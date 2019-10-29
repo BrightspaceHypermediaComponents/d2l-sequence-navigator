@@ -45,14 +45,18 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				cursor: pointer;
 			}
 
+			#header-container.hide-description {
+				cursor: default;
+			}
+
 			#header-container.d2l-asv-current {
 				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-outer-module-text-color: var(--d2l-asv-selected-text-color);
 				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.6);
 			}
 
-			#header-container.d2l-asv-focus-within,
-			#header-container:hover {
+			#header-container.d2l-asv-focus-within:not(.hide-description),
+			#header-container:hover:not(.hide-description) {
 				--d2l-outer-module-background-color: var(--d2l-asv-primary-color);
 				--d2l-outer-module-border-color: rgba(0, 0, 0, 0.42);
 				--d2l-outer-module-text-color: var(--d2l-asv-text-color);
@@ -173,7 +177,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		</style>
 
 		<d2l-accordion-collapse no-icons="" flex="">
-			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
+			<div slot="header" id="header-container" class$="[[_getIsSelected(currentActivity, focusWithin)]] [[isEmpty(subEntities)]] [[_getHideDescriptionClass(_hideModuleDescription, isSidebar)]]" on-click="_onHeaderClicked" is-sidebar$="[[isSidebar]]">
 				<div class="bkgd"></div>
 				<div class="border"></div>
 				<div class="module-header">
@@ -215,7 +219,7 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				</template>
 			</ol>
 		</d2l-accordion-collapse>
-`;
+		`;
 	}
 
 	static get is() {
@@ -271,6 +275,10 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 				type: String,
 				computed: 'getFormatedDate(entity)'
 			},
+			_hideModuleDescription: {
+				type: Boolean,
+				computed: '_getHideModuleDescription(entity)'
+			}
 		};
 	}
 
@@ -290,11 +298,13 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	connectedCallback() {
 		super.connectedCallback();
 		this.addEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
+		this.addEventListener('d2l-accordion-collapse-state-changed', this._updateHeaderClass);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		this.removeEventListener('d2l-accordion-collapse-clicked', this._onHeaderClicked);
+		this.removeEventListener('d2l-accordion-collapse-state-changed', this._updateHeaderClass);
 	}
 
 	_isAccordionOpen() {
@@ -379,8 +389,10 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_onHeaderClicked() {
-		this.currentActivity = this.entity.getLinkByRel('self').href;
-		this._contentObjectClick();
+		if (!this._hideModuleDescription) {
+			this.currentActivity = this.entity.getLinkByRel('self').href;
+			this._contentObjectClick();
+		}
 	}
 
 	childIsActiveEvent() {
@@ -442,5 +454,27 @@ class D2LOuterModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 		return result;
 	}
 
+	_getHideModuleDescription(entity) {
+		return Boolean(entity) && entity.hasClass('hide-description');
+	}
+
+	_hasActiveChild(entity, currentActivity) {
+		const hasActiveTopic = Boolean(entity) && entity.entities.some(subEntity => subEntity.href === currentActivity);
+		const innerModules = this.shadowRoot && this.shadowRoot.querySelectorAll('d2l-inner-module') || [];
+		const hasActiveModule = [...innerModules].some(innerMod => innerMod.hasAttribute('has-active-child'));
+
+		return hasActiveTopic || hasActiveModule;
+	}
+
+	_updateHeaderClass() {
+		if (this.isSidebar && this._hideModuleDescription) {
+			const active = this._hasActiveChild(this.entity, this.currentActivity) && !this._isAccordionOpen();
+			this.$['header-container'].setAttribute('class', this._getTrueClass(this.focusWithin, active));
+		}
+	}
+
+	_getHideDescriptionClass(_hideModuleDescription, isSidebar) {
+		return _hideModuleDescription && !isSidebar ? 'hide-description' : '';
+	}
 }
 customElements.define(D2LOuterModule.is, D2LOuterModule);

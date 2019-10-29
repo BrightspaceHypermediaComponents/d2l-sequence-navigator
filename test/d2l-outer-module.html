@@ -37,6 +37,11 @@
 				<d2l-outer-module token="bamboozle" disabled></d2l-outer-module>
 			</template>
 		</test-fixture>
+		<test-fixture id="ModuleWithHideDescriptionFixture">
+			<template>
+				<d2l-outer-module token="bamboozle" current-activity="data/l1-module1.json" disabled></d2l-outer-module>
+			</template>
+		</test-fixture>
 		<script type="module">
 import '@polymer/polymer/polymer-legacy.js';
 import '../components/d2l-outer-module.js';
@@ -394,6 +399,17 @@ describe('d2l-outer-module', () => {
 			});
 		});
 	});
+	describe('for module with hide description class', () => {
+		let element;
+		beforeEach(async() => {
+			element = await SirenFixture('data/hide-description.json', fixture('ModuleWithHideDescriptionFixture'));
+		});
+		it('should not change the current activity to module when clicked', () => {
+			element.shadowRoot.querySelector('#header-container').click();
+			const asvCurrentHeader = element.shadowRoot.querySelector('#header-container.d2l-asv-current');
+			expect(asvCurrentHeader).to.be.null;
+		});
+	})
 });
 </script>
 	</body>

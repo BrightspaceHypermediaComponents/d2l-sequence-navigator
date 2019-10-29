@@ -10,5 +10,6 @@
         "rel": ["up"],
         "href": "data/lesson2.json"
     }],
-    "class": ["sequence", "sequence-description"]
+    "class": ["sequence", "sequence-description"],
+    "entities": []
 }

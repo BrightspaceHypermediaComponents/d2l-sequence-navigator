@@ -186,6 +186,11 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 			subEntities: {
 				type: Array,
 				computed: 'getSubEntities(entity)'
+			},
+			hasActiveChild: {
+				type: Boolean,
+				computed: '_getHasActiveChild(entity, currentActivity)',
+				reflectToAttribute: true
 			}
 		};
 	}
@@ -197,7 +202,7 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 	}
 
 	_getHideDesciption(entity) {
-		return entity && entity.hasClass('hide-description') || false;
+		return Boolean(entity) && entity.hasClass('hide-description');
 	}
 
 	_getHref(entity) {
@@ -243,7 +248,10 @@ class D2LInnerModule extends ASVFocusWithinMixin(PolymerASVLaunchMixin(Completio
 
 	_getHideDescriptionClass(hideDescription) {
 		return hideDescription ? 'hide-description' : '';
+	}
 
+	_getHasActiveChild(entity, currentActivity) {
+		return Boolean(entity) && entity.entities.some(subEntity => subEntity.href === currentActivity);
 	}
 }
 customElements.define(D2LInnerModule.is, D2LInnerModule);
