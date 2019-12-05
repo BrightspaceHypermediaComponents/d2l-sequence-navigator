@@ -1,3 +1,7 @@
+# *THIS REPO IS EFFECTIVELY ARCHIVED*
+
+`d2l-sequence-navigator` now exists in [sequences](https://github.com/BrightspaceHypermediaComponents/sequences), please make changes in that repo.
+
 [![Build Status](https://travis-ci.com/BrightspaceHypermediaComponents/d2l-sequence-navigator.svg?token=s5DqGXfBESukCURszFfU&branch=master)](https://travis-ci.com/BrightspaceHypermediaComponents/d2l-sequence-navigator)
 
 # d2l-sequence-navigator
