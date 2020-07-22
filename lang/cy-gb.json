@@ -1,0 +1,12 @@
+{
+   "completed" : "completed",
+   "completedMofN" : "Completed {completed}/{total}",
+   "countStatus" : "{completed}/{total}",
+   "currentModule" : "Unit {current} of {total}",
+   "due" : "Due {dueDate}",
+   "exempt" : "Exempt",
+   "missedItems" : "You have {numberOfMissedActivities, plural, one {# item} other {# items}} left in this module.",
+   "optional" : "Optional",
+   "requirementsCompleted" : "{completed} of {total, plural, one {# requirement} other {# requirements}} completed",
+   "starts" : "Starts {startDate}"
+}
