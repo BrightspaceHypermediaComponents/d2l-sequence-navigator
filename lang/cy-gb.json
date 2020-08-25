@@ -1,0 +1,12 @@
+{
+   "completed" : "wedi cwblhau",
+   "completedMofN" : "{completed}/{total} wedi cwblhau",
+   "countStatus" : "{completed}/{total}",
+   "currentModule" : "Uned {current} o {total}",
+   "due" : "Yn ddyledus ar {dueDate}",
+   "exempt" : "Wedi’i eithrio",
+   "missedItems" : "Mae {numberOfMissedActivities, plural, one {# item} other {# items}} ar ôl gennych yn y modiwl hwn.",
+   "optional" : "Dewisol",
+   "requirementsCompleted" : "Mae {completed} o {total, plural, one {# requirement} other {# requirements}} wedi’u cwblhau",
+   "starts" : "Yn dechrau ar {startDate}"
+}
